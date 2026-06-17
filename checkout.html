@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — IPI DIGITAL</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="logo"><div class="logo-icon">IP</div>IPI <span>DIGITAL</span></a>
+  <div class="nav-links">
+    <a href="index.html">← Kembali ke Home</a>
+  </div>
+</nav>
+
+<!-- SUKSES (tersembunyi, tampil setelah submit) -->
+<div class="success-screen" id="successScreen" style="padding-top:100px">
+  <div style="max-width:480px; margin:0 auto">
+    <div class="success-icon">✅</div>
+    <h2 style="color:white; font-size:26px; font-weight:700; margin-bottom:12px">Pesanan Diterima! 🎉</h2>
+    <p style="color:#94a3b8; margin-bottom:8px">Terima kasih, <strong id="successName" style="color:white"></strong>!</p>
+    <p style="color:#94a3b8; margin-bottom:24px">Detail pembayaran dan akses akan dikirim ke <strong id="successEmail" style="color:#818cf8"></strong> dalam 5 menit.</p>
+
+    <div class="card" style="text-align:left; margin-bottom:24px; padding:24px">
+      <p style="color:#64748b; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px">Detail Pesanan</p>
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px"><span style="color:#94a3b8">Produk</span><span id="successProduct" style="color:white; font-weight:600"></span></div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px"><span style="color:#94a3b8">Total Bayar</span><span id="successPrice" style="color:#34d399; font-weight:700"></span></div>
+      <div style="display:flex; justify-content:space-between; font-size:14px"><span style="color:#94a3b8">Status</span><span style="color:#34d399; font-weight:600">✅ Dikonfirmasi</span></div>
+    </div>
+
+    <p style="color:#94a3b8; font-size:14px; margin-bottom:20px">🤝 Tim kami akan menghubungi Anda via WhatsApp dalam 5 menit.</p>
+    <a href="index.html" class="btn btn-outline btn-full">← Kembali ke Home</a>
+  </div>
+</div>
+
+<!-- FORM CHECKOUT -->
+<div id="checkoutForm" style="padding-top:84px; padding-bottom:60px">
+  <div class="container">
+    <!-- Header -->
+    <div style="text-align:center; margin-bottom:40px; padding-top:20px">
+      <h1 style="font-size:32px; font-weight:700; color:white; margin-bottom:8px">Checkout <span class="grad">Aman</span></h1>
+      <p style="color:#94a3b8">Lengkapi data di bawah untuk mengakses produk Anda</p>
+    </div>
+
+    <!-- Steps indicator -->
+    <div style="display:flex; justify-content:center; align-items:center; gap:8px; margin-bottom:40px">
+      <div style="display:flex; align-items:center; gap:6px">
+        <div style="width:28px;height:28px;background:#6366f1;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:700">1</div>
+        <span style="color:white; font-size:14px; font-weight:500">Data Diri</span>
+      </div>
+      <div style="width:40px; height:1px; background:rgba(255,255,255,0.1)"></div>
+      <div style="display:flex; align-items:center; gap:6px">
+        <div style="width:28px;height:28px;background:rgba(255,255,255,0.06);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:12px;font-weight:700">2</div>
+        <span style="color:#64748b; font-size:14px">Pembayaran</span>
+      </div>
+      <div style="width:40px; height:1px; background:rgba(255,255,255,0.1)"></div>
+      <div style="display:flex; align-items:center; gap:6px">
+        <div style="width:28px;height:28px;background:rgba(255,255,255,0.06);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:12px;font-weight:700">3</div>
+        <span style="color:#64748b; font-size:14px">Selesai</span>
+      </div>
+    </div>
+
+    <form class="checkout-grid" onsubmit="submitOrder(event)">
+
+      <!-- KOLOM KIRI: Form -->
+      <div>
+
+        <!-- Pilih Produk -->
+        <div class="form-section">
+          <h3><span class="step-num">1</span> Pilih Produk</h3>
+
+          <label class="product-option" id="opt-a">
+            <input type="radio" name="produk" value="a" onchange="selectProduct('a')">
+            <span style="font-size:24px">📡</span>
+            <div class="product-opt-info">
+              <div class="product-opt-name">IPI Signal Pro</div>
+              <div class="product-opt-tagline">Sinyal trading akurat berbasis AI</div>
+              <div style="text-decoration:line-through; color:#475569; font-size:12px">Rp 597.000</div>
+            </div>
+            <div class="product-opt-price">Rp 297.000/bln</div>
+          </label>
+
+          <label class="product-option" id="opt-b">
+            <input type="radio" name="produk" value="b" onchange="selectProduct('b')">
+            <span style="font-size:24px">🎓</span>
+            <div class="product-opt-info">
+              <div class="product-opt-name">IPI Academy Elite</div>
+              <div class="product-opt-tagline">Kursus trading dari nol sampai pro</div>
+              <div style="text-decoration:line-through; color:#475569; font-size:12px">Rp 2.997.000</div>
+            </div>
+            <div class="product-opt-price">Rp 1.497.000</div>
+          </label>
+
+          <label class="product-option" id="opt-c">
+            <input type="radio" name="produk" value="c" onchange="selectProduct('c')">
+            <span style="font-size:24px">🤖</span>
+            <div class="product-opt-info">
+              <div class="product-opt-name">IPI AutoBot</div>
+              <div class="product-opt-tagline">Bot trading otomatis 24/7</div>
+              <div style="text-decoration:line-through; color:#475569; font-size:12px">Rp 1.497.000</div>
+            </div>
+            <div class="product-opt-price">Rp 797.000/bln</div>
+          </label>
+        </div>
+
+        <!-- Data Diri -->
+        <div class="form-section">
+          <h3><span class="step-num">2</span> Data Diri</h3>
+          <label for="nama">Nama Lengkap *</label>
+          <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+
+          <label for="email">Email Aktif *</label>
+          <input type="email" id="email" name="email" placeholder="nama@email.com" required>
+          <p style="color:#475569; font-size:12px; margin-top:-10px; margin-bottom:16px">Detail akses akan dikirim ke email ini</p>
+
+          <label for="hp">Nomor WhatsApp *</label>
+          <input type="tel" id="hp" name="hp" placeholder="08xxxxxxxxxx" required>
+          <p style="color:#475569; font-size:12px; margin-top:-10px">Tim kami akan menghubungi via nomor ini</p>
+        </div>
+
+        <!-- Metode Pembayaran -->
+        <div class="form-section">
+          <h3><span class="step-num">3</span> Metode Pembayaran</h3>
+          <div class="grid-2" style="gap:10px">
+            <label class="radio-option">
+              <input type="radio" name="bayar" value="bca" required>
+              <div>
+                <span class="radio-label">🏦 Transfer BCA</span>
+                <span class="radio-desc">Rekening BCA</span>
+              </div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="bayar" value="mandiri">
+              <div>
+                <span class="radio-label">🏦 Transfer Mandiri</span>
+                <span class="radio-desc">Rekening Mandiri</span>
+              </div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="bayar" value="qris">
+              <div>
+                <span class="radio-label">📱 QRIS</span>
+                <span class="radio-desc">GoPay, OVO, Dana, dll</span>
+              </div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="bayar" value="gopay">
+              <div>
+                <span class="radio-label">💚 GoPay</span>
+                <span class="radio-desc">Dompet GoPay</span>
+              </div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="bayar" value="ovo">
+              <div>
+                <span class="radio-label">💜 OVO</span>
+                <span class="radio-desc">Dompet OVO</span>
+              </div>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="bayar" value="dana">
+              <div>
+                <span class="radio-label">🔵 DANA</span>
+                <span class="radio-desc">Dompet DANA</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Syarat & Ketentuan -->
+        <div class="checkbox-row">
+          <input type="checkbox" id="setuju" required>
+          <label for="setuju">Saya menyetujui <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> IPI DIGITAL. Saya memahami bahwa trading mengandung risiko.</label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">
+          🔒 Konfirmasi Pesanan
+        </button>
+        <p style="color:#475569; font-size:12px; text-align:center; margin-top:12px">Pembayaran aman · SSL terenkripsi · Garansi 7 hari</p>
+      </div>
+
+      <!-- KOLOM KANAN: Ringkasan -->
+      <div>
+        <div class="order-summary">
+          <h3>Ringkasan Pesanan</h3>
+
+          <div class="order-product" id="orderProduct">
+            <span class="order-product-icon" id="orderIcon">—</span>
+            <div>
+              <div class="order-product-name" id="orderName">Pilih produk dahulu</div>
+              <div class="order-product-cat" id="orderCat"></div>
+            </div>
+          </div>
+
+          <div class="price-row">
+            <span style="color:#94a3b8">Harga Normal</span>
+            <span class="s-through" id="normalPrice">—</span>
+          </div>
+          <div class="price-row">
+            <span style="color:#94a3b8">Diskon</span>
+            <span class="green" id="discountAmt">—</span>
+          </div>
+          <div class="price-row total">
+            <span>Total</span>
+            <span id="totalPrice" style="color:#818cf8">—</span>
+          </div>
+
+          <ul class="trust-list">
+            <li>🔒 Pembayaran 100% aman & terenkripsi</li>
+            <li>✅ Garansi uang kembali 7 hari</li>
+            <li>⚡ Akses instan setelah pembayaran</li>
+            <li>📱 Tim WA menghubungi dalam 5 menit</li>
+          </ul>
+
+          <div style="margin-top:20px; padding:14px; background:rgba(255,255,255,0.02); border-radius:10px; border:1px solid rgba(255,255,255,0.05)">
+            <p style="color:#64748b; font-size:12px; margin-bottom:6px">Butuh bantuan?</p>
+            <a href="https://wa.me/6281234567890" style="color:#34d399; font-size:14px; font-weight:600">💬 Chat WhatsApp Support</a>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="disclaimer">⚠️ Trading mengandung risiko tinggi. Investasikan hanya dana yang siap Anda rugikan.</div>
+
+<script>
+// Data produk
+const produkData = {
+  a: { icon:'📡', name:'IPI Signal Pro', cat:'Trading Tools · /bulan', normal:'Rp 597.000', diskon:'- Rp 300.000', total:'Rp 297.000' },
+  b: { icon:'🎓', name:'IPI Academy Elite', cat:'Education · Sekali Bayar', normal:'Rp 2.997.000', diskon:'- Rp 1.500.000', total:'Rp 1.497.000' },
+  c: { icon:'🤖', name:'IPI AutoBot', cat:'Automation · /bulan', normal:'Rp 1.497.000', diskon:'- Rp 700.000', total:'Rp 797.000' }
+};
+
+// Baca param dari URL
+const params = new URLSearchParams(window.location.search);
+const produkParam = params.get('produk');
+if (produkParam && produkData[produkParam]) {
+  document.querySelector(`input[value="${produkParam}"]`).checked = true;
+  document.getElementById(`opt-${produkParam}`).classList.add('selected');
+  selectProduct(produkParam);
+}
+
+function selectProduct(id) {
+  // Hapus semua selected
+  document.querySelectorAll('.product-option').forEach(el => el.classList.remove('selected'));
+  document.getElementById(`opt-${id}`).classList.add('selected');
+
+  const p = produkData[id];
+  document.getElementById('orderIcon').textContent = p.icon;
+  document.getElementById('orderName').textContent = p.name;
+  document.getElementById('orderCat').textContent = p.cat;
+  document.getElementById('normalPrice').textContent = p.normal;
+  document.getElementById('discountAmt').textContent = p.diskon;
+  document.getElementById('totalPrice').textContent = p.total;
+
+  // Update tombol
+  document.getElementById('submitBtn').textContent = `🔒 Konfirmasi — ${p.total}`;
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = '⏳ Memproses...';
+  btn.disabled = true;
+
+  const nama = document.getElementById('nama').value;
+  const email = document.getElementById('email').value;
+  const produkTerpilih = document.querySelector('input[name="produk"]:checked');
+
+  setTimeout(() => {
+    // Tampilkan layar sukses
+    document.getElementById('checkoutForm').style.display = 'none';
+    document.getElementById('successScreen').style.display = 'block';
+
+    document.getElementById('successName').textContent = nama;
+    document.getElementById('successEmail').textContent = email;
+
+    if (produkTerpilih) {
+      const p = produkData[produkTerpilih.value];
+      document.getElementById('successProduct').textContent = p.name;
+      document.getElementById('successPrice').textContent = p.total;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 1500);
+}
+</script>
+</body>
+</html>

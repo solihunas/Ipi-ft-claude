@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPI DIGITAL — Platform Trading Terdepan Indonesia</title>
+  <meta name="description" content="Bergabung dengan 5.000+ trader sukses. Sinyal trading akurat AI, edukasi terlengkap, dan bot otomatis 24/7.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="logo">
+    <div class="logo-icon">IP</div>
+    IPI <span>DIGITAL</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="produk-a.html">Signal Pro</a>
+    <a href="produk-b.html">Academy</a>
+    <a href="produk-c.html">AutoBot</a>
+    <a href="checkout.html" class="nav-cta">Mulai Sekarang</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="produk-a.html">Signal Pro</a>
+  <a href="produk-b.html">Academy Elite</a>
+  <a href="produk-c.html">AutoBot</a>
+  <a href="checkout.html" class="nav-cta btn btn-primary">Mulai Sekarang</a>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap" style="margin-top:64px">
+  <div class="ticker-track">
+    <div class="ticker-item"><span class="ticker-symbol">BTC</span><span class="ticker-price">$104,521</span><span class="ticker-up">+2.3%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">ETH</span><span class="ticker-price">$3,847</span><span class="ticker-up">+1.8%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">BNB</span><span class="ticker-price">$621</span><span class="ticker-up">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">SOL</span><span class="ticker-price">$189</span><span class="ticker-up">+3.1%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">XRP</span><span class="ticker-price">$0.72</span><span class="ticker-down">-0.4%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">ADA</span><span class="ticker-price">$0.58</span><span class="ticker-up">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">DOGE</span><span class="ticker-price">$0.18</span><span class="ticker-up">+4.7%</span></div>
+    <!-- Duplikat untuk loop mulus -->
+    <div class="ticker-item"><span class="ticker-symbol">BTC</span><span class="ticker-price">$104,521</span><span class="ticker-up">+2.3%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">ETH</span><span class="ticker-price">$3,847</span><span class="ticker-up">+1.8%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">BNB</span><span class="ticker-price">$621</span><span class="ticker-up">+0.9%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">SOL</span><span class="ticker-price">$189</span><span class="ticker-up">+3.1%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">XRP</span><span class="ticker-price">$0.72</span><span class="ticker-down">-0.4%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">ADA</span><span class="ticker-price">$0.58</span><span class="ticker-up">+1.2%</span></div>
+    <div class="ticker-item"><span class="ticker-symbol">DOGE</span><span class="ticker-price">$0.18</span><span class="ticker-up">+4.7%</span></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="min-height:calc(100vh - 90px); padding-top:60px">
+  <div class="hero-orb-1"></div>
+  <div class="hero-orb-2"></div>
+  <span class="badge badge-purple" style="margin-bottom:20px">🚀 Platform #1 Trading Indonesia</span>
+  <h1>Kuasai Pasar.<br><span class="grad">Raih Kebebasan.</span></h1>
+  <p>IPI DIGITAL hadir dengan sinyal trading akurat berbasis AI, edukasi terlengkap, dan bot otomatis — semua dalam satu platform untuk membantu Anda profit konsisten.</p>
+  <div class="hero-btns">
+    <a href="produk-a.html" class="btn btn-primary btn-lg">Lihat Produk Kami</a>
+    <a href="#produk" class="btn btn-outline btn-lg">Pelajari Lebih Lanjut</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><span class="num">5.000+</span><span class="lbl">Trader Aktif</span></div>
+    <div class="stat-item" style="border-left:1px solid rgba(255,255,255,0.07); border-right:1px solid rgba(255,255,255,0.07); padding:0 32px"><span class="num">78,5%</span><span class="lbl">Win Rate</span></div>
+    <div class="stat-item"><span class="num">Rp 2M+</span><span class="lbl">Total Profit Member</span></div>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Mengapa Pilih <span class="grad">IPI DIGITAL?</span></h2>
+      <p>Teknologi terbaik, edukasi terlengkap, hasil terukur — semua untuk satu tujuan: profit Anda.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div style="font-size:32px; margin-bottom:16px">📡</div>
+        <h3 style="color:white; font-size:18px; font-weight:700; margin-bottom:8px">Sinyal Akurat AI</h3>
+        <p style="color:#94a3b8; font-size:14px">Algoritma machine learning yang menganalisis 50+ pasang aset secara real-time. Win rate historis 78,5%.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:32px; margin-bottom:16px">🎓</div>
+        <h3 style="color:white; font-size:18px; font-weight:700; margin-bottom:8px">Edukasi Terlengkap</h3>
+        <p style="color:#94a3b8; font-size:14px">80+ video HD dari nol sampai level profesional. Dibimbing trader berpengalaman 10+ tahun.</p>
+      </div>
+      <div class="card">
+        <div style="font-size:32px; margin-bottom:16px">🤖</div>
+        <h3 style="color:white; font-size:18px; font-weight:700; margin-bottom:8px">Otomasi 24/7</h3>
+        <p style="color:#94a3b8; font-size:14px">Bot trading otomatis yang bekerja tanpa henti. Trading tetap jalan meski Anda tidur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TENTANG -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <div class="two-col" style="align-items:center">
+      <div>
+        <span class="badge badge-purple" style="margin-bottom:16px">Tentang Kami</span>
+        <h2 style="font-size:30px; font-weight:700; color:white; margin-bottom:16px">Tentang <span class="grad">IPI DIGITAL</span></h2>
+        <p style="color:#94a3b8; margin-bottom:16px; line-height:1.8">IPI DIGITAL adalah platform teknologi finansial terdepan di Indonesia. Didirikan dengan misi untuk mendemokratisasi kebebasan finansial — kami percaya siapa pun bisa menghasilkan dari pasar modal dengan alat yang tepat.</p>
+        <p style="color:#94a3b8; line-height:1.8">Dalam 3 tahun beroperasi, kami telah membantu lebih dari 5.000 trader dari seluruh Indonesia — mulai dari ibu rumah tangga, mahasiswa, hingga profesional — untuk mendapatkan penghasilan konsisten dari trading.</p>
+      </div>
+      <div class="grid-2" style="gap:16px">
+        <div class="card" style="text-align:center; padding:24px">
+          <div class="num grad" style="font-size:32px; font-weight:800; display:block; margin-bottom:6px">5.000+</div>
+          <div style="color:#64748b; font-size:13px">Trader Aktif</div>
+        </div>
+        <div class="card" style="text-align:center; padding:24px">
+          <div class="num grad" style="font-size:32px; font-weight:800; display:block; margin-bottom:6px">78,5%</div>
+          <div style="color:#64748b; font-size:13px">Win Rate</div>
+        </div>
+        <div class="card" style="text-align:center; padding:24px">
+          <div class="num grad" style="font-size:32px; font-weight:800; display:block; margin-bottom:6px">3 Tahun</div>
+          <div style="color:#64748b; font-size:13px">Pengalaman</div>
+        </div>
+        <div class="card" style="text-align:center; padding:24px">
+          <div class="num grad" style="font-size:32px; font-weight:800; display:block; margin-bottom:6px">24/7</div>
+          <div style="color:#64748b; font-size:13px">Support</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section class="section" id="produk">
+  <div class="container">
+    <div class="section-title">
+      <h2>Pilih Solusi <span class="grad">Terbaik Anda</span></h2>
+      <p>Tiga produk unggulan dirancang untuk berbagai kebutuhan trader Indonesia.</p>
+    </div>
+    <div class="grid-3" style="align-items:start">
+
+      <!-- Signal Pro -->
+      <div class="card product-card card-popular" style="margin-top:20px; position:relative">
+        <div class="popular-badge">⭐ Paling Populer</div>
+        <div class="icon">📡</div>
+        <span class="badge badge-gold" style="margin-bottom:12px">TERLARIS</span>
+        <h3>IPI Signal Pro</h3>
+        <p class="tagline">Sinyal Trading Akurat Berbasis AI</p>
+        <div class="price-big">Rp 297.000<span style="font-size:14px; color:#64748b">/bulan</span></div>
+        <div class="price-old">Rp 597.000/bulan</div>
+        <ul>
+          <li>Sinyal real-time via Telegram & WA</li>
+          <li>50+ pasang aset kripto & forex</li>
+          <li>Win rate historis 78,5%</li>
+          <li>Dashboard analytics premium</li>
+          <li>Garansi uang kembali 7 hari</li>
+        </ul>
+        <a href="produk-a.html" class="btn btn-primary btn-full">Lihat Detail →</a>
+      </div>
+
+      <!-- Academy -->
+      <div class="card product-card">
+        <div class="icon">🎓</div>
+        <span class="badge badge-purple" style="margin-bottom:12px">PREMIUM</span>
+        <h3>IPI Academy Elite</h3>
+        <p class="tagline">Kursus Trading dari Nol sampai Pro</p>
+        <div class="price-big">Rp 1.497.000<span style="font-size:14px; color:#64748b"> sekali</span></div>
+        <div class="price-old">Rp 2.997.000</div>
+        <ul>
+          <li>80+ video HD akses seumur hidup</li>
+          <li>Sesi live trading mingguan</li>
+          <li>Komunitas 5.000+ member</li>
+          <li>Sertifikat resmi IPI DIGITAL</li>
+          <li>1-on-1 coaching 3x/bulan</li>
+        </ul>
+        <a href="produk-b.html" class="btn btn-outline btn-full">Lihat Detail →</a>
+      </div>
+
+      <!-- AutoBot -->
+      <div class="card product-card">
+        <div class="icon">🤖</div>
+        <span class="badge badge-cyan" style="margin-bottom:12px">NEW</span>
+        <h3>IPI AutoBot</h3>
+        <p class="tagline">Bot Trading Otomatis 24/7</p>
+        <div class="price-big">Rp 797.000<span style="font-size:14px; color:#64748b">/bulan</span></div>
+        <div class="price-old">Rp 1.497.000/bulan</div>
+        <ul>
+          <li>Trading otomatis tanpa monitor</li>
+          <li>15+ exchange didukung</li>
+          <li>Multi-strategi: scalping, swing, grid</li>
+          <li>Auto risk management</li>
+          <li>Dana tetap aman di exchange Anda</li>
+        </ul>
+        <a href="produk-c.html" class="btn btn-outline btn-full">Lihat Detail →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="section section-alt" id="testimoni">
+  <div class="container">
+    <div class="section-title">
+      <h2>Apa Kata <span class="grad">Mereka?</span></h2>
+      <p>5.000+ trader sudah membuktikan. Ini cerita nyata mereka.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Dalam 2 bulan, portofolio saya naik 34%. Sinyalnya akurat dan responsnya cepat. Worth every penny!"</p>
+        <div class="testi-author">
+          <div class="avatar">RP</div>
+          <div>
+            <div class="testi-name">Rizki Pratama</div>
+            <div class="testi-role">Full-time Trader · Signal Pro</div>
+          </div>
+        </div>
+      </div>
+      <div class="card testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Saya ibu rumah tangga tanpa latar belakang trading. Dengan IPI Signal Pro, kini bisa dapat 8–15 juta per bulan."</p>
+        <div class="testi-author">
+          <div class="avatar">SD</div>
+          <div>
+            <div class="testi-name">Sari Dewi</div>
+            <div class="testi-role">Ibu Rumah Tangga · Signal Pro</div>
+          </div>
+        </div>
+      </div>
+      <div class="card testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Academy-nya luar biasa. Materi terstruktur, mentor responsif. Dari 0 sekarang profit konsisten tiap bulan!"</p>
+        <div class="testi-author">
+          <div class="avatar">BS</div>
+          <div>
+            <div class="testi-name">Budi Santoso</div>
+            <div class="testi-role">Ex-Karyawan Bank · Academy Elite</div>
+          </div>
+        </div>
+      </div>
+      <div class="card testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Dari modal 2 juta, dalam 4 bulan sekarang trading dengan modal 15 juta dan profit konsisten tiap bulan."</p>
+        <div class="testi-author">
+          <div class="avatar">MK</div>
+          <div>
+            <div class="testi-name">Maya Kusuma</div>
+            <div class="testi-role">Mahasiswi · Academy Elite</div>
+          </div>
+        </div>
+      </div>
+      <div class="card testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"AutoBot jalan 24/7 tanpa saya harus lihat chart. Profit rata-rata 9% per bulan. Ini passive income sesungguhnya!"</p>
+        <div class="testi-author">
+          <div class="avatar">HW</div>
+          <div>
+            <div class="testi-name">Hendro Wijaya</div>
+            <div class="testi-role">Pengusaha · AutoBot</div>
+          </div>
+        </div>
+      </div>
+      <div class="card testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Setup 15 menit, langsung running. Dashboard informatif. Minggu pertama sudah terasa hasilnya. Keren!"</p>
+        <div class="testi-author">
+          <div class="avatar">CA</div>
+          <div>
+            <div class="testi-name">Citra Andini</div>
+            <div class="testi-role">IT Manager · AutoBot</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container" style="max-width:700px">
+    <div class="section-title">
+      <h2>Pertanyaan <span class="grad">Umum</span></h2>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Apakah IPI DIGITAL legal?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">IPI DIGITAL adalah perusahaan teknologi finansial yang beroperasi sesuai regulasi Indonesia. Kami menyediakan tools dan edukasi trading, bukan jasa pengelolaan dana.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Metode pembayaran apa yang tersedia?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Kami menerima transfer bank (BCA, Mandiri, BNI, BRI), QRIS, GoPay, OVO, dan DANA. Proses cepat, akses langsung setelah pembayaran dikonfirmasi.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Apakah ada garansi uang kembali?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Ya! Semua produk IPI DIGITAL dilengkapi garansi uang kembali 7 hari tanpa syarat. Tidak puas? Dana dikembalikan 100%, tidak ada pertanyaan.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Cocok untuk pemula total?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Sangat cocok! Produk kami dirancang mulai dari nol. Tidak perlu latar belakang keuangan atau pengalaman trading sebelumnya. Kami akan membimbing dari awal.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Bagaimana support setelah pembelian?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Tim support kami tersedia 24/7 via WhatsApp dan komunitas Discord eksklusif. Setiap pertanyaan dijawab dalam maksimal 2 jam kerja.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA AKHIR -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="cta-section">
+      <span class="badge badge-purple" style="margin-bottom:20px">Mulai Sekarang</span>
+      <h2>Siap Mulai Perjalanan <span class="grad">Trading Anda?</span></h2>
+      <p>Bergabung dengan 5.000+ trader Indonesia yang sudah profit konsisten bersama IPI DIGITAL.</p>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
+        <a href="produk-a.html" class="btn btn-primary btn-lg">Coba Signal Pro</a>
+        <a href="checkout.html" class="btn btn-outline btn-lg">Daftar Gratis 3 Hari</a>
+      </div>
+      <p style="color:#475569; font-size:13px; margin-top:20px">✅ Garansi 7 hari &nbsp;·&nbsp; 🔒 Pembayaran aman &nbsp;·&nbsp; ⚡ Akses instan</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo" style="margin-bottom:16px; display:inline-flex">
+        <div class="logo-icon">IP</div>
+        IPI <span style="color:#818cf8">DIGITAL</span>
+      </div>
+      <p class="desc">Platform teknologi finansial terdepan Indonesia. Membantu trader meraih kebebasan finansial melalui tools, edukasi, dan otomasi terbaik.</p>
+    </div>
+    <div>
+      <h4>Produk</h4>
+      <ul>
+        <li><a href="produk-a.html">IPI Signal Pro</a></li>
+        <li><a href="produk-b.html">IPI Academy Elite</a></li>
+        <li><a href="produk-c.html">IPI AutoBot</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Perusahaan</h4>
+      <ul>
+        <li><a href="#about">Tentang Kami</a></li>
+        <li><a href="#testimoni">Testimoni</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="checkout.html">Beli Sekarang</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 IPI DIGITAL. Hak cipta dilindungi.</p>
+    <div style="display:flex; gap:20px">
+      <a href="#" style="color:#475569; font-size:13px">Kebijakan Privasi</a>
+      <a href="#" style="color:#475569; font-size:13px">Syarat & Ketentuan</a>
+    </div>
+  </div>
+</footer>
+<div class="disclaimer">⚠️ Trading mengandung risiko tinggi. Past performance tidak menjamin hasil di masa depan. Investasikan hanya dana yang siap Anda rugikan.</div>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  item.classList.toggle('open');
+}
+</script>
+</body>
+</html>

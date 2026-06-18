@@ -219,22 +219,22 @@
       <div class="testi-track" id="testiTrack">
         <div class="testi-slide">
           <div class="testi-img-frame">
-            <img src="testimoni-1.png" alt="Testimoni Pengguna 1" loading="lazy">
+        <img src="testimoni-1.jpg" alt="Testimoni Pengguna 1" loading="lazy">
           </div>
         </div>
         <div class="testi-slide">
           <div class="testi-img-frame">
-            <img src="testimoni-2.png" alt="Testimoni Pengguna 2" loading="lazy">
+            <img src="testimoni-2.jpg" alt="Testimoni Pengguna 2" loading="lazy">
           </div>
         </div>
         <div class="testi-slide">
           <div class="testi-img-frame">
-            <img src="testimoni-3.png" alt="Testimoni Pengguna 3" loading="lazy">
+            <img src="testimoni-3.jpg" alt="Testimoni Pengguna 3" loading="lazy">
           </div>
         </div>
         <div class="testi-slide">
           <div class="testi-img-frame">
-            <img src="testimoni-4.png" alt="Testimoni Pengguna 4" loading="lazy">
+            <img src="testimoni-4.jpg" alt="Testimoni Pengguna 4" loading="lazy">
           </div>
         </div>
       </div>
@@ -500,56 +500,27 @@ document.addEventListener('click', function(e) {
 
 // ======= SPLASH SCREEN =======
 (function() {
-  const splash = document.getElementById('splash');
-  const splashText = document.getElementById('splashText');
-  const splashLogo = document.getElementById('splashLogo');
-  const splashBrand = document.getElementById('splashBrand');
+  var splash = document.getElementById('splash');
+  var splashLogo = document.getElementById('splashLogo');
+  var splashBrand = document.getElementById('splashBrand');
+  var splashText = document.getElementById('splashText');
+  if (splashText) splashText.style.display = 'none';
 
-  const sentences = [
-    { text: 'Manusia lelah.',                                   dur: 700 },
-    { text: 'Manusia panik.',                                   dur: 700 },
-    { text: 'Manusia sering FOMO.',                             dur: 700 },
-    { text: 'Sedangkan AI…',                              dur: 700 },
-    { text: 'Tidak tidur.',                                     dur: 500 },
-    { text: 'Tidak emosional.',                                 dur: 500 },
-    { text: 'Tidak takut.',                                     dur: 500 },
-    { text: 'Tidak serakah.',                                   dur: 500 },
-    { text: 'AI dapat membaca ribuan data dalam hitungan detik.', dur: 1000 },
-    { text: 'Tapi AI tetap membutuhkan data yang tepat.',       dur: 1000 },
-  ];
-
-  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+  function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
   function dismissSplash() {
     splash.classList.add('splash-out');
-    setTimeout(function() { splash.style.display = 'none'; }, 500);
+    setTimeout(function() { splash.style.display = 'none'; }, 450);
   }
 
   splash.addEventListener('click', dismissSplash);
 
   async function runSplash() {
-    // Logo
-    await sleep(200);
+    await sleep(80);
     splashLogo.classList.add('vis');
-    await sleep(900);
-    splashLogo.classList.remove('vis');
-    await sleep(300);
-
-    // Sentences
-    for (var i = 0; i < sentences.length; i++) {
-      var s = sentences[i];
-      splashText.textContent = s.text;
-      splashText.classList.add('vis');
-      await sleep(s.dur + 200);
-      splashText.classList.remove('vis');
-      await sleep(180);
-    }
-    splashText.style.opacity = '0';
-
-    // Brand finale
+    await sleep(380);
     splashBrand.classList.add('vis');
-    await sleep(1800);
-
+    await sleep(1500);
     dismissSplash();
   }
 

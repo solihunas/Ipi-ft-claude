@@ -63,8 +63,9 @@ a { text-decoration:none; color:inherit; }
 
 .boot-step-lbl { font-size:11.5px; letter-spacing:.05em; color:var(--cy); margin-bottom:4px; }
 .boot-ok { color:var(--gr); display:none; }
-.boot-bwrap { height:4px; background:rgba(255,255,255,.05); border-radius:2px; margin-bottom:11px; overflow:hidden; }
-.boot-bar { height:100%; width:0; background:linear-gradient(90deg,var(--pu),var(--cy)); border-radius:2px; box-shadow:0 0 8px var(--cy); }
+.boot-bar-txt { font-size:12px; letter-spacing:.05em; color:var(--pu); margin-bottom:10px; font-family:var(--mono); }
+.boot-bcursor { animation:blink-blk .32s step-end infinite; color:var(--cy); text-shadow:0 0 8px var(--cy); }
+@keyframes blink-blk { 0%,100%{opacity:1} 50%{opacity:0} }
 .boot-ai-row { display:flex; align-items:center; font-size:11.5px; padding:2px 0; letter-spacing:.04em; }
 .boot-ai-nm { color:#3d5570; flex:0 0 190px; }
 .boot-ai-dots { color:#1a2a38; flex:1; white-space:nowrap; overflow:hidden; }
@@ -385,18 +386,26 @@ async function runBoot() {
   const el = document.getElementById('bootLines');
 
   async function runStep(label, ms) {
-    const wrap = document.createElement('div');
-    const lbl  = document.createElement('div'); lbl.className='boot-step-lbl';
-    const ok   = document.createElement('span'); ok.className='boot-ok'; ok.textContent=' [OK]';
+    const BLOCKS = 22;
+    const STEP   = ms / BLOCKS;
+    const wrap   = document.createElement('div');
+    const lbl    = document.createElement('div'); lbl.className='boot-step-lbl';
+    const ok     = document.createElement('span'); ok.className='boot-ok'; ok.textContent=' [OK]';
     lbl.textContent='> '+label; lbl.appendChild(ok);
-    const bw   = document.createElement('div'); bw.className='boot-bwrap';
-    const bar  = document.createElement('div'); bar.className='boot-bar'; bar.style.width='0';
-    bw.appendChild(bar); wrap.appendChild(lbl); wrap.appendChild(bw);
+    const bartxt = document.createElement('div'); bartxt.className='boot-bar-txt';
+    bartxt.innerHTML=`[<span class="boot-bcursor">█</span>${'░'.repeat(BLOCKS-1)}]  0%`;
+    wrap.appendChild(lbl); wrap.appendChild(bartxt);
     el.appendChild(wrap); el.scrollTop=el.scrollHeight;
-    await sleep(30);
-    bar.style.transition=`width ${ms*.88}ms cubic-bezier(.2,0,.8,1)`; bar.style.width='100%';
-    await sleep(ms);
-    ok.style.display='inline'; await sleep(100);
+    await sleep(20);
+    for (let i=1; i<=BLOCKS; i++) {
+      const pct = Math.round(i/BLOCKS*100);
+      const filled = '█'.repeat(i);
+      const cursor = i<BLOCKS ? `<span class="boot-bcursor">█</span>` : '█';
+      const empty  = '░'.repeat(BLOCKS-i-(i<BLOCKS?1:0));
+      bartxt.innerHTML=`[${filled}${i<BLOCKS?cursor:''}${empty}]  ${pct}%`;
+      await sleep(STEP);
+    }
+    ok.style.display='inline'; await sleep(90);
   }
 
   for (const s of BOOT_STEPS) await runStep(s.label, s.ms);

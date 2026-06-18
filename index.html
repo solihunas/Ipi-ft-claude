@@ -10,6 +10,23 @@
 </head>
 <body>
 
+<!-- ======= SPLASH SCREEN ======= -->
+<div id="splash" class="splash-overlay">
+  <div class="splash-content">
+    <div class="splash-logo" id="splashLogo">
+      <img src="logo.png" alt="IPI Digital">
+    </div>
+    <div class="splash-text" id="splashText"></div>
+    <div class="splash-brand" id="splashBrand">
+      <div class="splash-welcome">Selamat datang di</div>
+      <div class="splash-brandname">IPI DIGITAL</div>
+      <div class="splash-tagline">AI Trading &bull; Automation &bull; Trading Tools</div>
+    </div>
+  </div>
+  <div class="splash-skip">Tap untuk lewati</div>
+</div>
+
+
 <!-- ======= NAVBAR ======= -->
 <nav class="navbar">
   <a href="#" class="logo-wrap">
@@ -21,7 +38,6 @@
     <a href="#produk">Produk</a>
     <a href="#challenge">Challenge</a>
     <a href="#faq">FAQ</a>
-    <a href="battle.html" class="nav-battle">⚔ Battle AI</a>
     <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta">Pantau Challenge</a>
     <a href="battle.html" class="nav-battle-cta">🤖 Tonton Battle AI</a>
   </div>
@@ -36,9 +52,8 @@
   <a href="#produk" onclick="closeMenu()">Produk</a>
   <a href="#challenge" onclick="closeMenu()">Challenge</a>
   <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <a href="battle.html" class="nav-battle">⚔ Battle AI</a>
-  <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta">Pantau Challenge</a>
-  <a href="battle.html" class="nav-battle-cta">🤖 Tonton Battle AI</a>
+  <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" onclick="closeMenu()">Pantau Challenge</a>
+  <a href="battle.html" class="nav-battle-cta" onclick="closeMenu()">🤖 Tonton Battle AI</a>
 </div>
 
 
@@ -55,7 +70,8 @@
       </p>
       <div class="hero-btns">
         <a href="#produk" class="btn btn-primary btn-lg">Lihat Produk</a>
-        <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="btn btn-outline btn-lg">Gabung Challenge</a>
+        <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="btn btn-outline btn-lg">Pantau Challenge</a>
+        <a href="battle.html" class="btn btn-battle btn-lg">🤖 Tonton Battle AI</a>
       </div>
 
       <div class="exp-row">
@@ -185,6 +201,49 @@
         <a href="https://lynk.id/ipidigital/vr1er7e1zkxk" target="_blank" class="btn btn-outline btn-full">Beli Sekarang →</a>
       </div>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ======= TESTIMONI SCREENSHOT ======= -->
+<section class="section section-dark" id="testimoni-screenshot">
+  <div class="container">
+    <div class="section-title center">
+      <span class="section-label">Testimoni Pengguna</span>
+      <h2>Hasil Nyata dari <span class="grad">Pengguna</span></h2>
+      <p>Screenshot asli dari pengguna. Nama disamarkan untuk menjaga privasi.</p>
+    </div>
+
+    <div class="testi-carousel" id="testiCarousel">
+      <div class="testi-track" id="testiTrack">
+        <div class="testi-slide">
+          <div class="testi-img-frame">
+            <img src="testimoni-1.png" alt="Testimoni Pengguna 1" loading="lazy">
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-img-frame">
+            <img src="testimoni-2.png" alt="Testimoni Pengguna 2" loading="lazy">
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-img-frame">
+            <img src="testimoni-3.png" alt="Testimoni Pengguna 3" loading="lazy">
+          </div>
+        </div>
+        <div class="testi-slide">
+          <div class="testi-img-frame">
+            <img src="testimoni-4.png" alt="Testimoni Pengguna 4" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="testi-dots" id="testiDots">
+        <span class="testi-dot active" data-idx="0"></span>
+        <span class="testi-dot" data-idx="1"></span>
+        <span class="testi-dot" data-idx="2"></span>
+        <span class="testi-dot" data-idx="3"></span>
+      </div>
     </div>
   </div>
 </section>
@@ -431,7 +490,6 @@ function closeMenu() {
 function toggleFaq(btn) {
   btn.closest('.faq-item').classList.toggle('open');
 }
-// Tutup menu kalau klik di luar
 document.addEventListener('click', function(e) {
   const menu = document.getElementById('mobileMenu');
   const nav = document.querySelector('.navbar');
@@ -439,6 +497,86 @@ document.addEventListener('click', function(e) {
     menu.style.display = 'none';
   }
 });
+
+// ======= SPLASH SCREEN =======
+(function() {
+  const splash = document.getElementById('splash');
+  const splashText = document.getElementById('splashText');
+  const splashLogo = document.getElementById('splashLogo');
+  const splashBrand = document.getElementById('splashBrand');
+
+  const sentences = [
+    { text: 'Manusia lelah.',                                   dur: 700 },
+    { text: 'Manusia panik.',                                   dur: 700 },
+    { text: 'Manusia sering FOMO.',                             dur: 700 },
+    { text: 'Sedangkan AI…',                              dur: 700 },
+    { text: 'Tidak tidur.',                                     dur: 500 },
+    { text: 'Tidak emosional.',                                 dur: 500 },
+    { text: 'Tidak takut.',                                     dur: 500 },
+    { text: 'Tidak serakah.',                                   dur: 500 },
+    { text: 'AI dapat membaca ribuan data dalam hitungan detik.', dur: 1000 },
+    { text: 'Tapi AI tetap membutuhkan data yang tepat.',       dur: 1000 },
+  ];
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function dismissSplash() {
+    splash.classList.add('splash-out');
+    setTimeout(function() { splash.style.display = 'none'; }, 500);
+  }
+
+  splash.addEventListener('click', dismissSplash);
+
+  async function runSplash() {
+    // Logo
+    await sleep(200);
+    splashLogo.classList.add('vis');
+    await sleep(900);
+    splashLogo.classList.remove('vis');
+    await sleep(300);
+
+    // Sentences
+    for (var i = 0; i < sentences.length; i++) {
+      var s = sentences[i];
+      splashText.textContent = s.text;
+      splashText.classList.add('vis');
+      await sleep(s.dur + 200);
+      splashText.classList.remove('vis');
+      await sleep(180);
+    }
+    splashText.style.opacity = '0';
+
+    // Brand finale
+    splashBrand.classList.add('vis');
+    await sleep(1800);
+
+    dismissSplash();
+  }
+
+  runSplash();
+})();
+
+// ======= TESTIMONI CAROUSEL DOTS =======
+(function() {
+  var track = document.getElementById('testiTrack');
+  var dots = document.querySelectorAll('.testi-dot');
+  if (!track || !dots.length) return;
+
+  track.addEventListener('scroll', function() {
+    var idx = Math.round(track.scrollLeft / track.offsetWidth);
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === idx);
+    });
+  });
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      var idx = parseInt(dot.getAttribute('data-idx'));
+      var slide = track.querySelectorAll('.testi-slide')[idx];
+      if (slide) slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    });
+  });
+})();
 </script>
 
 </body>

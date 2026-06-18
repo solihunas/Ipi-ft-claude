@@ -678,3 +678,179 @@ footer {
   .footer-inner { flex-direction: column; gap: 28px; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
+
+/* ===== BTN BATTLE (hero) ===== */
+.btn-battle {
+  background: linear-gradient(135deg, #1e1240, #2d1b5e);
+  color: #c084fc;
+  border: 1px solid rgba(168,85,247,0.45);
+  box-shadow: 0 0 14px rgba(168,85,247,0.15);
+}
+.btn-battle:hover {
+  background: linear-gradient(135deg, #2d1b5e, #3d1f80);
+  color: #e9d5ff;
+  border-color: #a855f7;
+  box-shadow: 0 0 26px rgba(168,85,247,0.35);
+  transform: translateY(-1px);
+}
+
+/* ===== SPLASH SCREEN ===== */
+.splash-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #06020f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+}
+.splash-overlay.splash-out {
+  opacity: 0;
+  pointer-events: none;
+}
+.splash-content {
+  text-align: center;
+  padding: 24px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.splash-logo {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  margin-bottom: 0;
+}
+.splash-logo.vis {
+  opacity: 1;
+  transform: scale(1);
+}
+.splash-logo img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(168,85,247,0.5);
+  box-shadow: 0 0 40px rgba(168,85,247,0.35), 0 0 80px rgba(168,85,247,0.12);
+}
+.splash-text {
+  font-size: clamp(18px, 4.5vw, 30px);
+  font-weight: 600;
+  color: #e2e8f0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.splash-text.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+.splash-brand {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  pointer-events: none;
+}
+.splash-brand.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+.splash-welcome {
+  font-size: 13px;
+  color: #475569;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.splash-brandname {
+  font-size: clamp(36px, 9vw, 64px);
+  font-weight: 900;
+  background: linear-gradient(135deg, #9333ea, #a855f7, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.splash-tagline {
+  font-size: 13px;
+  color: #06b6d4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.splash-skip {
+  position: absolute;
+  bottom: 32px;
+  font-size: 11px;
+  color: #1f2937;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ===== TESTIMONI SCREENSHOT CAROUSEL ===== */
+.testi-carousel {
+  margin-top: 16px;
+}
+.testi-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 16px 0 24px;
+}
+.testi-track::-webkit-scrollbar { display: none; }
+.testi-slide {
+  flex: 0 0 auto;
+  width: clamp(260px, 75vw, 340px);
+  scroll-snap-align: center;
+}
+.testi-img-frame {
+  background: rgba(147,51,234,0.06);
+  border: 1px solid rgba(147,51,234,0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 28px rgba(147,51,234,0.1), 0 4px 24px rgba(0,0,0,0.45);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.testi-img-frame:hover {
+  box-shadow: 0 0 50px rgba(168,85,247,0.25), 0 8px 32px rgba(0,0,0,0.5);
+  transform: translateY(-4px);
+}
+.testi-img-frame img {
+  width: 100%;
+  display: block;
+}
+.testi-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.testi-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: rgba(168,85,247,0.25);
+  transition: background 0.3s, width 0.3s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.testi-dot.active {
+  background: #a855f7;
+  width: 22px;
+}

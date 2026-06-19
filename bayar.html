@@ -223,6 +223,13 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 
 /* Bottom padding */
 .page-pad{height:32px;}
+
+/* Loading state */
+.submit-btn.loading{opacity:.7;cursor:not-allowed;pointer-events:none;}
+.submit-btn.loading .btn-text{display:none;}
+.submit-btn .btn-spinner{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;}
+.submit-btn.loading .btn-spinner{display:block;}
+@keyframes spin{to{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
@@ -382,8 +389,11 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
     </div>
 
     <button type="submit" class="submit-btn" id="submitBtn" disabled>
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      Kirim Bukti Pembayaran
+      <div class="btn-spinner"></div>
+      <span class="btn-text" style="display:flex;align-items:center;gap:10px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Kirim Bukti Pembayaran
+      </span>
     </button>
 
     <div class="form-footer">
@@ -555,20 +565,45 @@ function showToast(msg){
 }
 
 // ── Submit ──
-document.getElementById('payForm').addEventListener('submit',function(e){
+document.getElementById('payForm').addEventListener('submit',async function(e){
   e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.classList.add('loading');
+
+  const nama=document.getElementById('namaInput').value.trim();
+  const contact=document.getElementById('contactInput').value.trim();
+  const pesan=document.getElementById('pesanInput').value.trim();
+
   const order={
-    pid,
-    name:product.name,icon:product.icon,
+    pid,name:product.name,icon:product.icon,
     basePrice:product.price,uniqueCode,finalPrice,
-    nama:document.getElementById('namaInput').value.trim(),
-    contact:document.getElementById('contactInput').value.trim(),
-    pesan:document.getElementById('pesanInput').value.trim(),
+    nama,contact,pesan,
     method:selectedMethod.name,
     methodNumber:selectedMethod.number,
     methodHolder:selectedMethod.holder,
     ts:Date.now()
   };
+
+  // Build form data for email (formsubmit.co — no backend needed)
+  const fd=new FormData();
+  fd.append('_subject','🛒 Pesanan Baru: '+product.name+' — IPI Digital');
+  fd.append('_captcha','false');
+  fd.append('_template','table');
+  fd.append('Nama Pembeli',nama);
+  fd.append('WhatsApp / Email',contact);
+  fd.append('Produk',product.icon+' '+product.name);
+  fd.append('Metode',selectedMethod.name+' – '+selectedMethod.number+' (a.n. '+selectedMethod.holder+')');
+  fd.append('Total Pembayaran',fmtRp(finalPrice)+' (kode unik #'+uniqueCode+')');
+  if(pesan) fd.append('Catatan',pesan);
+  if(uploadedFile) fd.append('Bukti Transfer',uploadedFile,uploadedFile.name);
+
+  try{
+    await fetch('https://formsubmit.co/ajax/solihunas@gmail.com',{
+      method:'POST',body:fd,headers:{'Accept':'application/json'}
+    });
+  }catch(_){}
+
+  // Redirect regardless — even if email fails, order is tracked via WA
   sessionStorage.setItem('ipi_order',JSON.stringify(order));
   location.href='sukses.html';
 });

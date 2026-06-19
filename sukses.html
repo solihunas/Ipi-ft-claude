@@ -183,20 +183,22 @@ const raw = sessionStorage.getItem('ipi_order');
 if (raw) {
   const o = JSON.parse(raw);
   document.getElementById('oName').textContent = o.icon + ' ' + o.name;
-  document.getElementById('oContact').textContent = o.contact;
+  document.getElementById('oContact').textContent = (o.nama ? o.nama + ' · ' : '') + o.contact;
   document.getElementById('oMethod').textContent = o.method + ' · ' + o.methodNumber;
   document.getElementById('oTotal').textContent = fmtRp(o.finalPrice);
   document.getElementById('stepAmount').textContent = fmtRp(o.finalPrice);
 
   const msg = encodeURIComponent(
     'Halo Admin IPI Digital 👋\n\n' +
-    'Saya sudah transfer untuk pembelian produk:\n' +
-    '🛒 ' + o.name + '\n' +
-    '💰 ' + fmtRp(o.finalPrice) + ' (kode #' + o.uniqueCode + ')\n' +
+    'Saya sudah melakukan transfer untuk pembelian:\n' +
+    '👤 Nama: ' + (o.nama || '-') + '\n' +
+    '🛒 Produk: ' + o.name + '\n' +
+    '💰 Nominal: ' + fmtRp(o.finalPrice) + ' (kode #' + o.uniqueCode + ')\n' +
+    '🏦 Via: ' + o.method + ' – ' + o.methodNumber + '\n' +
     '📱 Kontak: ' + o.contact + '\n\n' +
-    'Terlampir bukti transfernya. Mohon segera diproses. Terima kasih!'
+    'Bukti transfer terlampir. Mohon segera diproses. Terima kasih!'
   );
-  document.getElementById('waBtn').href = 'https://wa.me/6283876123080?text=' + msg;
+  document.getElementById('waBtn').href = 'https://wa.me/6282220761257?text=' + msg;
 }
 
 // Confetti burst

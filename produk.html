@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Produk — IPI Digital</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+<style>
+.pd-back {
+  display: inline-flex; align-items: center; gap: 7px;
+  color: #475569; font-size: 13px; text-decoration: none;
+  transition: color .2s; padding-top: 88px;
+  max-width: 740px; margin: 0 auto; padding-left: 20px;
+}
+.pd-back:hover { color: #a855f7; }
+.pd-wrap { max-width: 740px; margin: 0 auto; padding: 20px 20px 120px; }
+
+.pd-hero {
+  background: rgba(10,5,25,.85);
+  border: 1px solid rgba(147,51,234,.18);
+  border-radius: 16px; padding: 28px; margin-bottom: 28px;
+  position: relative; overflow: hidden;
+  display: flex; gap: 22px; align-items: flex-start;
+}
+.pd-hero::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,.55), transparent);
+}
+.pd-icon {
+  width: 60px; height: 60px; flex-shrink: 0;
+  background: rgba(147,51,234,.12); border: 1px solid rgba(147,51,234,.22);
+  border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+.pd-hero-body { flex: 1; min-width: 0; }
+.pd-name { font-size: clamp(17px,3.5vw,22px); font-weight: 800; color: #f1f5f9; line-height: 1.3; margin-bottom: 8px; }
+.pd-tagline { font-size: 14px; color: #64748b; line-height: 1.7; margin-bottom: 20px; }
+.pd-price-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(168,85,247,.08); border: 1px solid rgba(168,85,247,.22);
+  border-radius: 10px; padding: 10px 18px;
+}
+.pd-price-lbl { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: .1em; }
+.pd-price-val { font-size: 22px; font-weight: 800; color: #a855f7; }
+
+.pd-sec { margin-bottom: 28px; }
+.pd-sec-ttl {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: #a855f7; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.pd-sec-ttl::before { content: ''; width: 14px; height: 1px; background: #a855f7; flex-shrink: 0; }
+
+.pd-about {
+  font-size: 14px; color: #94a3b8; line-height: 1.85;
+  background: rgba(147,51,234,.04); border: 1px solid rgba(147,51,234,.08);
+  border-radius: 10px; padding: 18px 20px;
+}
+
+.pd-feat { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.pd-feat li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14px; color: #94a3b8; line-height: 1.6;
+  padding: 12px 16px; background: rgba(10,5,25,.6);
+  border: 1px solid rgba(147,51,234,.08); border-radius: 8px;
+}
+.pd-feat-check {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: rgba(168,85,247,.12); border: 1px solid rgba(168,85,247,.25);
+  display: flex; align-items: center; justify-content: center;
+  color: #a855f7; font-size: 11px; font-weight: 700;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+.pd-includes { display: flex; flex-direction: column; gap: 8px; }
+.pd-inc {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 13px; color: #94a3b8; padding: 12px 16px;
+  background: rgba(6,182,212,.04); border: 1px solid rgba(6,182,212,.1); border-radius: 8px;
+}
+.pd-inc-icon { font-size: 16px; flex-shrink: 0; }
+
+.pd-note {
+  background: rgba(245,158,11,.05); border: 1px solid rgba(245,158,11,.15);
+  border-radius: 10px; padding: 14px 18px; margin-bottom: 28px;
+  font-size: 13px; color: #78350f; line-height: 1.7;
+  display: flex; gap: 10px;
+}
+
+/* Sticky CTA bar */
+.pd-cta-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+  background: rgba(6,2,15,.95); backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(147,51,234,.15);
+  padding: 14px 20px; display: flex; align-items: center;
+  justify-content: space-between; gap: 16px;
+}
+.pd-cta-info .lbl { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: .08em; }
+.pd-cta-info .val { font-size: 18px; font-weight: 800; color: #a855f7; line-height: 1.2; }
+.pd-cta-bar .btn { white-space: nowrap; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="logo-wrap">
+    <img src="logo.png" alt="IPI Digital" class="logo-img">
+    <span class="logo-text">IPI <span>Digital</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html#tentang">Tentang</a>
+    <a href="index.html#produk">Produk</a>
+    <a href="index.html#challenge">Challenge</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta">Pantau Challenge</a>
+    <a href="battle.html" class="nav-battle-cta">🤖 Tonton Battle AI</a>
+  </div>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#tentang" onclick="closeMenu()">Tentang</a>
+  <a href="index.html#produk" onclick="closeMenu()">Produk</a>
+  <a href="index.html#challenge" onclick="closeMenu()">Challenge</a>
+  <a href="index.html#faq" onclick="closeMenu()">FAQ</a>
+  <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" onclick="closeMenu()">Pantau Challenge</a>
+  <a href="battle.html" class="nav-battle-cta" onclick="closeMenu()">🤖 Tonton Battle AI</a>
+</div>
+
+<div style="max-width:740px;margin:0 auto;padding:88px 20px 0">
+  <a href="index.html#produk" class="pd-back" style="display:inline-flex;align-items:center;gap:7px;color:#475569;font-size:13px;text-decoration:none;transition:color .2s;padding-top:0" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#475569'">
+    ← Semua Produk
+  </a>
+</div>
+
+<div class="pd-wrap">
+  <div id="pdContent"></div>
+</div>
+
+<div class="pd-cta-bar">
+  <div class="pd-cta-info">
+    <div class="lbl">Harga</div>
+    <div class="val" id="ctaPrice"></div>
+  </div>
+  <a href="#" id="ctaBtn" class="btn btn-primary btn-lg">Beli Sekarang →</a>
+</div>
+
+<div class="disclaimer">⚠️ Trading mengandung risiko tinggi. Produk ini adalah alat bantu, bukan jaminan profit.</div>
+
+<script>
+function toggleMenu(){const m=document.getElementById('mobileMenu');m.style.display=m.style.display==='flex'?'none':'flex';}
+function closeMenu(){document.getElementById('mobileMenu').style.display='none';}
+document.addEventListener('click',function(e){const m=document.getElementById('mobileMenu'),n=document.querySelector('.navbar');if(!n.contains(e.target)&&!m.contains(e.target))m.style.display='none';});
+
+function fmtRp(n){return'Rp '+n.toLocaleString('id-ID');}
+
+const PRODUCTS = {
+  '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',price:50000,badge:null,
+    tagline:'Mulai analisa trading dengan AI — tanpa coding, tanpa setup yang rumit.',
+    about:'Koleksi prompt AI yang sudah dioptimalkan khusus untuk konteks trading. Bukan prompt generik — setiap instruksi dirancang agar AI bisa memahami grafik, level harga, dan kondisi pasar seperti seorang analis.',
+    features:['15+ prompt trading yang sudah diuji secara langsung di pasar','Kompatibel dengan Claude, ChatGPT, dan berbagai model AI lainnya','Mencakup analisa trend, identifikasi level penting, dan evaluasi potensi entry','Format siap pakai — tinggal copy, paste, dan jalankan','Panduan singkat cara mengoptimalkan setiap prompt sesuai kondisi pasar'],
+    includes:['Dokumen berisi semua prompt (PDF/DOC)','Panduan cara penggunaan'],
+    note:'Cocok untuk pemula yang ingin mulai memanfaatkan AI untuk trading tanpa perlu latar belakang teknis.'},
+  '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',price:550000,badge:null,
+    tagline:'Latih AI kamu sendiri untuk menghasilkan sinyal analisa trading.',
+    about:'Paket lengkap berisi data historis candle dan panduan cara melatih model AI dari awal. Dirancang untuk yang ingin memiliki AI yang bisa menganalisa pergerakan harga dan menghasilkan sinyal secara mandiri.',
+    features:['Data 400.000 candle historis OHLCV dalam format CSV siap pakai','Panduan langkah-demi-langkah cara melatih AI dari nol','Teknik prompt engineering untuk memaksimalkan akurasi output model','Cara membaca dan memvalidasi sinyal yang dihasilkan AI','Cocok untuk berbagai timeframe dan pasangan aset'],
+    includes:['File data 400.000 candle (format CSV)','Panduan pelatihan AI (PDF/dokumen)'],
+    note:'Tidak perlu bisa coding. Panduan dirancang agar bisa diikuti oleh siapapun secara bertahap.'},
+  '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',price:3500000,badge:'Premium',
+    tagline:'AI yang bisa membaca jejak smart money dan mengidentifikasi entry dengan presisi tinggi.',
+    about:'Dataset dan metodologi eksklusif untuk melatih Claude AI agar mampu mengidentifikasi entry berkualitas tinggi. Menggunakan pendekatan berbasis likuiditas, struktur pasar, dan perilaku harga yang dikembangkan dari riset dan penggunaan nyata selama bertahun-tahun.',
+    features:['Data 1.000.000 candle — jauh lebih komprehensif dan representatif','Metodologi identifikasi likuiditas dan jejak pergerakan institusi','Teknik sniper entry berbasis struktur pasar: MSS, Order Block, Fair Value Gap','Panduan lengkap melatih Claude AI dari awal hingga siap digunakan','Akses support via chat selama 1 bulan penuh'],
+    includes:['File data 1.000.000 candle (format CSV)','Dokumen metodologi & panduan pelatihan (PDF)','Akses chat support 1 bulan'],
+    note:'Direkomendasikan untuk trader yang sudah punya dasar membaca chart dan ingin membawa analisa ke level yang lebih tinggi.'},
+  '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',price:3000000,badge:'Premium',
+    tagline:'Bot trading otomatis yang bekerja 24 jam — tanpa harus pantau layar terus-menerus.',
+    about:'Expert Advisor untuk MetaTrader 5 dengan strategi trend following yang sudah melalui pengujian nyata. Dirancang untuk menangkap pergerakan tren yang signifikan sambil menjaga risiko tetap terkontrol melalui parameter yang bisa dikustomisasi.',
+    features:['File EA (.ex5) siap install langsung di MetaTrader 5','Strategi trend following yang sudah melalui backtesting dan pengujian live','Parameter fleksibel: ukuran lot, TP, SL, dan filter waktu trading','Panduan instalasi dan konfigurasi yang lengkap dan mudah diikuti','Kompatibel dengan semua broker yang menggunakan platform MT5'],
+    includes:['File EA MetaTrader 5 (.ex5)','Panduan instalasi dan pengaturan parameter (PDF)'],
+    note:'Pastikan akun trading kamu menggunakan platform MetaTrader 5 (bukan MT4) sebelum melakukan pembelian.'},
+  '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',price:750000,badge:null,
+    tagline:'Identifikasi level kunci dan arah pergerakan XAU/USD dengan lebih akurat dan efisien.',
+    about:'Indikator custom untuk platform TradingView yang dirancang khusus untuk analisa XAU/USD (Gold). Membantu trader mengidentifikasi area-area penting yang sering menjadi titik reversal atau kelanjutan tren pada grafik gold.',
+    features:['Akses melalui invite-only Pine Script langsung di TradingView','Identifikasi level support & resistance secara otomatis di atas chart','Sinyal visual yang jelas membantu keputusan entry dan exit','Panduan cara memasang dan membaca indikator dengan benar','Akses seumur hidup dan update jika ada perbaikan atau penambahan fitur'],
+    includes:['Akses Pine Script indikator di TradingView (invite-only)','Panduan penggunaan (PDF)'],
+    note:'Khusus untuk pasangan XAU/USD. Diperlukan akun TradingView (versi gratis sudah cukup).'},
+};
+
+const id = new URLSearchParams(location.search).get('id') || '1';
+const p = PRODUCTS[id];
+
+if (!p) {
+  document.getElementById('pdContent').innerHTML = '<div style="text-align:center;padding:60px 0;color:#64748b">Produk tidak ditemukan. <a href="index.html#produk" style="color:#a855f7">Lihat semua produk</a></div>';
+} else {
+  document.title = p.short + ' — IPI Digital';
+  const badge = p.badge ? `<span class="product-badge" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${p.badge}</span><br>` : '';
+  document.getElementById('pdContent').innerHTML = `
+    <div class="pd-hero">
+      <div class="pd-icon">${p.icon}</div>
+      <div class="pd-hero-body">
+        ${badge}
+        <div class="pd-name">${p.name}</div>
+        <div class="pd-tagline">${p.tagline}</div>
+        <div class="pd-price-pill">
+          <div>
+            <div class="pd-price-lbl">Harga</div>
+            <div class="pd-price-val">${fmtRp(p.price)}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">Tentang Produk</div>
+      <div class="pd-about">${p.about}</div>
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">Yang Kamu Dapatkan</div>
+      <ul class="pd-feat">
+        ${p.features.map(f=>`<li><div class="pd-feat-check">✓</div><span>${f}</span></li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">Termasuk dalam Paket</div>
+      <div class="pd-includes">
+        ${p.includes.map(i=>`<div class="pd-inc"><span class="pd-inc-icon">📦</span><span>${i}</span></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="pd-note"><span>💡</span><span>${p.note}</span></div>
+  `;
+  document.getElementById('ctaPrice').textContent = fmtRp(p.price);
+  document.getElementById('ctaBtn').href = `bayar.html?id=${id}`;
+}
+</script>
+</body>
+</html>

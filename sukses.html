@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pesanan Terkirim — IPI Digital</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: #06020f; color: #e2e8f0; font-family: 'Inter', sans-serif; min-height: 100vh;
+         display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; }
+
+  .sukses-wrap { max-width: 480px; width: 100%; text-align: center; }
+
+  /* Success icon */
+  .sukses-icon-wrap { margin-bottom: 28px; position: relative; display: inline-block; }
+  .sukses-ring {
+    width: 96px; height: 96px; border-radius: 50%;
+    border: 2px solid rgba(168,85,247,.25);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto;
+    animation: ringPulse 2s ease-in-out infinite;
+  }
+  @keyframes ringPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,.4); }
+    50%       { box-shadow: 0 0 0 16px rgba(168,85,247,.0); }
+  }
+  .sukses-check {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    animation: popIn .5s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+
+  .sukses-title {
+    font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 8px;
+    animation: fadeUp .4s .2s ease both;
+  }
+  .sukses-sub {
+    font-size: 0.95rem; color: #94a3b8; line-height: 1.7; margin-bottom: 32px;
+    animation: fadeUp .4s .3s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Order card */
+  .order-card {
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: 20px; text-align: left; margin-bottom: 24px;
+    animation: fadeUp .4s .4s ease both;
+  }
+  .order-card .oc-label { font-size: 0.72rem; color: #a855f7; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 14px; }
+  .oc-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+  .oc-row:last-child { border-bottom: none; }
+  .oc-key { font-size: 0.82rem; color: #64748b; flex-shrink: 0; }
+  .oc-val { font-size: 0.88rem; color: #e2e8f0; font-weight: 600; text-align: right; }
+  .oc-val.highlight { color: #a855f7; font-size: 1rem; }
+
+  /* Next steps */
+  .steps-card {
+    background: linear-gradient(135deg, rgba(147,51,234,.1) 0%, rgba(6,182,212,.06) 100%);
+    border: 1px solid rgba(147,51,234,.25); border-radius: 16px;
+    padding: 20px; text-align: left; margin-bottom: 24px;
+    animation: fadeUp .4s .5s ease both;
+  }
+  .steps-title { font-size: 0.78rem; color: #06b6d4; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 14px; }
+  .step-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .step-item:last-child { margin-bottom: 0; }
+  .step-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(168,85,247,.2); border: 1px solid rgba(168,85,247,.3);
+    color: #a855f7; font-size: 0.72rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .step-text { font-size: 0.85rem; color: #cbd5e1; line-height: 1.55; }
+  .step-text strong { color: #fff; }
+
+  /* CTA buttons */
+  .cta-group { display: flex; flex-direction: column; gap: 12px; animation: fadeUp .4s .6s ease both; }
+  .btn-wa {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 15px 24px; border-radius: 14px;
+    background: linear-gradient(135deg, #1db954, #25d366);
+    color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none;
+    transition: opacity .2s, transform .1s; box-shadow: 0 4px 18px rgba(37,211,102,.3);
+  }
+  .btn-wa:hover { opacity: .9; transform: translateY(-1px); }
+  .btn-home {
+    display: block; padding: 13px 24px; border-radius: 14px;
+    border: 1.5px solid rgba(168,85,247,.35); color: #a855f7;
+    font-weight: 600; font-size: 0.9rem; text-decoration: none; text-align: center;
+    transition: background .2s;
+  }
+  .btn-home:hover { background: rgba(168,85,247,.08); }
+
+  /* Confetti dots */
+  .confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 0; }
+  .confetti-dot {
+    position: absolute; width: 6px; height: 6px; border-radius: 2px;
+    animation: confettiFall linear forwards;
+    opacity: 0;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="confetti" id="confetti"></div>
+
+<div class="sukses-wrap">
+  <div class="sukses-icon-wrap">
+    <div class="sukses-ring">
+      <div class="sukses-check">✓</div>
+    </div>
+  </div>
+
+  <h1 class="sukses-title">Bukti Berhasil Dikirim!</h1>
+  <p class="sukses-sub">
+    Terima kasih sudah memesan. Admin kami akan memverifikasi pembayaran
+    dan mengirimkan produk ke kontak Anda secepatnya.
+  </p>
+
+  <div class="order-card" id="orderCard">
+    <div class="oc-label">Ringkasan Pesanan</div>
+    <div class="oc-row">
+      <span class="oc-key">Produk</span>
+      <span class="oc-val" id="oName">—</span>
+    </div>
+    <div class="oc-row">
+      <span class="oc-key">Kontak</span>
+      <span class="oc-val" id="oContact">—</span>
+    </div>
+    <div class="oc-row">
+      <span class="oc-key">Metode</span>
+      <span class="oc-val" id="oMethod">—</span>
+    </div>
+    <div class="oc-row">
+      <span class="oc-key">Total Transfer</span>
+      <span class="oc-val highlight" id="oTotal">—</span>
+    </div>
+  </div>
+
+  <div class="steps-card">
+    <div class="steps-title">Langkah Selanjutnya</div>
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text">Pastikan Anda sudah mentransfer <strong id="stepAmount">—</strong> ke DANA <strong>083876123080</strong> (Ardi Kun).</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text">Kirim <strong>bukti transfer</strong> ke WhatsApp admin melalui tombol di bawah.</div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text">Admin akan memverifikasi dan mengirim produk ke kontak Anda. Biasanya <strong>dalam 1×24 jam</strong>.</div>
+    </div>
+  </div>
+
+  <div class="cta-group">
+    <a href="#" id="waBtn" class="btn-wa" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Kirim Bukti ke Admin
+    </a>
+    <a href="index.html" class="btn-home">← Kembali ke Beranda</a>
+  </div>
+</div>
+
+<script>
+function fmtRp(n) {
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+const raw = sessionStorage.getItem('ipi_order');
+if (raw) {
+  const o = JSON.parse(raw);
+  document.getElementById('oName').textContent = o.icon + ' ' + o.name;
+  document.getElementById('oContact').textContent = o.contact;
+  document.getElementById('oMethod').textContent = o.method + ' · ' + o.methodNumber;
+  document.getElementById('oTotal').textContent = fmtRp(o.finalPrice);
+  document.getElementById('stepAmount').textContent = fmtRp(o.finalPrice);
+
+  const msg = encodeURIComponent(
+    'Halo Admin IPI Digital 👋\n\n' +
+    'Saya sudah transfer untuk pembelian produk:\n' +
+    '🛒 ' + o.name + '\n' +
+    '💰 ' + fmtRp(o.finalPrice) + ' (kode #' + o.uniqueCode + ')\n' +
+    '📱 Kontak: ' + o.contact + '\n\n' +
+    'Terlampir bukti transfernya. Mohon segera diproses. Terima kasih!'
+  );
+  document.getElementById('waBtn').href = 'https://wa.me/6283876123080?text=' + msg;
+}
+
+// Confetti burst
+(function() {
+  const colors = ['#a855f7','#ec4899','#06b6d4','#7c3aed','#f59e0b'];
+  const container = document.getElementById('confetti');
+  for (let i = 0; i < 36; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'confetti-dot';
+    dot.style.left = Math.random() * 100 + '%';
+    dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    dot.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+    dot.style.animationDelay = (Math.random() * 0.8) + 's';
+    dot.style.width = dot.style.height = (4 + Math.random() * 5) + 'px';
+    container.appendChild(dot);
+  }
+})();
+</script>
+</body>
+</html>

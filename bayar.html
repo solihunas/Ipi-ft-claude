@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pembayaran — IPI Digital</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: #06020f; color: #e2e8f0; font-family: 'Inter', sans-serif; min-height: 100vh; }
+  .pay-wrap { max-width: 520px; margin: 0 auto; padding: 24px 16px 80px; }
+
+  /* Back nav */
+  .back-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 28px; }
+  .back-nav a { color: #a855f7; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; transition: opacity .2s; }
+  .back-nav a:hover { opacity: .75; }
+
+  /* Product summary card */
+  .product-card {
+    background: linear-gradient(135deg, rgba(147,51,234,.12) 0%, rgba(6,182,212,.06) 100%);
+    border: 1px solid rgba(147,51,234,.3);
+    border-radius: 16px; padding: 20px; margin-bottom: 24px;
+  }
+  .product-card .pc-label { font-size: 0.72rem; color: #7c3aed; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; margin-bottom: 6px; }
+  .product-card .pc-name { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .product-card .pc-icon { font-size: 1.5rem; margin-bottom: 8px; }
+
+  /* Form sections */
+  .form-section { margin-bottom: 20px; }
+  .form-section label { display: block; font-size: 0.85rem; font-weight: 600; color: #cbd5e1; margin-bottom: 8px; letter-spacing: .03em; }
+  .form-section label span.req { color: #a855f7; margin-left: 2px; }
+  .form-input {
+    width: 100%; padding: 14px 16px; border-radius: 12px;
+    background: rgba(255,255,255,.05); border: 1.5px solid rgba(255,255,255,.1);
+    color: #fff; font-size: 1rem; outline: none; transition: border-color .2s, box-shadow .2s;
+    box-sizing: border-box;
+  }
+  .form-input:focus { border-color: #a855f7; box-shadow: 0 0 0 3px rgba(168,85,247,.15); }
+  .form-input::placeholder { color: #64748b; }
+
+  /* Price display */
+  .price-display {
+    background: rgba(255,255,255,.04); border: 1.5px solid rgba(255,255,255,.1);
+    border-radius: 12px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;
+  }
+  .price-base { color: #64748b; font-size: 0.85rem; text-decoration: line-through; }
+  .price-final { font-size: 1.2rem; font-weight: 700; color: #a855f7; }
+  .price-code { font-size: 0.72rem; color: #06b6d4; margin-top: 2px; text-align: right; }
+
+  /* Payment method */
+  .method-grid { display: flex; flex-direction: column; gap: 10px; }
+  .method-option {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: 12px;
+    border: 1.5px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.03);
+    cursor: pointer; transition: border-color .2s, background .2s;
+    position: relative;
+  }
+  .method-option input[type=radio] { display: none; }
+  .method-option.selected { border-color: #a855f7; background: rgba(168,85,247,.08); }
+  .method-radio {
+    width: 20px; height: 20px; border-radius: 50%; border: 2px solid rgba(255,255,255,.25);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    transition: border-color .2s;
+  }
+  .method-option.selected .method-radio { border-color: #a855f7; }
+  .method-radio-dot {
+    width: 10px; height: 10px; border-radius: 50%; background: #a855f7;
+    transform: scale(0); transition: transform .2s;
+  }
+  .method-option.selected .method-radio-dot { transform: scale(1); }
+  .method-logo { font-size: 1.6rem; width: 36px; text-align: center; }
+  .method-info { flex: 1; }
+  .method-name { font-weight: 700; font-size: 0.95rem; color: #fff; }
+  .method-number { font-size: 0.8rem; color: #94a3b8; margin-top: 2px; }
+  .method-badge {
+    font-size: 0.65rem; font-weight: 700; background: rgba(6,182,212,.15);
+    color: #06b6d4; border: 1px solid rgba(6,182,212,.3); border-radius: 20px;
+    padding: 2px 8px; letter-spacing: .04em;
+  }
+  .method-unavail { opacity: .4; cursor: not-allowed; }
+  .method-unavail .method-name { color: #64748b; }
+
+  /* Instruction card */
+  .instruction-card {
+    border: 1.5px solid rgba(168,85,247,.35); border-radius: 14px;
+    background: rgba(168,85,247,.07); padding: 18px 18px;
+    margin-top: 14px; display: none;
+    animation: fadeSlideUp .3s ease;
+  }
+  .instruction-card.show { display: block; }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .instr-title { font-size: 0.78rem; color: #a855f7; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 12px; }
+  .instr-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 10px; }
+  .instr-key { font-size: 0.8rem; color: #94a3b8; }
+  .instr-val { font-size: 0.9rem; font-weight: 600; color: #e2e8f0; text-align: right; }
+  .instr-val.amount { color: #a855f7; font-size: 1.05rem; }
+  .instr-copy {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 0.72rem; color: #06b6d4; cursor: pointer;
+    border: 1px solid rgba(6,182,212,.3); border-radius: 6px;
+    padding: 2px 7px; margin-left: 8px; transition: background .2s;
+  }
+  .instr-copy:hover { background: rgba(6,182,212,.1); }
+  .instr-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin: 12px 0; }
+  .instr-note { font-size: 0.8rem; color: #94a3b8; line-height: 1.6; }
+  .instr-note strong { color: #e2e8f0; }
+
+  /* Submit button */
+  .submit-btn {
+    width: 100%; padding: 16px; border-radius: 14px; border: none;
+    font-size: 1rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    cursor: pointer; margin-top: 28px;
+    background: linear-gradient(135deg, #7c3aed, #a855f7, #ec4899);
+    color: #fff; transition: opacity .2s, transform .1s, box-shadow .2s;
+    box-shadow: 0 4px 20px rgba(168,85,247,.35);
+  }
+  .submit-btn:hover:not(:disabled) { opacity: .9; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(168,85,247,.45); }
+  .submit-btn:active:not(:disabled) { transform: translateY(0); }
+  .submit-btn:disabled { opacity: .3; cursor: not-allowed; box-shadow: none; }
+
+  /* Copy toast */
+  .copy-toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: rgba(6,182,212,.9); color: #fff; font-size: 0.85rem; font-weight: 600;
+    padding: 10px 20px; border-radius: 30px; pointer-events: none;
+    opacity: 0; transition: opacity .25s, transform .25s;
+    z-index: 9999;
+  }
+  .copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Security note */
+  .security-note { display: flex; align-items: center; gap: 8px; margin-top: 14px; color: #475569; font-size: 0.75rem; }
+  .security-note svg { flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="pay-wrap">
+  <div class="back-nav">
+    <a href="#" id="backLink">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Kembali ke Produk
+    </a>
+  </div>
+
+  <div class="product-card">
+    <div class="pc-label">Pesanan Anda</div>
+    <div class="pc-icon" id="pcIcon">🤖</div>
+    <div class="pc-name" id="pcName">Memuat produk...</div>
+  </div>
+
+  <form id="payForm" autocomplete="off">
+    <!-- Contact -->
+    <div class="form-section">
+      <label>Email atau WhatsApp <span class="req">*</span></label>
+      <input type="text" id="contactInput" class="form-input"
+             placeholder="Contoh: 08123456789 atau email@kamu.com" autocomplete="off">
+    </div>
+
+    <!-- Price -->
+    <div class="form-section">
+      <label>Total Pembayaran</label>
+      <div class="price-display">
+        <div>
+          <div class="price-base" id="priceBase"></div>
+          <div class="price-final" id="priceFinal">Memuat...</div>
+        </div>
+        <div class="price-code" id="priceCode"></div>
+      </div>
+    </div>
+
+    <!-- Payment method -->
+    <div class="form-section">
+      <label>Rekening Tujuan <span class="req">*</span></label>
+      <div class="method-grid">
+        <label class="method-option" id="danaOpt">
+          <input type="radio" name="method" value="dana">
+          <div class="method-radio"><div class="method-radio-dot"></div></div>
+          <div class="method-logo">💙</div>
+          <div class="method-info">
+            <div class="method-name">DANA</div>
+            <div class="method-number">083876123080 · Ardi Kun</div>
+          </div>
+          <span class="method-badge">TERSEDIA</span>
+        </label>
+      </div>
+
+      <!-- Instruction card -->
+      <div class="instruction-card" id="instrCard">
+        <div class="instr-title">📋 Instruksi Transfer</div>
+        <div class="instr-row">
+          <span class="instr-key">Nomor DANA</span>
+          <span class="instr-val">083876123080 <span class="instr-copy" onclick="copyText('083876123080')">Salin</span></span>
+        </div>
+        <div class="instr-row">
+          <span class="instr-key">Atas Nama</span>
+          <span class="instr-val">Ardi Kun</span>
+        </div>
+        <div class="instr-row">
+          <span class="instr-key">Nominal Transfer</span>
+          <span class="instr-val amount" id="instrAmount">—</span>
+        </div>
+        <hr class="instr-divider">
+        <p class="instr-note">
+          Transfer tepat <strong id="instrAmountNote">—</strong> ke DANA atas nama <strong>Ardi Kun</strong>.
+          Kode unik di akhir nominal membantu tim kami mengidentifikasi pesanan Anda secara otomatis.
+          Setelah transfer, klik <strong>DAPATKAN PRODUK</strong> — admin akan segera mengirimkan produk ke kontak yang Anda daftarkan.
+        </p>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn" id="submitBtn" disabled>DAPATKAN PRODUK</button>
+  </form>
+
+  <div class="security-note">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Data Anda aman. Pembayaran diverifikasi manual oleh admin IPI Digital.
+  </div>
+</div>
+
+<div class="copy-toast" id="copyToast">Disalin!</div>
+
+<script>
+const PRODUCTS = {
+  1: { name: 'Prompt AI Neurobro', icon: '🤖', price: 50000 },
+  2: { name: 'Data Training AI Signal', icon: '📊', price: 550000 },
+  3: { name: 'Latih Claude Sniper Entry', icon: '🎯', price: 3500000 },
+  4: { name: 'EA MT5 Trend Following', icon: '⚡', price: 3000000 },
+  5: { name: 'Indikator TradingView XAU', icon: '📈', price: 750000 },
+};
+
+function fmtRp(n) {
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+// Get or generate unique code per product (persisted in sessionStorage)
+function getUniqueCode(id) {
+  const key = 'ipi_ucode_' + id;
+  let code = sessionStorage.getItem(key);
+  if (!code) {
+    code = Math.floor(Math.random() * 900) + 100;
+    sessionStorage.setItem(key, code);
+  }
+  return parseInt(code);
+}
+
+const params = new URLSearchParams(location.search);
+const pid = parseInt(params.get('id')) || 1;
+const product = PRODUCTS[pid] || PRODUCTS[1];
+const uniqueCode = getUniqueCode(pid);
+const finalPrice = product.price + uniqueCode;
+
+// Populate product info
+document.getElementById('pcIcon').textContent = product.icon;
+document.getElementById('pcName').textContent = product.name;
+document.getElementById('backLink').href = 'produk.html?id=' + pid;
+document.getElementById('priceBase').textContent = fmtRp(product.price);
+document.getElementById('priceFinal').textContent = fmtRp(finalPrice);
+document.getElementById('priceCode').textContent = '+ kode unik #' + uniqueCode;
+document.getElementById('instrAmount').textContent = fmtRp(finalPrice);
+document.getElementById('instrAmountNote').textContent = fmtRp(finalPrice);
+
+// Payment method selection
+const danaOpt = document.getElementById('danaOpt');
+const instrCard = document.getElementById('instrCard');
+let methodSelected = false;
+
+danaOpt.addEventListener('click', function() {
+  this.classList.add('selected');
+  this.querySelector('input').checked = true;
+  instrCard.classList.add('show');
+  methodSelected = true;
+  validateForm();
+});
+
+// Contact input
+const contactInput = document.getElementById('contactInput');
+contactInput.addEventListener('input', validateForm);
+
+function validateForm() {
+  const contact = contactInput.value.trim();
+  const ok = contact.length >= 6 && methodSelected;
+  document.getElementById('submitBtn').disabled = !ok;
+}
+
+// Copy helper
+function copyText(text) {
+  navigator.clipboard.writeText(text).catch(() => {
+    const el = document.createElement('textarea');
+    el.value = text; document.body.appendChild(el);
+    el.select(); document.execCommand('copy'); document.body.removeChild(el);
+  });
+  const toast = document.getElementById('copyToast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+// Submit
+document.getElementById('payForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const order = {
+    pid, name: product.name, icon: product.icon,
+    basePrice: product.price, uniqueCode, finalPrice,
+    contact: contactInput.value.trim(),
+    method: 'DANA', methodNumber: '083876123080', methodOwner: 'Ardi Kun',
+    ts: Date.now()
+  };
+  sessionStorage.setItem('ipi_order', JSON.stringify(order));
+  location.href = 'sukses.html';
+});
+</script>
+</body>
+</html>

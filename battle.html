@@ -315,19 +315,45 @@ const AIS = [
   { id:'gemini', name:'Gemini',           sub:'Google Gemini 1.5',      color:'#64748b', cls:'c5', active:1 },
 ];
 
-// posAI[rank_pos] = AI index. Pos 0 & 1 fixed; pos 2-4 can rotate.
+// posAI[rank_pos] = AI index — now sorted by equity each tick
 let posAI = [0, 1, 2, 3, 4];
-const aiRankDelta = [0, 0, 0, 0, 0]; // per AI index, shown briefly on rank change
+const aiPos = [0, 1, 2, 3, 4];     // aiPos[aiIdx] = current rank (inverse of posAI)
+const aiRankDelta = [0, 0, 0, 0, 0];
 
-// Scores per POSITION (not per AI) — maintains visual ranking integrity
-const BASE_PS = [
-  { eq:128450, pnl:28450,  wr:78.3, tasks:247, dd:4.2  },
-  { eq:114230, pnl:14230,  wr:71.8, tasks:312, dd:6.1  },
-  { eq:108890, pnl:8890,   wr:65.4, tasks:198, dd:8.7  },
-  { eq:103450, pnl:3450,   wr:61.2, tasks:156, dd:11.3 },
-  { eq:98760,  pnl:-1240,  wr:55.6, tasks:89,  dd:14.8 },
+// ─── PERSONALITY PROFILES (hourly growth model) ────────────────────────────
+// hourlyPct per phase [min%, max%], phaseP = probability of each phase
+// Sessions: visual tick uses per-phase sigma/bias for feel, no huge drift
+const AI_CHAR = [
+  // 0 · Claude Sniper — expert, precision, steady climb, fast recovery
+  { phaseP:{trend:.60,side:.22,dd:.10,rec:.08},
+    hourly:{trend:[.00035,.00090],side:[-.00010,.00020],dd:[-.00030,-.00005],rec:[.00010,.00050]},
+    phaseLen:[18,96], wrR:[76,83], ddR:[3,6], sigma:70, bias:{trend:.538,side:.500,dd:.462,rec:.515} },
+  // 1 · Claude Basic — good, gradual, occasional sideways/dip
+  { phaseP:{trend:.45,side:.30,dd:.15,rec:.10},
+    hourly:{trend:[.00020,.00060],side:[-.00012,.00010],dd:[-.00040,-.00008],rec:[.00008,.00030]},
+    phaseLen:[12,120], wrR:[68,76], ddR:[5,9], sigma:85, bias:{trend:.528,side:.500,dd:.468,rec:.510} },
+  // 2 · ChatGPT — decent momentum, SLOW recovery from drawdowns
+  { phaseP:{trend:.35,side:.30,dd:.20,rec:.15},
+    hourly:{trend:[.00015,.00040],side:[-.00015,.00008],dd:[-.00050,-.00010],rec:[.00004,.00015]},
+    phaseLen:[8,144], wrR:[61,69], ddR:[7,14], sigma:95, bias:{trend:.520,side:.500,dd:.472,rec:.505} },
+  // 3 · Neurobro — HOT/COLD streaks: explosive up then sharp drops
+  { phaseP:{trend:.25,side:.22,dd:.30,rec:.23},
+    hourly:{trend:[.00060,.00150],side:[-.00025,.00010],dd:[-.00080,-.00020],rec:[.00010,.00050]},
+    phaseLen:[4,60], wrR:[57,66], ddR:[9,18], sigma:115, bias:{trend:.545,side:.500,dd:.452,rec:.512} },
+  // 4 · Gemini — struggling, long sideways, deep slow recovery
+  { phaseP:{trend:.20,side:.38,dd:.28,rec:.14},
+    hourly:{trend:[.00008,.00025],side:[-.00018,.00004],dd:[-.00055,-.00010],rec:[.00002,.00010]},
+    phaseLen:[20,180], wrR:[51,59], ddR:[12,20], sigma:90, bias:{trend:.512,side:.500,dd:.478,rec:.502} },
 ];
-const PS = BASE_PS.map(s=>({...s}));
+
+// ─── PER-AI STATE ─────────────────────────────────────────────────────────
+let AI_EQ    = [128450, 114230, 108890, 103450, 98760];
+let AI_PNL   = [ 28450,  14230,   8890,   3450,  -1240];
+let AI_WR    = [   78.3,   71.8,   65.4,   61.2,   55.6];
+let AI_DD    = [    4.2,    6.1,    8.7,   11.3,   14.8];
+let AI_TASKS = [   247,    312,    198,    156,     89];
+let AI_PHASE = ['trend','trend','side','dd','side'];
+let AI_PH_HRS= [  72,     60,    40,    20,    80]; // hours left in current phase
 
 // AI statuses (change periodically — tied to AI identity, not position)
 const AI_STATUS = ['ACTIVE','ACTIVE','ANALYZING','RESEARCHING','MONITORING'];
@@ -448,51 +474,111 @@ const RNK_CLS=['r1','r2','r3','r4','r5'];
 
 function renderLB(){
   document.getElementById('lbBody').innerHTML=posAI.map((aiIdx,pos)=>{
-    const ai=AIS[aiIdx], ps=PS[pos];
+    const ai=AIS[aiIdx];
+    const eq=AI_EQ[aiIdx], pnl=AI_PNL[aiIdx];
     const sym=pos<3?RNK_SYM[pos]:(pos+1);
-    const pCls=ps.pnl>=0?'vp':'vn', pSign=ps.pnl>=0?'+$':'-$';
+    const pCls=pnl>=0?'vp':'vn', pSign=pnl>=0?'+$':'-$';
     const d=aiRankDelta[aiIdx];
     const dHtml=d>0?`<span class="rdelta rup">▲${d}</span>`:d<0?`<span class="rdelta rdn">▼${Math.abs(d)}</span>`:'';
     return`<tr class="${pos===0?'row1':''}">
       <td class="lb-rank ${RNK_CLS[pos]}">${sym}${dHtml}</td>
       <td><div class="aicell"><div class="aibar" style="background:${ai.color};box-shadow:0 0 7px ${ai.color}40"></div><div><div class="ainm" style="color:${ai.color}">${ai.name}</div><div class="aisub">${ai.sub}</div></div></div></td>
       <td><span class="bdg ${AI_STATUS[aiIdx]==='ACTIVE'?'bact':'bstb'}">${AI_STATUS[aiIdx]}</span></td>
-      <td class="vb">$${fmtN(ps.eq)}</td>
-      <td class="${pCls}">${pSign}${fmtN(Math.abs(ps.pnl))}</td>
-      <td class="vw">${ps.wr.toFixed(1)}%</td>
-      <td class="vd">${ps.dd.toFixed(1)}%</td>
-      <td style="color:#4a6680">${ps.tasks}</td>
+      <td class="vb">$${fmtN(eq)}</td>
+      <td class="${pCls}">${pSign}${fmtN(Math.abs(pnl))}</td>
+      <td class="vw">${AI_WR[aiIdx].toFixed(1)}%</td>
+      <td class="vd">${AI_DD[aiIdx].toFixed(1)}%</td>
+      <td style="color:#4a6680">${AI_TASKS[aiIdx]}</td>
       <td style="color:${ai.color};font-weight:700">${ai.active}</td>
     </tr>`;
   }).join('');
 }
 
-let lastRot=Date.now();
-function maybeRotateLB(){
-  if(Date.now()-lastRot<42000||Math.random()>.55)return;
-  const a=2+Math.floor(Math.random()*3), b=2+Math.floor(Math.random()*3);
-  if(a===b)return;
-  const aiA=posAI[a], aiB=posAI[b];
-  posAI[a]=aiB; posAI[b]=aiA;
-  aiRankDelta[aiA]=a-b; aiRankDelta[aiB]=b-a;
-  setTimeout(()=>{aiRankDelta[aiA]=0; aiRankDelta[aiB]=0; renderLB();},8000);
-  lastRot=Date.now();
+// ─── RANKING — sorted by equity each tick ────────────────────────────────────
+function updateRanking(){
+  const newOrder=[0,1,2,3,4].sort((a,b)=>AI_EQ[b]-AI_EQ[a]);
+  newOrder.forEach((aiIdx,newRank)=>{
+    const oldRank=aiPos[aiIdx];
+    if(oldRank!==newRank){
+      aiRankDelta[aiIdx]=oldRank-newRank;
+      setTimeout(()=>{ aiRankDelta[aiIdx]=0; renderLB(); },7000);
+    }
+    aiPos[aiIdx]=newRank;
+  });
+  posAI=newOrder;
 }
 
-// ─── TICKER UPDATE ────────────────────────────────────────────────────────────────
+// ─── PERSISTENCE ─────────────────────────────────────────────────────────────
+const SAVE_KEY='ipi_battle_v4';
+let _saveTick=0;
+
+function saveState(){
+  try{
+    localStorage.setItem(SAVE_KEY,JSON.stringify({
+      ts:Date.now(), eq:AI_EQ.slice(), pnl:AI_PNL.slice(),
+      wr:AI_WR.slice(), dd:AI_DD.slice(), tasks:AI_TASKS.slice(),
+      phase:AI_PHASE.slice(), phHrs:AI_PH_HRS.slice()
+    }));
+  }catch(e){}
+}
+
+function pickPhase(probs){
+  let r=Math.random(),cum=0;
+  for(const[ph,p] of Object.entries(probs)){cum+=p;if(r<cum)return ph;}
+  return 'side';
+}
+
+// Simulate N hours of realistic growth per AI (used on load fast-forward)
+function advanceHours(i, hrs){
+  const c=AI_CHAR[i];
+  let ph=AI_PHASE[i], phh=AI_PH_HRS[i];
+  for(let h=0;h<hrs;h++){
+    if(--phh<=0){ ph=pickPhase(c.phaseP); phh=Math.round(rnd(c.phaseLen[0],c.phaseLen[1])); }
+    const [lo,hi]=c.hourly[ph];
+    const pct=rnd(lo,hi);
+    const delta=AI_EQ[i]*pct;
+    AI_EQ[i]+=delta; AI_PNL[i]+=delta;
+  }
+  AI_WR[i]=clamp(AI_WR[i]+(Math.random()-.5)*.008*hrs, c.wrR[0], c.wrR[1]);
+  AI_DD[i]=clamp(AI_DD[i]+(Math.random()-.5)*.004*hrs, c.ddR[0], c.ddR[1]);
+  AI_TASKS[i]+=Math.floor(hrs*rnd(.4,1.2));
+  AI_PHASE[i]=ph; AI_PH_HRS[i]=Math.max(1,phh);
+}
+
+function loadAndAdvance(){
+  try{
+    const raw=localStorage.getItem(SAVE_KEY);
+    if(!raw)return;
+    const s=JSON.parse(raw);
+    if(!s.eq||s.eq.length!==5)return;
+    AI_EQ=s.eq.slice(); AI_PNL=s.pnl.slice();
+    AI_WR=s.wr.slice(); AI_DD=s.dd.slice();
+    AI_TASKS=s.tasks.slice(); AI_PHASE=s.phase.slice();
+    AI_PH_HRS=s.phHrs.slice();
+    // Fast-forward elapsed hours (cap at 7 days = 168h)
+    const elapsedHrs=Math.min((Date.now()-s.ts)/3600000, 168);
+    if(elapsedHrs>=0.083){ // at least 5 minutes
+      const hrs=Math.floor(elapsedHrs);
+      if(hrs>0) for(let i=0;i<5;i++) advanceHours(i,hrs);
+    }
+  }catch(e){}
+}
+
+// ─── TICKER UPDATE (3s visual tick — per-AI personality feel) ─────────────────
 function tickerUpdate(){
-  PS.forEach((ps,pos)=>{
-    const delta=(Math.random()-(pos<2?.44:.48))*85;
-    let eq=ps.eq+delta;
-    if(pos>0)  eq=Math.min(PS[pos-1].eq-2000,eq);
-    if(pos<4)  eq=Math.max(PS[pos+1].eq+2000,eq);
-    ps.eq=eq; ps.pnl+=delta*.65;
-    ps.wr=clamp(ps.wr+(Math.random()-.5)*.09, BASE_PS[pos].wr-2, BASE_PS[pos].wr+2);
-    ps.dd=clamp(ps.dd+(Math.random()-.5)*.05, BASE_PS[pos].dd-1, BASE_PS[pos].dd+1);
-    if(Math.random()<.07) ps.tasks+=1;
+  AIS.forEach((_,i)=>{
+    const c=AI_CHAR[i], ph=AI_PHASE[i];
+    const delta=(Math.random()-(1-c.bias[ph]))*c.sigma;
+    AI_EQ[i]+=delta; AI_PNL[i]+=delta*.65;
+    AI_WR[i]=clamp(AI_WR[i]+(Math.random()-.5)*.09, c.wrR[0], c.wrR[1]);
+    AI_DD[i]=clamp(AI_DD[i]+(Math.random()-.5)*.05, c.ddR[0], c.ddR[1]);
+    if(Math.random()<.07) AI_TASKS[i]++;
+    // Occasionally shift phase (visual phase feels)
+    if(Math.random()<.004){ AI_PHASE[i]=pickPhase(c.phaseP); }
   });
-  MON.forEach(p=>{ p.r=Math.round((p.r+(Math.random()-.46)*.11)*10)/10; p.heldSec+=3; });
-  maybeRotateLB(); renderLB(); renderMon();
+  MON.forEach(p=>{p.r=Math.round((p.r+(Math.random()-.46)*.11)*10)/10; p.heldSec+=3;});
+  updateRanking(); renderLB(); renderMon();
+  if(++_saveTick>=100){ saveState(); _saveTick=0; } // save every ~5 min
 }
 
 // ─── AI STATUS CENTER ─────────────────────────────────────────────────────────────
@@ -646,12 +732,15 @@ async function runDuel(){
 
 // ─── START DASHBOARD ──────────────────────────────────────────────────────────────
 function startDashboard(){
+  loadAndAdvance();  // restore + fast-forward from localStorage
+  updateRanking();   // sort posAI by current equity
   renderLB(); renderSC(); renderSRV(); renderMon(); initRF(); runDuel();
   setInterval(updateClock,1000);
   setInterval(tickerUpdate,3000);
   setInterval(updateSRV,4200);
   setInterval(addRandRF,5200);
   setInterval(rotateStatuses,7500);
+  window.addEventListener('beforeunload', saveState);
 }
 
 // ─── ENTRY POINT ─────────────────────────────────────────────────────────────────

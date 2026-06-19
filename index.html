@@ -12,15 +12,23 @@
 
 <!-- ======= SPLASH SCREEN ======= -->
 <div id="splash" class="splash-overlay">
+  <div class="splash-scan"></div>
   <div class="splash-content">
-    <div class="splash-logo" id="splashLogo">
-      <img src="logo.png" alt="IPI Digital">
+    <div class="splash-sys">
+      <div class="splash-sys-line" id="ssl1">// AI TRADING SYSTEM &nbsp;&nbsp;<span class="ok">[ ONLINE ]</span></div>
+      <div class="splash-sys-line" id="ssl2">// MARKET INTELLIGENCE <span class="ok">[ ACTIVE ]</span></div>
+      <div class="splash-sys-line" id="ssl3">// LOADING IPI DIGITAL  <span class="ok">[ READY&nbsp; ]</span></div>
     </div>
-    <div class="splash-text" id="splashText"></div>
+    <div class="splash-logo" id="splashLogo">
+      <div class="splash-logo-inner">
+        <img src="logo.png" alt="IPI Digital">
+      </div>
+    </div>
     <div class="splash-brand" id="splashBrand">
-      <div class="splash-welcome">Selamat datang di</div>
-      <div class="splash-brandname">IPI DIGITAL</div>
-      <div class="splash-tagline">AI Trading &bull; Automation &bull; Trading Tools</div>
+      <div class="splash-brandname" id="splashBrandname">IPI DIGITAL</div>
+      <div class="splash-hook-wrap">
+        <span class="splash-hook" id="splashHook"></span><span class="splash-cur">|</span>
+      </div>
     </div>
   </div>
   <div class="splash-skip">Tap untuk lewati</div>
@@ -218,23 +226,31 @@
     <div class="testi-carousel" id="testiCarousel">
       <div class="testi-track" id="testiTrack">
         <div class="testi-slide">
-          <div class="testi-img-frame">
-        <img src="testimoni-1.jpg" alt="Testimoni Pengguna 1" loading="lazy">
+          <div class="testi-neon-wrap">
+            <div class="testi-img-frame">
+              <img src="testimoni-1.jpg" alt="Testimoni Pengguna 1" loading="lazy">
+            </div>
           </div>
         </div>
         <div class="testi-slide">
-          <div class="testi-img-frame">
-            <img src="testimoni-2.jpg" alt="Testimoni Pengguna 2" loading="lazy">
+          <div class="testi-neon-wrap">
+            <div class="testi-img-frame">
+              <img src="testimoni-2.jpg" alt="Testimoni Pengguna 2" loading="lazy">
+            </div>
           </div>
         </div>
         <div class="testi-slide">
-          <div class="testi-img-frame">
-            <img src="testimoni-3.jpg" alt="Testimoni Pengguna 3" loading="lazy">
+          <div class="testi-neon-wrap">
+            <div class="testi-img-frame">
+              <img src="testimoni-3.jpg" alt="Testimoni Pengguna 3" loading="lazy">
+            </div>
           </div>
         </div>
         <div class="testi-slide">
-          <div class="testi-img-frame">
-            <img src="testimoni-4.jpg" alt="Testimoni Pengguna 4" loading="lazy">
+          <div class="testi-neon-wrap">
+            <div class="testi-img-frame">
+              <img src="testimoni-4.jpg" alt="Testimoni Pengguna 4" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
@@ -498,29 +514,56 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// ======= SPLASH SCREEN =======
+// ======= SPLASH SCREEN — FUTURISTIC =======
 (function() {
-  var splash = document.getElementById('splash');
-  var splashLogo = document.getElementById('splashLogo');
-  var splashBrand = document.getElementById('splashBrand');
-  var splashText = document.getElementById('splashText');
-  if (splashText) splashText.style.display = 'none';
+  var splash   = document.getElementById('splash');
+  var logo     = document.getElementById('splashLogo');
+  var brand    = document.getElementById('splashBrand');
+  var brandname= document.getElementById('splashBrandname');
+  var hookEl   = document.getElementById('splashHook');
+  var curEl    = document.querySelector('.splash-cur');
 
-  function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
 
-  function dismissSplash() {
+  function dismissSplash(){
     splash.classList.add('splash-out');
-    setTimeout(function() { splash.style.display = 'none'; }, 450);
+    setTimeout(function(){ splash.style.display='none'; }, 500);
   }
 
   splash.addEventListener('click', dismissSplash);
 
-  async function runSplash() {
-    await sleep(80);
-    splashLogo.classList.add('vis');
-    await sleep(380);
-    splashBrand.classList.add('vis');
-    await sleep(1500);
+  function showSysLines(){
+    ['ssl1','ssl2','ssl3'].forEach(function(id,i){
+      setTimeout(function(){
+        var el=document.getElementById(id);
+        if(el) el.classList.add('vis');
+      }, i*170);
+    });
+  }
+
+  function typeText(text, el, speed){
+    return new Promise(function(resolve){
+      var i=0;
+      var t=setInterval(function(){
+        if(i<text.length){ el.textContent+=text[i++]; }
+        else{ clearInterval(t); resolve(); }
+      }, speed);
+    });
+  }
+
+  async function runSplash(){
+    await sleep(100);
+    showSysLines();
+    await sleep(560);
+    logo.classList.add('vis');
+    await sleep(400);
+    brand.classList.add('vis');
+    await sleep(180);
+    brandname.classList.add('glitch');
+    await sleep(450);
+    await typeText('Yang lain melihat candle. Yang menang, membaca cerita di baliknya.', hookEl, 22);
+    await sleep(900);
+    if(curEl) curEl.style.opacity='0';
     dismissSplash();
   }
 

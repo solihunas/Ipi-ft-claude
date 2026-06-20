@@ -490,8 +490,9 @@ body::before { z-index: 0; }
   background: rgba(147,51,234,0.05);
 }
 .product-badge {
-  position: absolute;
-  top: 16px; right: 16px;
+  display: inline-flex;
+  align-self: flex-start;
+  margin-bottom: 10px;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -963,9 +964,9 @@ footer {
   margin-bottom: 14px;
 }
 .prod-logo-wrap {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
   background: rgba(0,0,0,0.4);

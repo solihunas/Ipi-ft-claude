@@ -42,7 +42,8 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
   box-shadow:0 -4px 20px rgba(0,0,0,.15);
   position:relative;z-index:2;
 }
-.pp-icon{font-size:22px;width:40px;height:40px;background:#f3f0ff;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pp-icon{width:44px;height:44px;border-radius:10px;overflow:hidden;flex-shrink:0;border:1px solid rgba(147,51,234,.15);}
+.pp-icon img{width:100%;height:100%;object-fit:cover;display:block;}
 .pp-name{font-size:14px;font-weight:700;color:#1e1b4b;flex:1;line-height:1.3;}
 .pp-price{font-size:15px;font-weight:800;color:#7c3aed;white-space:nowrap;}
 
@@ -408,11 +409,11 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 
 <script>
 const PRODUCTS = {
-  '1':{ name:'Prompt AI Neurobro', icon:'⚡', price:50000 },
-  '2':{ name:'Data Training AI Signal', icon:'🧠', price:550000 },
-  '3':{ name:'Latih Claude Sniper Entry', icon:'🎯', price:3500000 },
-  '4':{ name:'EA MT5 Trend Following', icon:'🤖', price:3000000 },
-  '5':{ name:'Indikator TradingView XAU', icon:'📊', price:750000 },
+  '1':{ name:'Prompt AI Neurobro', img:'prod-neurobro.png', price:50000 },
+  '2':{ name:'Data Training AI Signal', img:'prod-signaler.png', price:550000 },
+  '3':{ name:'Latih Claude Sniper Entry', img:'prod-sniper.png', price:3500000 },
+  '4':{ name:'EA MT5 Trend Following', img:'prod-ea.png', price:3000000 },
+  '5':{ name:'Indikator TradingView XAU', img:'prod-indikator.png', price:750000 },
 };
 
 function fmtRp(n){ return 'Rp '+n.toLocaleString('id-ID'); }
@@ -432,7 +433,7 @@ const uniqueCode=getUniqueCode(pid);
 const finalPrice=product.price+uniqueCode;
 
 // Populate header info
-document.getElementById('ppIcon').textContent=product.icon;
+document.getElementById('ppIcon').innerHTML='<img src="'+product.img+'" alt="'+product.name+'">';
 document.getElementById('ppName').textContent=product.name;
 document.getElementById('ppPrice').textContent=fmtRp(finalPrice);
 document.getElementById('priceTotal').textContent=fmtRp(finalPrice);

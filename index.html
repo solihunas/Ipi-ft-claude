@@ -175,7 +175,7 @@
         </div>
         <p>Koleksi prompt eksklusif yang dirancang khusus untuk ekosistem platform Neurobro. Mulai perjalanan AI trading-mu dengan tools yang tepat.</p>
         <div class="product-price">Rp 50.000</div>
-        <a href="produk.html?id=1" class="btn btn-outline btn-full">Beli Sekarang →</a>
+        <a href="produk.html?id=1" class="btn btn-outline btn-full">Lihat Produk →</a>
       </div>
 
       <!-- Tier 2 — Signaler Rp550.000 -->
@@ -191,7 +191,7 @@
         </div>
         <p>Panduan lengkap dan dataset 400.000 candle untuk melatih Claude atau ChatGPT menghasilkan sinyal analisa trading yang akurat dan konsisten.</p>
         <div class="product-price">Rp 550.000</div>
-        <a href="produk.html?id=2" class="btn btn-outline btn-full">Beli Sekarang →</a>
+        <a href="produk.html?id=2" class="btn btn-outline btn-full">Lihat Produk →</a>
       </div>
 
       <!-- Tier 3 — Indikator Rp750.000 -->
@@ -208,7 +208,7 @@
         </div>
         <p>Indikator khusus XAU/USD di TradingView — dirancang untuk identifikasi level penting dan momentum pergerakan harga emas secara tepat.</p>
         <div class="product-price price-cyan">Rp 750.000</div>
-        <a href="produk.html?id=5" class="btn btn-outline-cyan btn-full">Beli Sekarang →</a>
+        <a href="produk.html?id=5" class="btn btn-outline-cyan btn-full">Lihat Produk →</a>
       </div>
 
       <!-- Tier 4 — EA MT5 Rp3.000.000 -->
@@ -225,7 +225,7 @@
         </div>
         <p>Expert Advisor MetaTrader 5 dengan strategi trend following teruji. Bot trading otomatis siap pakai langsung di akun MT5 tanpa perlu coding.</p>
         <div class="product-price price-pink">Rp 3.000.000</div>
-        <a href="produk.html?id=4" class="btn btn-primary btn-full">Beli Sekarang →</a>
+        <a href="produk.html?id=4" class="btn btn-primary btn-full">Lihat Produk →</a>
       </div>
 
       <!-- Tier 5 — Sniper Claude Rp3.500.000 -->
@@ -243,7 +243,7 @@
           </div>
           <p>Dataset dan metodologi eksklusif untuk melatih Claude AI berpikir secara logika dan psikologi pasar — bukan sekadar label SMC. Termasuk 1.000.000 candle historis.</p>
           <div class="product-price price-gold">Rp 3.500.000</div>
-          <a href="produk.html?id=3" class="btn btn-gold btn-full">Beli Sekarang →</a>
+          <a href="produk.html?id=3" class="btn btn-gold btn-full">Lihat Produk →</a>
         </div>
       </div>
 
@@ -621,6 +621,34 @@ document.addEventListener('click', function(e) {
   }
 
   runSplash();
+})();
+
+// ======= PRODUCT CARDS STAGGER REVEAL =======
+(function() {
+  var cards = document.querySelectorAll('.products-grid .product-card');
+  if (!cards.length || !window.IntersectionObserver) return;
+  cards.forEach(function(c) {
+    c.style.opacity = '0';
+    c.style.transform = 'translateY(24px)';
+  });
+  var seen = new Set();
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting || seen.has(entry.target)) return;
+      seen.add(entry.target);
+      var card = entry.target;
+      var idx = Array.from(cards).indexOf(card);
+      setTimeout(function() {
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+        setTimeout(function() {
+          card.style.cssText = '';
+        }, 520);
+      }, idx * 100);
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(function(c) { observer.observe(c); });
 })();
 
 // ======= TESTIMONI CAROUSEL DOTS =======

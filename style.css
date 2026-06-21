@@ -483,6 +483,16 @@ body::before { z-index: 0; }
 }
 .product-price span { font-size: 13px; font-weight: 400; color: #64748b; }
 
+/* Rating + sales meta */
+.prod-meta {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px; font-size: 12px;
+}
+.prod-stars { color: #f59e0b; letter-spacing: .5px; font-size: 13px; }
+.prod-rating-num { color: #94a3b8; font-weight: 600; }
+.prod-sales { color: #475569; font-size: 11.5px; }
+.prod-meta-sep { color: #1e293b; }
+
 /* Produk featured (kolom lebar) */
 .product-card.featured {
   grid-column: span 1;

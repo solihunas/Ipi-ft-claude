@@ -154,31 +154,31 @@ document.addEventListener('click',function(e){const m=document.getElementById('m
 function fmtRp(n){return'Rp '+n.toLocaleString('id-ID');}
 
 const PRODUCTS = {
-  '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,
+  '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:342,
     tagline:'Neurobro punya AI-nya sendiri. Prompt ini yang membuat AI-nya bekerja maksimal untuk trading kamu.',
     about:'Neurobro adalah platform AI yang punya ekosistem sendiri — berbeda dari Claude atau GPT. Dan seperti semua AI, hasilnya sangat bergantung pada bagaimana kamu berkomunikasi dengannya. Koleksi prompt ini dirancang khusus untuk mengeluarkan potensi penuh dari Neurobro AI: analisa lebih tajam, konteks lebih dalam, dan output yang langsung bisa digunakan — bukan jawaban generik yang harus ditafsir ulang.',
     features:['Prompt yang dirancang spesifik untuk ekosistem Neurobro AI — bukan template AI umum','Mencakup berbagai skenario analisa: arah tren, evaluasi momen, konfirmasi sebelum entry','Output yang dihasilkan lebih terstruktur, lebih kontekstual, dan lebih actionable','Format siap pakai — tidak perlu eksperimen sendiri dari nol','Dikembangkan dari penggunaan nyata, bukan dari teori prompt engineering'],
     includes:['Dokumen berisi semua prompt siap pakai (PDF/DOC)','Panduan cara menggunakan dan mengkombinasikan prompt untuk hasil optimal'],
     note:'Entry point paling terjangkau ke dunia AI Trading. Harga kecil, tapi perbedaan hasil yang dirasakan signifikan bagi yang benar-benar menggunakannya.'},
-  '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,
+  '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:4.9,sales:128,
     tagline:'AI default tidak tahu seperti apa pasar bergerak. Yang ini sudah "melihat" 400.000 candle.',
     about:'AI yang belum pernah dilatih dengan data harga nyata akan memberikan analisa yang dangkal. Produk ini adalah paket lengkap untuk mengubah itu: 400.000 candle historis OHLCV dalam format CSV, plus panduan step-by-step cara melatih AI kamu sendiri dari nol. Setelah proses ini, AI kamu tidak lagi menjawab ala kadarnya — ia mulai mengenali pola, ritme, dan perilaku pasar yang tidak bisa dilihat dengan mata biasa.',
     features:['400.000 data candle historis OHLCV — siap pakai, tidak perlu scraping sendiri','Panduan pelatihan AI dari awal hingga model siap digunakan untuk analisa','Teknik prompt engineering lanjutan untuk mengekstrak sinyal yang lebih akurat','Cara memvalidasi dan menginterpretasi output model secara kritis','Berlaku untuk berbagai timeframe dan pasangan aset'],
     includes:['File data 400.000 candle historis (format CSV)','Panduan pelatihan AI lengkap (PDF/dokumen)'],
     note:'Tidak perlu coding sama sekali. Semua langkah dijelaskan secara bertahap, dari yang belum pernah menyentuh data historis sekalipun bisa mengikutinya.'},
-  '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',
+  '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:74,
     tagline:'Kebanyakan AI melihat chart. Claude Sniper dilatih untuk memahami mengapa chart bergerak seperti itu.',
     about:'Ada perbedaan besar antara AI yang mengenali pola dan AI yang memahami pasar. Produk ini melatih Claude untuk berpikir secara logis dan psikologis — membaca chart bukan sebagai kumpulan candle, tapi sebagai rekaman dari keputusan jutaan manusia, perusahaan, dan algoritma yang bekerja bersamaan. Kenapa harga berhenti tepat di sini? Apa yang ditunggu oleh penggerak besar sebelum bergerak? Siapa yang sudah terjebak, dan di mana mereka akan menyerah? Claude Sniper dilatih untuk mempertanyakan semuanya dan menghasilkan kesimpulan yang masuk akal secara logika — bukan sekadar sinyal dari pola yang kebetulan berulang.',
     features:['Claude dilatih memahami kausalitas: kenapa A terjadi di area B, kenapa setelah X selalu muncul Y','Membaca anatomi pasar — di mana konsentrasi uang terbesar berada dan ke mana ia akan bergerak','Memahami psikologi pelaku pasar: apa yang diinginkan retail, institusi, dan algoritma pada waktu yang sama','1.000.000 data candle sebagai referensi — semakin banyak "pengalaman" yang dimiliki Claude','Panduan lengkap proses pelatihan dari awal hingga Claude siap digunakan untuk analisa nyata','Akses support 30 hari untuk memastikan proses pelatihan berjalan optimal'],
     includes:['File data 1.000.000 candle historis (format CSV)','Dokumen panduan pelatihan Claude + kerangka berpikir analisa (PDF)','30 hari akses chat support langsung'],
     note:'Cocok untuk trader yang sudah bisa membaca chart dan ingin memiliki "partner analisa" yang berpikir — bukan hanya merespons. Semakin dalam kamu menggunakannya, semakin Claude memahami cara kamu melihat pasar.'},
-  '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',img:'prod-ea.png',price:3000000,badge:'Premium',
+  '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',img:'prod-ea.png',price:3000000,badge:'Premium',rating:4.8,sales:56,
     tagline:'Emosi adalah musuh terbesar trader. Bot tidak punya emosi. Bot tidak pernah FOMO.',
     about:'Salah satu alasan terbesar trader rugi bukan karena strategi yang buruk — tapi karena eksekusi yang tidak konsisten akibat emosi. EA MT5 Trend Following hadir untuk menyelesaikan masalah itu: bot ini membaca tren, masuk posisi sesuai parameter yang sudah kamu tentukan, dan keluar dengan disiplin yang tidak akan pernah bisa dipertahankan oleh manusia di jam 2 pagi. Sudah melalui backtesting dan pengujian live — bukan sekadar EA teoritis.',
     features:['File EA (.ex5) siap install dan jalan langsung di MetaTrader 5','Strategi trend following yang sudah diuji dalam kondisi pasar nyata','Parameter yang bisa dikustomisasi: lot size, TP, SL, trailing stop, filter waktu','Tidak perlu pantau layar — EA bekerja selama platform aktif','Kompatibel dengan semua broker MT5, termasuk ECN dan STP'],
     includes:['File EA MetaTrader 5 (.ex5)','Panduan instalasi, konfigurasi, dan optimasi parameter (PDF)'],
     note:'Pastikan broker dan akun trading kamu menggunakan platform MetaTrader 5 (bukan MT4). Untuk yang sudah pakai MT5, ini bisa langsung jalan hari yang sama.'},
-  '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,
+  '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,rating:4.9,sales:91,
     tagline:'Gold bergerak di level-level tertentu yang tidak terlihat di chart biasa. Indikator ini menampilkannya.',
     about:'XAU/USD adalah pasangan yang digemari sekaligus ditakuti banyak trader — volatilitasnya tinggi, pergerakannya cepat, dan levelnya sering mengejutkan yang tidak tahu "peta"-nya. Indikator ini dirancang khusus untuk membantu trader XAU melihat area-area yang sering menjadi titik reaksi harga: level kritis yang diperhatikan oleh pemain besar, zona potensial reversal, dan konfirmasi arah sebelum entry. Dikembangkan dari pengalaman nyata trading XAU dan diperbarui secara berkelanjutan.',
     features:['Akses invite-only langsung via TradingView Pine Script — tidak ada yang bisa download tanpa izin','Tampilkan level-level kritikal XAU secara otomatis di atas chart kamu','Sinyal visual yang bersih dan tidak membebani chart dengan noise yang tidak perlu','Panduan cara membaca setiap elemen indikator dan mengintegrasikannya dalam analisa','Update berkelanjutan jika ada perbaikan atau penambahan fitur baru'],
@@ -201,6 +201,12 @@ if (!p) {
         ${badge}
         <div class="pd-name">${p.name}</div>
         <div class="pd-tagline">${p.tagline}</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:12px">
+          <span style="color:#f59e0b;font-size:13px;letter-spacing:.5px">★★★★★</span>
+          <span style="color:#94a3b8;font-weight:700">${p.rating.toFixed(1)}</span>
+          <span style="color:#1e293b">·</span>
+          <span style="color:#475569">${p.sales} terjual</span>
+        </div>
         <div class="pd-price-pill">
           <div>
             <div class="pd-price-lbl">Harga</div>

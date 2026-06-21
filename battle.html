@@ -140,8 +140,8 @@ a { text-decoration:none; color:inherit; }
 .rdelta { font-size:10px; margin-left:3px; }
 .rup{color:var(--gr);} .rdn{color:var(--rd);}
 
-/* 3-COLUMN */
-.tcol { display:grid; grid-template-columns:1fr 1.1fr 1fr; gap:18px; margin-bottom:22px; }
+/* 2-COLUMN */
+.tcol { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:22px; }
 
 /* AI STATUS CENTER */
 .sc-list { display:flex; flex-direction:column; gap:7px; padding:14px 15px; }
@@ -150,18 +150,25 @@ a { text-decoration:none; color:inherit; }
 .sc-nm { font-weight:700; font-size:12px; flex:1; }
 .sc-st { font-size:9px; letter-spacing:.09em; }
 
-/* LIVE DUEL */
-.duel-in { padding:18px 16px; text-align:center; min-height:180px; display:flex; flex-direction:column; justify-content:center; }
-.duel-topic { font-size:9px; letter-spacing:.12em; color:var(--tx); margin-bottom:14px; }
-.duel-topic em { font-style:normal; color:var(--cy); }
-.duel-vs { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:14px; }
-.duel-ai { font-size:12px; font-weight:700; flex:1; line-height:1.4; }
-.duel-vstxt { font-size:9px; color:#253040; letter-spacing:.12em; }
-.duel-analyzing { font-size:11px; letter-spacing:.1em; color:var(--cy); animation:glow 1.2s ease infinite; }
-.duel-winner { animation:fadeIn .4s ease; }
-.duel-crown { font-size:22px; margin-bottom:4px; }
-.duel-wlabel { font-size:9px; letter-spacing:.12em; color:var(--tx); margin-bottom:5px; }
-.duel-wname { font-size:15px; font-weight:700; letter-spacing:.04em; }
+/* WEEKLY PNL */
+.wpnl-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; padding:14px 15px; }
+.wpnl-card { padding:12px 14px; border-radius:6px; border:1px solid rgba(255,255,255,.048); background:rgba(255,255,255,.016); }
+.wpnl-nm { font-size:10px; font-weight:700; margin-bottom:6px; }
+.wpnl-lbl { font-size:9px; letter-spacing:.08em; color:var(--tx); margin-bottom:4px; }
+.wpnl-pct { font-size:24px; font-weight:700; line-height:1; margin-bottom:3px; }
+.wpnl-bar-wrap { height:3px; background:rgba(255,255,255,.05); border-radius:2px; margin:6px 0 5px; }
+.wpnl-bar { height:100%; border-radius:2px; }
+.wpnl-days { display:flex; gap:3px; flex-wrap:wrap; }
+.wpnl-day { width:8px; height:8px; border-radius:2px; opacity:.75; }
+/* DETAILED STATS */
+.ds-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; padding:14px 15px; }
+.ds-card { padding:12px 14px; border-radius:6px; border:1px solid rgba(255,255,255,.048); background:rgba(255,255,255,.016); }
+.ds-nm { font-size:10px; font-weight:700; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,.06); line-height:1.5; }
+.ds-row { display:flex; justify-content:space-between; align-items:center; padding:3px 0; border-bottom:1px solid rgba(255,255,255,.022); }
+.ds-row:last-child { border-bottom:none; }
+.ds-lbl { color:var(--tx); font-size:9.5px; }
+.ds-val { font-weight:700; font-size:10.5px; text-align:right; }
+.ds-phase { display:inline-block; padding:1px 7px; border-radius:3px; font-size:9px; letter-spacing:.07em; margin-bottom:7px; }
 
 /* SERVER ROOM */
 .srv-list { display:flex; flex-direction:column; padding:12px 15px; gap:0; }
@@ -202,9 +209,9 @@ a { text-decoration:none; color:inherit; }
 .dsc { padding:13px 22px; text-align:center; font-size:10px; color:#1f3040; border-top:1px solid rgba(255,255,255,.04); letter-spacing:.04em; }
 
 /* RESPONSIVE */
-@media(max-width:1100px){ .tcol{grid-template-columns:1fr 1fr;} .lb-tbl th:nth-child(8),.lb-tbl td:nth-child(8){display:none;} }
-@media(max-width:760px){ .tcol{grid-template-columns:1fr;} .lb-tbl th:nth-child(6),.lb-tbl td:nth-child(6),.lb-tbl th:nth-child(7),.lb-tbl td:nth-child(7){display:none;} }
-@media(max-width:520px){ .bh{padding:0 14px;} .arena{padding:14px;} .bh-ttl{font-size:14px;} .live-pill{display:none;} .lb-tbl td{padding:11px 8px;} .lb-tbl{font-size:11px;} .aisub{display:none;} .lb-tbl th:nth-child(5),.lb-tbl td:nth-child(5){display:none;} .rf-ai{min-width:108px;} }
+@media(max-width:1100px){ .tcol{grid-template-columns:1fr 1fr;} .lb-tbl th:nth-child(8),.lb-tbl td:nth-child(8){display:none;} .wpnl-grid{grid-template-columns:repeat(3,1fr);} .ds-grid{grid-template-columns:repeat(3,1fr);} }
+@media(max-width:760px){ .tcol{grid-template-columns:1fr;} .lb-tbl th:nth-child(6),.lb-tbl td:nth-child(6),.lb-tbl th:nth-child(7),.lb-tbl td:nth-child(7){display:none;} .wpnl-grid{grid-template-columns:1fr 1fr;} .ds-grid{grid-template-columns:1fr 1fr;} }
+@media(max-width:520px){ .bh{padding:0 14px;} .arena{padding:14px;} .bh-ttl{font-size:14px;} .live-pill{display:none;} .lb-tbl td{padding:11px 8px;} .lb-tbl{font-size:11px;} .aisub{display:none;} .lb-tbl th:nth-child(5),.lb-tbl td:nth-child(5){display:none;} .rf-ai{min-width:108px;} .wpnl-grid{grid-template-columns:1fr 1fr;} .ds-grid{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -265,15 +272,17 @@ a { text-decoration:none; color:inherit; }
       </div>
     </div>
 
-    <!-- 3-COLUMN -->
+    <!-- WEEKLY PNL -->
+    <div style="margin-bottom:22px">
+      <div class="sl">// HASIL PNL MINGGU LALU — PER AI MODEL</div>
+      <div class="card"><div class="wpnl-grid" id="wpnlGrid"></div></div>
+    </div>
+
+    <!-- 2-COLUMN -->
     <div class="tcol">
       <div>
         <div class="sl">// AI STATUS CENTER</div>
         <div class="card"><div class="sc-list" id="scList"></div></div>
-      </div>
-      <div>
-        <div class="sl">// LIVE AI DUEL</div>
-        <div class="card"><div class="duel-in" id="duelPanel"></div></div>
       </div>
       <div>
         <div class="sl">// SERVER ROOM</div>
@@ -285,6 +294,12 @@ a { text-decoration:none; color:inherit; }
     <div style="margin-bottom:22px">
       <div class="sl">// AI ACTIVE MONITORING — CRYPTO</div>
       <div class="card"><div class="mon-grid" id="monGrid"></div></div>
+    </div>
+
+    <!-- DETAILED AI STATS -->
+    <div style="margin-bottom:22px">
+      <div class="sl">// STATISTIK LENGKAP — PER AI MODEL</div>
+      <div class="card"><div class="ds-grid" id="dsGrid"></div></div>
     </div>
 
     <!-- RESEARCH FEED -->
@@ -386,8 +401,6 @@ const RF = {
 const RF_KEYS = ['sniper','basic','gpt','neuro','gemini'];
 const RF_W    = [4,3,2,2,1];
 
-// Duel topics
-const TOPICS = ['Momentum Detection','Trend Identification','Risk Assessment','Pattern Recognition','Volatility Analysis','Correlation Mapping','Sentiment Reading','Breakout Potential','Support Zone Mapping','Volume Distribution','Market Structure','Liquidity Assessment','Trend Continuation','Reversal Probability','Asset Prioritization'];
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────────
 function rnd(a,b){return a+Math.random()*(b-a);}
@@ -555,8 +568,8 @@ function loadAndAdvance(){
     AI_WR=s.wr.slice(); AI_DD=s.dd.slice();
     AI_TASKS=s.tasks.slice(); AI_PHASE=s.phase.slice();
     AI_PH_HRS=s.phHrs.slice();
-    // Fast-forward elapsed hours (cap at 7 days = 168h)
-    const elapsedHrs=Math.min((Date.now()-s.ts)/3600000, 168);
+    // Fast-forward all elapsed hours since last save — no cap, grows continuously
+    const elapsedHrs=(Date.now()-s.ts)/3600000;
     if(elapsedHrs>=0.083){ // at least 5 minutes
       const hrs=Math.floor(elapsedHrs);
       if(hrs>0) for(let i=0;i<5;i++) advanceHours(i,hrs);
@@ -682,64 +695,103 @@ function initRF(){
   [...init].reverse().forEach(([i,m])=>addRF(i,m));
 }
 
-// ─── LIVE AI DUEL ─────────────────────────────────────────────────────────────────
-function duelPick(){
-  const a=Math.floor(Math.random()*5);
-  let b; do{b=Math.floor(Math.random()*5);}while(b===a);
-  return[a,b];
-}
-function duelWinner(a,b){
-  if(a===0||b===0)return 0;
-  if(a===1||b===1)return Math.random()<.75?1:(a===1?b:a);
-  return Math.random()<.5?a:b;
+// ─── WEEKLY PNL ──────────────────────────────────────────────────────────────
+// Seeded weekly PnL per AI — consistent within same calendar week
+function getWeeklyPnl(){
+  const wk=Math.floor(Date.now()/(7*24*3600000));
+  function sr(s){const x=Math.sin(s)*10000;return x-Math.floor(x);}
+  // [lo%, hi%] per personality: Sniper steady+, Basic moderate+, GPT mixed, Neuro volatile, Gemini mostly-
+  const rngs=[[6,14],[3,8],[-3,6],[-16,14],[-7,1]];
+  return rngs.map(([lo,hi],i)=>lo+sr(wk*37+i*13+7)*(hi-lo));
 }
 
-async function runDuel(){
-  const [ai,bi]=duelPick();
-  const aiA=AIS[ai], aiB=AIS[bi];
-  const topic=TOPICS[Math.floor(Math.random()*TOPICS.length)];
-  const panel=document.getElementById('duelPanel');
+// Per-AI day-level bias for the week (positive/negative day streaks by personality)
+const WPNL_DAYSEEDS=[
+  [ 1, 1, 1,-1, 1, 1, 1], // Sniper: 6 up 1 down
+  [ 1, 1,-1, 1, 1, 1,-1], // Basic: 5 up 2 down
+  [-1, 1, 1,-1, 1,-1, 1], // ChatGPT: 4 up 3 down
+  [ 1,-1, 1,-1, 1,-1, 1], // Neurobro: alternating
+  [-1,-1, 1,-1,-1, 1,-1], // Gemini: 5 down 2 up
+];
 
-  panel.innerHTML=`
-    <div class="duel-topic">TOPIC: <em>${topic}</em></div>
-    <div class="duel-vs">
-      <div class="duel-ai" style="color:${aiA.color};text-align:right">${aiA.name}</div>
-      <div class="duel-vstxt">VS</div>
-      <div class="duel-ai" style="color:${aiB.color};text-align:left">${aiB.name}</div>
-    </div>
-    <div class="duel-analyzing">ANALYZING...</div>`;
-
-  await sleep(6800);
-  const win=duelWinner(ai,bi), wai=AIS[win];
-
-  panel.innerHTML=`
-    <div class="duel-topic">TOPIC: <em>${topic}</em></div>
-    <div class="duel-vs">
-      <div class="duel-ai" style="color:${aiA.color};text-align:right;opacity:${win===ai?1:.28}">${aiA.name}</div>
-      <div class="duel-vstxt">VS</div>
-      <div class="duel-ai" style="color:${aiB.color};text-align:left;opacity:${win===bi?1:.28}">${aiB.name}</div>
-    </div>
-    <div class="duel-winner">
-      <div class="duel-crown">🏆</div>
-      <div class="duel-wlabel">WINNER</div>
-      <div class="duel-wname" style="color:${wai.color}">${wai.name}</div>
+function renderWeeklyPnl(){
+  const pnls=getWeeklyPnl();
+  const wk=Math.floor(Date.now()/(7*24*3600000));
+  function sr(s){const x=Math.sin(s)*10000;return x-Math.floor(x);}
+  document.getElementById('wpnlGrid').innerHTML=AIS.map((ai,i)=>{
+    const pct=pnls[i];
+    const isPos=pct>=0;
+    const col=isPos?'var(--gr)':'var(--rd)';
+    const barW=Math.min(Math.abs(pct)/20*100,100);
+    const days=WPNL_DAYSEEDS[i].map((bias,d)=>{
+      const noise=sr(wk*73+i*19+d*11)>.45;
+      const isGreen=bias>0?noise:(1-noise)<.25;
+      return`<div class="wpnl-day" style="background:${isGreen?'var(--gr)':'var(--rd)'}"></div>`;
+    }).join('');
+    return`<div class="wpnl-card">
+      <div class="wpnl-nm" style="color:${ai.color}">${ai.name}</div>
+      <div class="wpnl-lbl">MINGGU LALU (7H)</div>
+      <div class="wpnl-pct" style="color:${col}">${isPos?'+':''}${pct.toFixed(1)}%</div>
+      <div class="wpnl-bar-wrap"><div class="wpnl-bar" style="width:${barW}%;background:${col}"></div></div>
+      <div class="wpnl-days">${days}</div>
     </div>`;
+  }).join('');
+}
 
-  addRF(win,`Duel winner: ${topic} — research model validated`);
-  await sleep(4200);
-  runDuel();
+// ─── DETAILED AI STATS ────────────────────────────────────────────────────────
+const AI_STATIC=[
+  // 0 Sniper — precision, low DD, fast recovery
+  {streakW:7,streakL:1,bestR:4.8,worstR:-1.2,avgHold:'3j 20m',vol:'$2.41M',sharpe:2.14,recDays:1.2,consistency:91,monthTrades:312},
+  // 1 Basic — steady, moderate performance
+  {streakW:5,streakL:2,bestR:3.2,worstR:-1.8,avgHold:'5j 10m',vol:'$1.83M',sharpe:1.63,recDays:2.1,consistency:84,monthTrades:198},
+  // 2 ChatGPT — decent but slow recovery
+  {streakW:4,streakL:3,bestR:2.8,worstR:-2.4,avgHold:'6j 45m',vol:'$1.24M',sharpe:1.10,recDays:4.5,consistency:72,monthTrades:143},
+  // 3 Neurobro — explosive up/down, volatile
+  {streakW:8,streakL:5,bestR:7.2,worstR:-4.1,avgHold:'2j 15m',vol:'$0.93M',sharpe:0.82,recDays:6.3,consistency:61,monthTrades:267},
+  // 4 Gemini — struggling, deep drawdowns
+  {streakW:2,streakL:6,bestR:2.1,worstR:-3.8,avgHold:'8j 30m',vol:'$0.71M',sharpe:0.41,recDays:11.2,consistency:49,monthTrades:89},
+];
+const PHASE_LBL={trend:'TRENDING',side:'SIDEWAYS',dd:'DRAWDOWN',rec:'RECOVERY'};
+const PHASE_COL={trend:'var(--gr)',side:'var(--cy)',dd:'var(--rd)',rec:'var(--am)'};
+
+function renderDetailedStats(){
+  document.getElementById('dsGrid').innerHTML=AIS.map((ai,i)=>{
+    const s=AI_STATIC[i];
+    const ph=AI_PHASE[i];
+    const pc=PHASE_COL[ph];
+    const consistCol=i<2?'var(--gr)':i===2?'var(--am)':i===3?'var(--am)':'var(--rd)';
+    return`<div class="ds-card">
+      <div class="ds-nm" style="color:${ai.color}">${ai.name}<br><span style="font-size:9px;color:#3d5066;font-weight:400">${ai.sub}</span></div>
+      <div class="ds-phase" style="background:${pc}18;color:${pc};border:1px solid ${pc}30">${PHASE_LBL[ph]}</div>
+      <div class="ds-row"><span class="ds-lbl">Win Rate</span><span class="ds-val" style="color:var(--gr)">${AI_WR[i].toFixed(1)}%</span></div>
+      <div class="ds-row"><span class="ds-lbl">Max Drawdown</span><span class="ds-val" style="color:var(--rd)">${AI_DD[i].toFixed(1)}%</span></div>
+      <div class="ds-row"><span class="ds-lbl">Sharpe Ratio</span><span class="ds-val" style="color:var(--cy)">${s.sharpe.toFixed(2)}</span></div>
+      <div class="ds-row"><span class="ds-lbl">Win Streak</span><span class="ds-val" style="color:var(--gr)">${s.streakW} wins</span></div>
+      <div class="ds-row"><span class="ds-lbl">Loss Streak</span><span class="ds-val" style="color:var(--rd)">${s.streakL} loss</span></div>
+      <div class="ds-row"><span class="ds-lbl">Best Trade</span><span class="ds-val" style="color:var(--gr)">+${s.bestR}R</span></div>
+      <div class="ds-row"><span class="ds-lbl">Worst Trade</span><span class="ds-val" style="color:var(--rd)">${s.worstR}R</span></div>
+      <div class="ds-row"><span class="ds-lbl">Avg Hold</span><span class="ds-val" style="color:var(--br)">${s.avgHold}</span></div>
+      <div class="ds-row"><span class="ds-lbl">Total Tasks</span><span class="ds-val" style="color:var(--pu)">${AI_TASKS[i].toLocaleString()}</span></div>
+      <div class="ds-row"><span class="ds-lbl">Volume Bulanan</span><span class="ds-val" style="color:var(--am)">${s.vol}</span></div>
+      <div class="ds-row"><span class="ds-lbl">Recovery Time</span><span class="ds-val" style="color:var(--am)">${s.recDays}d</span></div>
+      <div class="ds-row"><span class="ds-lbl">Consistency</span><span class="ds-val" style="color:${consistCol}">${s.consistency}%</span></div>
+      <div class="ds-row"><span class="ds-lbl">Trades/Bulan</span><span class="ds-val" style="color:var(--in)">${s.monthTrades}</span></div>
+    </div>`;
+  }).join('');
 }
 
 // ─── START DASHBOARD ──────────────────────────────────────────────────────────────
 function startDashboard(){
   loadAndAdvance();  // restore + fast-forward from localStorage
   updateRanking();   // sort posAI by current equity
-  renderLB(); renderSC(); renderSRV(); renderMon(); initRF(); runDuel();
+  renderLB(); renderSC(); renderSRV(); renderMon(); initRF();
+  renderWeeklyPnl(); renderDetailedStats();
   setInterval(updateClock,1000);
   setInterval(tickerUpdate,3000);
   setInterval(updateSRV,4200);
   setInterval(addRandRF,5200);
   setInterval(rotateStatuses,7500);
+  setInterval(renderDetailedStats,30000);
   window.addEventListener('beforeunload', saveState);
 }
 

@@ -84,7 +84,6 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 .cs-trigger:hover,.cs-trigger.open{border-color:#7c3aed;background:#fff;box-shadow:0 0 0 3px rgba(124,58,237,.1);}
 .cs-placeholder{font-size:15px;color:#94a3b8;flex:1;}
 .cs-selected-wrap{display:none;flex:1;align-items:center;gap:10px;}
-.cs-sel-icon{font-size:18px;}
 .cs-sel-text{flex:1;}
 .cs-sel-name{font-size:14px;font-weight:700;color:#1e293b;}
 .cs-sel-num{font-size:12px;color:#64748b;margin-top:1px;}
@@ -105,7 +104,10 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 }
 .cs-option:last-child{border-bottom:none;}
 .cs-option:hover{background:#f5f3ff;}
-.cs-opt-icon{font-size:20px;width:32px;text-align:center;flex-shrink:0;}
+.cs-opt-icon{width:34px;height:34px;border-radius:7px;overflow:hidden;flex-shrink:0;background:#f1f5f9;}
+.cs-opt-icon img{width:100%;height:100%;object-fit:cover;display:block;}
+.cs-sel-icon{width:28px;height:28px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#f1f5f9;display:inline-flex;}
+.cs-sel-icon img{width:100%;height:100%;object-fit:cover;display:block;}
 .cs-opt-info{flex:1;}
 .cs-opt-name{font-size:14px;font-weight:700;color:#1e293b;display:block;}
 .cs-opt-num{font-size:12px;color:#64748b;}
@@ -288,11 +290,11 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
         <div class="cs-dropdown" id="csDropdown">
           <div class="cs-option"
                data-value="dana"
-               data-icon="💙"
+               data-img="logo-dana.png"
                data-name="DANA"
                data-number="083876123080"
                data-holder="Ardikuntoro">
-            <span class="cs-opt-icon">💙</span>
+            <div class="cs-opt-icon"><img src="logo-dana.png" alt="DANA"></div>
             <div class="cs-opt-info">
               <span class="cs-opt-name">DANA</span>
               <span class="cs-opt-num">083876123080</span>
@@ -302,11 +304,11 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
           </div>
           <div class="cs-option"
                data-value="seabank"
-               data-icon="🌊"
+               data-img="logo-seabank.webp"
                data-name="SeaBank"
                data-number="901170990455"
                data-holder="Solihun Adi Saputra">
-            <span class="cs-opt-icon">🌊</span>
+            <div class="cs-opt-icon"><img src="logo-seabank.webp" alt="SeaBank"></div>
             <div class="cs-opt-info">
               <span class="cs-opt-name">SeaBank</span>
               <span class="cs-opt-num">901170990455</span>
@@ -466,17 +468,17 @@ dropdown.querySelectorAll('.cs-option').forEach(function(opt){
   opt.addEventListener('click',function(e){
     e.stopPropagation();
     const val=opt.dataset.value;
-    const icon=opt.dataset.icon;
+    const img=opt.dataset.img;
     const name=opt.dataset.name;
     const number=opt.dataset.number;
     const holder=opt.dataset.holder;
 
-    selectedMethod={val,icon,name,number,holder};
+    selectedMethod={val,img,name,number,holder};
 
     // Update trigger display
     placeholder.style.display='none';
     selectedWrap.style.display='flex';
-    document.getElementById('csSIcon').textContent=icon;
+    document.getElementById('csSIcon').innerHTML='<img src="'+img+'" alt="'+name+'" style="width:100%;height:100%;object-fit:cover;display:block;">';
     document.getElementById('csSName').textContent=name;
     document.getElementById('csSNum').textContent=number+' · a.n. '+holder;
 

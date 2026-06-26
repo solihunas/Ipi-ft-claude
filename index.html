@@ -677,6 +677,41 @@ document.addEventListener('click', function(e) {
     });
   });
 })();
+
+// ── Admin: product sales/rating override ──
+(function(){
+  try{
+    var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));
+    if(!ap||!ap.length)return;
+    document.querySelectorAll('a[href*="produk.html?id="]').forEach(function(a){
+      var m=(a.getAttribute('href')||'').match(/id=(\d+)/);
+      if(!m)return;
+      var p=ap.find(function(x){return String(x.id)===m[1];});
+      if(!p)return;
+      var par=a.parentElement;
+      var rn=par&&par.querySelector('.prod-rating-num');
+      var ps=par&&par.querySelector('.prod-sales');
+      if(rn&&p.rating!=null)rn.textContent=parseFloat(p.rating).toFixed(1);
+      if(ps&&p.sales!=null)ps.textContent=p.sales+' terjual';
+    });
+  }catch(_){}
+})();
+
+// ── Admin: inject testimonials from localStorage ──
+(function(){
+  try{
+    var ts=JSON.parse(localStorage.getItem('ipi_admin_testimonials'));
+    if(!ts||!ts.length)return;
+    var track=document.getElementById('testiTrack');
+    if(!track)return;
+    ts.forEach(function(t,i){
+      var div=document.createElement('div');
+      div.className='testi-slide';
+      div.innerHTML='<div class="testi-neon-wrap"><div class="testi-img-frame"><img src="'+t.img+'" alt="Testimoni '+(i+1)+'" loading="lazy"></div></div>';
+      track.appendChild(div);
+    });
+  }catch(_){}
+})();
 </script>
 
 </body>

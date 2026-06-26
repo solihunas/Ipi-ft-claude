@@ -186,6 +186,22 @@ const PRODUCTS = {
     note:'Khusus untuk XAU/USD. Akun TradingView gratis sudah cukup — kamu tidak perlu berlangganan TradingView Pro untuk menggunakannya.'},
 };
 
+// Admin: Apply product overrides from localStorage
+(function(){
+  try{
+    var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));
+    if(!ap||!ap.length)return;
+    ap.forEach(function(o){
+      if(!PRODUCTS[o.id])return;
+      if(o.name)PRODUCTS[o.id].name=o.name;
+      if(o.price&&o.price>0)PRODUCTS[o.id].price=o.price;
+      if(o.rating&&o.rating>0)PRODUCTS[o.id].rating=o.rating;
+      if(o.sales!=null)PRODUCTS[o.id].sales=o.sales;
+      if(o.img)PRODUCTS[o.id].img=o.img;
+    });
+  }catch(_){}
+})();
+
 const id = new URLSearchParams(location.search).get('id') || '1';
 const p = PRODUCTS[id];
 

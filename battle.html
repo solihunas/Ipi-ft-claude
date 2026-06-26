@@ -697,6 +697,8 @@ function initRF(){
 
 // ─── WEEKLY PNL ──────────────────────────────────────────────────────────────
 function getWeeklyPnl(){
+  // Admin override from localStorage
+  try{const ab=JSON.parse(localStorage.getItem('ipi_admin_battle'));if(ab&&ab.length>=5)return ab.map(b=>Number(b.pnl));}catch(_){}
   const wk=Math.floor(Date.now()/(7*24*3600000));
   function sr(s){const x=Math.sin(s)*10000;return x-Math.floor(x);}
   // Ranges per personality (user-defined):

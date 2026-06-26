@@ -7,7 +7,6 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#060210;color:#e2e8f0;font-family:'Segoe UI',sans-serif;min-height:100vh}
-a{color:inherit;text-decoration:none}
 button{cursor:pointer;border:none;background:none;color:inherit;font-family:inherit}
 input,textarea,select{font-family:inherit}
 
@@ -52,13 +51,12 @@ input,textarea,select{font-family:inherit}
 /* ── SECTION BODY ── */
 .sec-body{padding:16px;flex:1}
 
-/* ── FORM ELEMENTS ── */
+/* ── FORM ── */
 .field{margin-bottom:14px}
 .field label{display:block;font-size:12px;font-weight:600;color:#94a3b8;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
-.field input,.field textarea,.field select{width:100%;background:#0a0520;border:1px solid #2d1b69;border-radius:10px;color:#e2e8f0;padding:11px 14px;font-size:14px;outline:none}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#a855f7}
+.field input,.field textarea{width:100%;background:#0a0520;border:1px solid #2d1b69;border-radius:10px;color:#e2e8f0;padding:11px 14px;font-size:14px;outline:none}
+.field input:focus,.field textarea:focus{border-color:#a855f7}
 .field textarea{resize:vertical;min-height:80px}
-.field select option{background:#0e0825}
 
 /* ── BUTTONS ── */
 .btn-primary{width:100%;background:linear-gradient(135deg,#9333ea,#ec4899);color:#fff;font-weight:700;font-size:15px;border-radius:12px;padding:13px;letter-spacing:.02em}
@@ -68,7 +66,7 @@ input,textarea,select{font-family:inherit}
 .btn-danger{background:#4c0519;color:#fda4af;font-weight:600;font-size:13px;border-radius:10px;padding:9px 16px;border:1px solid #be123c}
 .btn-danger:active{opacity:.7}
 
-/* ── ADD FAB ── */
+/* ── FAB ── */
 .fab{position:fixed;bottom:24px;right:20px;z-index:100;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#9333ea,#ec4899);color:#fff;font-size:26px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(147,51,234,.5)}
 .fab:active{opacity:.85}
 
@@ -90,7 +88,7 @@ input,textarea,select{font-family:inherit}
 .pay-holder{font-size:12px;color:#64748b;margin-top:2px}
 .pay-actions{display:flex;gap:8px;margin-top:10px}
 
-/* ── TESTIMONIAL GRID ── */
+/* ── TESTIMONIAL ── */
 .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 .testi-item{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:1}
 .testi-item img{width:100%;height:100%;object-fit:cover}
@@ -102,7 +100,7 @@ input,textarea,select{font-family:inherit}
 .upload-text{font-size:14px;color:#94a3b8}
 .upload-hint{font-size:12px;color:#4b5563;margin-top:4px}
 
-/* ── BATTLE CARDS ── */
+/* ── BATTLE ── */
 .battle-card{background:#0e0825;border:1px solid #1e1040;border-radius:16px;padding:16px;margin-bottom:12px}
 .battle-ai-name{font-size:15px;font-weight:800;margin-bottom:12px}
 .battle-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
@@ -132,13 +130,20 @@ input,textarea,select{font-family:inherit}
 .section-empty{text-align:center;color:#4b5563;padding:60px 20px;font-size:14px}
 .row-btns{display:flex;gap:8px;flex-wrap:wrap}
 .info-box{font-size:13px;color:#94a3b8;background:#0e0825;border-radius:12px;padding:12px 14px;border:1px solid #1e1040;margin-bottom:16px}
+
+/* ── LOADING ── */
+.loading-state{text-align:center;padding:48px 20px;color:#64748b;font-size:14px}
+.loading-state .sp{font-size:28px;display:block;animation:spin .9s linear infinite;margin-bottom:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── SYNC STATUS ── */
+.sync-badge{font-size:11px;padding:3px 8px;border-radius:20px;background:#14532d;color:#86efac;font-weight:600;margin-left:8px}
+.sync-badge.err{background:#4c0519;color:#fda4af}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     VIEW: LOGIN
-════════════════════════════════════════════ -->
+<!-- ══ LOGIN ══ -->
 <div class="view show" id="vLogin">
   <div class="login-box">
     <div class="login-logo">
@@ -158,57 +163,46 @@ input,textarea,select{font-family:inherit}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     VIEW: HOME
-════════════════════════════════════════════ -->
+<!-- ══ HOME ══ -->
 <div class="view" id="vHome">
   <div class="topbar-home">
     <div class="home-brand">⚡ IPI Admin</div>
     <button class="logout-btn" onclick="doLogout()">Keluar</button>
   </div>
   <div class="home-body">
-    <div class="stats-grid" id="homeStats"></div>
+    <div class="stats-grid" id="homeStats">
+      <div class="stat-card"><div class="stat-val">—</div><div class="stat-lbl">Produk</div></div>
+      <div class="stat-card"><div class="stat-val">—</div><div class="stat-lbl">Metode Bayar</div></div>
+      <div class="stat-card"><div class="stat-val">—</div><div class="stat-lbl">Testimoni</div></div>
+      <div class="stat-card"><div class="stat-val">—</div><div class="stat-lbl">Total Terjual</div></div>
+    </div>
     <div class="menu-title">Menu Utama</div>
     <div class="menu-list">
       <button class="menu-card" onclick="showView('vProduk')">
         <div class="menu-icon" style="background:#1e1040">📦</div>
-        <div class="menu-info">
-          <div class="menu-name">Produk</div>
-          <div class="menu-sub">Edit nama, harga, rating, terjual</div>
-        </div>
+        <div class="menu-info"><div class="menu-name">Produk</div><div class="menu-sub">Edit nama, harga, rating, terjual</div></div>
         <div class="menu-arrow">›</div>
       </button>
       <button class="menu-card" onclick="showView('vPembayaran')">
         <div class="menu-icon" style="background:#1e1040">💳</div>
-        <div class="menu-info">
-          <div class="menu-name">Metode Pembayaran</div>
-          <div class="menu-sub">Tambah, edit, hapus metode bayar</div>
-        </div>
+        <div class="menu-info"><div class="menu-name">Metode Pembayaran</div><div class="menu-sub">Tambah, edit, hapus metode bayar</div></div>
         <div class="menu-arrow">›</div>
       </button>
       <button class="menu-card" onclick="showView('vTestimoni')">
         <div class="menu-icon" style="background:#1e1040">🖼️</div>
-        <div class="menu-info">
-          <div class="menu-name">Testimoni</div>
-          <div class="menu-sub">Upload dan hapus foto testimoni</div>
-        </div>
+        <div class="menu-info"><div class="menu-name">Testimoni</div><div class="menu-sub">Upload dan hapus foto testimoni</div></div>
         <div class="menu-arrow">›</div>
       </button>
       <button class="menu-card" onclick="showView('vBattle')">
         <div class="menu-icon" style="background:#1e1040">🤖</div>
-        <div class="menu-info">
-          <div class="menu-name">AI Battle</div>
-          <div class="menu-sub">Input PnL, trades, winrate mingguan</div>
-        </div>
+        <div class="menu-info"><div class="menu-name">AI Battle</div><div class="menu-sub">Input PnL, trades, winrate mingguan</div></div>
         <div class="menu-arrow">›</div>
       </button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     VIEW: PRODUK
-════════════════════════════════════════════ -->
+<!-- ══ PRODUK ══ -->
 <div class="view" id="vProduk">
   <div class="topbar">
     <button class="back-btn" onclick="showView('vHome')">← Beranda</button>
@@ -219,9 +213,7 @@ input,textarea,select{font-family:inherit}
   <button class="fab" onclick="openModalProduk(null)">＋</button>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     VIEW: PEMBAYARAN
-════════════════════════════════════════════ -->
+<!-- ══ PEMBAYARAN ══ -->
 <div class="view" id="vPembayaran">
   <div class="topbar">
     <button class="back-btn" onclick="showView('vHome')">← Beranda</button>
@@ -232,9 +224,7 @@ input,textarea,select{font-family:inherit}
   <button class="fab" onclick="openModalPay(null)">＋</button>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     VIEW: TESTIMONI
-════════════════════════════════════════════ -->
+<!-- ══ TESTIMONI ══ -->
 <div class="view" id="vTestimoni">
   <div class="topbar">
     <button class="back-btn" onclick="showView('vHome')">← Beranda</button>
@@ -253,9 +243,7 @@ input,textarea,select{font-family:inherit}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     VIEW: AI BATTLE
-════════════════════════════════════════════ -->
+<!-- ══ AI BATTLE ══ -->
 <div class="view" id="vBattle">
   <div class="topbar">
     <button class="back-btn" onclick="showView('vHome')">← Beranda</button>
@@ -263,18 +251,14 @@ input,textarea,select{font-family:inherit}
     <div style="width:80px"></div>
   </div>
   <div class="sec-body">
-    <div class="info-box">
-      💡 Input data mingguan untuk setiap AI. Tekan <strong>Simpan Semua</strong> agar tampil di halaman website.
-    </div>
+    <div class="info-box">💡 Input data mingguan tiap AI. Tekan <strong>Simpan Semua</strong> — data langsung update di website untuk semua pengunjung.</div>
     <div id="battleCards"></div>
     <button class="btn-primary" style="margin-bottom:10px" onclick="saveBattle()">💾 Simpan Semua Data Battle</button>
     <button class="btn-outline" style="width:100%" onclick="resetBattle()">🔄 Reset ke Data Default</button>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     MODAL: PRODUK
-════════════════════════════════════════════ -->
+<!-- ══ MODAL: PRODUK ══ -->
 <div class="modal-overlay" id="modalProduk">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -293,26 +277,11 @@ input,textarea,select{font-family:inherit}
         </div>
         <input type="hidden" id="pImgData">
       </div>
-      <div class="field">
-        <label>Nama Produk</label>
-        <input type="text" id="pName" placeholder="Nama produk">
-      </div>
-      <div class="field">
-        <label>Harga (Rp)</label>
-        <input type="number" id="pPrice" placeholder="50000" min="0">
-      </div>
-      <div class="field">
-        <label>Rating (0–5)</label>
-        <input type="number" id="pRating" placeholder="4.9" min="0" max="5" step="0.1">
-      </div>
-      <div class="field">
-        <label>Jumlah Terjual</label>
-        <input type="number" id="pSales" placeholder="100" min="0">
-      </div>
-      <div class="field">
-        <label>Deskripsi</label>
-        <textarea id="pDesc" placeholder="Deskripsi produk..." rows="4"></textarea>
-      </div>
+      <div class="field"><label>Nama Produk</label><input type="text" id="pName" placeholder="Nama produk"></div>
+      <div class="field"><label>Harga (Rp)</label><input type="number" id="pPrice" placeholder="50000" min="0"></div>
+      <div class="field"><label>Rating (0–5)</label><input type="number" id="pRating" placeholder="4.9" min="0" max="5" step="0.1"></div>
+      <div class="field"><label>Jumlah Terjual</label><input type="number" id="pSales" placeholder="100" min="0"></div>
+      <div class="field"><label>Deskripsi</label><textarea id="pDesc" placeholder="Deskripsi produk..." rows="4"></textarea></div>
       <div class="row-btns">
         <button class="btn-primary" style="flex:1" onclick="saveProduk()">💾 Simpan</button>
         <button class="btn-danger" id="pDelBtn" onclick="deleteProduk()" style="display:none">🗑 Hapus</button>
@@ -321,9 +290,7 @@ input,textarea,select{font-family:inherit}
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     MODAL: PEMBAYARAN
-════════════════════════════════════════════ -->
+<!-- ══ MODAL: PEMBAYARAN ══ -->
 <div class="modal-overlay" id="modalPay">
   <div class="modal-sheet">
     <div class="modal-handle"></div>
@@ -342,18 +309,9 @@ input,textarea,select{font-family:inherit}
         </div>
         <input type="hidden" id="payLogoData">
       </div>
-      <div class="field">
-        <label>Nama Metode</label>
-        <input type="text" id="payName" placeholder="Contoh: DANA, GoPay, BRI">
-      </div>
-      <div class="field">
-        <label>Nomor Rekening / No. HP</label>
-        <input type="text" id="payNumber" placeholder="08xxxxxxxxxx">
-      </div>
-      <div class="field">
-        <label>Atas Nama</label>
-        <input type="text" id="payHolder" placeholder="Nama pemilik rekening">
-      </div>
+      <div class="field"><label>Nama Metode</label><input type="text" id="payName" placeholder="Contoh: DANA, GoPay, BRI"></div>
+      <div class="field"><label>Nomor Rekening / No. HP</label><input type="text" id="payNumber" placeholder="08xxxxxxxxxx"></div>
+      <div class="field"><label>Atas Nama</label><input type="text" id="payHolder" placeholder="Nama pemilik rekening"></div>
       <div class="row-btns">
         <button class="btn-primary" style="flex:1" onclick="savePay()">💾 Simpan</button>
         <button class="btn-danger" id="payDelBtn" onclick="deletePay()" style="display:none">🗑 Hapus</button>
@@ -362,10 +320,25 @@ input,textarea,select{font-family:inherit}
   </div>
 </div>
 
-<!-- ── TOAST ── -->
 <div class="toast" id="toast"></div>
 
+<!-- Firebase SDK (compat mode — no bundler needed) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
 <script>
+/* ─── FIREBASE ─── */
+if(!firebase.apps.length){
+  firebase.initializeApp({
+    apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
+    authDomain:"feedshort-app.firebaseapp.com",
+    projectId:"feedshort-app",
+    storageBucket:"feedshort-app.firebasestorage.app",
+    messagingSenderId:"866699145686",
+    appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
+  });
+}
+const db=firebase.firestore();
+
 /* ─── AUTH ─── */
 const _U='admin',_P='cheytacM2**';
 
@@ -373,7 +346,6 @@ function checkAuth(){
   if(sessionStorage.getItem('ipi_as')!=='1')showView('vLogin');
   else showView('vHome');
 }
-
 function doLogin(){
   const u=document.getElementById('loginUser').value.trim();
   const p=document.getElementById('loginPass').value;
@@ -387,29 +359,85 @@ function doLogin(){
 }
 document.getElementById('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 document.getElementById('loginUser').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
-
-function doLogout(){
-  sessionStorage.removeItem('ipi_as');
-  showView('vLogin');
-}
+function doLogout(){sessionStorage.removeItem('ipi_as');showView('vLogin');}
 
 /* ─── VIEWS ─── */
 const VIEWS=['vLogin','vHome','vProduk','vPembayaran','vTestimoni','vBattle'];
-function showView(id){
+async function showView(id){
   if(id!=='vLogin'&&id!=='vHome'&&sessionStorage.getItem('ipi_as')!=='1'){showView('vLogin');return;}
   VIEWS.forEach(v=>document.getElementById(v).classList.remove('show'));
   document.getElementById(id).classList.add('show');
   window.scrollTo(0,0);
-  if(id==='vHome')renderHome();
-  if(id==='vProduk')renderProduk();
-  if(id==='vPembayaran')renderPembayaran();
-  if(id==='vTestimoni')renderTestimoni();
-  if(id==='vBattle')renderBattle();
+  try{
+    if(id==='vHome') await renderHome();
+    if(id==='vProduk') await renderProduk();
+    if(id==='vPembayaran') await renderPembayaran();
+    if(id==='vTestimoni') await renderTestimoni();
+    if(id==='vBattle') await renderBattle();
+  }catch(e){console.error(e);}
 }
 
-/* ─── STORAGE ─── */
-function dbs(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(_){}}
-function dbg(k){try{return JSON.parse(localStorage.getItem(k));}catch(_){return null;}}
+/* ─── FIRESTORE HELPERS ─── */
+async function fbSet(key,items){
+  // Save locally first (instant)
+  localStorage.setItem('ipi_admin_'+key,JSON.stringify(items));
+  // Then sync to Firestore
+  try{
+    await db.collection('ipi_site').doc(key).set({items});
+    toast('✅ Tersimpan & sinkron ke website');
+  }catch(e){
+    toast('⚠️ Tersimpan lokal saja (cek koneksi)');
+  }
+}
+
+async function fbGet(key,def){
+  // Serve cached version immediately
+  const raw=localStorage.getItem('ipi_admin_'+key);
+  let cached=def;
+  if(raw){try{cached=JSON.parse(raw);}catch(_){}}
+  // Fetch fresh from Firestore
+  try{
+    const snap=await db.collection('ipi_site').doc(key).get();
+    if(snap.exists){
+      const items=snap.data().items;
+      localStorage.setItem('ipi_admin_'+key,JSON.stringify(items));
+      return items;
+    }
+  }catch(e){}
+  return cached;
+}
+
+async function fbSetTestis(testis){
+  localStorage.setItem('ipi_admin_testimonials',JSON.stringify(testis));
+  try{
+    const batch=db.batch();
+    const snap=await db.collection('ipi_testimonials').get();
+    snap.docs.forEach(d=>batch.delete(d.ref));
+    testis.forEach((t,i)=>{
+      const ref=db.collection('ipi_testimonials').doc(String(i).padStart(4,'0'));
+      batch.set(ref,{data:t.data,name:t.name||'',ts:t.ts||0,order:i});
+    });
+    await batch.commit();
+    toast('✅ Foto tersimpan & sinkron ke website');
+  }catch(e){
+    toast('⚠️ Foto tersimpan lokal saja (cek koneksi)');
+  }
+}
+
+async function fbGetTestis(){
+  const raw=localStorage.getItem('ipi_admin_testimonials');
+  let cached=[];
+  if(raw){try{cached=JSON.parse(raw);}catch(_){}}
+  try{
+    const snap=await db.collection('ipi_testimonials').orderBy('order').get();
+    if(!snap.empty){
+      const items=snap.docs.map(d=>d.data());
+      localStorage.setItem('ipi_admin_testimonials',JSON.stringify(items));
+      return items;
+    }
+  }catch(e){}
+  return cached;
+}
 
 /* ─── DEFAULT DATA ─── */
 const DP=[
@@ -431,26 +459,25 @@ const DBattle=[
   {ai:'Gemini',color:'#64748b',pnl:-1.8,trades:22,winrate:45},
 ];
 
-function gP(){return dbg('ipi_admin_products')||DP;}
-function gPay(){return dbg('ipi_admin_payments')||DPay;}
-function gT(){return dbg('ipi_admin_testimonials')||[];}
-function gB(){
-  const s=dbg('ipi_admin_battle');
+async function gP(){return fbGet('products',DP);}
+async function gPay(){return fbGet('payments',DPay);}
+async function gT(){return fbGetTestis();}
+async function gB(){
+  const s=await fbGet('battle',null);
   if(!s||!s.length)return DBattle;
   return DBattle.map((d,i)=>{const b=s[i]||{};return{ai:d.ai,color:d.color,pnl:b.pnl??d.pnl,trades:b.trades??d.trades,winrate:b.winrate??d.winrate};});
 }
 
 /* ─── HELPERS ─── */
 function fmtRp(n){return'Rp '+Number(n).toLocaleString('id-ID');}
-function fmtImg(p){return p||'';}
-
 function toast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
+  setTimeout(()=>t.classList.remove('show'),2800);
 }
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
+function loadingHTML(msg){return`<div class="loading-state"><span class="sp">⏳</span>${msg||'Memuat...'}</div>`;}
 
 document.getElementById('modalProduk').addEventListener('click',function(e){if(e.target===this)closeModal('modalProduk');});
 document.getElementById('modalPay').addEventListener('click',function(e){if(e.target===this)closeModal('modalPay');});
@@ -468,8 +495,8 @@ function previewImg(fileId,previewId,hiddenId){
 }
 
 /* ─── HOME ─── */
-function renderHome(){
-  const prods=gP(),pays=gPay(),testis=gT();
+async function renderHome(){
+  const[prods,pays,testis]=await Promise.all([gP(),gPay(),gT()]);
   const totalSales=prods.reduce((a,p)=>a+Number(p.sales||0),0);
   document.getElementById('homeStats').innerHTML=`
     <div class="stat-card"><div class="stat-val">${prods.length}</div><div class="stat-lbl">Produk</div></div>
@@ -480,13 +507,14 @@ function renderHome(){
 }
 
 /* ─── PRODUK ─── */
-function renderProduk(){
-  const prods=gP();
+async function renderProduk(){
+  document.getElementById('produkList').innerHTML=loadingHTML('Memuat produk...');
+  const prods=await gP();
   const el=document.getElementById('produkList');
   if(!prods.length){el.innerHTML='<div class="section-empty">Belum ada produk.<br>Tap ＋ untuk tambah.</div>';return;}
   el.innerHTML=prods.map(p=>`
     <div class="prod-card">
-      <img class="prod-img" src="${fmtImg(p.imgData||p.img)}" alt="${p.name}" onerror="this.style.visibility='hidden'">
+      <img class="prod-img" src="${p.imgData||p.img||''}" alt="${p.name}" onerror="this.style.visibility='hidden'">
       <div class="prod-info">
         <div class="prod-name">${p.name}</div>
         <div class="prod-price">${fmtRp(p.price)}</div>
@@ -499,8 +527,9 @@ function renderProduk(){
   `).join('');
 }
 
-function openModalProduk(id){
-  const p=id?gP().find(x=>x.id===id):null;
+async function openModalProduk(id){
+  const prods=await gP();
+  const p=id?prods.find(x=>x.id===id):null;
   document.getElementById('modalProdukTitle').textContent=p?'Edit Produk':'Tambah Produk';
   document.getElementById('pId').value=p?p.id:'';
   document.getElementById('pName').value=p?p.name:'';
@@ -517,7 +546,7 @@ function openModalProduk(id){
   openModal('modalProduk');
 }
 
-function saveProduk(){
+async function saveProduk(){
   const id=document.getElementById('pId').value;
   const name=document.getElementById('pName').value.trim();
   const price=Number(document.getElementById('pPrice').value);
@@ -527,37 +556,36 @@ function saveProduk(){
   const imgData=document.getElementById('pImgData').value;
   if(!name){toast('⚠️ Nama produk wajib diisi');return;}
   if(!price){toast('⚠️ Harga wajib diisi');return;}
-  let prods=gP();
+  let prods=await gP();
   if(id){
     prods=prods.map(p=>p.id!==id?p:{...p,name,price,rating,sales,desc,imgData:imgData||p.imgData||''});
-    toast('✅ Produk diperbarui');
   }else{
     const defP=DP.find(x=>x.name===name)||{img:''};
     prods.push({id:String(Date.now()),name,price,rating,sales,desc,img:defP.img||'',imgData});
-    toast('✅ Produk ditambahkan');
   }
-  dbs('ipi_admin_products',prods);
   closeModal('modalProduk');
-  renderProduk();
+  await fbSet('products',prods);
+  await renderProduk();
 }
 
-function deleteProduk(){
+async function deleteProduk(){
   const id=document.getElementById('pId').value;
   if(!id||!confirm('Hapus produk ini?'))return;
-  dbs('ipi_admin_products',gP().filter(p=>p.id!==id));
+  const prods=(await gP()).filter(p=>p.id!==id);
   closeModal('modalProduk');
-  renderProduk();
-  toast('🗑️ Produk dihapus');
+  await fbSet('products',prods);
+  await renderProduk();
 }
 
 /* ─── PEMBAYARAN ─── */
-function renderPembayaran(){
-  const pays=gPay();
+async function renderPembayaran(){
+  document.getElementById('pembayaranList').innerHTML=loadingHTML('Memuat metode bayar...');
+  const pays=await gPay();
   const el=document.getElementById('pembayaranList');
   if(!pays.length){el.innerHTML='<div class="section-empty">Belum ada metode bayar.<br>Tap ＋ untuk tambah.</div>';return;}
   el.innerHTML=pays.map(p=>`
     <div class="pay-card">
-      <img class="pay-logo" src="${fmtImg(p.imgData||p.img)}" alt="${p.name}" onerror="this.style.visibility='hidden'">
+      <img class="pay-logo" src="${p.imgData||p.img||''}" alt="${p.name}" onerror="this.style.visibility='hidden'">
       <div class="pay-info">
         <div class="pay-name">${p.name}</div>
         <div class="pay-num">${p.number}</div>
@@ -570,8 +598,9 @@ function renderPembayaran(){
   `).join('');
 }
 
-function openModalPay(id){
-  const p=id?gPay().find(x=>x.id===id):null;
+async function openModalPay(id){
+  const pays=await gPay();
+  const p=id?pays.find(x=>x.id===id):null;
   document.getElementById('modalPayTitle').textContent=p?'Edit Metode Bayar':'Tambah Metode Bayar';
   document.getElementById('payId').value=p?p.id:'';
   document.getElementById('payName').value=p?p.name:'';
@@ -586,7 +615,7 @@ function openModalPay(id){
   openModal('modalPay');
 }
 
-function savePay(){
+async function savePay(){
   const id=document.getElementById('payId').value;
   const name=document.getElementById('payName').value.trim();
   const number=document.getElementById('payNumber').value.trim();
@@ -595,31 +624,29 @@ function savePay(){
   if(!name){toast('⚠️ Nama metode wajib diisi');return;}
   if(!number){toast('⚠️ Nomor rekening wajib diisi');return;}
   if(!holder){toast('⚠️ Nama pemilik wajib diisi');return;}
-  let pays=gPay();
+  let pays=await gPay();
   if(id){
     pays=pays.map(p=>p.id!==id?p:{...p,name,number,holder,imgData:imgData||p.imgData||''});
-    toast('✅ Metode bayar diperbarui');
   }else{
     pays.push({id:name.toLowerCase().replace(/\s+/g,'-')+'-'+Date.now(),name,number,holder,img:'',imgData});
-    toast('✅ Metode bayar ditambahkan');
   }
-  dbs('ipi_admin_payments',pays);
   closeModal('modalPay');
-  renderPembayaran();
+  await fbSet('payments',pays);
+  await renderPembayaran();
 }
 
-function deletePay(){
+async function deletePay(){
   const id=document.getElementById('payId').value;
   if(!id||!confirm('Hapus metode bayar ini?'))return;
-  dbs('ipi_admin_payments',gPay().filter(p=>p.id!==id));
+  const pays=(await gPay()).filter(p=>p.id!==id);
   closeModal('modalPay');
-  renderPembayaran();
-  toast('🗑️ Metode bayar dihapus');
+  await fbSet('payments',pays);
+  await renderPembayaran();
 }
 
 /* ─── TESTIMONI ─── */
-function renderTestimoni(){
-  const testis=gT();
+async function renderTestimoni(){
+  const testis=await gT();
   const grid=document.getElementById('testiGrid');
   const empty=document.getElementById('testiEmpty');
   if(!testis.length){grid.innerHTML='';empty.style.display='block';return;}
@@ -632,69 +659,61 @@ function renderTestimoni(){
   `).join('');
 }
 
-function handleTestiUpload(e){
+async function handleTestiUpload(e){
   const files=Array.from(e.target.files);
   if(!files.length)return;
-  const testis=gT();
-  let n=0;
-  files.forEach(f=>{
+  toast('⏳ Mengupload '+files.length+' foto...');
+  const testis=await gT();
+  await Promise.all(files.map(f=>new Promise(res=>{
     const r=new FileReader();
-    r.onload=ev=>{
-      testis.push({data:ev.target.result,name:f.name,ts:Date.now()});
-      n++;
-      if(n===files.length){dbs('ipi_admin_testimonials',testis);renderTestimoni();toast('✅ '+files.length+' foto ditambahkan');}
-    };
+    r.onload=ev=>{testis.push({data:ev.target.result,name:f.name,ts:Date.now()});res();};
     r.readAsDataURL(f);
-  });
+  })));
+  await fbSetTestis(testis);
+  await renderTestimoni();
   e.target.value='';
 }
 
-function deleteTestimoni(idx){
+async function deleteTestimoni(idx){
   if(!confirm('Hapus foto ini?'))return;
-  const testis=gT();testis.splice(idx,1);
-  dbs('ipi_admin_testimonials',testis);renderTestimoni();toast('🗑️ Foto dihapus');
+  const testis=await gT();
+  testis.splice(idx,1);
+  await fbSetTestis(testis);
+  await renderTestimoni();
 }
 
 /* ─── AI BATTLE ─── */
-function renderBattle(){
-  const battle=gB();
+async function renderBattle(){
+  document.getElementById('battleCards').innerHTML=loadingHTML('Memuat data AI Battle...');
+  const battle=await gB();
   document.getElementById('battleCards').innerHTML=battle.map((b,i)=>`
     <div class="battle-card">
       <div class="battle-ai-name" style="color:${b.color}">${b.ai}</div>
       <div class="battle-fields">
-        <div class="bf-item">
-          <label>PnL %</label>
-          <input type="number" id="b_pnl_${i}" value="${b.pnl}" step="0.1" placeholder="0.0">
-        </div>
-        <div class="bf-item">
-          <label>Trades</label>
-          <input type="number" id="b_trades_${i}" value="${b.trades}" min="0" placeholder="0">
-        </div>
-        <div class="bf-item">
-          <label>Win %</label>
-          <input type="number" id="b_winrate_${i}" value="${b.winrate}" min="0" max="100" placeholder="0">
-        </div>
+        <div class="bf-item"><label>PnL %</label><input type="number" id="b_pnl_${i}" value="${b.pnl}" step="0.1" placeholder="0.0"></div>
+        <div class="bf-item"><label>Trades</label><input type="number" id="b_trades_${i}" value="${b.trades}" min="0" placeholder="0"></div>
+        <div class="bf-item"><label>Win %</label><input type="number" id="b_winrate_${i}" value="${b.winrate}" min="0" max="100" placeholder="0"></div>
       </div>
     </div>
   `).join('');
 }
 
-function saveBattle(){
-  const battle=gB();
+async function saveBattle(){
+  const battle=await gB();
   const updated=battle.map((b,i)=>({
     ai:b.ai,color:b.color,
     pnl:Number(document.getElementById('b_pnl_'+i).value)||0,
     trades:Number(document.getElementById('b_trades_'+i).value)||0,
     winrate:Number(document.getElementById('b_winrate_'+i).value)||0,
   }));
-  dbs('ipi_admin_battle',updated);
-  toast('✅ Data AI Battle disimpan');
+  await fbSet('battle',updated);
 }
 
-function resetBattle(){
+async function resetBattle(){
   if(!confirm('Reset data battle ke default?'))return;
   localStorage.removeItem('ipi_admin_battle');
-  renderBattle();
+  try{await db.collection('ipi_site').doc('battle').delete();}catch(e){}
+  await renderBattle();
   toast('🔄 Data battle direset');
 }
 

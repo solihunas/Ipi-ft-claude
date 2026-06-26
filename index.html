@@ -678,38 +678,80 @@ document.addEventListener('click', function(e) {
   });
 })();
 
-// ── Admin: product sales/rating override ──
-(function(){
+// ── Admin: apply product overrides to DOM ──
+function _applyProdOverrides(items){
   try{
-    var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));
-    if(!ap||!ap.length)return;
-    document.querySelectorAll('a[href*="produk.html?id="]').forEach(function(a){
-      var m=(a.getAttribute('href')||'').match(/id=(\d+)/);
-      if(!m)return;
-      var p=ap.find(function(x){return String(x.id)===m[1];});
-      if(!p)return;
-      var par=a.parentElement;
-      var rn=par&&par.querySelector('.prod-rating-num');
-      var ps=par&&par.querySelector('.prod-sales');
-      if(rn&&p.rating!=null)rn.textContent=parseFloat(p.rating).toFixed(1);
-      if(ps&&p.sales!=null)ps.textContent=p.sales+' terjual';
+    items.forEach(function(p){
+      document.querySelectorAll('a[href*="produk.html?id="]').forEach(function(a){
+        var m=(a.getAttribute('href')||'').match(/id=([^&]+)/);
+        if(!m||String(p.id)!==m[1])return;
+        var par=a.parentElement;
+        var rn=par&&par.querySelector('.prod-rating-num');
+        var ps=par&&par.querySelector('.prod-sales');
+        if(rn&&p.rating!=null)rn.textContent=parseFloat(p.rating).toFixed(1);
+        if(ps&&p.sales!=null)ps.textContent=p.sales+' terjual';
+      });
     });
   }catch(_){}
-})();
+}
 
-// ── Admin: inject testimonials from localStorage ──
-(function(){
+// ── Admin: inject testimonial photos to carousel ──
+function _injectTestis(testis){
   try{
-    var ts=JSON.parse(localStorage.getItem('ipi_admin_testimonials'));
-    if(!ts||!ts.length)return;
     var track=document.getElementById('testiTrack');
-    if(!track)return;
-    ts.forEach(function(t,i){
+    if(!track||!testis.length)return;
+    testis.forEach(function(t,i){
       var div=document.createElement('div');
       div.className='testi-slide';
-      div.innerHTML='<div class="testi-neon-wrap"><div class="testi-img-frame"><img src="'+t.img+'" alt="Testimoni '+(i+1)+'" loading="lazy"></div></div>';
+      // support both t.data (new) and t.img (legacy)
+      var src=t.data||t.img||'';
+      div.innerHTML='<div class="testi-neon-wrap"><div class="testi-img-frame"><img src="'+src+'" alt="Testimoni '+(i+1)+'" loading="lazy"></div></div>';
       track.appendChild(div);
     });
+  }catch(_){}
+}
+
+// Apply from localStorage cache immediately (instant render)
+(function(){
+  try{var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));if(ap&&ap.length)_applyProdOverrides(ap);}catch(_){}
+  try{var ts=JSON.parse(localStorage.getItem('ipi_admin_testimonials'));if(ts&&ts.length)_injectTestis(ts);}catch(_){}
+})();
+</script>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+// Fetch fresh data from Firestore and update page
+(function(){
+  try{
+    if(!firebase.apps.length){
+      firebase.initializeApp({
+        apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
+        authDomain:"feedshort-app.firebaseapp.com",
+        projectId:"feedshort-app",
+        storageBucket:"feedshort-app.firebasestorage.app",
+        messagingSenderId:"866699145686",
+        appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
+      });
+    }
+    var db=firebase.firestore();
+
+    // Products
+    db.collection('ipi_site').doc('products').get().then(function(d){
+      if(!d.exists)return;
+      var items=d.data().items;
+      localStorage.setItem('ipi_admin_products',JSON.stringify(items));
+      _applyProdOverrides(items);
+    }).catch(function(){});
+
+    // Testimonials
+    db.collection('ipi_testimonials').orderBy('order').get().then(function(snap){
+      if(snap.empty)return;
+      var testis=snap.docs.map(function(d){return d.data();});
+      localStorage.setItem('ipi_admin_testimonials',JSON.stringify(testis));
+      _injectTestis(testis);
+    }).catch(function(){});
   }catch(_){}
 })();
 </script>

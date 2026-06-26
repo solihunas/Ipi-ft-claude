@@ -186,20 +186,23 @@ const PRODUCTS = {
     note:'Khusus untuk XAU/USD. Akun TradingView gratis sudah cukup — kamu tidak perlu berlangganan TradingView Pro untuk menggunakannya.'},
 };
 
-// Admin: Apply product overrides from localStorage
-(function(){
+// Admin: Apply product overrides (from cache or Firestore)
+function _patchProds(items){
   try{
-    var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));
-    if(!ap||!ap.length)return;
-    ap.forEach(function(o){
+    items.forEach(function(o){
       if(!PRODUCTS[o.id])return;
       if(o.name)PRODUCTS[o.id].name=o.name;
       if(o.price&&o.price>0)PRODUCTS[o.id].price=o.price;
-      if(o.rating&&o.rating>0)PRODUCTS[o.id].rating=o.rating;
-      if(o.sales!=null)PRODUCTS[o.id].sales=o.sales;
-      if(o.img)PRODUCTS[o.id].img=o.img;
+      if(o.rating&&o.rating>0)PRODUCTS[o.id].rating=parseFloat(o.rating);
+      if(o.sales!=null)PRODUCTS[o.id].sales=Number(o.sales);
+      if(o.imgData)PRODUCTS[o.id].img=o.imgData;
+      else if(o.img)PRODUCTS[o.id].img=o.img;
     });
   }catch(_){}
+}
+// Apply cache immediately
+(function(){
+  try{var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));if(ap&&ap.length)_patchProds(ap);}catch(_){}
 })();
 
 const id = new URLSearchParams(location.search).get('id') || '1';
@@ -256,6 +259,46 @@ if (!p) {
   document.getElementById('ctaPrice').textContent = fmtRp(p.price);
   document.getElementById('ctaBtn').href = `bayar.html?id=${id}`;
 }
+</script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+  try{
+    if(!firebase.apps.length){
+      firebase.initializeApp({
+        apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
+        authDomain:"feedshort-app.firebaseapp.com",
+        projectId:"feedshort-app",
+        storageBucket:"feedshort-app.firebasestorage.app",
+        messagingSenderId:"866699145686",
+        appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
+      });
+    }
+    firebase.firestore().collection('ipi_site').doc('products').get().then(function(d){
+      if(!d.exists)return;
+      var items=d.data().items;
+      localStorage.setItem('ipi_admin_products',JSON.stringify(items));
+      // Update displayed data if this product is in the list
+      var cur=items.find(function(x){return String(x.id)===id;});
+      if(!cur)return;
+      // Update price display
+      var newPrice=cur.price&&cur.price>0?Number(cur.price):null;
+      if(newPrice){
+        document.getElementById('ctaPrice').textContent=fmtRp(newPrice);
+        // Update inline price pill if present
+        var pv=document.querySelector('.pd-price-val');
+        if(pv)pv.textContent=fmtRp(newPrice);
+      }
+      // Update rating & sales
+      var ratingEl=document.querySelector('.pd-hero-body [style*="font-weight:700"]');
+      var salesEl=document.querySelector('.pd-hero-body [style*="#475569"]');
+      if(ratingEl&&cur.rating!=null)ratingEl.textContent=parseFloat(cur.rating).toFixed(1);
+      if(salesEl&&cur.sales!=null)salesEl.textContent=cur.sales+' terjual';
+    }).catch(function(){});
+  }catch(_){}
+})();
 </script>
 </body>
 </html>

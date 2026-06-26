@@ -854,5 +854,31 @@ function startDashboard(){
 // ─── ENTRY POINT ─────────────────────────────────────────────────────────────────
 window.addEventListener('load', runBoot);
 </script>
+<!-- Firebase: fetch fresh battle data and re-render weekly PnL -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+  try{
+    if(!firebase.apps.length){
+      firebase.initializeApp({
+        apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
+        authDomain:"feedshort-app.firebaseapp.com",
+        projectId:"feedshort-app",
+        storageBucket:"feedshort-app.firebasestorage.app",
+        messagingSenderId:"866699145686",
+        appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
+      });
+    }
+    firebase.firestore().collection('ipi_site').doc('battle').get().then(function(d){
+      if(!d.exists)return;
+      var items=d.data().items;
+      localStorage.setItem('ipi_admin_battle',JSON.stringify(items));
+      // Re-render weekly PnL section with fresh data
+      if(typeof renderWeeklyPnl==='function') renderWeeklyPnl();
+    }).catch(function(){});
+  }catch(_){}
+})();
+</script>
 </body>
 </html>

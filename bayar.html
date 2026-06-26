@@ -446,26 +446,29 @@ document.getElementById('backLink').href='produk.html?id='+pid;
 document.getElementById('iAmount').textContent=fmtRp(finalPrice);
 document.getElementById('iAmtNote').textContent=fmtRp(finalPrice);
 
-// ── Render payment options (from admin localStorage or defaults) ──
-function buildPayOpts(){
-  var pay=null;try{pay=JSON.parse(localStorage.getItem('ipi_admin_payments'));}catch(_){}
-  if(!pay||!pay.length)return; // keep hardcoded HTML
+// ── Render payment options ──
+function _buildPayOpts(pay){
+  if(!pay||!pay.length)return;
   var dd=document.getElementById('csDropdown');
   dd.innerHTML='';
   pay.forEach(function(p){
     var d=document.createElement('div');
     d.className='cs-option';
     d.dataset.value=p.id||p.name;
-    d.dataset.img=p.img||'';
+    var logoSrc=p.imgData||p.img||'';
+    d.dataset.img=logoSrc;
     d.dataset.name=p.name;
     d.dataset.number=p.number;
     d.dataset.holder=p.holder;
-    var lg=p.img?'<div class="cs-opt-icon"><img src="'+p.img+'" alt="'+p.name+'" onerror="this.parentElement.textContent=\'💳\'"></div>':'<div class="cs-opt-icon" style="font-size:20px">💳</div>';
+    var lg=logoSrc?'<div class="cs-opt-icon"><img src="'+logoSrc+'" alt="'+p.name+'" onerror="this.parentElement.textContent=\'💳\'"></div>':'<div class="cs-opt-icon" style="font-size:20px">💳</div>';
     d.innerHTML=lg+'<div class="cs-opt-info"><span class="cs-opt-name">'+p.name+'</span><span class="cs-opt-num">'+p.number+'</span><span class="cs-opt-holder">a.n. '+p.holder+'</span></div><span class="cs-badge">Tersedia</span>';
     dd.appendChild(d);
   });
 }
-buildPayOpts();
+// Apply from localStorage cache first (instant)
+(function(){
+  try{var p=JSON.parse(localStorage.getItem('ipi_admin_payments'));_buildPayOpts(p);}catch(_){}
+})();
 
 // ── Custom dropdown ──
 const trigger=document.getElementById('csTrigger');
@@ -646,6 +649,31 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
   sessionStorage.setItem('ipi_order',JSON.stringify(order));
   location.href='sukses.html';
 });
+</script>
+<!-- Firebase: fetch fresh payment methods -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+  try{
+    if(!firebase.apps.length){
+      firebase.initializeApp({
+        apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
+        authDomain:"feedshort-app.firebaseapp.com",
+        projectId:"feedshort-app",
+        storageBucket:"feedshort-app.firebasestorage.app",
+        messagingSenderId:"866699145686",
+        appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
+      });
+    }
+    firebase.firestore().collection('ipi_site').doc('payments').get().then(function(d){
+      if(!d.exists)return;
+      var items=d.data().items;
+      localStorage.setItem('ipi_admin_payments',JSON.stringify(items));
+      _buildPayOpts(items);
+    }).catch(function(){});
+  }catch(_){}
+})();
 </script>
 </body>
 </html>

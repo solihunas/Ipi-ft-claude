@@ -9,7 +9,7 @@
 <style>
 .pd-back {
   display: inline-flex; align-items: center; gap: 7px;
-  color: #475569; font-size: 13px; text-decoration: none;
+  color: #cbd5e1; font-size: 13px; text-decoration: none;
   transition: color .2s; padding-top: 88px;
   max-width: 740px; margin: 0 auto; padding-left: 20px;
 }
@@ -41,7 +41,7 @@
   background: rgba(168,85,247,.08); border: 1px solid rgba(168,85,247,.22);
   border-radius: 10px; padding: 10px 18px;
 }
-.pd-price-lbl { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: .1em; }
+.pd-price-lbl { font-size: 10px; color: #cbd5e1; text-transform: uppercase; letter-spacing: .1em; }
 .pd-price-val { font-size: 22px; font-weight: 800; color: #a855f7; }
 
 .pd-sec { margin-bottom: 28px; }
@@ -133,7 +133,7 @@
   padding: 14px 20px; display: flex; align-items: center;
   justify-content: space-between; gap: 16px;
 }
-.pd-cta-info .lbl { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: .08em; }
+.pd-cta-info .lbl { font-size: 10px; color: #cbd5e1; text-transform: uppercase; letter-spacing: .08em; }
 .pd-cta-info .val { font-size: 18px; font-weight: 800; color: #a855f7; line-height: 1.2; }
 .pd-cta-bar .btn { white-space: nowrap; flex-shrink: 0; }
 </style>
@@ -165,7 +165,7 @@
 </div>
 
 <div style="max-width:740px;margin:0 auto;padding:88px 20px 0">
-  <a href="index.html#produk" class="pd-back" style="display:inline-flex;align-items:center;gap:7px;color:#475569;font-size:13px;text-decoration:none;transition:color .2s;padding-top:0" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#475569'">
+  <a href="index.html#produk" class="pd-back" style="display:inline-flex;align-items:center;gap:7px;color:#cbd5e1;font-size:13px;text-decoration:none;transition:color .2s;padding-top:0" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#cbd5e1'">
     ← Semua Produk
   </a>
 </div>
@@ -247,7 +247,7 @@ const id = new URLSearchParams(location.search).get('id') || '1';
 const p = PRODUCTS[id];
 
 if (!p) {
-  document.getElementById('pdContent').innerHTML = '<div style="text-align:center;padding:60px 0;color:#64748b">Produk tidak ditemukan. <a href="index.html#produk" style="color:#a855f7">Lihat semua produk</a></div>';
+  document.getElementById('pdContent').innerHTML = '<div style="text-align:center;padding:60px 0;color:#cbd5e1">Produk tidak ditemukan. <a href="index.html#produk" style="color:#a855f7">Lihat semua produk</a></div>';
 } else {
   document.title = p.short + ' — IPI Digital';
   const badge = p.badge ? `<span class="product-badge" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${p.badge}</span><br>` : '';
@@ -260,7 +260,7 @@ if (!p) {
         <div class="pd-tagline">${p.tagline}</div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:12px">
           <span style="color:#f59e0b;font-size:13px;letter-spacing:.5px">★★★★★</span>
-          <span style="color:#94a3b8;font-weight:700">${p.rating.toFixed(1)}</span>
+          <span style="color:#e2e8f0;font-weight:700">${p.rating.toFixed(1)}</span>
           <span style="color:#64748b">·</span>
           <span style="color:#cbd5e1">${p.sales} terjual</span>
         </div>

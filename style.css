@@ -78,7 +78,7 @@ body::before { z-index: 0; }
   gap: 4px;
 }
 .nav-links a {
-  color: #64748b;
+  color: #cbd5e1;
   padding: 8px 14px;
   border-radius: 6px;
   font-size: 14px;
@@ -146,7 +146,7 @@ body::before { z-index: 0; }
   flex-direction: column;
   gap: 4px;
 }
-.mobile-menu a { color: #94a3b8; padding: 12px 16px; display: block; border-radius: 6px; font-size: 15px; }
+.mobile-menu a { color: #cbd5e1; padding: 12px 16px; display: block; border-radius: 6px; font-size: 15px; }
 .mobile-menu a:hover { background: rgba(147,51,234,0.08); color: #e2e8f0; }
 .mobile-menu .nav-cta { margin-top: 8px; text-align: center; border-radius: 8px !important; }
 
@@ -481,7 +481,7 @@ body::before { z-index: 0; }
   margin-bottom: 16px;
   font-variant-numeric: tabular-nums;
 }
-.product-price span { font-size: 13px; font-weight: 400; color: #64748b; }
+.product-price span { font-size: 13px; font-weight: 400; color: #cbd5e1; }
 
 /* Rating + sales meta */
 .prod-meta {
@@ -489,9 +489,9 @@ body::before { z-index: 0; }
   margin-bottom: 10px; font-size: 12px;
 }
 .prod-stars { color: #f59e0b; letter-spacing: .5px; font-size: 13px; }
-.prod-rating-num { color: #94a3b8; font-weight: 600; }
+.prod-rating-num { color: #e2e8f0; font-weight: 600; }
 .prod-sales { color: #cbd5e1; font-size: 11.5px; }
-.prod-meta-sep { color: #1e293b; }
+.prod-meta-sep { color: #64748b; }
 
 /* Produk featured (kolom lebar) */
 .product-card.featured {
@@ -734,7 +734,7 @@ footer {
 }
 .footer-brand .logo-wrap { margin-bottom: 14px; }
 .footer-brand p { font-size: 13px; color: #cbd5e1; line-height: 1.7; max-width: 240px; }
-.footer-col h4 { color: #94a3b8; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.footer-col h4 { color: #cbd5e1; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
 .footer-col ul { list-style: none; }
 .footer-col ul li { margin-bottom: 10px; }
 .footer-col ul li a { color: #cbd5e1; font-size: 14px; transition: color 0.2s; }
@@ -750,7 +750,7 @@ footer {
   flex-wrap: wrap;
   gap: 10px;
 }
-.footer-bottom p { font-size: 12px; color: #94a3b8; }
+.footer-bottom p { font-size: 12px; color: #cbd5e1; }
 .disclaimer {
   text-align: center;
   padding: 10px 20px;
@@ -930,7 +930,7 @@ footer {
 }
 .splash-hook {
   font-size: clamp(11px, 2.5vw, 13px);
-  color: #94a3b8; letter-spacing: .04em; line-height: 1.6;
+  color: #cbd5e1; letter-spacing: .04em; line-height: 1.6;
 }
 .splash-cur {
   font-size: 15px; color: #a855f7; font-weight: 300;
@@ -940,7 +940,7 @@ footer {
 
 .splash-skip {
   position: absolute; bottom: 28px;
-  font-size: 10px; color: #1f2937;
+  font-size: 10px; color: #94a3b8;
   letter-spacing: .1em; text-transform: uppercase; z-index: 10;
 }
 
@@ -1068,7 +1068,7 @@ footer {
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: #475569;
+  color: #cbd5e1;
   display: block;
 }
 

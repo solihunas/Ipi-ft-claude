@@ -192,56 +192,37 @@ document.addEventListener('click',function(e){const m=document.getElementById('m
 function fmtRp(n){return'Rp '+n.toLocaleString('id-ID');}
 
 const PRODUCTS = {
-  '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:342,
+  '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:1323,
     tagline:'Prompt siap pakai agar Neurobro membantu analisa trading lebih jelas, terarah, dan mudah dipakai sejak awal.',
     about:'Produk ini membantu kamu memakai Neurobro sebagai alat bantu analisa, bukan sekadar tempat bertanya. Kumpulan prompt di dalamnya disusun khusus untuk ekosistem Neurobro agar AI lebih cepat memahami konteks chart, merapikan alur berpikir, dan memberi output yang lebih mudah ditindaklanjuti. Cocok untuk pemula yang ingin mulai memakai AI dengan cara yang benar maupun trader yang ingin proses analisa lebih efisien.',
     features:['Prompt dibuat khusus untuk ekosistem Neurobro AI, jadi hasilnya lebih relevan dibanding template AI umum','Membantu AI menyusun analisa tren, momentum, konfirmasi entry, dan evaluasi kondisi pasar dengan format yang rapi','Jawaban AI lebih terarah, lebih jelas poin pentingnya, dan lebih mudah dipakai saat mengambil keputusan','Siap salin dan pakai, sehingga kamu tidak perlu trial and error dari nol','Membantu trader pemula lebih cepat memahami cara berkomunikasi dengan AI untuk kebutuhan trading'],
     includes:['Dokumen berisi semua prompt siap pakai (PDF/DOC)','Panduan cara menggunakan dan mengkombinasikan prompt untuk hasil optimal'],
     note:'Pilihan paling ringan untuk mulai memakai AI sebagai alat bantu trading. Nilainya terasa dari awal karena kamu langsung punya alur prompt yang lebih jelas tanpa harus bingung menyusun instruksi sendiri.'},
-  '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:4.9,sales:128,
+  '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:5.0,sales:548,
     tagline:'Data dan panduan pelatihan agar AI belajar membaca pasar, lalu membantu menyusun analisa dengan dasar yang lebih kuat.',
     about:'Banyak AI bisa menjawab, tetapi belum tentu paham ritme pasar. Produk ini memberi fondasi supaya AI yang kamu pakai lebih berguna untuk trading: 400.000 data candle historis OHLCV plus panduan langkah demi langkah untuk melatihnya dari awal. Hasil akhirnya bukan AI yang asal memberi sinyal, melainkan alat bantu analisa yang punya referensi data lebih kuat, lebih terstruktur, dan lebih membantu bahkan jika kamu masih belajar memahami market.',
     features:['400.000 data candle historis OHLCV siap pakai tanpa perlu scraping atau menyusun dataset sendiri','Panduan pelatihan dibuat bertahap agar pemula tetap bisa mengikuti prosesnya dengan rapi','Membantu AI memberi analisa yang lebih berbasis data, bukan jawaban generik','Dilengkapi teknik prompt untuk mengekstrak sinyal dan insight dengan lebih jelas','Bisa dipakai untuk berbagai timeframe dan pasangan aset sesuai kebutuhan analisa'],
     includes:['File data 400.000 candle historis (format CSV)','Panduan pelatihan AI lengkap (PDF/dokumen)'],
     note:'Tidak perlu coding. Panduannya dibuat supaya trader yang baru mulai mengenal data historis dan AI tetap bisa mengikuti prosesnya tanpa merasa kewalahan.'},
-  '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:74,
+  '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:128,
     tagline:'Claude dilatih untuk membantu membaca konteks pasar, menyaring noise, dan menajamkan keputusan entry kamu.',
     about:'Produk ini dirancang agar Claude berfungsi sebagai alat bantu analisa yang benar-benar berguna saat membaca chart. Fokusnya bukan membuat AI mengikuti cara pandang user, tetapi membantu user melihat pasar dengan lebih jernih: apa konteks pergerakan harga, area mana yang layak diperhatikan, siapa yang berpotensi terjebak, dan apa risiko di balik sebuah entry. Dengan pendekatan logika pasar, psikologi pelaku, dan referensi data yang besar, Claude Sniper membantu trader pemula sampai berpengalaman agar proses analisa lebih dalam tanpa membebani pikiran dengan noise yang tidak perlu.',
     features:['Membantu Claude membaca hubungan sebab-akibat di pasar, bukan hanya mengenali pola permukaan','Menyusun analisa area penting, potensi jebakan, dan skenario entry dengan logika yang lebih jelas','Membantu trader memahami konteks pergerakan harga, termasuk sisi psikologi pelaku pasar','Didukung 1.000.000 data candle historis sebagai fondasi pembelajaran yang lebih kaya','Panduan pelatihan lengkap dari awal sampai siap dipakai untuk analisa nyata','Akses support 30 hari agar proses setup dan penggunaan berjalan lebih lancar'],
     includes:['File data 1.000.000 candle historis (format CSV)','Dokumen panduan pelatihan Claude + kerangka berpikir analisa (PDF)','30 hari akses chat support langsung'],
     note:'Claude Sniper diposisikan sebagai alat bantu analisa untuk memperjelas keputusan, bukan menggantikan penilaian trader. Cocok dipakai saat kamu ingin membaca pasar lebih dalam dengan cara yang tetap terstruktur dan masuk akal.'},
-  '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',img:'prod-ea.png',price:3000000,badge:'Premium',rating:4.8,sales:56,
+  '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',img:'prod-ea.png',price:3000000,badge:'Premium',rating:5.0,sales:566,
     tagline:'Bot bantu eksekusi strategi trend following dengan disiplin saat kamu tidak bisa terus memantau chart.',
     about:'EA ini dibuat untuk membantu trader menjaga konsistensi eksekusi. Saat emosi, lelah, atau telat merespons pasar, bot tetap bekerja sesuai parameter yang sudah ditentukan. Hasilnya, kamu punya alat bantu yang mengeksekusi strategi trend following secara lebih disiplin, lebih rapi, dan tidak mudah terpengaruh FOMO atau ragu-ragu. Cocok untuk trader yang ingin mengurangi beban pantau chart terus-menerus tanpa harus coding sendiri.',
     features:['File EA (.ex5) siap install dan langsung digunakan di MetaTrader 5','Strategi trend following sudah diuji agar lebih siap dipakai pada kondisi pasar nyata','Parameter penting bisa disesuaikan: lot size, TP, SL, trailing stop, dan filter waktu','Membantu mengurangi beban monitor chart terus-menerus selama platform aktif','Kompatibel dengan broker MT5, termasuk tipe ECN dan STP'],
     includes:['File EA MetaTrader 5 (.ex5)','Panduan instalasi, konfigurasi, dan optimasi parameter (PDF)'],
     note:'Pastikan akun trading kamu menggunakan MetaTrader 5, bukan MT4. Jika sudah memakai MT5, produk ini bisa langsung disiapkan dan dipakai pada hari yang sama.'},
-  '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,rating:4.9,sales:91,
+  '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,rating:4.9,sales:767,
     tagline:'Indikator bantu membaca area penting XAU lebih cepat dan lebih rapi langsung di chart TradingView.',
     about:'XAU sering bergerak cepat dan membuat banyak trader telat membaca level penting. Indikator ini dibuat untuk membantu proses analisa jadi lebih ringan: menampilkan area yang layak diperhatikan, membantu melihat potensi reaksi harga, dan memberi peta visual yang lebih bersih sebelum entry. Cocok untuk trader XAU yang ingin analisa lebih efisien, lebih terarah, dan tidak dipenuhi noise yang mengganggu fokus.',
     features:['Akses invite-only langsung di TradingView sehingga indikator tetap eksklusif dan aman','Membantu menampilkan level-level penting XAU secara otomatis di chart','Visual dibuat bersih agar chart tetap enak dibaca tanpa terlalu banyak noise','Dilengkapi panduan penggunaan supaya trader pemula pun lebih cepat memahami tiap elemen indikator','Mendapat update berkelanjutan saat ada peningkatan atau penambahan fitur'],
     includes:['Akses Pine Script indikator di TradingView (invite-only, tidak bisa dibagikan)','Panduan penggunaan lengkap (PDF)'],
     note:'Khusus untuk XAU/USD. Akun TradingView gratis sudah cukup, jadi kamu bisa langsung memakai indikator ini tanpa perlu langganan paket Pro.'},
 };
-
-// Admin: Apply product overrides (from cache or Firestore)
-function _patchProds(items){
-  try{
-    items.forEach(function(o){
-      if(!PRODUCTS[o.id])return;
-      if(o.name)PRODUCTS[o.id].name=o.name;
-      if(o.price&&o.price>0)PRODUCTS[o.id].price=o.price;
-      if(o.rating&&o.rating>0)PRODUCTS[o.id].rating=parseFloat(o.rating);
-      if(o.sales!=null)PRODUCTS[o.id].sales=Number(o.sales);
-      if(o.imgData)PRODUCTS[o.id].img=o.imgData;
-      else if(o.img)PRODUCTS[o.id].img=o.img;
-    });
-  }catch(_){}
-}
-// Apply cache immediately
-(function(){
-  try{var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));if(ap&&ap.length)_patchProds(ap);}catch(_){}
-})();
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
@@ -314,46 +295,6 @@ if (!p) {
   document.getElementById('ctaPrice').textContent = fmtRp(p.price);
   document.getElementById('ctaBtn').href = `bayar.html?id=${id}`;
 }
-</script>
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
-<script>
-(function(){
-  try{
-    if(!firebase.apps.length){
-      firebase.initializeApp({
-        apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
-        authDomain:"feedshort-app.firebaseapp.com",
-        projectId:"feedshort-app",
-        storageBucket:"feedshort-app.firebasestorage.app",
-        messagingSenderId:"866699145686",
-        appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
-      });
-    }
-    firebase.firestore().collection('ipi_site').doc('products').get().then(function(d){
-      if(!d.exists)return;
-      var items=d.data().items;
-      localStorage.setItem('ipi_admin_products',JSON.stringify(items));
-      // Update displayed data if this product is in the list
-      var cur=items.find(function(x){return String(x.id)===id;});
-      if(!cur)return;
-      // Update price display
-      var newPrice=cur.price&&cur.price>0?Number(cur.price):null;
-      if(newPrice){
-        document.getElementById('ctaPrice').textContent=fmtRp(newPrice);
-        // Update inline price pill if present
-        var pv=document.querySelector('.pd-price-val');
-        if(pv)pv.textContent=fmtRp(newPrice);
-      }
-      // Update rating & sales
-      var ratingEl=document.querySelector('.pd-hero-body [style*="font-weight:700"]');
-      var salesEl=document.querySelector('.pd-hero-body [style*="#475569"]');
-      if(ratingEl&&cur.rating!=null)ratingEl.textContent=parseFloat(cur.rating).toFixed(1);
-      if(salesEl&&cur.sales!=null)salesEl.textContent=cur.sales+' terjual';
-    }).catch(function(){});
-  }catch(_){}
-})();
 </script>
 </body>
 </html>

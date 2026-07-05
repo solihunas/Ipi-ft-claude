@@ -174,7 +174,7 @@
           </div>
         </div>
         <p>Prompt siap pakai untuk membantu Neurobro memberi analisa trading yang lebih jelas, rapi, dan mudah dipakai, termasuk untuk pemula.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales">342 terjual</span></div>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales">1323 terjual</span></div>
         <div class="product-price">Rp 50.000</div>
         <a href="produk.html?id=1" class="btn btn-outline btn-full">Lihat Produk →</a>
       </div>
@@ -191,7 +191,7 @@
           </div>
         </div>
         <p>Dataset 400.000 candle dan panduan bertahap untuk membantu AI memberi analisa trading yang lebih berbasis data dan lebih mudah dipahami.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales">128 terjual</span></div>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales">548 terjual</span></div>
         <div class="product-price">Rp 550.000</div>
         <a href="produk.html?id=2" class="btn btn-outline btn-full">Lihat Produk →</a>
       </div>
@@ -209,7 +209,7 @@
         </div>
         <span class="product-badge badge-cyan">Premium</span>
         <p>Indikator XAU/USD yang membantu trader melihat area penting, potensi reaksi harga, dan arah analisa dengan chart yang tetap bersih.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales">91 terjual</span></div>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales">767 terjual</span></div>
         <div class="product-price price-cyan">Rp 750.000</div>
         <a href="produk.html?id=5" class="btn btn-outline-cyan btn-full">Lihat Produk →</a>
       </div>
@@ -227,7 +227,7 @@
         </div>
         <span class="product-badge badge-pink">Premium</span>
         <p>Bot MT5 siap pakai untuk membantu eksekusi strategi trend following lebih disiplin tanpa harus terus memantau chart atau coding sendiri.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.8</span><span class="prod-meta-sep">·</span><span class="prod-sales">56 terjual</span></div>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales">566 terjual</span></div>
         <div class="product-price price-pink">Rp 3.000.000</div>
         <a href="produk.html?id=4" class="btn btn-primary btn-full">Lihat Produk →</a>
       </div>
@@ -246,7 +246,7 @@
           </div>
           <span class="product-badge badge-gold">Unggulan</span>
           <p>Paket data dan metodologi untuk membantu Claude membaca konteks pasar, menyaring noise, dan menajamkan analisa entry dengan lebih terstruktur.</p>
-          <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales">74 terjual</span></div>
+          <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales">128 terjual</span></div>
           <div class="product-price price-gold">Rp 3.500.000</div>
           <a href="produk.html?id=3" class="btn btn-gold btn-full">Lihat Produk →</a>
         </div>
@@ -725,84 +725,6 @@ document.addEventListener('click', function(e) {
   });
 })();
 
-// ── Admin: apply product overrides to DOM ──
-function _applyProdOverrides(items){
-  try{
-    items.forEach(function(p){
-      document.querySelectorAll('a[href*="produk.html?id="]').forEach(function(a){
-        var m=(a.getAttribute('href')||'').match(/id=([^&]+)/);
-        if(!m||String(p.id)!==m[1])return;
-        var par=a.parentElement;
-        var rn=par&&par.querySelector('.prod-rating-num');
-        var ps=par&&par.querySelector('.prod-sales');
-        if(rn&&p.rating!=null)rn.textContent=parseFloat(p.rating).toFixed(1);
-        if(ps&&p.sales!=null)ps.textContent=p.sales+' terjual';
-      });
-    });
-  }catch(_){}
-}
-
-function _esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-
-// ── Admin: inject testimonial photos to carousel ──
-function _injectTestis(testis){
-  try{
-    var track=document.getElementById('testiTrack');
-    if(!track||!testis.length)return;
-    testis.forEach(function(t,i){
-      var div=document.createElement('div');
-      div.className='testi-slide';
-      // support both t.data (new) and t.img (legacy)
-      var src=t.data||t.img||'';
-      div.innerHTML='<div class="testi-neon-wrap"><div class="testi-img-frame"><img src="'+_esc(src)+'" alt="Testimoni '+(i+1)+'" loading="lazy"></div></div>';
-      track.appendChild(div);
-    });
-  }catch(_){}
-}
-
-// Apply from localStorage cache immediately (instant render)
-(function(){
-  try{var ap=JSON.parse(localStorage.getItem('ipi_admin_products'));if(ap&&ap.length)_applyProdOverrides(ap);}catch(_){}
-  try{var ts=JSON.parse(localStorage.getItem('ipi_admin_testimonials'));if(ts&&ts.length)_injectTestis(ts);}catch(_){}
-})();
-</script>
-
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
-<script>
-// Fetch fresh data from Firestore and update page
-(function(){
-  try{
-    if(!firebase.apps.length){
-      firebase.initializeApp({
-        apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
-        authDomain:"feedshort-app.firebaseapp.com",
-        projectId:"feedshort-app",
-        storageBucket:"feedshort-app.firebasestorage.app",
-        messagingSenderId:"866699145686",
-        appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
-      });
-    }
-    var db=firebase.firestore();
-
-    // Products
-    db.collection('ipi_site').doc('products').get().then(function(d){
-      if(!d.exists)return;
-      var items=d.data().items;
-      localStorage.setItem('ipi_admin_products',JSON.stringify(items));
-      _applyProdOverrides(items);
-    }).catch(function(){});
-
-    // Testimonials
-    db.collection('ipi_testimonials').orderBy('order').get().then(function(snap){
-      if(snap.empty)return;
-      var testis=snap.docs.map(function(d){return d.data();});
-      localStorage.setItem('ipi_admin_testimonials',JSON.stringify(testis));
-      _injectTestis(testis);
-    }).catch(function(){});
-  }catch(_){}
-})();
 </script>
 
 </body>

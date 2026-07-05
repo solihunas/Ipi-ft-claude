@@ -264,7 +264,7 @@ a { text-decoration:none; color:inherit; }
           <thead>
             <tr>
               <th>RANK</th><th>AI MODEL</th><th>STATUS</th>
-              <th>PNL MINGGU INI</th><th>ACCURACY</th><th>ERROR RATE</th><th>TASKS</th><th>ACTIVE</th>
+              <th>PNL BULAN LALU</th><th>ACCURACY</th><th>ERROR RATE</th><th>TASKS</th><th>ACTIVE</th>
             </tr>
           </thead>
           <tbody id="lbBody"></tbody>
@@ -272,9 +272,9 @@ a { text-decoration:none; color:inherit; }
       </div>
     </div>
 
-    <!-- WEEKLY PNL -->
+    <!-- MONTHLY PNL -->
     <div style="margin-bottom:22px">
-      <div class="sl">// PNL 1 MINGGU TERAKHIR — PER AI MODEL</div>
+      <div class="sl">// PNL BULAN LALU — PER AI MODEL</div>
       <div class="card"><div class="wpnl-grid" id="wpnlGrid"></div></div>
     </div>
 
@@ -486,7 +486,7 @@ const RNK_SYM=['👑','🥈','🥉','',''];
 const RNK_CLS=['r1','r2','r3','r4','r5'];
 
 function renderLB(){
-  const wpnls=getWeeklyPnl();
+  const wpnls=getMonthlyPnl();
   document.getElementById('lbBody').innerHTML=posAI.map((aiIdx,pos)=>{
     const ai=AIS[aiIdx];
     const wp=wpnls[aiIdx];
@@ -695,16 +695,18 @@ function initRF(){
   [...init].reverse().forEach(([i,m])=>addRF(i,m));
 }
 
-// ─── WEEKLY PNL ──────────────────────────────────────────────────────────────
-function getWeeklyPnl(){
-  // Admin override from localStorage
-  try{const ab=JSON.parse(localStorage.getItem('ipi_admin_battle'));if(ab&&ab.length>=5)return ab.map(b=>Number(b.pnl));}catch(_){}
-  const wk=Math.floor(Date.now()/(7*24*3600000));
+// ─── MONTHLY PNL (bulan sebelumnya) ────────────────────────────────────────────
+function prevMonthSeed(){
+  const now=new Date();
+  return now.getFullYear()*12+now.getMonth()-1; // index unik utk bulan lalu, berubah tiap bulan
+}
+function getMonthlyPnl(){
+  const mo=prevMonthSeed();
   function sr(s){const x=Math.sin(s)*10000;return x-Math.floor(x);}
   // Ranges per personality (user-defined):
   // Sniper +7-15%, Basic +5-10%, ChatGPT 0-5%, Neurobro 0-5%, Gemini -5-+5%
   const rngs=[[7,15],[5,10],[0,5],[0,5],[-5,5]];
-  return rngs.map(([lo,hi],i)=>lo+sr(wk*37+i*13+7)*(hi-lo));
+  return rngs.map(([lo,hi],i)=>lo+sr(mo*37+i*13+7)*(hi-lo));
 }
 
 // Day-level bias per AI (mostly green for Sniper/Basic, balanced for ChatGPT/Neurobro, mixed for Gemini)
@@ -716,39 +718,39 @@ const WPNL_DAYSEEDS=[
   [-1, 1,-1, 1,-1, 1,-1], // Gemini: 3 up 4 down (mixed)
 ];
 
-// Per-AI extra weekly stats (seeded per week)
-function getWeeklyExtras(i){
-  const wk=Math.floor(Date.now()/(7*24*3600000));
+// Per-AI extra stats untuk bulan lalu (seeded per bulan)
+function getMonthlyExtras(i){
+  const mo=prevMonthSeed();
   function sr(s){const x=Math.sin(s)*10000;return x-Math.floor(x);}
   const tradeBases=[52,38,29,61,18];
-  const trades=tradeBases[i]+Math.floor(sr(wk*53+i*17)*20);
+  const trades=tradeBases[i]+Math.floor(sr(mo*53+i*17)*20);
   const bestDayBase=[[2.1,4.8],[1.2,3.1],[0.4,1.8],[1.8,5.2],[-0.1,2.1]];
   const worstDayBase=[[-2.1,-0.2],[-1.4,-0.1],[-1.2,-0.1],[-2.8,-0.2],[-3.1,-0.5]];
-  const [blo,bhi]=bestDayBase[i];  const bestDay=blo+sr(wk*61+i*23)*(bhi-blo);
-  const [wlo,whi]=worstDayBase[i]; const worstDay=wlo+sr(wk*79+i*31)*(whi-wlo);
+  const [blo,bhi]=bestDayBase[i];  const bestDay=blo+sr(mo*61+i*23)*(bhi-blo);
+  const [wlo,whi]=worstDayBase[i]; const worstDay=wlo+sr(mo*79+i*31)*(whi-wlo);
   const winDays=WPNL_DAYSEEDS[i].filter(x=>x>0).length;
   return{trades,bestDay,worstDay,winDays};
 }
 
 function renderWeeklyPnl(){
-  const pnls=getWeeklyPnl();
-  const wk=Math.floor(Date.now()/(7*24*3600000));
+  const pnls=getMonthlyPnl();
+  const mo=prevMonthSeed();
   function sr(s){const x=Math.sin(s)*10000;return x-Math.floor(x);}
   document.getElementById('wpnlGrid').innerHTML=AIS.map((ai,i)=>{
     const pct=pnls[i];
     const isPos=pct>=0;
     const col=isPos?'var(--gr)':'var(--rd)';
     const barW=Math.min(Math.abs(pct)/16*100,100);
-    const ex=getWeeklyExtras(i);
-    const avgDaily=pct/7;
+    const ex=getMonthlyExtras(i);
+    const avgDaily=pct/30;
     const days=WPNL_DAYSEEDS[i].map((bias,d)=>{
-      const noise=sr(wk*73+i*19+d*11)>.42;
+      const noise=sr(mo*73+i*19+d*11)>.42;
       const isGreen=bias>0?noise:(1-noise)<.22;
       return`<div class="wpnl-day" style="background:${isGreen?'var(--gr)':'var(--rd)'}"></div>`;
     }).join('');
     return`<div class="wpnl-card">
       <div class="wpnl-nm" style="color:${ai.color}">${ai.name}</div>
-      <div class="wpnl-lbl">7 HARI TERAKHIR</div>
+      <div class="wpnl-lbl">BULAN LALU</div>
       <div class="wpnl-pct" style="color:${col}">${isPos?'+':''}${pct.toFixed(1)}%</div>
       <div class="wpnl-bar-wrap"><div class="wpnl-bar" style="width:${barW}%;background:${col}"></div></div>
       <div class="wpnl-days" style="margin-bottom:7px">${days}</div>
@@ -853,32 +855,6 @@ function startDashboard(){
 
 // ─── ENTRY POINT ─────────────────────────────────────────────────────────────────
 window.addEventListener('load', runBoot);
-</script>
-<!-- Firebase: fetch fresh battle data and re-render weekly PnL -->
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
-<script>
-(function(){
-  try{
-    if(!firebase.apps.length){
-      firebase.initializeApp({
-        apiKey:"AIzaSyCZw5Fq3H8sofmcHMab7dOBvUR8OaEDwkY",
-        authDomain:"feedshort-app.firebaseapp.com",
-        projectId:"feedshort-app",
-        storageBucket:"feedshort-app.firebasestorage.app",
-        messagingSenderId:"866699145686",
-        appId:"1:866699145686:web:8134bc0d1d98e3edc2f477"
-      });
-    }
-    firebase.firestore().collection('ipi_site').doc('battle').get().then(function(d){
-      if(!d.exists)return;
-      var items=d.data().items;
-      localStorage.setItem('ipi_admin_battle',JSON.stringify(items));
-      // Re-render weekly PnL section with fresh data
-      if(typeof renderWeeklyPnl==='function') renderWeeklyPnl();
-    }).catch(function(){});
-  }catch(_){}
-})();
 </script>
 </body>
 </html>

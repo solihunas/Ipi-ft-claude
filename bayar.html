@@ -9,6 +9,17 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;-webkit-text-size-adjust:100%}
 
+/* ── Language switch ── */
+.lang-switch{position:relative;display:inline-flex;align-items:center;width:64px;height:30px;border-radius:999px;background:rgba(6,2,15,.35);border:1px solid rgba(255,255,255,.28);box-shadow:0 2px 10px rgba(0,0,0,.18);cursor:pointer;user-select:none;flex-shrink:0;outline:none;transition:border-color .2s,box-shadow .2s}
+.lang-switch:hover{border-color:rgba(255,255,255,.5)}
+.lang-switch:focus-visible{box-shadow:0 0 0 2px rgba(255,255,255,.6)}
+.lang-switch-thumb{position:absolute;top:2px;left:2px;width:28px;height:24px;border-radius:999px;background:linear-gradient(135deg,#7c3aed,#ec4899);box-shadow:0 0 10px rgba(0,0,0,.35);transition:transform .25s ease;z-index:1}
+.lang-switch.is-en .lang-switch-thumb{transform:translateX(32px)}
+.lang-switch-opt{position:relative;z-index:2;flex:1;text-align:center;font-size:10.5px;font-weight:700;letter-spacing:.03em;color:rgba(255,255,255,.55);transition:color .2s;pointer-events:none}
+.lang-switch .lang-switch-opt[data-lang="id"]{color:#fff}
+.lang-switch.is-en .lang-switch-opt[data-lang="id"]{color:rgba(255,255,255,.55)}
+.lang-switch.is-en .lang-switch-opt[data-lang="en"]{color:#fff}
+
 /* ── Header ── */
 .pay-header{
   background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 55%,#6d28d9 100%);
@@ -240,11 +251,18 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 <!-- ── Header ── -->
 <div class="pay-header">
   <div class="header-inner">
-    <a href="#" id="backLink" class="back-link">
-      ← Kembali ke Produk
-    </a>
-    <h1 class="header-title">Konfirmasi Pembayaran</h1>
-    <p class="header-sub">Isi form di bawah setelah melakukan transfer</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px">
+      <a href="#" id="backLink" class="back-link" style="margin-bottom:0" data-i18n="pay.back">
+        ← Kembali ke Produk
+      </a>
+      <div class="lang-switch" id="langSwitch" aria-label="Switch language / Ganti bahasa">
+        <span class="lang-switch-thumb"></span>
+        <span class="lang-switch-opt" data-lang="id">ID</span>
+        <span class="lang-switch-opt" data-lang="en">EN</span>
+      </div>
+    </div>
+    <h1 class="header-title" data-i18n="pay.title">Konfirmasi Pembayaran</h1>
+    <p class="header-sub" data-i18n="pay.subtitle">Isi form di bawah setelah melakukan transfer</p>
   </div>
 </div>
 
@@ -261,23 +279,23 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 
     <!-- Nama -->
     <div class="form-group">
-      <label class="form-label">Nama Lengkap <span class="req">*</span></label>
-      <input type="text" id="namaInput" class="form-input" placeholder="Masukkan nama Anda">
+      <label class="form-label" data-i18n="pay.namaLbl">Nama Lengkap <span class="req">*</span></label>
+      <input type="text" id="namaInput" class="form-input" placeholder="Masukkan nama Anda" data-i18n-placeholder="pay.namaPh">
     </div>
 
     <!-- WA / Email -->
     <div class="form-group">
-      <label class="form-label">WhatsApp / Email <span class="req">*</span></label>
-      <input type="text" id="contactInput" class="form-input" placeholder="08xx-xxxx / nama@email.com">
+      <label class="form-label" data-i18n="pay.contactLbl">WhatsApp / Email <span class="req">*</span></label>
+      <input type="text" id="contactInput" class="form-input" placeholder="08xx-xxxx / nama@email.com" data-i18n-placeholder="pay.contactPh">
     </div>
 
     <!-- Metode -->
     <div class="form-group">
-      <label class="form-label">Metode Pembayaran <span class="req">*</span></label>
+      <label class="form-label" data-i18n="pay.metodeLbl">Metode Pembayaran <span class="req">*</span></label>
       <div class="cs-wrap">
         <div class="cs-trigger" id="csTrigger">
           <span style="font-size:18px">🏦</span>
-          <span class="cs-placeholder" id="csPlaceholder">Pilih metode pembayaran</span>
+          <span class="cs-placeholder" id="csPlaceholder" data-i18n="pay.csPlaceholder">Pilih metode pembayaran</span>
           <div class="cs-selected-wrap" id="csSelectedWrap">
             <span class="cs-sel-icon" id="csSIcon"></span>
             <div class="cs-sel-text">
@@ -324,32 +342,32 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
     <div class="instr-card" id="instrCard">
       <div class="instr-header">
         <span class="instr-header-icon">📋</span>
-        <span class="instr-header-title">Detail Transfer</span>
+        <span class="instr-header-title" data-i18n="pay.instrTitle">Detail Transfer</span>
       </div>
       <div class="instr-body">
         <div class="instr-row">
-          <span class="instr-key">Metode</span>
+          <span class="instr-key" data-i18n="pay.metodeKey">Metode</span>
           <span class="instr-val" id="iMethod">—</span>
         </div>
         <div class="instr-row">
-          <span class="instr-key">Nomor Rekening</span>
+          <span class="instr-key" id="iNumberKey" data-i18n="pay.rekeningKey">Nomor Rekening</span>
           <div class="instr-val-wrap">
-            <span class="instr-val" id="iNumber">—</span>
-            <button type="button" class="copy-btn" id="copyNumBtn">Salin</button>
+            <span class="instr-val" id="iNumber" style="word-break:break-all">—</span>
+            <button type="button" class="copy-btn" id="copyNumBtn" data-i18n="pay.salinBtn">Salin</button>
           </div>
         </div>
         <div class="instr-row">
-          <span class="instr-key">Atas Nama</span>
+          <span class="instr-key" id="iHolderKey" data-i18n="pay.atasNamaKey">Atas Nama</span>
           <span class="instr-val" id="iHolder">—</span>
         </div>
         <div class="instr-row">
-          <span class="instr-key">Nominal Transfer</span>
+          <span class="instr-key" data-i18n="pay.nominalKey">Nominal Transfer</span>
           <div class="instr-val-wrap">
             <span class="instr-val amount" id="iAmount">—</span>
-            <button type="button" class="copy-btn" id="copyAmtBtn">Salin</button>
+            <button type="button" class="copy-btn" id="copyAmtBtn" data-i18n="pay.salinBtn">Salin</button>
           </div>
         </div>
-        <div class="instr-note">
+        <div class="instr-note" id="instrNote">
           Silakan transfer tepat <strong id="iAmtNote">—</strong> ke <strong id="iMethodNote">—</strong>
           atas nama <strong id="iHolderNote">—</strong>. Nominal unik di akhir membantu
           admin memverifikasi pesanan Anda lebih cepat.
@@ -359,12 +377,12 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 
     <!-- Bukti Transfer -->
     <div class="form-group">
-      <label class="form-label">Bukti Transfer <span class="req">*</span></label>
+      <label class="form-label" data-i18n="pay.buktiLbl">Bukti Transfer <span class="req">*</span></label>
       <div class="upload-area" id="uploadArea">
         <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp">
         <span class="upload-icon">📎</span>
-        <span class="upload-cta">Klik atau seret foto ke sini</span>
-        <span class="upload-hint">JPG, PNG, WebP — Maks. 5 MB</span>
+        <span class="upload-cta" data-i18n="pay.uploadCta">Klik atau seret foto ke sini</span>
+        <span class="upload-hint" data-i18n="pay.uploadHint">JPG, PNG, WebP — Maks. 5 MB</span>
       </div>
       <div class="file-preview" id="filePreview">
         <img src="" alt="" class="fp-thumb" id="fpThumb">
@@ -376,30 +394,30 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
       </div>
     </div>
 
-    <div class="section-divider">Ringkasan</div>
+    <div class="section-divider" data-i18n="pay.ringkasan">Ringkasan</div>
 
     <!-- Total -->
     <div class="price-row">
-      <span class="price-lbl">Total Pembayaran</span>
+      <span class="price-lbl" data-i18n="pay.totalLbl">Total Pembayaran</span>
       <span class="price-final" id="priceTotal">—</span>
     </div>
     <div class="price-code-note" id="priceCodeNote"></div>
 
     <!-- Pesan -->
     <div class="form-group">
-      <label class="form-label">Pesan <span class="opt">(opsional)</span></label>
-      <textarea class="form-textarea" id="pesanInput" placeholder="Catatan tambahan untuk admin..."></textarea>
+      <label class="form-label" data-i18n="pay.pesanLbl">Pesan <span class="opt">(opsional)</span></label>
+      <textarea class="form-textarea" id="pesanInput" placeholder="Catatan tambahan untuk admin..." data-i18n-placeholder="pay.pesanPh"></textarea>
     </div>
 
     <button type="submit" class="submit-btn" id="submitBtn" disabled>
       <div class="btn-spinner"></div>
       <span class="btn-text" style="display:flex;align-items:center;gap:10px;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        Kirim Bukti Pembayaran
+        <span data-i18n="pay.submitBtn">Kirim Bukti Pembayaran</span>
       </span>
     </button>
 
-    <div class="form-footer">
+    <div class="form-footer" data-i18n="pay.footer">
       🔒 Data Anda aman. Pembayaran diverifikasi langsung oleh admin IPI Digital.
     </div>
 
@@ -409,16 +427,57 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 <div class="page-pad"></div>
 <div class="toast" id="toast"></div>
 
+<script src="i18n.js"></script>
 <script>
+window.I18N = Object.assign(window.I18N||{}, {
+  'pay.back': {id:'← Kembali ke Produk', en:'← Back to Product'},
+  'pay.title': {id:'Konfirmasi Pembayaran', en:'Payment Confirmation'},
+  'pay.subtitle': {id:'Isi form di bawah setelah melakukan transfer', en:'Fill in the form below after sending your payment'},
+  'pay.namaLbl': {id:'Nama Lengkap <span class="req">*</span>', en:'Full Name <span class="req">*</span>'},
+  'pay.namaPh': {id:'Masukkan nama Anda', en:'Enter your name'},
+  'pay.contactLbl': {id:'WhatsApp / Email <span class="req">*</span>', en:'WhatsApp / Email <span class="req">*</span>'},
+  'pay.contactPh': {id:'08xx-xxxx / nama@email.com', en:'WhatsApp number / name@email.com'},
+  'pay.metodeLbl': {id:'Metode Pembayaran <span class="req">*</span>', en:'Payment Method <span class="req">*</span>'},
+  'pay.csPlaceholder': {id:'Pilih metode pembayaran', en:'Select a payment method'},
+  'pay.instrTitle': {id:'Detail Transfer', en:'Transfer Details'},
+  'pay.metodeKey': {id:'Metode', en:'Method'},
+  'pay.rekeningKey': {id:'Nomor Rekening', en:'Wallet Address'},
+  'pay.atasNamaKey': {id:'Atas Nama', en:'Currency'},
+  'pay.nominalKey': {id:'Nominal Transfer', en:'Amount to Send'},
+  'pay.salinBtn': {id:'Salin', en:'Copy'},
+  'pay.buktiLbl': {id:'Bukti Transfer <span class="req">*</span>', en:'Proof of Payment <span class="req">*</span>'},
+  'pay.uploadCta': {id:'Klik atau seret foto ke sini', en:'Click or drag a screenshot here'},
+  'pay.uploadHint': {id:'JPG, PNG, WebP — Maks. 5 MB', en:'JPG, PNG, WebP — Max 5 MB'},
+  'pay.ringkasan': {id:'Ringkasan', en:'Summary'},
+  'pay.totalLbl': {id:'Total Pembayaran', en:'Total Payment'},
+  'pay.pesanLbl': {id:'Pesan <span class="opt">(opsional)</span>', en:'Message <span class="opt">(optional)</span>'},
+  'pay.pesanPh': {id:'Catatan tambahan untuk admin...', en:'Additional notes for the admin...'},
+  'pay.submitBtn': {id:'Kirim Bukti Pembayaran', en:'Send Proof of Payment'},
+  'pay.footer': {id:'🔒 Data Anda aman. Pembayaran diverifikasi langsung oleh admin IPI Digital.', en:'🔒 Your data is safe. Payments are verified directly by the IPI Digital admin.'}
+});
+
 const PRODUCTS = {
-  '1':{ name:'Prompt AI Neurobro', img:'prod-neurobro.png', price:50000 },
-  '2':{ name:'Data Training AI Signal', img:'prod-signaler.png', price:550000 },
-  '3':{ name:'Latih Claude Sniper Entry', img:'prod-sniper.png', price:3500000 },
-  '4':{ name:'EA MT5 Trend Following', img:'prod-ea.png', price:3000000 },
-  '5':{ name:'Indikator TradingView XAU', img:'prod-indikator.png', price:750000 },
+  '1':{ name:'Prompt AI Neurobro', name_en:'Neurobro AI Prompt', img:'prod-neurobro.png', price:50000 },
+  '2':{ name:'Data Training AI Signal', name_en:'AI Signal Training Data', img:'prod-signaler.png', price:550000 },
+  '3':{ name:'Latih Claude Sniper Entry', name_en:'Train Claude Sniper Entry', img:'prod-sniper.png', price:3500000 },
+  '4':{ name:'EA MT5 Trend Following', name_en:'MT5 Trend Following EA', img:'prod-ea.png', price:3000000 },
+  '5':{ name:'Indikator TradingView XAU', name_en:'TradingView XAU Indicator', img:'prod-indikator.png', price:750000 },
 };
 
-function fmtRp(n){ return 'Rp '+n.toLocaleString('id-ID'); }
+// Metode pembayaran bank/e-wallet — dipakai saat bahasa Indonesia
+const BANK_METHODS = [
+  {value:'dana', img:'logo-dana.png', name:'DANA', number:'083876123080', holder:'Ardikuntoro'},
+  {value:'seabank', img:'logo-seabank.webp', name:'SeaBank', number:'901170990455', holder:'Solihun Adi Saputra'}
+];
+// Metode pembayaran crypto (USDT) — otomatis dipakai saat bahasa Inggris
+const CRYPTO_METHODS = [
+  {value:'usdt-trc20', img:'', name:'TRON (TRC20)', number:'TNtBj4CQnnCFxzjcR2rcT4QjHwZTkXU86L', holder:'USDT'},
+  {value:'usdt-erc20', img:'', name:'Ethereum (ERC20)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'},
+  {value:'usdt-arb', img:'', name:'Arbitrum One (USDT0)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'},
+  {value:'usdt-poly', img:'', name:'Polygon (USDT0)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'}
+];
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function fmtBytes(b){ return b<1048576?(b/1024).toFixed(0)+' KB':(b/1048576).toFixed(1)+' MB'; }
 
 function getUniqueCode(id){
@@ -432,21 +491,68 @@ const params=new URLSearchParams(location.search);
 const pid=params.get('id')||'1';
 const product=PRODUCTS[pid]||PRODUCTS['1'];
 const uniqueCode=getUniqueCode(pid);
-const finalPrice=product.price+uniqueCode;
 
-// Populate header info
-document.getElementById('ppIcon').innerHTML='<img src="'+esc(product.img)+'" alt="'+esc(product.name)+'">';
-document.getElementById('ppName').textContent=product.name;
-document.getElementById('ppPrice').textContent=fmtRp(finalPrice);
-document.getElementById('priceTotal').textContent=fmtRp(finalPrice);
-document.getElementById('priceCodeNote').textContent='Harga dasar '+fmtRp(product.price)+' + kode unik #'+uniqueCode;
-document.getElementById('backLink').href='produk.html?id='+pid;
+function isEn(){ return window.ipiLang ? window.ipiLang.get()==='en' : false; }
 
-// Amount labels
-document.getElementById('iAmount').textContent=fmtRp(finalPrice);
-document.getElementById('iAmtNote').textContent=fmtRp(finalPrice);
+// Mode Inggris = bayar via crypto (USDT), tanpa kode unik. Mode Indonesia = transfer bank + kode unik.
+function currentAmount(){
+  if(isEn()){
+    const usd=Math.round(product.price/12000);
+    return { value:usd, display:'$'+usd.toLocaleString('en-US') };
+  }
+  const idr=product.price+uniqueCode;
+  return { value:idr, display:'Rp '+idr.toLocaleString('id-ID') };
+}
 
-function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function renderHeader(){
+  const en=isEn();
+  const name=en&&product.name_en?product.name_en:product.name;
+  const amt=currentAmount();
+  document.getElementById('ppIcon').innerHTML='<img src="'+esc(product.img)+'" alt="'+esc(name)+'">';
+  document.getElementById('ppName').textContent=name;
+  document.getElementById('ppPrice').textContent=amt.display;
+  document.getElementById('priceTotal').textContent=amt.display;
+  document.getElementById('priceCodeNote').textContent = en ? '' :
+    'Harga dasar Rp '+product.price.toLocaleString('id-ID')+' + kode unik #'+uniqueCode;
+  document.getElementById('backLink').href='produk.html?id='+pid;
+  document.getElementById('iAmount').textContent=amt.display;
+  var amtNoteEl=document.getElementById('iAmtNote');
+  if(amtNoteEl) amtNoteEl.textContent=amt.display;
+}
+
+function renderDropdown(){
+  const en=isEn();
+  const methods = en ? CRYPTO_METHODS : BANK_METHODS;
+  const fallbackIcon = en ? '🪙' : '💳';
+  const availableWord = en ? 'Available' : 'Tersedia';
+  dropdown.innerHTML = methods.map(function(p){
+    const lg = p.img
+      ? '<div class="cs-opt-icon"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" onerror="this.parentElement.textContent=\''+fallbackIcon+'\'"></div>'
+      : '<div class="cs-opt-icon" style="font-size:20px">'+fallbackIcon+'</div>';
+    const subLine = en
+      ? '<span class="cs-opt-num" style="word-break:break-all">'+esc(p.number)+'</span><span class="cs-opt-holder">'+esc(p.holder)+'</span>'
+      : '<span class="cs-opt-num">'+esc(p.number)+'</span><span class="cs-opt-holder">a.n. '+esc(p.holder)+'</span>';
+    return '<div class="cs-option" data-value="'+esc(p.value)+'" data-img="'+esc(p.img)+'" data-name="'+esc(p.name)+'" data-number="'+esc(p.number)+'" data-holder="'+esc(p.holder)+'">'
+      +lg+'<div class="cs-opt-info"><span class="cs-opt-name">'+esc(p.name)+'</span>'+subLine+'</div>'
+      +'<span class="cs-badge">'+availableWord+'</span></div>';
+  }).join('');
+}
+
+function resetSelection(){
+  selectedMethod=null;
+  placeholder.style.display='';
+  selectedWrap.style.display='none';
+  document.getElementById('instrCard').classList.remove('show');
+  document.getElementById('iNumberKey').textContent = isEn() ? 'Wallet Address' : 'Nomor Rekening';
+  document.getElementById('iHolderKey').textContent = isEn() ? 'Currency' : 'Atas Nama';
+  validateForm();
+}
+
+function render(){
+  renderHeader();
+  renderDropdown();
+  resetSelection();
+}
 
 // ── Custom dropdown ──
 const trigger=document.getElementById('csTrigger');
@@ -454,6 +560,9 @@ const dropdown=document.getElementById('csDropdown');
 const placeholder=document.getElementById('csPlaceholder');
 const selectedWrap=document.getElementById('csSelectedWrap');
 let selectedMethod=null;
+
+render();
+document.addEventListener('ipi-lang-change', render);
 
 trigger.addEventListener('click',function(e){
   e.stopPropagation();
@@ -471,32 +580,39 @@ dropdown.addEventListener('click',function(e){
   const opt=e.target.closest('.cs-option');
   if(!opt)return;
   e.stopPropagation();
-  const val=opt.dataset.value;
+  const en=isEn();
   const img=opt.dataset.img;
   const name=opt.dataset.name;
   const number=opt.dataset.number;
   const holder=opt.dataset.holder;
 
-  selectedMethod={val,img,name,number,holder};
+  selectedMethod={img,name,number,holder};
 
   // Update trigger display
   placeholder.style.display='none';
   selectedWrap.style.display='flex';
+  const fallbackIcon=en?'🪙':'💳';
   const iconEl=document.getElementById('csSIcon');
-  iconEl.innerHTML=img?'<img src="'+esc(img)+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.textContent=\'💳\'">':'💳';
+  iconEl.innerHTML=img?'<img src="'+esc(img)+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.textContent=\''+fallbackIcon+'\'">':fallbackIcon;
   document.getElementById('csSName').textContent=name;
-  document.getElementById('csSNum').textContent=number+' · a.n. '+holder;
+  document.getElementById('csSNum').textContent = en ? (number+' · '+holder) : (number+' · a.n. '+holder);
 
   // Update instruction card
   document.getElementById('iMethod').textContent=name;
   document.getElementById('iNumber').textContent=number;
-  document.getElementById('iHolder').textContent='a.n. '+holder;
-  document.getElementById('iMethodNote').textContent=name;
-  document.getElementById('iHolderNote').textContent=holder;
+  document.getElementById('iHolder').textContent = en ? holder : ('a.n. '+holder);
+  document.getElementById('iNumberKey').textContent = en ? 'Wallet Address' : 'Nomor Rekening';
+  document.getElementById('iHolderKey').textContent = en ? 'Currency' : 'Atas Nama';
+
+  const amt=currentAmount();
+  const note=document.getElementById('instrNote');
+  note.innerHTML = en
+    ? 'Send exactly <strong>'+esc(amt.display)+'</strong> worth of <strong>'+esc(holder)+'</strong> to the address above, via <strong>'+esc(name)+'</strong> only. Double-check the network before sending — using the wrong network can result in permanent loss of funds.'
+    : 'Silakan transfer tepat <strong>'+esc(amt.display)+'</strong> ke <strong>'+esc(name)+'</strong> atas nama <strong>'+esc(holder)+'</strong>. Nominal unik di akhir membantu admin memverifikasi pesanan Anda lebih cepat.';
 
   // Copy buttons
-  document.getElementById('copyNumBtn').onclick=function(){copyText(number,'Nomor disalin!');};
-  document.getElementById('copyAmtBtn').onclick=function(){copyText(String(finalPrice),'Nominal disalin!');};
+  document.getElementById('copyNumBtn').onclick=function(){copyText(number, en?'Address copied!':'Nomor disalin!');};
+  document.getElementById('copyAmtBtn').onclick=function(){copyText(String(amt.value), en?'Amount copied!':'Nominal disalin!');};
 
   document.getElementById('instrCard').classList.add('show');
   dropdown.classList.remove('show');
@@ -512,8 +628,9 @@ let uploadedFile=null;
 
 function handleFile(f){
   if(!f)return;
-  if(f.size>5*1024*1024){showToast('File terlalu besar. Maks. 5 MB.');return;}
-  if(!['image/jpeg','image/png','image/webp'].includes(f.type)){showToast('Format tidak didukung. Gunakan JPG, PNG, atau WebP.');return;}
+  const en=isEn();
+  if(f.size>5*1024*1024){showToast(en?'File too large. Max 5 MB.':'File terlalu besar. Maks. 5 MB.');return;}
+  if(!['image/jpeg','image/png','image/webp'].includes(f.type)){showToast(en?'Unsupported format. Use JPG, PNG, or WebP.':'Format tidak didukung. Gunakan JPG, PNG, atau WebP.');return;}
   uploadedFile=f;
   const reader=new FileReader();
   reader.onload=function(e){
@@ -577,13 +694,18 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
   const btn=document.getElementById('submitBtn');
   btn.classList.add('loading');
 
+  const en=isEn();
   const nama=document.getElementById('namaInput').value.trim();
   const contact=document.getElementById('contactInput').value.trim();
   const pesan=document.getElementById('pesanInput').value.trim();
+  const amt=currentAmount();
+  const name=en&&product.name_en?product.name_en:product.name;
 
   const order={
-    pid,name:product.name,img:product.img,
-    basePrice:product.price,uniqueCode,finalPrice,
+    pid,name,img:product.img,
+    currency: en?'USDT':'IDR',
+    finalPrice:amt.value, finalPriceDisplay:amt.display,
+    basePrice:product.price, uniqueCode: en?null:uniqueCode,
     nama,contact,pesan,
     method:selectedMethod.name,
     methodNumber:selectedMethod.number,
@@ -593,14 +715,25 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
 
   // Kirim notifikasi ke Telegram
   function escTg(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  var tgLines=[
+  var tgLines = en ? [
+    '🛒 <b>NEW ORDER — IPI Digital</b>',
+    '',
+    '📦 <b>Product:</b> '+escTg(name),
+    '👤 <b>Name:</b> '+escTg(nama),
+    '📱 <b>Contact:</b> '+escTg(contact),
+    '💳 <b>Method:</b> '+escTg(selectedMethod.name)+' – '+escTg(selectedMethod.number)+' ('+escTg(selectedMethod.holder)+')',
+    '💰 <b>Total:</b> '+escTg(amt.display)+' (USDT)',
+    pesan?'📝 <b>Note:</b> '+escTg(pesan):'',
+    '',
+    '🕐 '+new Date().toISOString(),
+  ] : [
     '🛒 <b>PESANAN BARU — IPI Digital</b>',
     '',
-    '📦 <b>Produk:</b> '+escTg(product.name),
+    '📦 <b>Produk:</b> '+escTg(name),
     '👤 <b>Nama:</b> '+escTg(nama),
     '📱 <b>WA/Email:</b> '+escTg(contact),
     '💳 <b>Metode:</b> '+escTg(selectedMethod.name)+' – '+escTg(selectedMethod.number)+' (a.n. '+escTg(selectedMethod.holder)+')',
-    '💰 <b>Total:</b> '+escTg(fmtRp(finalPrice))+' (kode unik #'+uniqueCode+')',
+    '💰 <b>Total:</b> '+escTg(amt.display)+' (kode unik #'+uniqueCode+')',
     pesan?'📝 <b>Catatan:</b> '+escTg(pesan):'',
     '',
     '🕐 '+new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}),
@@ -616,10 +749,7 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
   // Simpan pesanan untuk admin panel
   try{
     var ords=JSON.parse(localStorage.getItem('ipi_admin_orders'))||[];
-    ords.push({pid:pid,name:product.name,img:product.img,basePrice:product.price,
-      uniqueCode:uniqueCode,finalPrice:finalPrice,nama:nama,contact:contact,pesan:pesan,
-      method:selectedMethod.name,methodNumber:selectedMethod.number,
-      methodHolder:selectedMethod.holder,ts:Date.now(),status:'pending'});
+    ords.push(Object.assign({status:'pending'}, order));
     localStorage.setItem('ipi_admin_orders',JSON.stringify(ords));
   }catch(_){}
 

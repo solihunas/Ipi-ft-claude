@@ -117,83 +117,118 @@
 <div class="confetti" id="confetti"></div>
 
 <div class="sukses-wrap">
+  <div style="display:flex;justify-content:flex-end;margin-bottom:16px">
+    <div class="lang-switch" id="langSwitch" aria-label="Switch language / Ganti bahasa">
+      <span class="lang-switch-thumb"></span>
+      <span class="lang-switch-opt" data-lang="id">ID</span>
+      <span class="lang-switch-opt" data-lang="en">EN</span>
+    </div>
+  </div>
+
   <div class="sukses-icon-wrap">
     <div class="sukses-ring">
       <div class="sukses-check">✓</div>
     </div>
   </div>
 
-  <h1 class="sukses-title">Bukti Berhasil Dikirim!</h1>
-  <p class="sukses-sub">
+  <h1 class="sukses-title" data-i18n="sukses.title">Bukti Berhasil Dikirim!</h1>
+  <p class="sukses-sub" data-i18n="sukses.subtitle">
     Terima kasih sudah memesan. Admin kami akan memverifikasi pembayaran
     dan mengirimkan produk ke kontak Anda secepatnya.
   </p>
 
   <div class="order-card" id="orderCard">
-    <div class="oc-label">Ringkasan Pesanan</div>
+    <div class="oc-label" data-i18n="sukses.ringkasan">Ringkasan Pesanan</div>
     <div class="oc-row">
-      <span class="oc-key">Produk</span>
+      <span class="oc-key" data-i18n="sukses.produk">Produk</span>
       <span class="oc-val" id="oName">—</span>
     </div>
     <div class="oc-row">
-      <span class="oc-key">Kontak</span>
+      <span class="oc-key" data-i18n="sukses.kontak">Kontak</span>
       <span class="oc-val" id="oContact">—</span>
     </div>
     <div class="oc-row">
-      <span class="oc-key">Metode</span>
+      <span class="oc-key" data-i18n="sukses.metode">Metode</span>
       <span class="oc-val" id="oMethod">—</span>
     </div>
     <div class="oc-row">
-      <span class="oc-key">Total Transfer</span>
+      <span class="oc-key" id="oTotalKey" data-i18n="sukses.totalTransfer">Total Transfer</span>
       <span class="oc-val highlight" id="oTotal">—</span>
     </div>
   </div>
 
   <div class="steps-card">
-    <div class="steps-title">Langkah Selanjutnya</div>
+    <div class="steps-title" data-i18n="sukses.langkah">Langkah Selanjutnya</div>
     <div class="step-item">
       <div class="step-num">1</div>
-      <div class="step-text">Pastikan Anda sudah mentransfer <strong id="stepAmount">—</strong> ke DANA <strong>083876123080</strong> (Ardi Kun).</div>
+      <div class="step-text" id="step1Text">—</div>
     </div>
     <div class="step-item">
       <div class="step-num">2</div>
-      <div class="step-text">Kirim <strong>bukti transfer</strong> ke WhatsApp admin melalui tombol di bawah.</div>
+      <div class="step-text" data-i18n="sukses.step2">Kirim <strong>bukti transfer</strong> ke WhatsApp admin melalui tombol di bawah.</div>
     </div>
     <div class="step-item">
       <div class="step-num">3</div>
-      <div class="step-text">Admin akan memverifikasi dan mengirim produk ke kontak Anda. Biasanya <strong>dalam 1×24 jam</strong>.</div>
+      <div class="step-text" data-i18n="sukses.step3">Admin akan memverifikasi dan mengirim produk ke kontak Anda. Biasanya <strong>dalam 1×24 jam</strong>.</div>
     </div>
   </div>
 
   <div class="cta-group">
     <a href="#" id="waBtn" class="btn-wa" target="_blank">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Kirim Bukti ke Admin
+      <span data-i18n="sukses.waBtn">Kirim Bukti ke Admin</span>
     </a>
-    <a href="index.html" class="btn-home">← Kembali ke Beranda</a>
+    <a href="index.html" class="btn-home" data-i18n="sukses.homeBtn">← Kembali ke Beranda</a>
   </div>
 </div>
 
+<script src="i18n.js"></script>
 <script>
-function fmtRp(n) {
-  return 'Rp ' + n.toLocaleString('id-ID');
-}
+window.I18N = Object.assign(window.I18N||{}, {
+  'sukses.title': {id:'Bukti Berhasil Dikirim!', en:'Proof Sent Successfully!'},
+  'sukses.subtitle': {id:'Terima kasih sudah memesan. Admin kami akan memverifikasi pembayaran dan mengirimkan produk ke kontak Anda secepatnya.', en:'Thank you for your order. Our admin will verify the payment and send the product to your contact as soon as possible.'},
+  'sukses.ringkasan': {id:'Ringkasan Pesanan', en:'Order Summary'},
+  'sukses.produk': {id:'Produk', en:'Product'},
+  'sukses.kontak': {id:'Kontak', en:'Contact'},
+  'sukses.metode': {id:'Metode', en:'Method'},
+  'sukses.totalTransfer': {id:'Total Transfer', en:'Total Amount'},
+  'sukses.langkah': {id:'Langkah Selanjutnya', en:'Next Steps'},
+  'sukses.step2': {id:'Kirim <strong>bukti transfer</strong> ke WhatsApp admin melalui tombol di bawah.', en:'Send your <strong>proof of payment</strong> to the admin on WhatsApp using the button below.'},
+  'sukses.step3': {id:'Admin akan memverifikasi dan mengirim produk ke kontak Anda. Biasanya <strong>dalam 1×24 jam</strong>.', en:'The admin will verify it and send the product to your contact. Usually <strong>within 24 hours</strong>.'},
+  'sukses.waBtn': {id:'Kirim Bukti ke Admin', en:'Send Proof to Admin'},
+  'sukses.homeBtn': {id:'← Kembali ke Beranda', en:'← Back to Home'}
+});
 
 const raw = sessionStorage.getItem('ipi_order');
 if (raw) {
   const o = JSON.parse(raw);
-  document.getElementById('oName').textContent = o.icon + ' ' + o.name;
+  const en = o.currency === 'USDT';
+  const totalDisplay = o.finalPriceDisplay || ('Rp ' + (o.finalPrice||0).toLocaleString('id-ID'));
+
+  document.getElementById('oName').textContent = '📦 ' + o.name;
   document.getElementById('oContact').textContent = (o.nama ? o.nama + ' · ' : '') + o.contact;
   document.getElementById('oMethod').textContent = o.method + ' · ' + o.methodNumber;
-  document.getElementById('oTotal').textContent = fmtRp(o.finalPrice);
-  document.getElementById('stepAmount').textContent = fmtRp(o.finalPrice);
+  document.getElementById('oTotal').textContent = totalDisplay;
 
-  const msg = encodeURIComponent(
+  document.getElementById('step1Text').innerHTML = en
+    ? 'Make sure you have sent <strong>'+totalDisplay+'</strong> worth of <strong>'+o.methodHolder+'</strong> to <strong>'+o.method+'</strong> address <strong>'+o.methodNumber+'</strong>.'
+    : 'Pastikan Anda sudah mentransfer <strong>'+totalDisplay+'</strong> ke <strong>'+o.method+'</strong> <strong>'+o.methodNumber+'</strong> (a.n. '+o.methodHolder+').';
+
+  const msg = en ? encodeURIComponent(
+    'Hello IPI Digital Admin 👋\n\n' +
+    'I have sent payment for my order:\n' +
+    '👤 Name: ' + (o.nama || '-') + '\n' +
+    '🛒 Product: ' + o.name + '\n' +
+    '💰 Amount: ' + totalDisplay + ' (USDT)\n' +
+    '🏦 Via: ' + o.method + ' – ' + o.methodNumber + '\n' +
+    '📱 Contact: ' + o.contact + '\n\n' +
+    'Proof of payment attached. Please process it soon. Thank you!'
+  ) : encodeURIComponent(
     'Halo Admin IPI Digital 👋\n\n' +
     'Saya sudah melakukan transfer untuk pembelian:\n' +
     '👤 Nama: ' + (o.nama || '-') + '\n' +
     '🛒 Produk: ' + o.name + '\n' +
-    '💰 Nominal: ' + fmtRp(o.finalPrice) + ' (kode #' + o.uniqueCode + ')\n' +
+    '💰 Nominal: ' + totalDisplay + (o.uniqueCode ? ' (kode #' + o.uniqueCode + ')' : '') + '\n' +
     '🏦 Via: ' + o.method + ' – ' + o.methodNumber + '\n' +
     '📱 Kontak: ' + o.contact + '\n\n' +
     'Bukti transfer terlampir. Mohon segera diproses. Terima kasih!'

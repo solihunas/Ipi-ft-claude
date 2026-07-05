@@ -145,27 +145,32 @@
     <img src="logo.png" alt="IPI Digital" class="logo-img">
     <span class="logo-text">IPI <span>Digital</span></span>
   </a>
+  <div class="lang-switch" id="langSwitch" aria-label="Switch language / Ganti bahasa">
+    <span class="lang-switch-thumb"></span>
+    <span class="lang-switch-opt" data-lang="id">ID</span>
+    <span class="lang-switch-opt" data-lang="en">EN</span>
+  </div>
   <div class="nav-links">
-    <a href="index.html#tentang">Tentang</a>
-    <a href="index.html#produk">Produk</a>
-    <a href="index.html#challenge">Challenge</a>
-    <a href="index.html#faq">FAQ</a>
-    <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta">Pantau Challenge</a>
-    <a href="battle.html" class="nav-battle-cta">🤖 Tonton Battle AI</a>
+    <a href="index.html#tentang" data-i18n="nav.tentang">Tentang</a>
+    <a href="index.html#produk" data-i18n="nav.produk">Produk</a>
+    <a href="index.html#challenge" data-i18n="nav.challenge">Challenge</a>
+    <a href="index.html#faq" data-i18n="nav.faq">FAQ</a>
+    <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" data-i18n="nav.cta">Pantau Challenge</a>
+    <a href="battle.html" class="nav-battle-cta" data-i18n="nav.battle">🤖 Tonton Battle AI</a>
   </div>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#tentang" onclick="closeMenu()">Tentang</a>
-  <a href="index.html#produk" onclick="closeMenu()">Produk</a>
-  <a href="index.html#challenge" onclick="closeMenu()">Challenge</a>
-  <a href="index.html#faq" onclick="closeMenu()">FAQ</a>
-  <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" onclick="closeMenu()">Pantau Challenge</a>
-  <a href="battle.html" class="nav-battle-cta" onclick="closeMenu()">🤖 Tonton Battle AI</a>
+  <a href="index.html#tentang" onclick="closeMenu()" data-i18n="nav.tentang">Tentang</a>
+  <a href="index.html#produk" onclick="closeMenu()" data-i18n="nav.produk">Produk</a>
+  <a href="index.html#challenge" onclick="closeMenu()" data-i18n="nav.challenge">Challenge</a>
+  <a href="index.html#faq" onclick="closeMenu()" data-i18n="nav.faq">FAQ</a>
+  <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" onclick="closeMenu()" data-i18n="nav.cta">Pantau Challenge</a>
+  <a href="battle.html" class="nav-battle-cta" onclick="closeMenu()" data-i18n="nav.battle">🤖 Tonton Battle AI</a>
 </div>
 
 <div style="max-width:740px;margin:0 auto;padding:88px 20px 0">
-  <a href="index.html#produk" class="pd-back" style="display:inline-flex;align-items:center;gap:7px;color:#ffffff;font-size:13px;text-decoration:none;transition:color .2s;padding-top:0" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#ffffff'">
+  <a href="index.html#produk" class="pd-back" style="display:inline-flex;align-items:center;gap:7px;color:#ffffff;font-size:13px;text-decoration:none;transition:color .2s;padding-top:0" onmouseover="this.style.color='#a855f7'" onmouseout="this.style.color='#ffffff'" data-i18n="pd.back">
     ← Semua Produk
   </a>
 </div>
@@ -176,20 +181,20 @@
 
 <div class="pd-cta-bar">
   <div class="pd-cta-info">
-    <div class="lbl">Harga</div>
+    <div class="lbl" data-i18n="pd.harga">Harga</div>
     <div class="val" id="ctaPrice"></div>
   </div>
-  <a href="#" id="ctaBtn" class="btn btn-primary btn-lg">Beli Sekarang →</a>
+  <a href="#" id="ctaBtn" class="btn btn-primary btn-lg" data-i18n="pd.beliBtn">Beli Sekarang →</a>
 </div>
 
-<div class="disclaimer">⚠️ Trading mengandung risiko tinggi. Produk ini adalah alat bantu, bukan jaminan profit.</div>
+<div class="disclaimer" data-i18n="footer.disclaimer">⚠️ Trading mengandung risiko tinggi. Produk ini adalah alat bantu, bukan jaminan profit.</div>
 
+<script src="i18n.js"></script>
 <script>
 function toggleMenu(){const m=document.getElementById('mobileMenu');m.style.display=m.style.display==='flex'?'none':'flex';}
 function closeMenu(){document.getElementById('mobileMenu').style.display='none';}
 document.addEventListener('click',function(e){const m=document.getElementById('mobileMenu'),n=document.querySelector('.navbar');if(!n.contains(e.target)&&!m.contains(e.target))m.style.display='none';});
 
-function fmtRp(n){return'Rp '+n.toLocaleString('id-ID');}
 
 const PRODUCTS = {
   '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:1323,
@@ -197,104 +202,159 @@ const PRODUCTS = {
     about:'Produk ini membantu kamu memakai Neurobro sebagai alat bantu analisa, bukan sekadar tempat bertanya. Kumpulan prompt di dalamnya disusun khusus untuk ekosistem Neurobro agar AI lebih cepat memahami konteks chart, merapikan alur berpikir, dan memberi output yang lebih mudah ditindaklanjuti. Cocok untuk pemula yang ingin mulai memakai AI dengan cara yang benar maupun trader yang ingin proses analisa lebih efisien.',
     features:['Prompt dibuat khusus untuk ekosistem Neurobro AI, jadi hasilnya lebih relevan dibanding template AI umum','Membantu AI menyusun analisa tren, momentum, konfirmasi entry, dan evaluasi kondisi pasar dengan format yang rapi','Jawaban AI lebih terarah, lebih jelas poin pentingnya, dan lebih mudah dipakai saat mengambil keputusan','Siap salin dan pakai, sehingga kamu tidak perlu trial and error dari nol','Membantu trader pemula lebih cepat memahami cara berkomunikasi dengan AI untuk kebutuhan trading'],
     includes:['Dokumen berisi semua prompt siap pakai (PDF/DOC)','Panduan cara menggunakan dan mengkombinasikan prompt untuk hasil optimal'],
-    note:'Pilihan paling ringan untuk mulai memakai AI sebagai alat bantu trading. Nilainya terasa dari awal karena kamu langsung punya alur prompt yang lebih jelas tanpa harus bingung menyusun instruksi sendiri.'},
+    note:'Pilihan paling ringan untuk mulai memakai AI sebagai alat bantu trading. Nilainya terasa dari awal karena kamu langsung punya alur prompt yang lebih jelas tanpa harus bingung menyusun instruksi sendiri.',
+    en:{name:'Neurobro AI Prompt Optimization Pack',short:'Neurobro AI Prompt',
+      tagline:'Ready-to-use prompts that help Neurobro give clearer, more focused trading analysis from day one.',
+      about:'This product helps you use Neurobro as a real analysis tool, not just something to ask questions to. The prompts inside are built specifically for the Neurobro ecosystem so the AI understands chart context faster, organizes its reasoning, and gives output that is easier to act on. Great for beginners who want to start using AI the right way, and for traders who want a more efficient analysis process.',
+      features:['Prompts built specifically for the Neurobro AI ecosystem, so results are more relevant than generic AI templates','Helps the AI structure trend analysis, momentum, entry confirmation, and market evaluation in a clean format','AI answers are more focused, with clearer key points, and easier to use when making decisions','Copy-and-paste ready, so you skip trial and error from scratch','Helps beginner traders learn faster how to communicate with AI for trading needs'],
+      includes:['Document with all ready-to-use prompts (PDF/DOC)','Guide on how to use and combine prompts for the best results'],
+      note:'The lightest option to start using AI as a trading tool. The value shows immediately since you get a clear prompt flow right away, without the hassle of writing your own instructions.'}},
   '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:5.0,sales:548,
     tagline:'Data dan panduan pelatihan agar AI belajar membaca pasar, lalu membantu menyusun analisa dengan dasar yang lebih kuat.',
     about:'Banyak AI bisa menjawab, tetapi belum tentu paham ritme pasar. Produk ini memberi fondasi supaya AI yang kamu pakai lebih berguna untuk trading: 400.000 data candle historis OHLCV plus panduan langkah demi langkah untuk melatihnya dari awal. Hasil akhirnya bukan AI yang asal memberi sinyal, melainkan alat bantu analisa yang punya referensi data lebih kuat, lebih terstruktur, dan lebih membantu bahkan jika kamu masih belajar memahami market.',
     features:['400.000 data candle historis OHLCV siap pakai tanpa perlu scraping atau menyusun dataset sendiri','Panduan pelatihan dibuat bertahap agar pemula tetap bisa mengikuti prosesnya dengan rapi','Membantu AI memberi analisa yang lebih berbasis data, bukan jawaban generik','Dilengkapi teknik prompt untuk mengekstrak sinyal dan insight dengan lebih jelas','Bisa dipakai untuk berbagai timeframe dan pasangan aset sesuai kebutuhan analisa'],
     includes:['File data 400.000 candle historis (format CSV)','Panduan pelatihan AI lengkap (PDF/dokumen)'],
-    note:'Tidak perlu coding. Panduannya dibuat supaya trader yang baru mulai mengenal data historis dan AI tetap bisa mengikuti prosesnya tanpa merasa kewalahan.'},
+    note:'Tidak perlu coding. Panduannya dibuat supaya trader yang baru mulai mengenal data historis dan AI tetap bisa mengikuti prosesnya tanpa merasa kewalahan.',
+    en:{name:'Data + Training Method for AI Trading Signal Analysis',short:'AI Signal Training Data',
+      tagline:'Data and training guide so your AI learns to read the market, then helps build analysis on a stronger foundation.',
+      about:'Plenty of AI tools can answer questions, but that does not mean they understand market rhythm. This product gives your AI a real foundation for trading: 400,000 historical OHLCV candles plus a step-by-step guide to train it from scratch. The result is not an AI that just throws out signals, but an analysis tool backed by stronger, more structured data — useful even while you are still learning the market yourself.',
+      features:['400,000 historical OHLCV candles, ready to use — no scraping or building your own dataset','Training guide built step-by-step so beginners can follow along cleanly','Helps the AI give more data-driven analysis instead of generic answers','Includes prompt techniques to extract signals and insights more clearly','Works across different timeframes and asset pairs depending on your analysis needs'],
+      includes:['400,000 historical candle data file (CSV format)','Complete AI training guide (PDF/document)'],
+      note:'No coding required. The guide is written so traders who are new to historical data and AI can follow along without feeling overwhelmed.'}},
   '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:128,
     tagline:'Claude dilatih untuk membantu membaca konteks pasar, menyaring noise, dan menajamkan keputusan entry kamu.',
     about:'Produk ini dirancang agar Claude berfungsi sebagai alat bantu analisa yang benar-benar berguna saat membaca chart. Fokusnya bukan membuat AI mengikuti cara pandang user, tetapi membantu user melihat pasar dengan lebih jernih: apa konteks pergerakan harga, area mana yang layak diperhatikan, siapa yang berpotensi terjebak, dan apa risiko di balik sebuah entry. Dengan pendekatan logika pasar, psikologi pelaku, dan referensi data yang besar, Claude Sniper membantu trader pemula sampai berpengalaman agar proses analisa lebih dalam tanpa membebani pikiran dengan noise yang tidak perlu.',
     features:['Membantu Claude membaca hubungan sebab-akibat di pasar, bukan hanya mengenali pola permukaan','Menyusun analisa area penting, potensi jebakan, dan skenario entry dengan logika yang lebih jelas','Membantu trader memahami konteks pergerakan harga, termasuk sisi psikologi pelaku pasar','Didukung 1.000.000 data candle historis sebagai fondasi pembelajaran yang lebih kaya','Panduan pelatihan lengkap dari awal sampai siap dipakai untuk analisa nyata','Akses support 30 hari agar proses setup dan penggunaan berjalan lebih lancar'],
     includes:['File data 1.000.000 candle historis (format CSV)','Dokumen panduan pelatihan Claude + kerangka berpikir analisa (PDF)','30 hari akses chat support langsung'],
-    note:'Claude Sniper diposisikan sebagai alat bantu analisa untuk memperjelas keputusan, bukan menggantikan penilaian trader. Cocok dipakai saat kamu ingin membaca pasar lebih dalam dengan cara yang tetap terstruktur dan masuk akal.'},
+    note:'Claude Sniper diposisikan sebagai alat bantu analisa untuk memperjelas keputusan, bukan menggantikan penilaian trader. Cocok dipakai saat kamu ingin membaca pasar lebih dalam dengan cara yang tetap terstruktur dan masuk akal.',
+    en:{name:'Train Claude Sniper Entry',short:'Train Claude Sniper',
+      tagline:'Claude is trained to help read market context, filter out noise, and sharpen your entry decisions.',
+      about:'This product is designed to make Claude a genuinely useful analysis tool when reading charts. The focus is not to make the AI dictate a single view, but to help you see the market more clearly: the context behind a price move, which areas deserve attention, who might get trapped, and what risk sits behind an entry. Through market logic, participant psychology, and a large data reference, Claude Sniper helps traders — from beginner to experienced — go deeper in their analysis without the burden of unnecessary noise.',
+      features:['Helps Claude read cause-and-effect in the market, not just recognize surface-level patterns','Builds analysis of key areas, potential traps, and entry scenarios with clearer logic','Helps traders understand price-movement context, including market participant psychology','Backed by 1,000,000 historical candles as a richer learning foundation','Complete training guide from start to ready-for-real-analysis','30 days of support access for a smoother setup and usage process'],
+      includes:['1,000,000 historical candle data file (CSV format)','Claude training guide document + analysis framework (PDF)','30 days of direct chat support access'],
+      note:'Claude Sniper is positioned as an analysis aid to clarify decisions, not to replace trader judgment. Best used when you want to read the market more deeply in a way that stays structured and sensible.'}},
   '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',img:'prod-ea.png',price:3000000,badge:'Premium',rating:5.0,sales:566,
     tagline:'Bot bantu eksekusi strategi trend following dengan disiplin saat kamu tidak bisa terus memantau chart.',
     about:'EA ini dibuat untuk membantu trader menjaga konsistensi eksekusi. Saat emosi, lelah, atau telat merespons pasar, bot tetap bekerja sesuai parameter yang sudah ditentukan. Hasilnya, kamu punya alat bantu yang mengeksekusi strategi trend following secara lebih disiplin, lebih rapi, dan tidak mudah terpengaruh FOMO atau ragu-ragu. Cocok untuk trader yang ingin mengurangi beban pantau chart terus-menerus tanpa harus coding sendiri.',
     features:['File EA (.ex5) siap install dan langsung digunakan di MetaTrader 5','Strategi trend following sudah diuji agar lebih siap dipakai pada kondisi pasar nyata','Parameter penting bisa disesuaikan: lot size, TP, SL, trailing stop, dan filter waktu','Membantu mengurangi beban monitor chart terus-menerus selama platform aktif','Kompatibel dengan broker MT5, termasuk tipe ECN dan STP'],
     includes:['File EA MetaTrader 5 (.ex5)','Panduan instalasi, konfigurasi, dan optimasi parameter (PDF)'],
-    note:'Pastikan akun trading kamu menggunakan MetaTrader 5, bukan MT4. Jika sudah memakai MT5, produk ini bisa langsung disiapkan dan dipakai pada hari yang sama.'},
+    note:'Pastikan akun trading kamu menggunakan MetaTrader 5, bukan MT4. Jika sudah memakai MT5, produk ini bisa langsung disiapkan dan dipakai pada hari yang sama.',
+    en:{name:'MT5 Trend Following EA',short:'MT5 Trend Following EA',
+      tagline:'A bot that executes a trend-following strategy with discipline when you cannot watch the chart all the time.',
+      about:'This EA is built to help traders keep their execution consistent. When you are emotional, tired, or slow to react to the market, the bot keeps working according to the parameters you set. The result: a tool that executes a trend-following strategy with more discipline, more consistency, and less exposure to FOMO or hesitation. Great for traders who want to spend less time glued to the chart, without having to code it themselves.',
+      features:['EA file (.ex5), ready to install and use directly on MetaTrader 5','A trend-following strategy that has been tested to hold up in real market conditions','Key parameters are adjustable: lot size, TP, SL, trailing stop, and time filters','Reduces the need to constantly monitor the chart while the platform is active','Compatible with MT5 brokers, including ECN and STP account types'],
+      includes:['MetaTrader 5 EA file (.ex5)','Installation, configuration, and parameter optimization guide (PDF)'],
+      note:'Make sure your trading account uses MetaTrader 5, not MT4. If you are already on MT5, this product can be set up and used the same day.'}},
   '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,rating:4.9,sales:767,
     tagline:'Indikator bantu membaca area penting XAU lebih cepat dan lebih rapi langsung di chart TradingView.',
     about:'XAU sering bergerak cepat dan membuat banyak trader telat membaca level penting. Indikator ini dibuat untuk membantu proses analisa jadi lebih ringan: menampilkan area yang layak diperhatikan, membantu melihat potensi reaksi harga, dan memberi peta visual yang lebih bersih sebelum entry. Cocok untuk trader XAU yang ingin analisa lebih efisien, lebih terarah, dan tidak dipenuhi noise yang mengganggu fokus.',
     features:['Akses invite-only langsung di TradingView sehingga indikator tetap eksklusif dan aman','Membantu menampilkan level-level penting XAU secara otomatis di chart','Visual dibuat bersih agar chart tetap enak dibaca tanpa terlalu banyak noise','Dilengkapi panduan penggunaan supaya trader pemula pun lebih cepat memahami tiap elemen indikator','Mendapat update berkelanjutan saat ada peningkatan atau penambahan fitur'],
     includes:['Akses Pine Script indikator di TradingView (invite-only, tidak bisa dibagikan)','Panduan penggunaan lengkap (PDF)'],
-    note:'Khusus untuk XAU/USD. Akun TradingView gratis sudah cukup, jadi kamu bisa langsung memakai indikator ini tanpa perlu langganan paket Pro.'},
+    note:'Khusus untuk XAU/USD. Akun TradingView gratis sudah cukup, jadi kamu bisa langsung memakai indikator ini tanpa perlu langganan paket Pro.',
+    en:{name:'TradingView XAU Indicator',short:'TradingView XAU Indicator',
+      tagline:'An indicator that helps you read key XAU areas faster and more clearly, right on the TradingView chart.',
+      about:'XAU often moves fast, and many traders end up reading key levels too late. This indicator makes analysis lighter: it highlights areas worth watching, helps you spot potential price reactions, and gives a cleaner visual map before you enter. Great for XAU traders who want analysis that is more efficient, more focused, and free of distracting noise.',
+      features:['Invite-only access directly on TradingView, keeping the indicator exclusive and secure','Automatically highlights key XAU levels on the chart','Clean visuals keep the chart easy to read without too much noise','Comes with a usage guide so even beginner traders quickly understand every element of the indicator','Gets ongoing updates whenever improvements or new features are added'],
+      includes:['Pine Script indicator access on TradingView (invite-only, non-transferable)','Complete usage guide (PDF)'],
+      note:'Built specifically for XAU/USD. A free TradingView account is enough — no need for a Pro subscription to use this indicator.'}},
 };
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
+window.I18N = Object.assign(window.I18N||{}, {
+  'nav.tentang': {id:'Tentang', en:'About'},
+  'nav.produk': {id:'Produk', en:'Products'},
+  'nav.challenge': {id:'Challenge', en:'Challenge'},
+  'nav.faq': {id:'FAQ', en:'FAQ'},
+  'nav.cta': {id:'Pantau Challenge', en:'Follow the Challenge'},
+  'nav.battle': {id:'🤖 Tonton Battle AI', en:'🤖 Watch AI Battle'},
+  'pd.back': {id:'← Semua Produk', en:'← All Products'},
+  'pd.harga': {id:'Harga', en:'Price'},
+  'pd.beliBtn': {id:'Beli Sekarang →', en:'Buy Now →'},
+  'footer.disclaimer': {id:'⚠️ Trading mengandung risiko tinggi. Produk ini adalah alat bantu, bukan jaminan profit.', en:'⚠️ Trading carries high risk. This product is a tool, not a profit guarantee.'}
+});
+
 const id = new URLSearchParams(location.search).get('id') || '1';
 const p = PRODUCTS[id];
 
-if (!p) {
-  document.getElementById('pdContent').innerHTML = '<div style="text-align:center;padding:60px 0;color:#ffffff">Produk tidak ditemukan. <a href="index.html#produk" style="color:#a855f7">Lihat semua produk</a></div>';
-} else {
-  document.title = p.short + ' — IPI Digital';
+function render(){
+  var lang = window.ipiLang ? window.ipiLang.get() : 'id';
+  var loc = (lang==='en' && p && p.en) ? p.en : p;
+
+  if (!p) {
+    var msg = lang==='en'
+      ? '<div style="text-align:center;padding:60px 0;color:#ffffff">Product not found. <a href="index.html#produk" style="color:#a855f7">View all products</a></div>'
+      : '<div style="text-align:center;padding:60px 0;color:#ffffff">Produk tidak ditemukan. <a href="index.html#produk" style="color:#a855f7">Lihat semua produk</a></div>';
+    document.getElementById('pdContent').innerHTML = msg;
+    return;
+  }
+
+  document.title = loc.short + ' — IPI Digital';
+  const soldWord = lang==='en' ? ' sold' : ' terjual';
+  const priceLbl = lang==='en' ? 'Price' : 'Harga';
   const badge = p.badge ? `<span class="product-badge" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${esc(p.badge)}</span><br>` : '';
   document.getElementById('pdContent').innerHTML = `
     <div class="pd-hero">
-      <div class="pd-icon"><img src="${esc(p.img)}" alt="${esc(p.short)}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="pd-icon"><img src="${esc(p.img)}" alt="${esc(loc.short)}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
       <div class="pd-hero-body">
         ${badge}
-        <div class="pd-name">${esc(p.name)}</div>
-        <div class="pd-tagline">${p.tagline}</div>
+        <div class="pd-name">${esc(loc.name)}</div>
+        <div class="pd-tagline">${loc.tagline}</div>
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:12px">
           <span style="color:#f59e0b;font-size:13px;letter-spacing:.5px">★★★★★</span>
           <span style="color:#ffffff;font-weight:700">${p.rating.toFixed(1)}</span>
           <span style="color:#96a6bd">·</span>
-          <span style="color:#ffffff">${p.sales} terjual</span>
+          <span style="color:#ffffff">${p.sales}${soldWord}</span>
         </div>
         <div class="pd-price-pill">
           <div>
-            <div class="pd-price-lbl">Harga</div>
-            <div class="pd-price-val">${fmtRp(p.price)}</div>
+            <div class="pd-price-lbl">${priceLbl}</div>
+            <div class="pd-price-val">${window.ipiFmtMoney ? window.ipiFmtMoney(p.price) : ('Rp '+p.price.toLocaleString('id-ID'))}</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="pd-sec">
-      <div class="pd-sec-ttl">Tentang Produk</div>
-      <div class="pd-about">${p.about}</div>
+      <div class="pd-sec-ttl">${lang==='en' ? 'About the Product' : 'Tentang Produk'}</div>
+      <div class="pd-about">${loc.about}</div>
     </div>
 
     <div class="pd-sec">
-      <div class="pd-sec-ttl">Yang Kamu Dapatkan</div>
+      <div class="pd-sec-ttl">${lang==='en' ? 'What You Get' : 'Yang Kamu Dapatkan'}</div>
       <ul class="pd-feat">
-        ${p.features.map(f=>`<li><div class="pd-feat-check">✓</div><span>${f}</span></li>`).join('')}
+        ${loc.features.map(f=>`<li><div class="pd-feat-check">✓</div><span>${f}</span></li>`).join('')}
       </ul>
     </div>
 
     <div class="pd-sec">
-      <div class="pd-sec-ttl">Termasuk dalam Paket</div>
+      <div class="pd-sec-ttl">${lang==='en' ? 'What is Included' : 'Termasuk dalam Paket'}</div>
       <div class="pd-includes">
-        ${p.includes.map(i=>`<div class="pd-inc"><span class="pd-inc-icon">📦</span><span>${i}</span></div>`).join('')}
+        ${loc.includes.map(i=>`<div class="pd-inc"><span class="pd-inc-icon">📦</span><span>${i}</span></div>`).join('')}
       </div>
     </div>
 
     <div class="pd-sec">
-      <div class="pd-sec-ttl">Cara Order</div>
+      <div class="pd-sec-ttl">${lang==='en' ? 'How to Order' : 'Cara Order'}</div>
       <div class="pd-order-card">
-        <p>Ikuti panduan singkat ini supaya proses pembelian lebih jelas, cepat, dan minim salah input.</p>
         <ol class="pd-steps">
-          <li><span class="pd-step-num">1</span><span>Pilih produk yang paling sesuai dengan kebutuhan, pengalaman, dan target trading kamu saat ini.</span></li>
-          <li><span class="pd-step-num">2</span><span>Baca deskripsi produk sampai paham manfaat, isi paket, dan cara pakainya supaya kamu membeli dengan yakin.</span></li>
-          <li><span class="pd-step-num">3</span><span>Klik tombol "Beli Sekarang" untuk lanjut ke halaman pembayaran produk ini.</span></li>
-          <li><span class="pd-step-num">4</span><span>Pilih metode pembayaran yang tersedia, lalu isi form dengan data email atau WhatsApp yang aktif dan benar.</span></li>
-          <li><span class="pd-step-num">5</span><span>Setelah pembayaran terverifikasi, produk akan dikirim otomatis ke email atau WhatsApp sesuai data yang kamu isi.</span></li>
+          <li><span class="pd-step-num">1</span><span><b>${lang==='en'?'Choose a Product':'Pilih Produk'}</b> — ${lang==='en'?'matching your financial profile and trading goals.':'sesuai profil finansial dan tujuan trading kamu.'}</span></li>
+          <li><span class="pd-step-num">2</span><span><b>${lang==='en'?'Read the Description':'Baca Deskripsi'}</b> — ${lang==='en'?'understand the features and benefits before buying.':'pahami fitur dan manfaatnya sebelum membeli.'}</span></li>
+          <li><span class="pd-step-num">3</span><span><b>${lang==='en'?'Buy Now':'Beli Sekarang'}</b> — ${lang==='en'?'click the buy button on this page.':'klik tombol beli di halaman ini.'}</span></li>
+          <li><span class="pd-step-num">4</span><span><b>${lang==='en'?'Enter Contact & Pay':'Input Kontak & Bayar'}</b> — ${lang==='en'?'fill in an active email/WhatsApp, then complete payment.':'isi email/WhatsApp aktif, lalu selesaikan pembayaran.'}</span></li>
+          <li><span class="pd-step-num">5</span><span><b>${lang==='en'?'Product Delivered Automatically':'Produk Terkirim Otomatis'}</b> — ${lang==='en'?'once payment is verified, the product is sent straight to your contact.':'setelah pembayaran terverifikasi, produk langsung dikirim ke kontak kamu.'}</span></li>
         </ol>
-        <div class="pd-order-delivery">Jika pembelian ditujukan untuk dipakai secepatnya, pastikan kontak yang kamu masukkan aktif agar file atau akses produk bisa langsung diterima tanpa hambatan.</div>
       </div>
     </div>
 
-    <div class="pd-note"><span>💡</span><span>${p.note}</span></div>
+    <div class="pd-note"><span>💡</span><span>${loc.note}</span></div>
   `;
-  document.getElementById('ctaPrice').textContent = fmtRp(p.price);
+  document.getElementById('ctaPrice').textContent = window.ipiFmtMoney ? window.ipiFmtMoney(p.price) : ('Rp '+p.price.toLocaleString('id-ID'));
   document.getElementById('ctaBtn').href = `bayar.html?id=${id}`;
 }
+
+render();
+document.addEventListener('ipi-lang-change', render);
 </script>
 </body>
 </html>

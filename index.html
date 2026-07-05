@@ -41,13 +41,18 @@
     <img src="logo.png" alt="IPI Digital" class="logo-img">
     <span class="logo-text">IPI <span>Digital</span></span>
   </a>
+  <div class="lang-switch" id="langSwitch" aria-label="Switch language / Ganti bahasa">
+    <span class="lang-switch-thumb"></span>
+    <span class="lang-switch-opt" data-lang="id">ID</span>
+    <span class="lang-switch-opt" data-lang="en">EN</span>
+  </div>
   <div class="nav-links">
-    <a href="#tentang">Tentang</a>
-    <a href="#produk">Produk</a>
-    <a href="#challenge">Challenge</a>
-    <a href="#faq">FAQ</a>
-    <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta">Pantau Challenge</a>
-    <a href="battle.html" class="nav-battle-cta">🤖 Tonton Battle AI</a>
+    <a href="#tentang" data-i18n="nav.tentang">Tentang</a>
+    <a href="#produk" data-i18n="nav.produk">Produk</a>
+    <a href="#challenge" data-i18n="nav.challenge">Challenge</a>
+    <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" data-i18n="nav.cta">Pantau Challenge</a>
+    <a href="battle.html" class="nav-battle-cta" data-i18n="nav.battle">🤖 Tonton Battle AI</a>
   </div>
   <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -56,12 +61,12 @@
 
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#tentang" onclick="closeMenu()">Tentang</a>
-  <a href="#produk" onclick="closeMenu()">Produk</a>
-  <a href="#challenge" onclick="closeMenu()">Challenge</a>
-  <a href="#faq" onclick="closeMenu()">FAQ</a>
-  <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" onclick="closeMenu()">Pantau Challenge</a>
-  <a href="battle.html" class="nav-battle-cta" onclick="closeMenu()">🤖 Tonton Battle AI</a>
+  <a href="#tentang" onclick="closeMenu()" data-i18n="nav.tentang">Tentang</a>
+  <a href="#produk" onclick="closeMenu()" data-i18n="nav.produk">Produk</a>
+  <a href="#challenge" onclick="closeMenu()" data-i18n="nav.challenge">Challenge</a>
+  <a href="#faq" onclick="closeMenu()" data-i18n="nav.faq">FAQ</a>
+  <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="nav-cta" onclick="closeMenu()" data-i18n="nav.cta">Pantau Challenge</a>
+  <a href="battle.html" class="nav-battle-cta" onclick="closeMenu()" data-i18n="nav.battle">🤖 Tonton Battle AI</a>
 </div>
 
 
@@ -69,27 +74,27 @@
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-content">
-      <span class="hero-eyebrow">✦ AI Trading · Automasi · Tools</span>
-      <h1>Produk Digital untuk<br><span class="grad">AI Trading</span> dan<br>Automasi Trading</h1>
-      <p>
+      <span class="hero-eyebrow" data-i18n="hero.eyebrow">✦ AI Trading · Automasi · Tools</span>
+      <h1 data-i18n="hero.title">Produk Digital untuk<br><span class="grad">AI Trading</span> dan<br>Automasi Trading</h1>
+      <p data-i18n="hero.desc">
         IPI Digital menyediakan produk digital seputar AI Trading, Prompt Engineering,
         Data Training AI, Bot Trading, dan Indikator — dikembangkan dari pengalaman
         nyata di pasar.
       </p>
       <div class="hero-btns">
-        <a href="#produk" class="btn btn-primary btn-lg">Lihat Produk</a>
-        <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="btn btn-outline btn-lg">Pantau Challenge</a>
-        <a href="battle.html" class="btn btn-battle btn-lg">🤖 Tonton Battle AI</a>
+        <a href="#produk" class="btn btn-primary btn-lg" data-i18n="hero.btnProduk">Lihat Produk</a>
+        <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="btn btn-outline btn-lg" data-i18n="nav.cta">Pantau Challenge</a>
+        <a href="battle.html" class="btn btn-battle btn-lg" data-i18n="nav.battle">🤖 Tonton Battle AI</a>
       </div>
 
       <div class="exp-row">
         <div class="exp-badge">
-          <span class="num">8 Tahun</span>
-          <span class="lbl">Pengalaman<br>Trading</span>
+          <span class="num" data-i18n="hero.exp1n">8 Tahun</span>
+          <span class="lbl" data-i18n="hero.exp1l">Pengalaman<br>Trading</span>
         </div>
         <div class="exp-badge">
-          <span class="num">3 Tahun</span>
-          <span class="lbl">AI Trading &<br>Automation</span>
+          <span class="num" data-i18n="hero.exp2n">3 Tahun</span>
+          <span class="lbl" data-i18n="hero.exp2l">AI Trading &<br>Automation</span>
         </div>
       </div>
     </div>
@@ -107,16 +112,16 @@
     <div class="about-grid">
 
       <div>
-        <span class="section-label">Tentang Kami</span>
-        <h2 style="font-size:clamp(24px,3.5vw,34px); font-weight:700; color:#ffffff; line-height:1.25; margin-bottom:20px">
+        <span class="section-label" data-i18n="about.label">Tentang Kami</span>
+        <h2 style="font-size:clamp(24px,3.5vw,34px); font-weight:700; color:#ffffff; line-height:1.25; margin-bottom:20px" data-i18n="about.title">
           Fokus pada <span class="grad">AI Trading</span><br>dan Automasi
         </h2>
-        <p class="about-desc">
+        <p class="about-desc" data-i18n="about.desc">
           IPI Digital adalah brand yang fokus mengembangkan dan menjual produk digital
           di bidang trading berbasis kecerdasan buatan. Semua produk dikembangkan dari
           riset dan penggunaan nyata — bukan teori.
         </p>
-        <ul class="about-focus-list">
+        <ul class="about-focus-list" data-i18n="about.list">
           <li>AI Trading</li>
           <li>Prompt Engineering untuk Trading</li>
           <li>Data Training AI</li>
@@ -128,16 +133,16 @@
       <div>
         <div class="about-exp">
           <div class="about-exp-card">
-            <span class="num">8<span style="font-size:16px; font-weight:400; color:#ffffff"> thn</span></span>
-            <span class="lbl">Pengalaman Trading</span>
+            <span class="num">8<span style="font-size:16px; font-weight:400; color:#ffffff" data-i18n="about.yr">&nbsp;thn</span></span>
+            <span class="lbl" data-i18n="about.exp1">Pengalaman Trading</span>
           </div>
           <div class="about-exp-card">
-            <span class="num">3<span style="font-size:16px; font-weight:400; color:#ffffff"> thn</span></span>
-            <span class="lbl">AI Trading</span>
+            <span class="num">3<span style="font-size:16px; font-weight:400; color:#ffffff" data-i18n="about.yr">&nbsp;thn</span></span>
+            <span class="lbl" data-i18n="about.exp2">AI Trading</span>
           </div>
         </div>
         <div style="background:rgba(147,51,234,0.06); border:1px solid rgba(147,51,234,0.12); border-radius:10px; padding:22px">
-          <p style="font-size:13px; color:#ffffff; line-height:1.8">
+          <p style="font-size:13px; color:#ffffff; line-height:1.8" data-i18n="about.note">
             Semua produk yang tersedia di sini adalah hasil dari riset, eksperimen,
             dan penggunaan langsung di pasar nyata — mulai dari Forex, XAU, hingga
             aset crypto. Tidak ada klaim berlebihan. Produk berbicara lewat hasil nyata
@@ -155,9 +160,9 @@
 <section class="section" id="produk">
   <div class="container">
     <div class="section-title">
-      <span class="section-label">Produk Digital</span>
-      <h2>Pilih Produk <span class="grad">yang Sesuai</span></h2>
-      <p>Pilih produk yang paling sesuai dengan kebutuhanmu, lalu baca detailnya sebelum melakukan pembelian.</p>
+      <span class="section-label" data-i18n="prod.label">Produk Digital</span>
+      <h2 data-i18n="prod.title">Pilih Produk <span class="grad">yang Sesuai</span></h2>
+      <p data-i18n="prod.desc">Pilih produk yang paling sesuai dengan kebutuhanmu, lalu baca detailnya sebelum melakukan pembelian.</p>
     </div>
 
     <div class="products-grid">
@@ -169,14 +174,14 @@
             <img src="prod-neurobro.png" class="prod-logo-img" alt="Neurobro">
           </div>
           <div class="prod-name-area">
-            <h3>Prompt AI Neurobro</h3>
-            <span class="prod-tagline">AI Entry Level</span>
+            <h3 data-i18n="prod.p1.name">Prompt AI Neurobro</h3>
+            <span class="prod-tagline" data-i18n="prod.p1.tag">AI Entry Level</span>
           </div>
         </div>
-        <p>Prompt siap pakai untuk membantu Neurobro memberi analisa trading yang lebih jelas, rapi, dan mudah dipakai, termasuk untuk pemula.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales">1323 terjual</span></div>
-        <div class="product-price">Rp 50.000</div>
-        <a href="produk.html?id=1" class="btn btn-outline btn-full">Lihat Produk →</a>
+        <p data-i18n="prod.p1.desc">Prompt siap pakai untuk membantu Neurobro memberi analisa trading yang lebih jelas, rapi, dan mudah dipakai, termasuk untuk pemula.</p>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales" data-i18n="prod.p1.sold">1323 terjual</span></div>
+        <div class="product-price" data-price-rp="50000">Rp 50.000</div>
+        <a href="produk.html?id=1" class="btn btn-outline btn-full" data-i18n="prod.viewBtn">Lihat Produk →</a>
       </div>
 
       <!-- Tier 2 — Signaler Rp550.000 -->
@@ -186,14 +191,14 @@
             <img src="prod-signaler.png" class="prod-logo-img" alt="AI Signaler">
           </div>
           <div class="prod-name-area">
-            <h3>Latih Claude & ChatGPT Jadi AI Signaler</h3>
-            <span class="prod-tagline">Data 400K Candle</span>
+            <h3 data-i18n="prod.p2.name">Latih Claude & ChatGPT Jadi AI Signaler</h3>
+            <span class="prod-tagline" data-i18n="prod.p2.tag">Data 400K Candle</span>
           </div>
         </div>
-        <p>Dataset 400.000 candle dan panduan bertahap untuk membantu AI memberi analisa trading yang lebih berbasis data dan lebih mudah dipahami.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales">548 terjual</span></div>
-        <div class="product-price">Rp 550.000</div>
-        <a href="produk.html?id=2" class="btn btn-outline btn-full">Lihat Produk →</a>
+        <p data-i18n="prod.p2.desc">Dataset 400.000 candle dan panduan bertahap untuk membantu AI memberi analisa trading yang lebih berbasis data dan lebih mudah dipahami.</p>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales" data-i18n="prod.p2.sold">548 terjual</span></div>
+        <div class="product-price" data-price-rp="550000">Rp 550.000</div>
+        <a href="produk.html?id=2" class="btn btn-outline btn-full" data-i18n="prod.viewBtn">Lihat Produk →</a>
       </div>
 
       <!-- Tier 3 — Indikator Rp750.000 -->
@@ -203,15 +208,15 @@
             <img src="prod-indikator.png" class="prod-logo-img" alt="Indikator TradingView">
           </div>
           <div class="prod-name-area">
-            <h3>Indikator TradingView XAU</h3>
-            <span class="prod-tagline">Precision Tools</span>
+            <h3 data-i18n="prod.p5.name">Indikator TradingView XAU</h3>
+            <span class="prod-tagline" data-i18n="prod.p5.tag">Precision Tools</span>
           </div>
         </div>
-        <span class="product-badge badge-cyan">Premium</span>
-        <p>Indikator XAU/USD yang membantu trader melihat area penting, potensi reaksi harga, dan arah analisa dengan chart yang tetap bersih.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales">767 terjual</span></div>
-        <div class="product-price price-cyan">Rp 750.000</div>
-        <a href="produk.html?id=5" class="btn btn-outline-cyan btn-full">Lihat Produk →</a>
+        <span class="product-badge badge-cyan" data-i18n="prod.premium">Premium</span>
+        <p data-i18n="prod.p5.desc">Indikator XAU/USD yang membantu trader melihat area penting, potensi reaksi harga, dan arah analisa dengan chart yang tetap bersih.</p>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">4.9</span><span class="prod-meta-sep">·</span><span class="prod-sales" data-i18n="prod.p5.sold">767 terjual</span></div>
+        <div class="product-price price-cyan" data-price-rp="750000">Rp 750.000</div>
+        <a href="produk.html?id=5" class="btn btn-outline-cyan btn-full" data-i18n="prod.viewBtn">Lihat Produk →</a>
       </div>
 
       <!-- Tier 4 — EA MT5 Rp3.000.000 -->
@@ -221,15 +226,15 @@
             <img src="prod-ea.png" class="prod-logo-img" alt="EA MT5">
           </div>
           <div class="prod-name-area">
-            <h3>EA MT5 Trend Following</h3>
-            <span class="prod-tagline">Auto Trading</span>
+            <h3 data-i18n="prod.p4.name">EA MT5 Trend Following</h3>
+            <span class="prod-tagline" data-i18n="prod.p4.tag">Auto Trading</span>
           </div>
         </div>
-        <span class="product-badge badge-pink">Premium</span>
-        <p>Bot MT5 siap pakai untuk membantu eksekusi strategi trend following lebih disiplin tanpa harus terus memantau chart atau coding sendiri.</p>
-        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales">566 terjual</span></div>
-        <div class="product-price price-pink">Rp 3.000.000</div>
-        <a href="produk.html?id=4" class="btn btn-primary btn-full">Lihat Produk →</a>
+        <span class="product-badge badge-pink" data-i18n="prod.premium">Premium</span>
+        <p data-i18n="prod.p4.desc">Bot MT5 siap pakai untuk membantu eksekusi strategi trend following lebih disiplin tanpa harus terus memantau chart atau coding sendiri.</p>
+        <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales" data-i18n="prod.p4.sold">566 terjual</span></div>
+        <div class="product-price price-pink" data-price-rp="3000000">Rp 3.000.000</div>
+        <a href="produk.html?id=4" class="btn btn-primary btn-full" data-i18n="prod.viewBtn">Lihat Produk →</a>
       </div>
 
       <!-- Tier 5 — Sniper Claude Rp3.500.000 -->
@@ -240,15 +245,15 @@
               <img src="prod-sniper.png" class="prod-logo-img" alt="Sniper Claude">
             </div>
             <div class="prod-name-area">
-              <h3 class="name-gold">Latih Claude Sniper Entry</h3>
-              <span class="prod-tagline tier-5-tag">1 Juta Candle · Elite</span>
+              <h3 class="name-gold" data-i18n="prod.p3.name">Latih Claude Sniper Entry</h3>
+              <span class="prod-tagline tier-5-tag" data-i18n="prod.p3.tag">1 Juta Candle · Elite</span>
             </div>
           </div>
-          <span class="product-badge badge-gold">Unggulan</span>
-          <p>Paket data dan metodologi untuk membantu Claude membaca konteks pasar, menyaring noise, dan menajamkan analisa entry dengan lebih terstruktur.</p>
-          <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales">128 terjual</span></div>
-          <div class="product-price price-gold">Rp 3.500.000</div>
-          <a href="produk.html?id=3" class="btn btn-gold btn-full">Lihat Produk →</a>
+          <span class="product-badge badge-gold" data-i18n="prod.featured">Unggulan</span>
+          <p data-i18n="prod.p3.desc">Paket data dan metodologi untuk membantu Claude membaca konteks pasar, menyaring noise, dan menajamkan analisa entry dengan lebih terstruktur.</p>
+          <div class="prod-meta"><span class="prod-stars">★★★★★</span><span class="prod-rating-num">5.0</span><span class="prod-meta-sep">·</span><span class="prod-sales" data-i18n="prod.p3.sold">128 terjual</span></div>
+          <div class="product-price price-gold" data-price-rp="3500000">Rp 3.500.000</div>
+          <a href="produk.html?id=3" class="btn btn-gold btn-full" data-i18n="prod.viewBtn">Lihat Produk →</a>
         </div>
       </div>
 
@@ -258,11 +263,11 @@
     <div class="prod-extra-cta">
       <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="btn-tg-pill">
         <svg class="tg-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        Free Neurobro Prompt
+        <span data-i18n="prod.ctaFree">Free Neurobro Prompt</span>
       </a>
       <a href="https://t.me/iipistore" target="_blank" class="btn-tg-pill btn-tg-admin">
         <svg class="tg-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        Hubungi Admin via Telegram
+        <span data-i18n="prod.ctaAdmin">Hubungi Admin via Telegram</span>
       </a>
     </div>
   </div>
@@ -273,44 +278,40 @@
 <section class="section section-dark" id="cara-order">
   <div class="container">
     <div class="section-title center">
-      <span class="section-label">Cara Order</span>
-      <h2>Dari Pilih Produk sampai <span class="grad">Siap Dipakai</span></h2>
-      <p style="margin:0 auto">5 langkah singkat, tanpa ribet — produk sampai ke kamu secara otomatis begitu pembayaran terkonfirmasi.</p>
+      <span class="section-label" data-i18n="order.label">Cara Order</span>
+      <h2 data-i18n="order.title">Order dalam <span class="grad">5 Langkah Simpel</span></h2>
+      <p style="margin:0 auto" data-i18n="order.desc">Singkat dan otomatis — produk langsung dikirim setelah pembayaran terkonfirmasi.</p>
     </div>
 
     <div class="order-guide-card">
-      <div class="order-guide-head">
-        <h3>Proses order dibuat sesederhana mungkin</h3>
-        <p>Panduan ini membantu calon pembeli memahami alurnya dari memilih produk sampai file atau akses diterima otomatis.</p>
-      </div>
       <div class="order-guide-list">
         <div class="order-step-card">
           <div class="order-step-num">1</div>
-          <h4>Pilih produk yang sesuai</h4>
-          <p>Tentukan produk berdasarkan kebutuhan, level pengalaman, dan tujuan trading kamu saat ini.</p>
+          <h4 data-i18n="order.s1t">Pilih Produk</h4>
+          <p data-i18n="order.s1d">Sesuai profil finansial dan tujuan trading kamu.</p>
         </div>
         <div class="order-step-card">
           <div class="order-step-num">2</div>
-          <h4>Pahami detail produk</h4>
-          <p>Baca deskripsi, fitur, dan isi paket agar kamu tahu manfaat yang akan didapat sebelum membeli.</p>
+          <h4 data-i18n="order.s2t">Baca Deskripsi</h4>
+          <p data-i18n="order.s2d">Pahami fitur dan manfaatnya sebelum membeli.</p>
         </div>
         <div class="order-step-card">
           <div class="order-step-num">3</div>
-          <h4>Klik Beli Sekarang</h4>
-          <p>Masuk ke halaman produk pilihanmu, lalu lanjutkan pembelian lewat tombol yang tersedia.</p>
+          <h4 data-i18n="order.s3t">Beli Sekarang</h4>
+          <p data-i18n="order.s3d">Klik tombol beli di halaman produk.</p>
         </div>
         <div class="order-step-card">
           <div class="order-step-num">4</div>
-          <h4>Pilih metode pembayaran</h4>
-          <p>Isi form dengan data email atau WhatsApp yang aktif agar pengiriman produk tidak terkendala.</p>
+          <h4 data-i18n="order.s4t">Input Kontak & Bayar</h4>
+          <p data-i18n="order.s4d">Isi email/WhatsApp aktif, lalu selesaikan pembayaran.</p>
         </div>
         <div class="order-step-card">
           <div class="order-step-num">5</div>
-          <h4>Produk dikirim otomatis</h4>
-          <p>Setelah pembayaran terverifikasi, produk otomatis dikirim ke email atau WhatsApp sesuai data yang kamu isi.</p>
+          <h4 data-i18n="order.s5t">Produk Terkirim Otomatis</h4>
+          <p data-i18n="order.s5d">Setelah pembayaran terverifikasi, produk langsung dikirim ke kontak yang kamu isi.</p>
         </div>
       </div>
-      <div class="order-guide-note">Saran kami: baca detail produk terlebih dulu sebelum checkout agar pembelian terasa tepat guna dan tidak membingungkan saat produk sudah diterima.</div>
+      <div class="order-guide-note" data-i18n="order.note">Tips: baca detail produk dulu sebelum checkout.</div>
     </div>
   </div>
 </section>
@@ -323,9 +324,9 @@
       <div class="testi-section-logo">
         <img src="img-testimoni.png" alt="Testimoni IPI Digital">
       </div>
-      <span class="section-label">Testimoni Pengguna</span>
-      <h2>Hasil Nyata dari <span class="grad">Pengguna</span></h2>
-      <p>Screenshot asli dari pengguna. Nama disamarkan untuk menjaga privasi.</p>
+      <span class="section-label" data-i18n="testiSS.label">Testimoni Pengguna</span>
+      <h2 data-i18n="testiSS.title">Hasil Nyata dari <span class="grad">Pengguna</span></h2>
+      <p data-i18n="testiSS.desc">Screenshot asli dari pengguna. Nama disamarkan untuk menjaga privasi.</p>
     </div>
 
     <div class="testi-carousel" id="testiCarousel">
@@ -374,9 +375,9 @@
 <section class="section section-dark">
   <div class="container">
     <div class="section-title center">
-      <span class="section-label">Testimoni</span>
-      <h2>Kata <span class="grad">Pengguna</span></h2>
-      <p>Testimoni asli dari pengguna. Nama disamarkan untuk menjaga privasi.</p>
+      <span class="section-label" data-i18n="testi.label">Testimoni</span>
+      <h2 data-i18n="testi.title">Kata <span class="grad">Pengguna</span></h2>
+      <p data-i18n="testi.desc">Testimoni asli dari pengguna. Nama disamarkan untuk menjaga privasi.</p>
     </div>
 
     <div class="testi-grid">
@@ -388,7 +389,7 @@
           <div class="testi-avatar">Ag</div>
           <div>
             <div class="testi-name">Ag**</div>
-            <div class="testi-label">Pengguna Latih Claude Sniper Entry</div>
+            <div class="testi-label" data-i18n="testi.u1">Pengguna Latih Claude Sniper Entry</div>
           </div>
         </div>
       </div>
@@ -400,7 +401,7 @@
           <div class="testi-avatar">Ra</div>
           <div>
             <div class="testi-name">Ra**</div>
-            <div class="testi-label">Pengguna Prompt AI Neurobro</div>
+            <div class="testi-label" data-i18n="testi.u2">Pengguna Prompt AI Neurobro</div>
           </div>
         </div>
       </div>
@@ -412,7 +413,7 @@
           <div class="testi-avatar">An</div>
           <div>
             <div class="testi-name">An***</div>
-            <div class="testi-label">Pengguna Latih Claude Sniper Entry</div>
+            <div class="testi-label" data-i18n="testi.u1">Pengguna Latih Claude Sniper Entry</div>
           </div>
         </div>
       </div>
@@ -424,7 +425,7 @@
           <div class="testi-avatar">Wa</div>
           <div>
             <div class="testi-name">Wa***</div>
-            <div class="testi-label">Pengguna Produk IPI Digital</div>
+            <div class="testi-label" data-i18n="testi.u4">Pengguna Produk IPI Digital</div>
           </div>
         </div>
       </div>
@@ -438,14 +439,14 @@
 <section class="section" id="challenge">
   <div class="container">
     <div class="challenge-box">
-      <span class="section-label" style="justify-content:center; margin-bottom:20px">Live Challenge</span>
-      <h2>Challenge Modal <span style="background:linear-gradient(135deg,#ec4899,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$10</span></h2>
-      <p>
+      <span class="section-label" style="justify-content:center; margin-bottom:20px" data-i18n="challenge.label">Live Challenge</span>
+      <h2 data-i18n="challenge.title">Challenge Modal <span style="background:linear-gradient(135deg,#ec4899,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$10</span></h2>
+      <p data-i18n="challenge.desc">
         Ikuti perkembangan challenge modal kecil secara langsung.
         Semua proses — analisa, entry, hasil — dibagikan secara terbuka
         di komunitas Telegram.
       </p>
-      <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="btn btn-lg" style="background:linear-gradient(135deg,#7c3aed,#ec4899); color:white; box-shadow:0 0 24px rgba(236,72,153,0.2)">
+      <a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" class="btn btn-lg" style="background:linear-gradient(135deg,#7c3aed,#ec4899); color:white; box-shadow:0 0 24px rgba(236,72,153,0.2)" data-i18n="challenge.btn">
         Pantau Challenge di Telegram →
       </a>
     </div>
@@ -457,14 +458,14 @@
 <section class="section section-dark">
   <div class="container">
     <div class="signaler-box">
-      <span class="section-label" style="justify-content:center; margin-bottom:20px; color:#06b6d4">Free Signal</span>
-      <h2>Free AI <span class="grad-cyan">Signaler</span></h2>
-      <p>
+      <span class="section-label" style="justify-content:center; margin-bottom:20px; color:#06b6d4" data-i18n="signaler.label">Free Signal</span>
+      <h2 data-i18n="signaler.title">Free AI <span class="grad-cyan">Signaler</span></h2>
+      <p data-i18n="signaler.desc">
         Coba sinyal AI gratis sebelum memutuskan membeli produk premium.
         Gabung komunitas Telegram dan pantau sinyal yang dibagikan secara
         berkala.
       </p>
-      <a href="https://t.me/aitradesignaler" target="_blank" class="btn btn-lg btn-cyan">
+      <a href="https://t.me/aitradesignaler" target="_blank" class="btn btn-lg btn-cyan" data-i18n="signaler.btn">
         Gabung Free AI Signaler →
       </a>
     </div>
@@ -476,78 +477,78 @@
 <section class="section" id="faq">
   <div class="container">
     <div class="section-title center">
-      <span class="section-label">FAQ</span>
-      <h2>Pertanyaan <span class="grad">Umum</span></h2>
+      <span class="section-label" data-i18n="faq.label">FAQ</span>
+      <h2 data-i18n="faq.title">Pertanyaan <span class="grad">Umum</span></h2>
     </div>
 
     <div class="faq-wrap">
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Apa itu prompt AI untuk trading?
+          <span data-i18n="faq.q1">Apa itu prompt AI untuk trading?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" data-i18n="faq.a1">
           Prompt adalah instruksi yang diberikan ke AI (seperti Claude atau ChatGPT) agar AI bisa menganalisa grafik, level harga, atau kondisi pasar. Produk prompt kami dirancang khusus untuk konteks trading — bukan prompt generik.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Apa yang dimaksud Data Training AI?
+          <span data-i18n="faq.q2">Apa yang dimaksud Data Training AI?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" data-i18n="faq.a2">
           Data training adalah kumpulan data historis candle (harga open, high, low, close) yang digunakan untuk melatih atau menyetel AI agar mengenali pola pasar. Produk kami menyertakan data ratusan ribu hingga jutaan candle beserta panduan cara melatihnya.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Produk "Latih Claude Sniper Entry" untuk siapa?
+          <span data-i18n="faq.q3">Produk "Latih Claude Sniper Entry" untuk siapa?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" data-i18n="faq.a3">
           Untuk semua trader yang ingin punya Claude AI sebagai partner analisa entry presisi — baik yang masih membangun kemampuan membaca chart maupun yang sudah berpengalaman. Anda tidak perlu bisa coding, cukup ikuti panduan pelatihan yang disertakan secara bertahap.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          EA MT5 bekerja di broker apa saja?
+          <span data-i18n="faq.q4">EA MT5 bekerja di broker apa saja?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" data-i18n="faq.a4">
           EA MT5 Trend Following kompatibel dengan semua broker yang menggunakan platform MetaTrader 5. Pastikan akun trading Anda menggunakan MT5 (bukan MT4) sebelum membeli.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Indikator TradingView XAU untuk pair apa?
+          <span data-i18n="faq.q5">Indikator TradingView XAU untuk pair apa?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" data-i18n="faq.a5">
           Indikator ini dirancang khusus untuk XAU/USD (Gold). Digunakan di platform TradingView. Setelah pembelian, Anda akan mendapat akses dan panduan cara memasangnya.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Bagaimana cara membeli produk?
+          <span data-i18n="faq.q6">Bagaimana cara membeli produk?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" data-i18n="faq.a6">
           Pilih produk yang diinginkan, baca detailnya sampai paham, lalu klik tombol "Beli Sekarang". Setelah itu pilih metode pembayaran, isi form dengan data yang benar, dan setelah pembayaran terverifikasi produk akan dikirim otomatis ke email atau WhatsApp Anda.
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Apakah ada garansi hasil profit?
+          <span data-i18n="faq.q7">Apakah ada garansi hasil profit?</span>
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a">
+        <div class="faq-a" data-i18n="faq.a7">
           Tidak ada. Trading selalu mengandung risiko dan tidak ada produk yang bisa menjamin profit. Semua produk kami adalah alat bantu — hasil akhir tetap bergantung pada cara Anda menggunakannya dan kondisi pasar.
         </div>
       </div>
@@ -565,37 +566,37 @@
         <img src="logo.png" alt="IPI Digital" class="logo-img">
         <span class="logo-text">IPI <span>Digital</span></span>
       </div>
-      <p>Produk digital untuk AI Trading, Prompt Engineering, Data Training AI, Bot Trading, dan Indikator.</p>
+      <p data-i18n="footer.desc">Produk digital untuk AI Trading, Prompt Engineering, Data Training AI, Bot Trading, dan Indikator.</p>
     </div>
 
     <div class="footer-col">
-      <h4>Produk</h4>
+      <h4 data-i18n="footer.hProduk">Produk</h4>
       <ul>
-        <li><a href="produk.html?id=1">Prompt AI Neurobro</a></li>
-        <li><a href="produk.html?id=2">Data Training AI Signal</a></li>
-        <li><a href="produk.html?id=3">Latih Claude Sniper Entry</a></li>
-        <li><a href="produk.html?id=4">EA MT5 Trend Following</a></li>
-        <li><a href="produk.html?id=5">Indikator TradingView XAU</a></li>
+        <li><a href="produk.html?id=1" data-i18n="prod.p1.name">Prompt AI Neurobro</a></li>
+        <li><a href="produk.html?id=2" data-i18n="prod.p2.shortName">Data Training AI Signal</a></li>
+        <li><a href="produk.html?id=3" data-i18n="prod.p3.name">Latih Claude Sniper Entry</a></li>
+        <li><a href="produk.html?id=4" data-i18n="prod.p4.name">EA MT5 Trend Following</a></li>
+        <li><a href="produk.html?id=5" data-i18n="prod.p5.name">Indikator TradingView XAU</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Komunitas</h4>
+      <h4 data-i18n="footer.hKomunitas">Komunitas</h4>
       <ul>
-        <li><a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank">Telegram Challenge</a></li>
-        <li><a href="https://t.me/aitradesignaler" target="_blank">Free AI Signaler</a></li>
+        <li><a href="https://t.me/+HR5R4Z1QCDc5Mzc1" target="_blank" data-i18n="footer.telegramChallenge">Telegram Challenge</a></li>
+        <li><a href="https://t.me/aitradesignaler" target="_blank" data-i18n="signaler.title2">Free AI Signaler</a></li>
         <li><a href="https://lynk.id/ipidigital" target="_blank">Lynk.id / Toko</a></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>© 2025 IPI Digital. Hak cipta dilindungi.</p>
-    <p style="color:#ffffff; font-size:12px">Produk digital · Tidak ada garansi profit</p>
+    <p>© 2025 IPI Digital. <span data-i18n="footer.rights">Hak cipta dilindungi.</span></p>
+    <p style="color:#ffffff; font-size:12px" data-i18n="footer.tagline">Produk digital · Tidak ada garansi profit</p>
   </div>
 </footer>
 
-<div class="disclaimer">
+<div class="disclaimer" data-i18n="footer.disclaimer">
   ⚠️ Trading mengandung risiko tinggi. Produk ini adalah alat bantu, bukan jaminan profit. Gunakan dengan bijak.
 </div>
 
@@ -726,6 +727,133 @@ document.addEventListener('click', function(e) {
 })();
 
 </script>
+
+<script>
+window.I18N = {
+  'nav.tentang': {id:'Tentang', en:'About'},
+  'nav.produk': {id:'Produk', en:'Products'},
+  'nav.challenge': {id:'Challenge', en:'Challenge'},
+  'nav.faq': {id:'FAQ', en:'FAQ'},
+  'nav.cta': {id:'Pantau Challenge', en:'Follow the Challenge'},
+  'nav.battle': {id:'🤖 Tonton Battle AI', en:'🤖 Watch AI Battle'},
+
+  'hero.eyebrow': {id:'✦ AI Trading · Automasi · Tools', en:'✦ AI Trading · Automation · Tools'},
+  'hero.title': {id:'Produk Digital untuk<br><span class="grad">AI Trading</span> dan<br>Automasi Trading', en:'Digital Products for<br><span class="grad">AI Trading</span> and<br>Trading Automation'},
+  'hero.desc': {id:'IPI Digital menyediakan produk digital seputar AI Trading, Prompt Engineering, Data Training AI, Bot Trading, dan Indikator — dikembangkan dari pengalaman nyata di pasar.', en:'IPI Digital provides digital products around AI Trading, Prompt Engineering, AI Training Data, Trading Bots, and Indicators — built from real market experience.'},
+  'hero.btnProduk': {id:'Lihat Produk', en:'View Products'},
+  'hero.exp1n': {id:'8 Tahun', en:'8 Years'},
+  'hero.exp1l': {id:'Pengalaman<br>Trading', en:'Trading<br>Experience'},
+  'hero.exp2n': {id:'3 Tahun', en:'3 Years'},
+  'hero.exp2l': {id:'AI Trading &<br>Automation', en:'AI Trading &<br>Automation'},
+
+  'about.label': {id:'Tentang Kami', en:'About Us'},
+  'about.title': {id:'Fokus pada <span class="grad">AI Trading</span><br>dan Automasi', en:'Focused on <span class="grad">AI Trading</span><br>and Automation'},
+  'about.desc': {id:'IPI Digital adalah brand yang fokus mengembangkan dan menjual produk digital di bidang trading berbasis kecerdasan buatan. Semua produk dikembangkan dari riset dan penggunaan nyata — bukan teori.', en:'IPI Digital is a brand focused on developing and selling digital products for AI-based trading. Every product is built from real research and real-world use — not theory.'},
+  'about.list': {id:'<li>AI Trading</li><li>Prompt Engineering untuk Trading</li><li>Data Training AI</li><li>Trading Automation (EA / Bot)</li><li>Pengembangan Tools & Indikator Trading</li>', en:'<li>AI Trading</li><li>Prompt Engineering for Trading</li><li>AI Training Data</li><li>Trading Automation (EA / Bot)</li><li>Trading Tools & Indicator Development</li>'},
+  'about.yr': {id:'&nbsp;thn', en:'&nbsp;yrs'},
+  'about.exp1': {id:'Pengalaman Trading', en:'Trading Experience'},
+  'about.exp2': {id:'AI Trading', en:'AI Trading'},
+  'about.note': {id:'Semua produk yang tersedia di sini adalah hasil dari riset, eksperimen, dan penggunaan langsung di pasar nyata — mulai dari Forex, XAU, hingga aset crypto. Tidak ada klaim berlebihan. Produk berbicara lewat hasil nyata dari pengguna.', en:'Every product here comes from research, experimentation, and real use in live markets — from Forex and XAU to crypto assets. No overhyped claims. The products speak through real user results.'},
+
+  'prod.label': {id:'Produk Digital', en:'Digital Products'},
+  'prod.title': {id:'Pilih Produk <span class="grad">yang Sesuai</span>', en:'Choose the <span class="grad">Right Product</span>'},
+  'prod.desc': {id:'Pilih produk yang paling sesuai dengan kebutuhanmu, lalu baca detailnya sebelum melakukan pembelian.', en:'Pick the product that fits your needs best, then read the details before you buy.'},
+  'prod.premium': {id:'Premium', en:'Premium'},
+  'prod.featured': {id:'Unggulan', en:'Featured'},
+  'prod.viewBtn': {id:'Lihat Produk →', en:'View Product →'},
+  'prod.ctaFree': {id:'Free Neurobro Prompt', en:'Free Neurobro Prompt'},
+  'prod.ctaAdmin': {id:'Hubungi Admin via Telegram', en:'Contact Admin via Telegram'},
+
+  'prod.p1.name': {id:'Prompt AI Neurobro', en:'Neurobro AI Prompt'},
+  'prod.p1.tag': {id:'AI Entry Level', en:'AI Entry Level'},
+  'prod.p1.desc': {id:'Prompt siap pakai untuk membantu Neurobro memberi analisa trading yang lebih jelas, rapi, dan mudah dipakai, termasuk untuk pemula.', en:'Ready-to-use prompts that help Neurobro give clearer, cleaner, easier-to-follow trading analysis — beginner-friendly.'},
+  'prod.p1.sold': {id:'1323 terjual', en:'1323 sold'},
+
+  'prod.p2.name': {id:'Latih Claude & ChatGPT Jadi AI Signaler', en:'Train Claude & ChatGPT as an AI Signaler'},
+  'prod.p2.shortName': {id:'Data Training AI Signal', en:'AI Signal Training Data'},
+  'prod.p2.tag': {id:'Data 400K Candle', en:'400K Candle Data'},
+  'prod.p2.desc': {id:'Dataset 400.000 candle dan panduan bertahap untuk membantu AI memberi analisa trading yang lebih berbasis data dan lebih mudah dipahami.', en:'A 400,000-candle dataset plus a step-by-step guide to help AI give more data-driven, easier-to-understand trading analysis.'},
+  'prod.p2.sold': {id:'548 terjual', en:'548 sold'},
+
+  'prod.p3.name': {id:'Latih Claude Sniper Entry', en:'Train Claude Sniper Entry'},
+  'prod.p3.tag': {id:'1 Juta Candle · Elite', en:'1 Million Candles · Elite'},
+  'prod.p3.desc': {id:'Paket data dan metodologi untuk membantu Claude membaca konteks pasar, menyaring noise, dan menajamkan analisa entry dengan lebih terstruktur.', en:'A data and methodology package that helps Claude read market context, filter out noise, and sharpen entry analysis in a more structured way.'},
+  'prod.p3.sold': {id:'128 terjual', en:'128 sold'},
+
+  'prod.p4.name': {id:'EA MT5 Trend Following', en:'MT5 Trend Following EA'},
+  'prod.p4.tag': {id:'Auto Trading', en:'Auto Trading'},
+  'prod.p4.desc': {id:'Bot MT5 siap pakai untuk membantu eksekusi strategi trend following lebih disiplin tanpa harus terus memantau chart atau coding sendiri.', en:'A ready-to-use MT5 bot that executes a trend-following strategy with discipline, without you having to watch charts or code it yourself.'},
+  'prod.p4.sold': {id:'566 terjual', en:'566 sold'},
+
+  'prod.p5.name': {id:'Indikator TradingView XAU', en:'TradingView XAU Indicator'},
+  'prod.p5.tag': {id:'Precision Tools', en:'Precision Tools'},
+  'prod.p5.desc': {id:'Indikator XAU/USD yang membantu trader melihat area penting, potensi reaksi harga, dan arah analisa dengan chart yang tetap bersih.', en:'An XAU/USD indicator that helps traders spot key areas, potential price reactions, and analysis direction — while keeping the chart clean.'},
+  'prod.p5.sold': {id:'767 terjual', en:'767 sold'},
+
+  'order.label': {id:'Cara Order', en:'How to Order'},
+  'order.title': {id:'Order dalam <span class="grad">5 Langkah Simpel</span>', en:'Order in <span class="grad">5 Simple Steps</span>'},
+  'order.desc': {id:'Singkat dan otomatis — produk langsung dikirim setelah pembayaran terkonfirmasi.', en:'Quick and automatic — your product is sent right after payment is confirmed.'},
+  'order.s1t': {id:'Pilih Produk', en:'Choose a Product'},
+  'order.s1d': {id:'Sesuai profil finansial dan tujuan trading kamu.', en:'Matching your financial profile and trading goals.'},
+  'order.s2t': {id:'Baca Deskripsi', en:'Read the Description'},
+  'order.s2d': {id:'Pahami fitur dan manfaatnya sebelum membeli.', en:'Understand the features and benefits before buying.'},
+  'order.s3t': {id:'Beli Sekarang', en:'Buy Now'},
+  'order.s3d': {id:'Klik tombol beli di halaman produk.', en:'Click the buy button on the product page.'},
+  'order.s4t': {id:'Input Kontak & Bayar', en:'Enter Contact & Pay'},
+  'order.s4d': {id:'Isi email/WhatsApp aktif, lalu selesaikan pembayaran.', en:'Fill in an active email/WhatsApp, then complete payment.'},
+  'order.s5t': {id:'Produk Terkirim Otomatis', en:'Product Delivered Automatically'},
+  'order.s5d': {id:'Setelah pembayaran terverifikasi, produk langsung dikirim ke kontak yang kamu isi.', en:'Once payment is verified, the product is sent straight to the contact you provided.'},
+  'order.note': {id:'Tips: baca detail produk dulu sebelum checkout.', en:'Tip: read the product details first before checkout.'},
+
+  'testiSS.label': {id:'Testimoni Pengguna', en:'User Testimonials'},
+  'testiSS.title': {id:'Hasil Nyata dari <span class="grad">Pengguna</span>', en:'Real Results from <span class="grad">Users</span>'},
+  'testiSS.desc': {id:'Screenshot asli dari pengguna. Nama disamarkan untuk menjaga privasi.', en:'Real screenshots from users. Names are blurred to protect privacy.'},
+
+  'testi.label': {id:'Testimoni', en:'Testimonials'},
+  'testi.title': {id:'Kata <span class="grad">Pengguna</span>', en:'What <span class="grad">Users</span> Say'},
+  'testi.desc': {id:'Testimoni asli dari pengguna. Nama disamarkan untuk menjaga privasi.', en:'Real testimonials from users. Names are blurred to protect privacy.'},
+  'testi.u1': {id:'Pengguna Latih Claude Sniper Entry', en:'Train Claude Sniper Entry user'},
+  'testi.u2': {id:'Pengguna Prompt AI Neurobro', en:'Neurobro AI Prompt user'},
+  'testi.u4': {id:'Pengguna Produk IPI Digital', en:'IPI Digital product user'},
+
+  'challenge.label': {id:'Live Challenge', en:'Live Challenge'},
+  'challenge.title': {id:'Challenge Modal <span style="background:linear-gradient(135deg,#ec4899,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$10</span>', en:'The <span style="background:linear-gradient(135deg,#ec4899,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent">$10</span> Capital Challenge'},
+  'challenge.desc': {id:'Ikuti perkembangan challenge modal kecil secara langsung. Semua proses — analisa, entry, hasil — dibagikan secara terbuka di komunitas Telegram.', en:'Follow this small-capital challenge live. Every step — analysis, entries, results — is shared openly in our Telegram community.'},
+  'challenge.btn': {id:'Pantau Challenge di Telegram →', en:'Follow the Challenge on Telegram →'},
+
+  'signaler.label': {id:'Free Signal', en:'Free Signal'},
+  'signaler.title': {id:'Free AI <span class="grad-cyan">Signaler</span>', en:'Free AI <span class="grad-cyan">Signaler</span>'},
+  'signaler.title2': {id:'Free AI Signaler', en:'Free AI Signaler'},
+  'signaler.desc': {id:'Coba sinyal AI gratis sebelum memutuskan membeli produk premium. Gabung komunitas Telegram dan pantau sinyal yang dibagikan secara berkala.', en:'Try free AI signals before deciding to buy a premium product. Join our Telegram community and follow the signals shared regularly.'},
+  'signaler.btn': {id:'Gabung Free AI Signaler →', en:'Join Free AI Signaler →'},
+
+  'faq.label': {id:'FAQ', en:'FAQ'},
+  'faq.title': {id:'Pertanyaan <span class="grad">Umum</span>', en:'Frequently Asked <span class="grad">Questions</span>'},
+  'faq.q1': {id:'Apa itu prompt AI untuk trading?', en:'What is an AI prompt for trading?'},
+  'faq.a1': {id:'Prompt adalah instruksi yang diberikan ke AI (seperti Claude atau ChatGPT) agar AI bisa menganalisa grafik, level harga, atau kondisi pasar. Produk prompt kami dirancang khusus untuk konteks trading — bukan prompt generik.', en:'A prompt is an instruction given to an AI (like Claude or ChatGPT) so it can analyze charts, price levels, or market conditions. Our prompt products are built specifically for trading — not generic prompts.'},
+  'faq.q2': {id:'Apa yang dimaksud Data Training AI?', en:'What is AI Training Data?'},
+  'faq.a2': {id:'Data training adalah kumpulan data historis candle (harga open, high, low, close) yang digunakan untuk melatih atau menyetel AI agar mengenali pola pasar. Produk kami menyertakan data ratusan ribu hingga jutaan candle beserta panduan cara melatihnya.', en:'Training data is a set of historical candle data (open, high, low, close prices) used to train or tune an AI to recognize market patterns. Our products include hundreds of thousands to millions of candles, plus a guide on how to train with them.'},
+  'faq.q3': {id:'Produk "Latih Claude Sniper Entry" untuk siapa?', en:'Who is "Train Claude Sniper Entry" for?'},
+  'faq.a3': {id:'Untuk semua trader yang ingin punya Claude AI sebagai partner analisa entry presisi — baik yang masih membangun kemampuan membaca chart maupun yang sudah berpengalaman. Anda tidak perlu bisa coding, cukup ikuti panduan pelatihan yang disertakan secara bertahap.', en:'For any trader who wants Claude AI as a precision entry-analysis partner — whether you are still building your chart-reading skills or already experienced. No coding needed, just follow the included step-by-step training guide.'},
+  'faq.q4': {id:'EA MT5 bekerja di broker apa saja?', en:'Which brokers does the MT5 EA work with?'},
+  'faq.a4': {id:'EA MT5 Trend Following kompatibel dengan semua broker yang menggunakan platform MetaTrader 5. Pastikan akun trading Anda menggunakan MT5 (bukan MT4) sebelum membeli.', en:'The MT5 Trend Following EA works with any broker running the MetaTrader 5 platform. Make sure your trading account uses MT5 (not MT4) before you buy.'},
+  'faq.q5': {id:'Indikator TradingView XAU untuk pair apa?', en:'Which pair is the TradingView XAU indicator for?'},
+  'faq.a5': {id:'Indikator ini dirancang khusus untuk XAU/USD (Gold). Digunakan di platform TradingView. Setelah pembelian, Anda akan mendapat akses dan panduan cara memasangnya.', en:'This indicator is built specifically for XAU/USD (Gold), for use on TradingView. After purchase, you get access plus a guide on how to set it up.'},
+  'faq.q6': {id:'Bagaimana cara membeli produk?', en:'How do I buy a product?'},
+  'faq.a6': {id:'Pilih produk yang diinginkan, baca detailnya sampai paham, lalu klik tombol "Beli Sekarang". Setelah itu pilih metode pembayaran, isi form dengan data yang benar, dan setelah pembayaran terverifikasi produk akan dikirim otomatis ke email atau WhatsApp Anda.', en:'Choose the product you want, read the details until you understand it, then click "Buy Now". Next, pick a payment method, fill in the form with correct details, and once payment is verified the product is sent automatically to your email or WhatsApp.'},
+  'faq.q7': {id:'Apakah ada garansi hasil profit?', en:'Is there a profit guarantee?'},
+  'faq.a7': {id:'Tidak ada. Trading selalu mengandung risiko dan tidak ada produk yang bisa menjamin profit. Semua produk kami adalah alat bantu — hasil akhir tetap bergantung pada cara Anda menggunakannya dan kondisi pasar.', en:'No. Trading always carries risk and no product can guarantee profit. All our products are tools — the outcome still depends on how you use them and on market conditions.'},
+
+  'footer.desc': {id:'Produk digital untuk AI Trading, Prompt Engineering, Data Training AI, Bot Trading, dan Indikator.', en:'Digital products for AI Trading, Prompt Engineering, AI Training Data, Trading Bots, and Indicators.'},
+  'footer.hProduk': {id:'Produk', en:'Products'},
+  'footer.hKomunitas': {id:'Komunitas', en:'Community'},
+  'footer.telegramChallenge': {id:'Telegram Challenge', en:'Telegram Challenge'},
+  'footer.rights': {id:'Hak cipta dilindungi.', en:'All rights reserved.'},
+  'footer.tagline': {id:'Produk digital · Tidak ada garansi profit', en:'Digital products · No profit guarantee'},
+  'footer.disclaimer': {id:'⚠️ Trading mengandung risiko tinggi. Produk ini adalah alat bantu, bukan jaminan profit. Gunakan dengan bijak.', en:'⚠️ Trading carries high risk. This product is a tool, not a profit guarantee. Use it wisely.'}
+};
+</script>
+<script src="i18n.js"></script>
 
 </body>
 </html>

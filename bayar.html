@@ -435,7 +435,7 @@ const uniqueCode=getUniqueCode(pid);
 const finalPrice=product.price+uniqueCode;
 
 // Populate header info
-document.getElementById('ppIcon').innerHTML='<img src="'+product.img+'" alt="'+product.name+'">';
+document.getElementById('ppIcon').innerHTML='<img src="'+esc(product.img)+'" alt="'+esc(product.name)+'">';
 document.getElementById('ppName').textContent=product.name;
 document.getElementById('ppPrice').textContent=fmtRp(finalPrice);
 document.getElementById('priceTotal').textContent=fmtRp(finalPrice);
@@ -445,6 +445,8 @@ document.getElementById('backLink').href='produk.html?id='+pid;
 // Amount labels
 document.getElementById('iAmount').textContent=fmtRp(finalPrice);
 document.getElementById('iAmtNote').textContent=fmtRp(finalPrice);
+
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
 // ── Render payment options ──
 function _buildPayOpts(pay){
@@ -460,8 +462,8 @@ function _buildPayOpts(pay){
     d.dataset.name=p.name;
     d.dataset.number=p.number;
     d.dataset.holder=p.holder;
-    var lg=logoSrc?'<div class="cs-opt-icon"><img src="'+logoSrc+'" alt="'+p.name+'" onerror="this.parentElement.textContent=\'💳\'"></div>':'<div class="cs-opt-icon" style="font-size:20px">💳</div>';
-    d.innerHTML=lg+'<div class="cs-opt-info"><span class="cs-opt-name">'+p.name+'</span><span class="cs-opt-num">'+p.number+'</span><span class="cs-opt-holder">a.n. '+p.holder+'</span></div><span class="cs-badge">Tersedia</span>';
+    var lg=logoSrc?'<div class="cs-opt-icon"><img src="'+esc(logoSrc)+'" alt="'+esc(p.name)+'" onerror="this.parentElement.textContent=\'💳\'"></div>':'<div class="cs-opt-icon" style="font-size:20px">💳</div>';
+    d.innerHTML=lg+'<div class="cs-opt-info"><span class="cs-opt-name">'+esc(p.name)+'</span><span class="cs-opt-num">'+esc(p.number)+'</span><span class="cs-opt-holder">a.n. '+esc(p.holder)+'</span></div><span class="cs-badge">Tersedia</span>';
     dd.appendChild(d);
   });
 }
@@ -505,7 +507,7 @@ dropdown.addEventListener('click',function(e){
   placeholder.style.display='none';
   selectedWrap.style.display='flex';
   const iconEl=document.getElementById('csSIcon');
-  iconEl.innerHTML=img?'<img src="'+img+'" alt="'+name+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.textContent=\'💳\'">':'💳';
+  iconEl.innerHTML=img?'<img src="'+esc(img)+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.textContent=\'💳\'">':'💳';
   document.getElementById('csSName').textContent=name;
   document.getElementById('csSNum').textContent=number+' · a.n. '+holder;
 

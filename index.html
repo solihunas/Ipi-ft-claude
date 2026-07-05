@@ -742,6 +742,8 @@ function _applyProdOverrides(items){
   }catch(_){}
 }
 
+function _esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
 // ── Admin: inject testimonial photos to carousel ──
 function _injectTestis(testis){
   try{
@@ -752,7 +754,7 @@ function _injectTestis(testis){
       div.className='testi-slide';
       // support both t.data (new) and t.img (legacy)
       var src=t.data||t.img||'';
-      div.innerHTML='<div class="testi-neon-wrap"><div class="testi-img-frame"><img src="'+src+'" alt="Testimoni '+(i+1)+'" loading="lazy"></div></div>';
+      div.innerHTML='<div class="testi-neon-wrap"><div class="testi-img-frame"><img src="'+_esc(src)+'" alt="Testimoni '+(i+1)+'" loading="lazy"></div></div>';
       track.appendChild(div);
     });
   }catch(_){}

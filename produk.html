@@ -125,6 +125,55 @@
   display: flex; gap: 10px;
 }
 
+/* Coming-soon warning box */
+.pd-warn-box {
+  background: rgba(245,158,11,.1); border: 1.5px solid rgba(245,158,11,.4);
+  border-radius: 14px; padding: 20px; margin-bottom: 28px;
+  box-shadow: 0 0 24px rgba(245,158,11,.08);
+}
+.pd-warn-ttl {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 800; color: #f59e0b;
+  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px;
+}
+.pd-warn-box p { font-size: 13.5px; color: #fef3c7; line-height: 1.8; margin-bottom: 10px; }
+.pd-warn-box p:last-child { margin-bottom: 0; font-weight: 700; }
+
+/* "Yang Anda Dapatkan" cards (coming-soon layout) */
+.pd-get-list { display: flex; flex-direction: column; gap: 12px; }
+.pd-get-card {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px; background: rgba(10,5,25,.6);
+  border: 1px solid rgba(147,51,234,.12); border-radius: 10px;
+}
+.pd-get-num {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(168,85,247,.15); border: 1px solid rgba(168,85,247,.3);
+  color: #c084fc; font-size: 12px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.pd-get-card h4 { font-size: 14.5px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+.pd-get-card p { font-size: 13px; color: #ffffff; line-height: 1.75; margin: 0; }
+
+/* "Yang Perlu Diketahui" — transparansi, selalu terlihat (bukan accordion) */
+.pd-know-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.pd-know-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 13.5px; color: #ffffff; font-weight: 600; line-height: 1.7;
+  padding: 13px 16px; background: rgba(239,68,68,.05);
+  border: 1px solid rgba(239,68,68,.18); border-radius: 8px;
+}
+.pd-know-icon { color: #f87171; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* Coming-soon bottom CTA */
+.pd-soon-cta {
+  text-align: center; background: rgba(245,158,11,.06);
+  border: 1px solid rgba(245,158,11,.25); border-radius: 14px;
+  padding: 28px 20px;
+}
+.pd-soon-cta p { font-size: 13px; color: #ffffff; margin-top: 14px; }
+.pd-soon-cta a.pd-contact-link { color: #f59e0b; font-weight: 600; }
+
 /* Sticky CTA bar */
 .pd-cta-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
@@ -181,7 +230,7 @@
 
 <div class="pd-cta-bar">
   <div class="pd-cta-info">
-    <div class="lbl" data-i18n="pd.harga">Harga</div>
+    <div class="lbl" id="ctaLbl" data-i18n="pd.harga">Harga</div>
     <div class="val" id="ctaPrice"></div>
   </div>
   <a href="#" id="ctaBtn" class="btn btn-primary btn-lg" data-i18n="pd.beliBtn">Beli Sekarang →</a>
@@ -257,6 +306,56 @@ const PRODUCTS = {
       features:['Invite-only access directly on TradingView, keeping the indicator exclusive and secure','Automatically highlights key XAU levels on the chart','Clean visuals keep the chart easy to read without too much noise','Comes with a usage guide so even beginner traders quickly understand every element of the indicator','Gets ongoing updates whenever improvements or new features are added'],
       includes:['Pine Script indicator access on TradingView (invite-only, non-transferable)','Complete usage guide (PDF)'],
       note:'Built specifically for XAU/USD. A free TradingView account is enough — no need for a Pro subscription to use this indicator.'}},
+  '6':{comingSoon:true,name:'Panduan Autotrade N8N — Bangun Sistem AI Agent Trading Otomatis di MT5, Sendiri Tanpa Coding',short:'Panduan Autotrade N8N',icon:'🤖',img:'prod-n8n.png',badge:null,
+    tagline:'Cetak biru lengkap membangun sistem AI Agent trading otomatis di MT5 pakai n8n — tanpa satu baris kode.',
+    warnTitle:'⚠️ Baca Dulu Sebelum Lanjut',
+    warnBody:['Produk ini bukan robot trading siap pakai dan bukan langganan sinyal. Ini adalah panduan + kerangka sistem yang harus Anda bangun dan jalankan sendiri.',
+      'Selain harga produk nanti, Anda wajib membayar layanan pihak ketiga secara terpisah setiap bulan (n8n Cloud + MetaApi) agar sistem bisa berjalan — estimasi sekitar $50–60/bulan (±Rp900rb–950rb), tergantung kurs dan penggunaan.',
+      'Kalau budget bulanan ini terasa berat, produk ini mungkin belum cocok untuk Anda saat ini.'],
+    aboutTtl:'Apa Ini Sebenarnya',
+    about:['Bayangkan sebuah sistem yang bekerja sendiri tiap beberapa menit. Membaca data candle terbaru dari akun MT5 Anda, memprosesnya lewat AI Agent sesuai logika yang Anda tentukan sendiri, lalu — kalau Anda mau — mengeksekusi keputusan itu langsung ke akun trading Anda.',
+      'Semua berjalan otomatis di background, tanpa Anda harus install aplikasi rumit, tanpa sewa VPS sendiri, dan tanpa satu baris kode pun yang perlu Anda tulis.',
+      'Panduan Autotrade N8N adalah cetak biru lengkap untuk membangun sistem ini dari nol, disusun khusus untuk pemula yang belum pernah menyentuh automation sebelumnya.'],
+    getTtl:'Yang Anda Dapatkan',
+    getCards:[
+      {t:'Ebook Panduan Bergambar',d:'Instruksi step-by-step dari awal sampai sistem berjalan, mulai dari daftar akun, sambungkan MT5, sampai mengaktifkan workflow. Ditulis dengan bahasa sederhana, tiap langkah dijelaskan detail termasuk posisi tombol dan tampilan layar yang akan Anda lihat.'},
+      {t:'File Workflow n8n Siap Impor',d:'Kerangka alur kerja yang sudah jadi: scheduler, koneksi data, sampai struktur eksekusi. Anda tinggal impor lewat satu tombol, tidak perlu menyusun dari kosong.'},
+      {t:'Panduan Menyusun Logika AI Agent Sendiri',d:'Kami mengajarkan cara berpikir untuk menyusun instruksi/doktrin ke AI Agent, bukan memberikan doktrin trading jadi. Supaya sistem yang Anda jalankan mencerminkan pemahaman dan keputusan Anda sendiri.'}
+    ],
+    knowTtl:'Yang Perlu Anda Ketahui Sebelum Membeli',
+    knowPoints:['Ini panduan dan sistem, bukan layanan kelola trading. Anda yang membangun, menjalankan, dan bertanggung jawab penuh atas sistem di akun Anda sendiri.',
+      'Kami tidak menjual strategi atau doktrin trading jadi. Anda akan menyusun sendiri logika pengambilan keputusan untuk AI Agent Anda.',
+      'Support tersedia lewat grup komunitas, tempat Anda bisa bertanya dan saling bantu dengan pembeli lain seputar kendala teknis pemasangan sistem.',
+      'Trading mengandung risiko. Sistem otomatis tidak menjamin profit. Performa masa lalu tidak menentukan hasil masa depan. Selalu uji di akun demo terlebih dahulu sebelum menggunakan akun real.'],
+    forTtl:'Untuk Siapa Ini',
+    forWhom:['Anda tidak perlu jadi programmer. Kalau Anda bisa mengikuti instruksi dengan sabar dan mau belajar menyusun logika trading Anda sendiri secara sistematis, Anda bisa menyelesaikan ini.',
+      'Ini cocok untuk trader yang ingin sistem yang bisa mereka pahami sepenuhnya — bukan kotak hitam yang tidak jelas cara kerjanya — dan yang siap dengan konsekuensi biaya bulanan sebagai bagian dari membangun fondasi otomasi jangka panjang.'],
+    ctaNote:'Ada pertanyaan? Hubungi kami di Telegram.',
+    en:{name:'N8N Autotrade Guide — Build Your Own No-Code AI Agent Trading System on MT5',short:'N8N Autotrade Guide',
+      tagline:'The complete blueprint to build an automated AI Agent trading system on MT5 using n8n — without writing a single line of code.',
+      warnTitle:'⚠️ Read This Before You Continue',
+      warnBody:['This is not a ready-to-use trading robot and not a signal subscription. It is a guide + system framework that you build and run yourself.',
+        'On top of the product price (once set), you will need to pay for third-party services separately every month (n8n Cloud + MetaApi) to keep the system running — roughly $50–60/month (≈Rp900k–950k), depending on exchange rate and usage.',
+        'If this monthly budget feels like a stretch, this product might not be the right fit for you right now.'],
+      aboutTtl:'What This Actually Is',
+      about:['Picture a system that runs itself every few minutes. It reads the latest candle data from your MT5 account, processes it through an AI Agent following the logic you define yourself, then — if you choose — executes that decision straight into your trading account.',
+        'Everything runs automatically in the background — no complicated app installs, no VPS to rent yourself, and not a single line of code you need to write.',
+        'The N8N Autotrade Guide is the complete blueprint to build this system from scratch, written specifically for beginners who have never touched automation before.'],
+      getTtl:'What You Get',
+      getCards:[
+        {t:'Illustrated Step-by-Step Ebook',d:'Step-by-step instructions from zero to a running system: creating accounts, connecting MT5, and activating the workflow. Written in simple language, with every step explained in detail — including where to click and what your screen will look like.'},
+        {t:'Ready-to-Import n8n Workflow File',d:'A finished workflow skeleton: scheduler, data connections, all the way to the execution structure. Just import it with one click — no need to build it from scratch.'},
+        {t:'Guide to Building Your Own AI Agent Logic',d:'We teach you how to think through writing instructions/doctrine for your AI Agent, instead of handing you a ready-made trading doctrine — so the system you run reflects your own understanding and decisions.'}
+      ],
+      knowTtl:'What You Should Know Before Buying',
+      knowPoints:['This is a guide and a system, not a managed trading service. You build, run, and take full responsibility for the system on your own account.',
+        'We do not sell a ready-made trading strategy or doctrine. You will build your own decision-making logic for your AI Agent.',
+        'Support is available through a community group, where you can ask questions and help each other with technical setup issues alongside other buyers.',
+        'Trading carries risk. An automated system does not guarantee profit. Past performance does not determine future results. Always test on a demo account before using a real account.'],
+      forTtl:'Who This Is For',
+      forWhom:['You do not need to be a programmer. If you can follow instructions patiently and are willing to learn how to structure your own trading logic systematically, you can complete this.',
+        'This is a good fit for traders who want a system they can fully understand — not a black box they cannot explain — and who are ready to take on the monthly cost as part of building a long-term automation foundation.'],
+      ctaNote:'Have questions? Contact us on Telegram.'}},
 };
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -270,6 +369,7 @@ window.I18N = Object.assign(window.I18N||{}, {
   'nav.battle': {id:'🤖 Tonton Battle AI', en:'🤖 Watch AI Battle'},
   'pd.back': {id:'← Semua Produk', en:'← All Products'},
   'pd.harga': {id:'Harga', en:'Price'},
+  'pd.status': {id:'Status', en:'Status'},
   'pd.beliBtn': {id:'Beli Sekarang →', en:'Buy Now →'},
   'footer.disclaimer': {id:'⚠️ Trading mengandung risiko tinggi. Produk ini adalah alat bantu, bukan jaminan profit.', en:'⚠️ Trading carries high risk. This product is a tool, not a profit guarantee.'}
 });
@@ -288,6 +388,8 @@ function render(){
     document.getElementById('pdContent').innerHTML = msg;
     return;
   }
+
+  if (p.comingSoon) { renderComingSoon(lang, loc); return; }
 
   document.title = loc.short + ' — IPI Digital';
   const soldWord = lang==='en' ? ' sold' : ' terjual';
@@ -351,6 +453,83 @@ function render(){
   `;
   document.getElementById('ctaPrice').textContent = window.ipiFmtMoney ? window.ipiFmtMoney(p.price) : ('Rp '+p.price.toLocaleString('id-ID'));
   document.getElementById('ctaBtn').href = `bayar.html?id=${id}`;
+}
+
+const TG_CONTACT = 'https://t.me/iipistore';
+
+function renderComingSoon(lang, loc){
+  const en = lang==='en';
+  const soonLbl = en ? 'Coming Soon' : 'Segera Hadir';
+  const statusLbl = en ? 'Status' : 'Status';
+  const waitlistLbl = en ? 'Join Waitlist →' : 'Daftar Tunggu →';
+
+  document.title = loc.short + ' — IPI Digital';
+  document.getElementById('pdContent').innerHTML = `
+    <div class="pd-hero">
+      <div class="pd-icon"><img src="${esc(p.img)}" alt="${esc(loc.short)}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="pd-hero-body">
+        <span class="product-badge badge-gold" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${soonLbl}</span><br>
+        <div class="pd-name">${esc(loc.name)}</div>
+        <div class="pd-tagline">${loc.tagline}</div>
+        <div class="pd-price-pill">
+          <div>
+            <div class="pd-price-lbl">${statusLbl}</div>
+            <div class="pd-price-val" style="color:#f59e0b">${soonLbl}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pd-warn-box">
+      <div class="pd-warn-ttl"><span>⚠️</span><span>${esc(loc.warnTitle.replace(/^⚠️\s*/,''))}</span></div>
+      ${loc.warnBody.map(t=>`<p>${esc(t)}</p>`).join('')}
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">${esc(loc.aboutTtl)}</div>
+      <div class="pd-about">${loc.about.map(t=>`<p style="margin-bottom:12px">${esc(t)}</p>`).join('')}</div>
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">${esc(loc.getTtl)}</div>
+      <div class="pd-get-list">
+        ${loc.getCards.map((c,i)=>`<div class="pd-get-card"><div class="pd-get-num">${i+1}</div><div><h4>${esc(c.t)}</h4><p>${esc(c.d)}</p></div></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">${esc(loc.knowTtl)}</div>
+      <ul class="pd-know-list">
+        ${loc.knowPoints.map(k=>`<li><span class="pd-know-icon">●</span><span>${esc(k)}</span></li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">${esc(loc.forTtl)}</div>
+      <div class="pd-about">${loc.forWhom.map(t=>`<p style="margin-bottom:12px">${esc(t)}</p>`).join('')}</div>
+    </div>
+
+    <div class="pd-soon-cta">
+      <a href="${TG_CONTACT}" target="_blank" class="btn btn-gold btn-lg">${waitlistLbl}</a>
+      <p>${en?'Have questions? Contact us on ':'Ada pertanyaan? Hubungi kami di '}<a href="${TG_CONTACT}" target="_blank" class="pd-contact-link">Telegram</a>.</p>
+    </div>
+  `;
+
+  const ctaLbl = document.getElementById('ctaLbl');
+  ctaLbl.textContent = statusLbl;
+  ctaLbl.removeAttribute('data-i18n');
+
+  const ctaPrice = document.getElementById('ctaPrice');
+  ctaPrice.textContent = soonLbl;
+  ctaPrice.style.color = '#f59e0b';
+
+  const ctaBtn = document.getElementById('ctaBtn');
+  ctaBtn.textContent = waitlistLbl;
+  ctaBtn.href = TG_CONTACT;
+  ctaBtn.target = '_blank';
+  ctaBtn.removeAttribute('data-i18n');
+  ctaBtn.classList.remove('btn-primary');
+  ctaBtn.classList.add('btn-gold');
 }
 
 render();

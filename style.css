@@ -1272,6 +1272,24 @@ footer {
   box-shadow: 0 0 20px rgba(245,158,11,0.2);
 }
 
+/* Tier 6 — "Segera Hadir" full-width teaser banner */
+.product-card.tier-6 {
+  margin-top: 20px;
+  align-items: center;
+  text-align: center;
+  border-style: dashed;
+  border-color: rgba(245,158,11,0.3);
+  background: rgba(245,158,11,0.03);
+}
+.product-card.tier-6:hover { border-color: rgba(245,158,11,0.5); }
+.product-card.tier-6 .product-badge { align-self: center; }
+.product-card.tier-6 .prod-logo-wrap { width: 72px; height: 72px; margin-bottom: 14px; border-color: rgba(245,158,11,0.35); }
+.product-card.tier-6 h3 { font-size: 17px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+.product-card.tier-6 .prod-tagline { display: block; color: #f59e0b; margin-bottom: 14px; }
+.product-card.tier-6 p { max-width: 480px; margin: 0 auto 18px; flex: none; }
+.product-card.tier-6 .product-price { margin-bottom: 18px; }
+.product-card.tier-6 .btn { width: auto; }
+
 /* Telegram CTA pills below products grid */
 .prod-extra-cta {
   display: flex;

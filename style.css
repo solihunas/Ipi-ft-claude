@@ -1290,11 +1290,25 @@ footer {
 .product-card.tier-6 .product-price { margin-bottom: 18px; }
 .product-card.tier-6 .btn { width: auto; }
 
-/* Live (purchasable) variant — drop the dashed "coming soon" cues */
-.product-card.tier-6-live { border-style: solid; border-color: rgba(147,51,234,0.12); background: rgba(10,5,25,0.8); }
-.product-card.tier-6-live:hover { border-color: rgba(147,51,234,0.4); }
-.product-card.tier-6-live .prod-logo-wrap { border-color: rgba(168,85,247,0.15); }
-.product-card.tier-6-live .prod-tagline { color: #a855f7; }
+/* Tier 6 live — compact full-width row, same bright treatment as other cards */
+.product-card.tier-6-live {
+  margin-top: 20px;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+  padding: 22px 28px;
+}
+.product-card.tier-6-live .prod-top { margin-bottom: 0; flex-shrink: 0; }
+.product-card.tier-6-live p { flex: 1 1 240px; margin-bottom: 0; }
+.product-card.tier-6-live .prod-meta { margin-bottom: 0; flex-shrink: 0; }
+.product-card.tier-6-live .product-price { margin-bottom: 0; flex-shrink: 0; }
+.product-card.tier-6-live .btn { width: auto; flex-shrink: 0; }
+@media (max-width: 760px) {
+  .product-card.tier-6-live { flex-direction: column; align-items: stretch; }
+  .product-card.tier-6-live p { flex: none; }
+  .product-card.tier-6-live .btn { width: 100%; }
+}
 
 /* Telegram CTA pills below products grid */
 .prod-extra-cta {

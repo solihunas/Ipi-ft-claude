@@ -185,6 +185,23 @@
 .pd-soon-cta p { font-size: 13px; color: #ffffff; margin-top: 14px; }
 .pd-soon-cta a.pd-contact-link { color: #f59e0b; font-weight: 600; }
 
+/* Multi-variant product cards */
+.pd-variant-list { display: flex; flex-direction: column; gap: 16px; }
+.pd-variant-card {
+  background: linear-gradient(180deg, rgba(10,5,25,.9), rgba(10,5,25,.72));
+  border: 1px solid rgba(147,51,234,.16);
+  border-radius: 14px; padding: 20px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.22);
+}
+.pd-variant-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pd-variant-tag {
+  display: inline-block; margin-top: 6px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  color: #fca5a5; background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.25);
+  border-radius: 6px; padding: 3px 8px;
+}
+.pd-variant-price { font-size: 19px; font-weight: 800; color: #a855f7; white-space: nowrap; }
+
 /* Sticky CTA bar */
 .pd-cta-bar {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
@@ -293,18 +310,38 @@ const PRODUCTS = {
       features:['Helps Claude read cause-and-effect in the market, not just recognize surface-level patterns','Builds analysis of key areas, potential traps, and entry scenarios with clearer logic','Helps traders understand price-movement context, including market participant psychology','Backed by 1,000,000 historical candles as a richer learning foundation','Complete training guide from start to ready-for-real-analysis','30 days of support access for a smoother setup and usage process'],
       includes:['1,000,000 historical candle data file (CSV format)','Claude training guide document + analysis framework (PDF)','30 days of direct chat support access'],
       note:'Claude Sniper is positioned as an analysis aid to clarify decisions, not to replace trader judgment. Best used when you want to read the market more deeply in a way that stays structured and sensible.'}},
-  '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',img:'prod-ea.png',price:3000000,badge:'Premium',rating:5.0,sales:583,
-    tagline:'Bot bantu eksekusi strategi trend following dengan disiplin saat kamu tidak bisa terus memantau chart.',
-    about:'EA ini dibuat untuk membantu trader menjaga konsistensi eksekusi. Saat emosi, lelah, atau telat merespons pasar, bot tetap bekerja sesuai parameter yang sudah ditentukan. Hasilnya, kamu punya alat bantu yang mengeksekusi strategi trend following secara lebih disiplin, lebih rapi, dan tidak mudah terpengaruh FOMO atau ragu-ragu. Cocok untuk trader yang ingin mengurangi beban pantau chart terus-menerus tanpa harus coding sendiri.',
-    features:['File EA (.ex5) siap install dan langsung digunakan di MetaTrader 5','Strategi trend following sudah diuji agar lebih siap dipakai pada kondisi pasar nyata','Parameter penting bisa disesuaikan: lot size, TP, SL, trailing stop, dan filter waktu','Membantu mengurangi beban monitor chart terus-menerus selama platform aktif','Kompatibel dengan broker MT5, termasuk tipe ECN dan STP'],
-    includes:['File EA MetaTrader 5 (.ex5)','Panduan instalasi, konfigurasi, dan optimasi parameter (PDF)'],
-    note:'Pastikan akun trading kamu menggunakan MetaTrader 5, bukan MT4. Jika sudah memakai MT5, produk ini bisa langsung disiapkan dan dipakai pada hari yang sama.',
-    en:{name:'MT5 Trend Following EA',short:'MT5 Trend Following EA',
-      tagline:'A bot that executes a trend-following strategy with discipline when you cannot watch the chart all the time.',
-      about:'This EA is built to help traders keep their execution consistent. When you are emotional, tired, or slow to react to the market, the bot keeps working according to the parameters you set. The result: a tool that executes a trend-following strategy with more discipline, more consistency, and less exposure to FOMO or hesitation. Great for traders who want to spend less time glued to the chart, without having to code it themselves.',
-      features:['EA file (.ex5), ready to install and use directly on MetaTrader 5','A trend-following strategy that has been tested to hold up in real market conditions','Key parameters are adjustable: lot size, TP, SL, trailing stop, and time filters','Reduces the need to constantly monitor the chart while the platform is active','Compatible with MT5 brokers, including ECN and STP account types'],
-      includes:['MetaTrader 5 EA file (.ex5)','Installation, configuration, and parameter optimization guide (PDF)'],
-      note:'Make sure your trading account uses MetaTrader 5, not MT4. If you are already on MT5, this product can be set up and used the same day.'}},
+  '4':{name:'EA MT5 & Automasi Trading',short:'EA MT5 & Automasi Trading',icon:'🤖',img:'prod-ea.png',price:720000,badge:'Premium',rating:5.0,sales:583,
+    tagline:'Tiga pilihan bot dan sistem otomatis untuk gaya trading yang berbeda — pilih yang paling sesuai kebutuhan Anda.',
+    about:['Setiap trader punya gaya berbeda — ada yang nyaman dengan strategi agresif, ada yang lebih suka menunggu momentum breakout, dan ada yang ingin sistem AI Agent yang bisa disesuaikan sendiri lewat n8n. Karena itu kami sediakan tiga pilihan terpisah di bawah, bukan satu paket yang dipaksakan cocok untuk semua orang.',
+      'Pilih salah satu sesuai kebutuhan dan gaya trading Anda. Masing-masing punya karakter, tingkat risiko, dan harga yang berbeda — baca detailnya sebelum memutuskan.'],
+    variants:[
+      {id:'4a',title:'EA Martingale',tag:'High Risk, High Return',price:720000,
+        bullets:['Strategi averaging otomatis yang menambah posisi secara terukur saat harga bergerak melawan arah awal, dirancang untuk memaksimalkan potensi profit saat harga akhirnya berbalik arah.','Cocok dijalankan di sesi Asia, saat pergerakan harga cenderung lebih terkontrol dan tidak terlalu liar.','Dilengkapi Stop Loss akumulasi yang menghitung seluruh posisi terbuka sekaligus, jadi risiko tetap terjaga meski jumlah entry bertambah.'],
+        btnLabel:'Beli EA Martingale →'},
+      {id:'4b',title:'EA Breakout Strategy',tag:null,price:3050000,
+        bullets:['Bot otomatis yang menangkap momentum saat harga menembus area kunci, dirancang untuk entry yang presisi di awal pergerakan baru.','Cocok dijalankan di sesi New York, saat volatilitas breakout biasanya lebih jelas terbentuk.','Semakin besar timeframe yang digunakan, semakin baik kualitas sinyal breakout yang dihasilkan.','Kalkulasi lot cerdas — risiko per transaksi bisa diatur berdasarkan persentase dari equity akun.','Bisa dipakai dengan lot tetap (fixed) atau lot otomatis yang menyesuaikan diri dengan risiko yang Anda tentukan.'],
+        btnLabel:'Beli EA Breakout →'},
+      {id:'4c',title:'Autotrade N8N',tag:null,price:1300000,
+        bullets:['Biaya server bulanan dan API pihak ketiga sepenuhnya menjadi tanggungan Anda sendiri, terpisah dari harga produk ini.','Anda mendapat file workflow n8n siap pakai plus PDF panduan lengkap untuk input data dan instalasi.','Proses instalasi dan aktivasi memakan waktu kurang dari 1 jam dengan mengikuti panduan yang disertakan.'],
+        btnLabel:'Beli Autotrade N8N →'}
+    ],
+    note:'Belum yakin harus pilih yang mana? Baca dulu penjelasan tiap opsi di atas, dan pastikan akun trading Anda sudah menggunakan MetaTrader 5 (bukan MT4) sebelum membeli EA Martingale atau EA Breakout.',
+    en:{name:'MT5 EA & Trading Automation',short:'MT5 EA & Automation',
+      tagline:'Three bots and automation systems for different trading styles — pick the one that fits you best.',
+      about:['Every trader has a different style — some are comfortable with an aggressive strategy, some prefer waiting for breakout momentum, and some want an AI Agent system they can customize themselves through n8n. That is why we offer three separate options below instead of one package forced to fit everyone.',
+        'Pick whichever matches your needs and trading style. Each one has a different character, risk level, and price — read the details before deciding.'],
+      variants:[
+        {id:'4a',title:'EA Martingale',tag:'High Risk, High Return',price:720000,
+          bullets:['An automated averaging strategy that adds positions in a measured way when price moves against the initial direction, aimed at maximizing profit potential once price eventually reverses.','Best run during the Asia session, when price movement tends to be more controlled and less erratic.','Comes with an accumulated Stop Loss that accounts for all open positions at once, so risk stays managed even as entries add up.'],
+          btnLabel:'Buy EA Martingale →'},
+        {id:'4b',title:'EA Breakout Strategy',tag:null,price:3050000,
+          bullets:['An automated bot that captures momentum when price breaks through a key level, built for precise entries at the start of a new move.','Best run during the New York session, when breakout volatility tends to be clearer.','The bigger the timeframe used, the better the quality of the breakout signal.','Smart lot calculation — risk per trade can be set as a percentage of your account equity.','Works with either a fixed lot size or automatic lot sizing that adjusts to your chosen risk.'],
+          btnLabel:'Buy EA Breakout →'},
+        {id:'4c',title:'Autotrade N8N',tag:null,price:1300000,
+          bullets:['Monthly server costs and third-party API fees are entirely your own responsibility, separate from this product price.','You get a ready-to-use n8n workflow file plus a complete PDF guide for data input and installation.','Installation and activation take less than 1 hour by following the included guide.'],
+          btnLabel:'Buy N8N Autotrade →'}
+      ],
+      note:'Not sure which one to pick? Read through each option above first, and make sure your trading account is already on MetaTrader 5 (not MT4) before buying EA Martingale or EA Breakout.'}},
   '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,rating:4.9,sales:790,
     tagline:'Indikator bantu membaca area penting XAU lebih cepat dan lebih rapi langsung di chart TradingView.',
     about:'XAU sering bergerak cepat dan membuat banyak trader telat membaca level penting. Indikator ini dibuat untuk membantu proses analisa jadi lebih ringan: menampilkan area yang layak diperhatikan, membantu melihat potensi reaksi harga, dan memberi peta visual yang lebih bersih sebelum entry. Cocok untuk trader XAU yang ingin analisa lebih efisien, lebih terarah, dan tidak dipenuhi noise yang mengganggu fokus.',
@@ -317,44 +354,6 @@ const PRODUCTS = {
       features:['Invite-only access directly on TradingView, keeping the indicator exclusive and secure','Automatically highlights key XAU levels on the chart','Clean visuals keep the chart easy to read without too much noise','Comes with a usage guide so even beginner traders quickly understand every element of the indicator','Gets ongoing updates whenever improvements or new features are added'],
       includes:['Pine Script indicator access on TradingView (invite-only, non-transferable)','Complete usage guide (PDF)'],
       note:'Built specifically for XAU/USD. A free TradingView account is enough — no need for a Pro subscription to use this indicator.'}},
-  '6':{name:'Workflow N8N - Autotrade',short:'Workflow N8N - Autotrade',icon:'🤖',img:'prod-n8n.png',price:750000,fullPrice:1420000,badge:'SOLD OUT',badgeClass:'badge-soldout',soldOut:true,rating:4.9,sales:43,
-    tagline:'Sistem AI Agent trading otomatis di MT5, dijalankan lewat n8n — workflow-nya sudah jadi, tinggal Anda hubungkan ke akun sendiri.',
-    preTtl:'Info Pre-Order',
-    preIntro:'Batch saat ini sudah terjual habis. Anda tetap bisa pre-order untuk batch berikutnya dengan ketentuan berikut:',
-    preTerms:['Anda sudah membaca dan memahami seluruh isi deskripsi produk ini sebelum melakukan pre-order.',
-      'Waktu tunggu pendampingan build sekitar 3–7 hari, tergantung antrian saat itu.',
-      'Harga total tetap sama seperti sebelumnya (Rp 1.420.000). Pembayaran ini adalah uang muka — sisanya dilunasi begitu jadwal pendampingan Anda ditentukan, untuk melanjutkan prosesnya.'],
-    warnTitle:'⚠️ Baca Dulu Sebelum Lanjut',
-    warnProvide:['Workflow n8n siap pakai — tinggal isi data, logic, API key, ID, dan token milik Anda sendiri','Ebook panduan dari nol sampai sistem jadi','Pendampingan sampai sistem Anda berjalan, respons maksimal 24 jam'],
-    warnNotProvide:['Biaya server bulanan & API pihak ketiga — itu ditanggung user'],
-    warnBody:['Logic dan money management yang dipakai di sistem ini sepenuhnya tanggung jawab Anda sendiri.',
-      'Sederhananya: kami menyediakan rumah dan petanya — workflow yang sudah jadi plus panduan lengkap cara memakainya. Anda yang tinggal di dalamnya: mengisi datanya, menjalankan sistemnya, dan menanggung biaya operasionalnya sesuai kebutuhan Anda sendiri.'],
-    aboutTtl:'Apa Ini Sebenarnya',
-    about:['Bayangkan sebuah sistem yang bekerja sendiri tiap beberapa menit. Membaca data candle terbaru dari akun MT5 Anda, memprosesnya lewat AI Agent sesuai logika yang Anda tentukan sendiri, lalu — kalau Anda mau — mengeksekusi keputusan itu langsung ke akun trading Anda.',
-      'Semua berjalan otomatis di background, tanpa Anda harus install aplikasi rumit, tanpa sewa VPS sendiri, dan tanpa satu baris kode pun yang perlu Anda tulis.',
-      'Workflow-nya sudah kami susun dan uji — Anda tinggal memasukkan data dan kredensial milik Anda sendiri, lalu ikuti ebook panduannya langkah demi langkah sampai sistem benar-benar jalan.'],
-    features:['Workflow n8n siap pakai — tinggal isi data, logic, API key, ID, dan token Anda sendiri, sistem langsung bisa berjalan','Ebook panduan lengkap dari nol sampai sistem jadi, ditulis sesederhana mungkin supaya tetap bisa diikuti walau Anda belum paham coding sama sekali','Pendampingan sampai sistem Anda benar-benar berjalan, dengan respons maksimal 24 jam'],
-    includes:['File workflow n8n siap impor (.json)','Ebook panduan lengkap (PDF)','Akses pendampingan teknis (respons maks 24 jam)'],
-    note:'Ingat: biaya server bulanan, API pihak ketiga, serta logic dan money management yang Anda pakai sepenuhnya tanggung jawab Anda sendiri. Kami menyediakan workflow, panduan, dan pendampingan — bukan mengelola akun trading Anda.',
-    en:{name:'N8N Workflow - Autotrade',short:'N8N Workflow - Autotrade',
-      tagline:'An automated AI Agent trading system for MT5, run through n8n — the workflow is already built, you just connect it to your own account.',
-      preTtl:'Pre-Order Info',
-      preIntro:'The current batch is sold out. You can still pre-order the next batch under these terms:',
-      preTerms:['You have read and understood everything in this product’s description before pre-ordering.',
-        'Build support wait time is around 3–7 days, depending on the queue at the time.',
-        'The total price stays the same as before ($118). This payment is a deposit — the remaining balance is settled once your support schedule is confirmed, to move forward.'],
-      warnTitle:'⚠️ Read This Before You Continue',
-      warnProvide:['A ready-to-use n8n workflow — just plug in your own data, logic, API keys, IDs, and tokens','A guide ebook from zero to a finished setup','Support until your system is running, with a response time of at most 24 hours'],
-      warnNotProvide:['Monthly server & third-party API costs — that’s on the user'],
-      warnBody:['The logic and money management used in this system are entirely your own responsibility.',
-        'In short: we provide the house and the map — a ready-made workflow plus a complete guide on how to use it. You are the one who lives in it: entering your own data, running the system, and covering the running costs based on your own needs.'],
-      aboutTtl:'What This Actually Is',
-      about:['Picture a system that runs itself every few minutes. It reads the latest candle data from your MT5 account, processes it through an AI Agent following the logic you define yourself, then — if you choose — executes that decision straight into your trading account.',
-        'Everything runs automatically in the background — no complicated app installs, no VPS to rent yourself, and not a single line of code you need to write.',
-        'The workflow is already built and tested — you just plug in your own data and credentials, then follow the ebook step by step until the system is genuinely running.'],
-      features:['A ready-to-use n8n workflow — just plug in your own data, logic, API keys, IDs, and tokens, and the system is ready to run','A complete guide ebook from zero to a finished setup, written as simply as possible so you can follow along even with no coding background at all','Support until your system is actually running, with a response time of at most 24 hours'],
-      includes:['Ready-to-import n8n workflow file (.json)','Complete guide ebook (PDF)','Technical support access (max 24-hour response)'],
-      note:'Remember: monthly server costs, third-party API fees, and the logic and money management you use are entirely your own responsibility. We provide the workflow, the guide, and support — not management of your trading account.'}},
 };
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -376,6 +375,22 @@ window.I18N = Object.assign(window.I18N||{}, {
 const id = new URLSearchParams(location.search).get('id') || '1';
 const p = PRODUCTS[id];
 
+function caraOrderHtml(lang){
+  return `
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">${lang==='en' ? 'How to Order' : 'Cara Order'}</div>
+      <div class="pd-order-card">
+        <ol class="pd-steps">
+          <li><span class="pd-step-num">1</span><span><b>${lang==='en'?'Choose a Product':'Pilih Produk'}</b> — ${lang==='en'?'matching your financial profile and trading goals.':'sesuai profil finansial dan tujuan trading kamu.'}</span></li>
+          <li><span class="pd-step-num">2</span><span><b>${lang==='en'?'Read the Description':'Baca Deskripsi'}</b> — ${lang==='en'?'understand the features and benefits before buying.':'pahami fitur dan manfaatnya sebelum membeli.'}</span></li>
+          <li><span class="pd-step-num">3</span><span><b>${lang==='en'?'Buy Now':'Beli Sekarang'}</b> — ${lang==='en'?'click the buy button on this page.':'klik tombol beli di halaman ini.'}</span></li>
+          <li><span class="pd-step-num">4</span><span><b>${lang==='en'?'Enter Contact & Pay':'Input Kontak & Bayar'}</b> — ${lang==='en'?'fill in an active email/WhatsApp, then complete payment.':'isi email/WhatsApp aktif, lalu selesaikan pembayaran.'}</span></li>
+          <li><span class="pd-step-num">5</span><span><b>${lang==='en'?'Product Delivered Automatically':'Produk Terkirim Otomatis'}</b> — ${lang==='en'?'once payment is verified, the product is sent straight to your contact.':'setelah pembayaran terverifikasi, produk langsung dikirim ke kontak kamu.'}</span></li>
+        </ol>
+      </div>
+    </div>`;
+}
+
 function render(){
   var lang = window.ipiLang ? window.ipiLang.get() : 'id';
   var loc = (lang==='en' && p && p.en) ? p.en : p;
@@ -389,6 +404,7 @@ function render(){
   }
 
   if (p.comingSoon) { renderComingSoon(lang, loc); return; }
+  if (p.variants) { renderVariants(lang, loc); return; }
 
   document.title = loc.short + ' — IPI Digital';
   const soldWord = lang==='en' ? ' sold' : ' terjual';
@@ -457,18 +473,7 @@ function render(){
       </div>
     </div>
 
-    <div class="pd-sec">
-      <div class="pd-sec-ttl">${lang==='en' ? 'How to Order' : 'Cara Order'}</div>
-      <div class="pd-order-card">
-        <ol class="pd-steps">
-          <li><span class="pd-step-num">1</span><span><b>${lang==='en'?'Choose a Product':'Pilih Produk'}</b> — ${lang==='en'?'matching your financial profile and trading goals.':'sesuai profil finansial dan tujuan trading kamu.'}</span></li>
-          <li><span class="pd-step-num">2</span><span><b>${lang==='en'?'Read the Description':'Baca Deskripsi'}</b> — ${lang==='en'?'understand the features and benefits before buying.':'pahami fitur dan manfaatnya sebelum membeli.'}</span></li>
-          <li><span class="pd-step-num">3</span><span><b>${lang==='en'?'Buy Now':'Beli Sekarang'}</b> — ${lang==='en'?'click the buy button on this page.':'klik tombol beli di halaman ini.'}</span></li>
-          <li><span class="pd-step-num">4</span><span><b>${lang==='en'?'Enter Contact & Pay':'Input Kontak & Bayar'}</b> — ${lang==='en'?'fill in an active email/WhatsApp, then complete payment.':'isi email/WhatsApp aktif, lalu selesaikan pembayaran.'}</span></li>
-          <li><span class="pd-step-num">5</span><span><b>${lang==='en'?'Product Delivered Automatically':'Produk Terkirim Otomatis'}</b> — ${lang==='en'?'once payment is verified, the product is sent straight to your contact.':'setelah pembayaran terverifikasi, produk langsung dikirim ke kontak kamu.'}</span></li>
-        </ol>
-      </div>
-    </div>
+    ${caraOrderHtml(lang)}
 
     <div class="pd-note"><span>💡</span><span>${loc.note}</span></div>
   `;
@@ -563,6 +568,81 @@ function renderComingSoon(lang, loc){
   ctaBtn.removeAttribute('data-i18n');
   ctaBtn.classList.remove('btn-primary');
   ctaBtn.classList.add('btn-gold');
+}
+
+function renderVariants(lang, loc){
+  document.title = loc.short + ' — IPI Digital';
+  const startLbl = lang==='en' ? 'Starting From' : 'Mulai Dari';
+  const chooseTtl = lang==='en' ? 'Choose Your Option' : 'Pilih Opsi Anda';
+  const seeOptionsLbl = lang==='en' ? 'See Options ↓' : 'Lihat Pilihan ↓';
+  const variants = loc.variants;
+  const lowestPrice = Math.min.apply(null, variants.map(function(v){ return v.price; }));
+  const fmt = function(n){ return window.ipiFmtMoney ? window.ipiFmtMoney(n) : ('Rp '+n.toLocaleString('id-ID')); };
+  const badge = p.badge ? `<span class="product-badge ${p.badgeClass||''}" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${esc(p.badge)}</span><br>` : '';
+
+  const variantCards = variants.map(function(v){
+    return `
+    <div class="pd-variant-card">
+      <div class="pd-variant-top">
+        <div>
+          <div style="font-size:16px;font-weight:800;color:#ffffff">${esc(v.title)}</div>
+          ${v.tag ? `<span class="pd-variant-tag">${esc(v.tag)}</span>` : ''}
+        </div>
+        <div class="pd-variant-price">${fmt(v.price)}</div>
+      </div>
+      <ul class="pd-feat" style="margin-top:14px">
+        ${v.bullets.map(function(b){ return `<li><div class="pd-feat-check">✓</div><span>${esc(b)}</span></li>`; }).join('')}
+      </ul>
+      <a href="bayar.html?id=${esc(v.id)}" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-top:16px;display:block">${esc(v.btnLabel)}</a>
+    </div>`;
+  }).join('');
+
+  document.getElementById('pdContent').innerHTML = `
+    <div class="pd-hero">
+      <div class="pd-icon"><img src="${esc(p.img)}" alt="${esc(loc.short)}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+      <div class="pd-hero-body">
+        ${badge}
+        <div class="pd-name">${esc(loc.name)}</div>
+        <div class="pd-tagline">${loc.tagline}</div>
+        <div class="pd-price-pill">
+          <div>
+            <div class="pd-price-lbl">${startLbl}</div>
+            <div class="pd-price-val">${fmt(lowestPrice)}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pd-sec">
+      <div class="pd-sec-ttl">${lang==='en' ? 'About the Product' : 'Tentang Produk'}</div>
+      <div class="pd-about">${loc.about.map(function(t){ return `<p style="margin-bottom:12px">${esc(t)}</p>`; }).join('')}</div>
+    </div>
+
+    <div class="pd-sec" id="pdVariants">
+      <div class="pd-sec-ttl">${esc(chooseTtl)}</div>
+      <div class="pd-variant-list">
+        ${variantCards}
+      </div>
+    </div>
+
+    ${caraOrderHtml(lang)}
+
+    <div class="pd-note"><span>💡</span><span>${loc.note}</span></div>
+  `;
+
+  const ctaLbl = document.getElementById('ctaLbl');
+  ctaLbl.textContent = startLbl;
+  ctaLbl.removeAttribute('data-i18n');
+
+  document.getElementById('ctaPrice').textContent = fmt(lowestPrice);
+
+  const ctaBtn = document.getElementById('ctaBtn');
+  ctaBtn.textContent = seeOptionsLbl;
+  ctaBtn.removeAttribute('data-i18n');
+  ctaBtn.href = '#pdVariants';
+  ctaBtn.removeAttribute('target');
+  ctaBtn.classList.remove('btn-gold');
+  ctaBtn.classList.add('btn-primary');
 }
 
 render();

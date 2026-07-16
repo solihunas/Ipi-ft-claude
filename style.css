@@ -1277,44 +1277,6 @@ footer {
   box-shadow: 0 0 20px rgba(245,158,11,0.2);
 }
 
-/* Tier 6 — "Segera Hadir" full-width teaser banner */
-.product-card.tier-6 {
-  margin-top: 20px;
-  align-items: center;
-  text-align: center;
-  border-style: dashed;
-  border-color: rgba(245,158,11,0.3);
-  background: rgba(245,158,11,0.03);
-}
-.product-card.tier-6:hover { border-color: rgba(245,158,11,0.5); }
-.product-card.tier-6 .product-badge { align-self: center; }
-.product-card.tier-6 .prod-logo-wrap { width: 72px; height: 72px; margin-bottom: 14px; border-color: rgba(245,158,11,0.35); }
-.product-card.tier-6 h3 { font-size: 17px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-.product-card.tier-6 .prod-tagline { display: block; color: #f59e0b; margin-bottom: 14px; }
-.product-card.tier-6 p { max-width: 480px; margin: 0 auto 18px; flex: none; }
-.product-card.tier-6 .product-price { margin-bottom: 18px; }
-.product-card.tier-6 .btn { width: auto; }
-
-/* Tier 6 live — compact full-width row, same bright treatment as other cards */
-.product-card.tier-6-live {
-  margin-top: 20px;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px 28px;
-  padding: 22px 28px;
-}
-.product-card.tier-6-live .prod-top { margin-bottom: 0; flex-shrink: 0; }
-.product-card.tier-6-live p { flex: 1 1 240px; margin-bottom: 0; }
-.product-card.tier-6-live .prod-meta { margin-bottom: 0; flex-shrink: 0; }
-.product-card.tier-6-live .product-price { margin-bottom: 0; flex-shrink: 0; }
-.product-card.tier-6-live .btn { width: auto; flex-shrink: 0; }
-@media (max-width: 760px) {
-  .product-card.tier-6-live { flex-direction: column; align-items: stretch; }
-  .product-card.tier-6-live p { flex: none; }
-  .product-card.tier-6-live .btn { width: 100%; }
-}
-
 /* Telegram CTA pills below products grid */
 .prod-extra-cta {
   display: flex;

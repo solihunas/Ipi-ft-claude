@@ -44,6 +44,40 @@
 .pd-price-lbl { font-size: 10px; color: #ffffff; text-transform: uppercase; letter-spacing: .1em; }
 .pd-price-val { font-size: 22px; font-weight: 800; color: #a855f7; }
 
+/* Promo pricing — Sniper Claude 20% off */
+.pd-price-pill-promo {
+  border-color: rgba(236,72,153,.4);
+  background: linear-gradient(135deg, rgba(236,72,153,.1), rgba(249,115,22,.08));
+  box-shadow: 0 0 22px rgba(236,72,153,.15);
+  position: relative;
+}
+.pd-price-old { font-size: 13px; color: #96a6bd; text-decoration: line-through; margin-bottom: 1px; }
+.pd-promo-badge {
+  background: linear-gradient(135deg,#ec4899,#f97316);
+  color: #ffffff; font-size: 12px; font-weight: 800;
+  border-radius: 20px; padding: 4px 12px; letter-spacing: .02em;
+  box-shadow: 0 0 14px rgba(236,72,153,.5);
+  animation: promo-pulse 1.6s ease-in-out infinite;
+}
+@keyframes promo-pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+.pd-promo-strip {
+  background: linear-gradient(135deg, rgba(236,72,153,.1), rgba(249,115,22,.06));
+  border: 1.5px solid rgba(236,72,153,.35);
+  border-radius: 12px; padding: 14px 18px; margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(236,72,153,.1);
+}
+.pd-promo-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.pd-promo-lbl { font-size: 11px; color: #ffffff; text-transform: uppercase; letter-spacing: .08em; }
+.pd-promo-count {
+  font-family: 'Courier New', monospace; font-size: 19px; font-weight: 800;
+  color: #f9a8d4; letter-spacing: .04em;
+  text-shadow: 0 0 12px rgba(236,72,153,.6);
+}
+.pd-promo-slots { font-size: 13px; font-weight: 700; color: #fed7aa; }
+
 .pd-sec { margin-bottom: 28px; }
 .pd-sec-ttl {
   font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
@@ -299,6 +333,7 @@ const PRODUCTS = {
       includes:['400,000 historical candle data file (CSV format)','Complete AI training guide (PDF/document)'],
       note:'No coding required. The guide is written so traders who are new to historical data and AI can follow along without feeling overwhelmed.'}},
   '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:132,
+    promo:{pct:20},
     tagline:'Claude dilatih untuk membantu membaca konteks pasar, menyaring noise, dan menajamkan keputusan entry kamu.',
     about:'Produk ini dirancang agar Claude berfungsi sebagai alat bantu analisa yang benar-benar berguna saat membaca chart. Fokusnya bukan membuat AI mengikuti cara pandang user, tetapi membantu user melihat pasar dengan lebih jernih: apa konteks pergerakan harga, area mana yang layak diperhatikan, siapa yang berpotensi terjebak, dan apa risiko di balik sebuah entry. Dengan pendekatan logika pasar, psikologi pelaku, dan referensi data yang besar, Claude Sniper membantu trader pemula sampai berpengalaman agar proses analisa lebih dalam tanpa membebani pikiran dengan noise yang tidak perlu.',
     features:['Membantu Claude membaca hubungan sebab-akibat di pasar, bukan hanya mengenali pola permukaan','Menyusun analisa area penting, potensi jebakan, dan skenario entry dengan logika yang lebih jelas','Membantu trader memahami konteks pergerakan harga, termasuk sisi psikologi pelaku pasar','Didukung 1.000.000 data candle historis sebagai fondasi pembelajaran yang lebih kaya','Panduan pelatihan lengkap dari awal sampai siap dipakai untuk analisa nyata','Akses support 30 hari agar proses setup dan penggunaan berjalan lebih lancar'],
@@ -358,6 +393,30 @@ const PRODUCTS = {
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
+// Promo Sniper Claude 20% off — fixed end time (48h window). Keep this timestamp
+// in sync with the copy in index.html and bayar.html when relaunching the promo.
+const PROMO_SNIPER_END = new Date('2026-07-18T21:40:00+07:00').getTime();
+let promoTimer = null;
+function pad2(n){ return String(n).padStart(2,'0'); }
+function promoRemainingText(ms){
+  if (ms <= 0) return '00:00:00';
+  const totalSec = Math.floor(ms/1000);
+  const h = Math.floor(totalSec/3600), m = Math.floor((totalSec%3600)/60), s = totalSec%60;
+  return pad2(h)+':'+pad2(m)+':'+pad2(s);
+}
+function promoStripHtml(lang){
+  const endLbl = lang==='en' ? 'Ends in' : 'Berakhir dalam';
+  const slotsLbl = lang==='en' ? '🔥 5 fastest-buyer slots — 2 left' : '🔥 5 slot tercepat — sisa 2';
+  return `
+    <div class="pd-promo-strip">
+      <div class="pd-promo-row">
+        <span class="pd-promo-lbl">${endLbl}</span>
+        <span class="pd-promo-count" id="pdPromoCountdown">--:--:--</span>
+      </div>
+      <div class="pd-promo-slots">${slotsLbl}</div>
+    </div>`;
+}
+
 window.I18N = Object.assign(window.I18N||{}, {
   'nav.tentang': {id:'Tentang', en:'About'},
   'nav.produk': {id:'Produk', en:'Products'},
@@ -409,6 +468,9 @@ function render(){
   document.title = loc.short + ' — IPI Digital';
   const soldWord = lang==='en' ? ' sold' : ' terjual';
   const priceLbl = p.soldOut ? (lang==='en' ? 'Pre-Order Deposit' : 'Uang Muka Pre-Order') : (lang==='en' ? 'Price' : 'Harga');
+  const promoActive = !!(p.promo && Date.now() < PROMO_SNIPER_END);
+  const priceNow = promoActive ? Math.round(p.price * (1 - p.promo.pct/100)) : p.price;
+  const fmtP = n => window.ipiFmtMoney ? window.ipiFmtMoney(n) : ('Rp '+n.toLocaleString('id-ID'));
   const badge = p.badge ? `<span class="product-badge ${p.badgeClass||''}" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${esc(p.badge)}</span><br>` : '';
   const ratingRow = p.rating!=null ? `
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:12px">
@@ -442,15 +504,18 @@ function render(){
         <div class="pd-name">${esc(loc.name)}</div>
         <div class="pd-tagline">${loc.tagline}</div>
         ${ratingRow}
-        <div class="pd-price-pill">
+        <div class="pd-price-pill${promoActive ? ' pd-price-pill-promo' : ''}">
           <div>
             <div class="pd-price-lbl">${priceLbl}</div>
-            <div class="pd-price-val">${window.ipiFmtMoney ? window.ipiFmtMoney(p.price) : ('Rp '+p.price.toLocaleString('id-ID'))}</div>
+            ${promoActive ? `<div class="pd-price-old">${fmtP(p.price)}</div>` : ''}
+            <div class="pd-price-val">${fmtP(priceNow)}</div>
           </div>
+          ${promoActive ? `<div class="pd-promo-badge">-${p.promo.pct}%</div>` : ''}
         </div>
       </div>
     </div>
 
+    ${promoActive ? promoStripHtml(lang) : ''}
     ${preBox}
     ${warnBox}
 
@@ -477,7 +542,21 @@ function render(){
 
     <div class="pd-note"><span>💡</span><span>${loc.note}</span></div>
   `;
-  document.getElementById('ctaPrice').textContent = window.ipiFmtMoney ? window.ipiFmtMoney(p.price) : ('Rp '+p.price.toLocaleString('id-ID'));
+  document.getElementById('ctaPrice').textContent = fmtP(priceNow);
+
+  if (promoTimer) { clearInterval(promoTimer); promoTimer = null; }
+  if (promoActive) {
+    const tickPromo = () => {
+      const el = document.getElementById('pdPromoCountdown');
+      if (!el) { clearInterval(promoTimer); promoTimer = null; return; }
+      const remaining = PROMO_SNIPER_END - Date.now();
+      if (remaining <= 0) { clearInterval(promoTimer); promoTimer = null; render(); return; }
+      el.textContent = promoRemainingText(remaining);
+    };
+    tickPromo();
+    promoTimer = setInterval(tickPromo, 1000);
+  }
+
   const ctaBtn = document.getElementById('ctaBtn');
   ctaBtn.href = `bayar.html?id=${id}`;
   if (p.soldOut) {
@@ -579,6 +658,14 @@ function renderVariants(lang, loc){
   const lowestPrice = Math.min.apply(null, variants.map(function(v){ return v.price; }));
   const fmt = function(n){ return window.ipiFmtMoney ? window.ipiFmtMoney(n) : ('Rp '+n.toLocaleString('id-ID')); };
   const badge = p.badge ? `<span class="product-badge ${p.badgeClass||''}" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${esc(p.badge)}</span><br>` : '';
+  const soldWord = lang==='en' ? ' total sold' : ' total terjual';
+  const ratingRow = p.rating!=null ? `
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:12px">
+          <span style="color:#f59e0b;font-size:13px;letter-spacing:.5px">★★★★★</span>
+          <span style="color:#ffffff;font-weight:700">${p.rating.toFixed(1)}</span>
+          <span style="color:#96a6bd">·</span>
+          <span style="color:#ffffff">${p.sales}${soldWord}</span>
+        </div>` : '';
 
   const variantCards = variants.map(function(v){
     return `
@@ -604,6 +691,7 @@ function renderVariants(lang, loc){
         ${badge}
         <div class="pd-name">${esc(loc.name)}</div>
         <div class="pd-tagline">${loc.tagline}</div>
+        ${ratingRow}
         <div class="pd-price-pill">
           <div>
             <div class="pd-price-lbl">${startLbl}</div>

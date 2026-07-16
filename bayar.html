@@ -494,6 +494,12 @@ const pid=params.get('id')||'1';
 const product=PRODUCTS[pid]||PRODUCTS['1'];
 const uniqueCode=getUniqueCode(pid);
 
+// Promo Sniper Claude 20% off — fixed end time (~48h window). Keep this timestamp
+// in sync with the copy in index.html and produk.html when relaunching the promo.
+const PROMO_SNIPER_END = new Date('2026-07-18T21:40:00+07:00').getTime();
+const promoActive = pid === '3' && Date.now() < PROMO_SNIPER_END;
+if (promoActive) product.price = Math.round(product.price * 0.8);
+
 function isEn(){ return window.ipiLang ? window.ipiLang.get()==='en' : false; }
 
 // Mode Inggris = bayar via crypto (USDT), tanpa kode unik. Mode Indonesia = transfer bank + kode unik.
@@ -514,8 +520,9 @@ function renderHeader(){
   document.getElementById('ppName').textContent=name;
   document.getElementById('ppPrice').textContent=amt.display;
   document.getElementById('priceTotal').textContent=amt.display;
-  document.getElementById('priceCodeNote').textContent = en ? '' :
-    'Harga dasar Rp '+product.price.toLocaleString('id-ID')+' + kode unik #'+uniqueCode;
+  const promoNote = promoActive ? (en ? '20% discount applied. ' : 'Diskon 20% diterapkan. ') : '';
+  document.getElementById('priceCodeNote').textContent = en ? promoNote :
+    promoNote+'Harga dasar Rp '+product.price.toLocaleString('id-ID')+' + kode unik #'+uniqueCode;
   document.getElementById('backLink').href='produk.html?id='+pid;
   document.getElementById('iAmount').textContent=amt.display;
   var amtNoteEl=document.getElementById('iAmtNote');

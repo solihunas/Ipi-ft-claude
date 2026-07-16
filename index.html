@@ -27,11 +27,38 @@
     <div class="splash-brand" id="splashBrand">
       <div class="splash-brandname" id="splashBrandname">IPI DIGITAL</div>
       <div class="splash-hook-wrap">
-        <span class="splash-hook" id="splashHook"></span><span class="splash-cur">|</span>
+        <span class="splash-hook" id="splashHook">AI TRADE SPECIALIST</span>
       </div>
     </div>
   </div>
   <div class="splash-skip">Tap untuk lewati</div>
+</div>
+
+<!-- ======= PROMO: Sniper Claude 20% off ======= -->
+<div class="promo-banner" id="promoBanner">
+  <div class="promo-banner-inner">
+    <span class="promo-fire">🔥</span>
+    <span class="promo-text" data-i18n="promo.bannerText">Diskon 20% — Latih Claude Sniper Entry</span>
+    <span class="promo-count" id="promoCountdown">--:--:--</span>
+    <span class="promo-slots" data-i18n="promo.slots">Sisa 2 dari 5 slot tercepat</span>
+    <a href="produk.html?id=3" class="promo-cta" data-i18n="promo.cta">Klaim Sekarang →</a>
+  </div>
+</div>
+
+<div class="promo-popup-overlay" id="promoPopupOverlay">
+  <div class="promo-popup">
+    <button class="promo-popup-close" id="promoPopupClose" aria-label="Close">✕</button>
+    <div class="promo-popup-badge">🔥 <span data-i18n="promo.popupBadge">Diskon Terbatas</span></div>
+    <h3 data-i18n="promo.popupTitle">Diskon 20% — Latih Claude Sniper Entry</h3>
+    <p data-i18n="promo.popupDesc">Khusus 5 pembeli tercepat. Klaim sebelum waktu atau slotnya habis.</p>
+    <div class="promo-popup-price">
+      <span class="old" id="promoPopupOld"></span>
+      <span class="new" id="promoPopupNew"></span>
+    </div>
+    <div class="promo-popup-count" id="promoPopupCountdown">--:--:--</div>
+    <div class="promo-popup-slots" data-i18n="promo.slots">Sisa 2 dari 5 slot tercepat</div>
+    <a href="produk.html?id=3" class="btn btn-primary btn-lg promo-popup-cta" data-i18n="promo.cta">Klaim Sekarang →</a>
+  </div>
 </div>
 
 
@@ -626,8 +653,6 @@ document.addEventListener('click', function(e) {
   var logo     = document.getElementById('splashLogo');
   var brand    = document.getElementById('splashBrand');
   var brandname= document.getElementById('splashBrandname');
-  var hookEl   = document.getElementById('splashHook');
-  var curEl    = document.querySelector('.splash-cur');
 
   function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
 
@@ -643,37 +668,104 @@ document.addEventListener('click', function(e) {
       setTimeout(function(){
         var el=document.getElementById(id);
         if(el) el.classList.add('vis');
-      }, i*170);
-    });
-  }
-
-  function typeText(text, el, speed){
-    return new Promise(function(resolve){
-      var i=0;
-      var t=setInterval(function(){
-        if(i<text.length){ el.textContent+=text[i++]; }
-        else{ clearInterval(t); resolve(); }
-      }, speed);
+      }, i*90);
     });
   }
 
   async function runSplash(){
-    await sleep(100);
+    await sleep(50);
     showSysLines();
-    await sleep(560);
+    await sleep(300);
     logo.classList.add('vis');
-    await sleep(400);
+    await sleep(320);
     brand.classList.add('vis');
-    await sleep(180);
+    await sleep(150);
     brandname.classList.add('glitch');
-    await sleep(450);
-    await typeText('Yang lain melihat candle. Yang menang, membaca cerita di baliknya.', hookEl, 22);
-    await sleep(900);
-    if(curEl) curEl.style.opacity='0';
+    await sleep(750);
     dismissSplash();
   }
 
   runSplash();
+})();
+
+// ======= PROMO: Sniper Claude 20% off =======
+(function() {
+  var PROMO_END = new Date('2026-07-18T21:40:00+07:00').getTime(); // keep in sync with produk.html & bayar.html — 48h window
+  var PROMO_BASE_PRICE = 3500000;
+  var PROMO_PCT = 20;
+  var PROMO_SEEN_KEY = 'ipi_promo_sniper20_seen';
+
+  var banner = document.getElementById('promoBanner');
+  var popupOverlay = document.getElementById('promoPopupOverlay');
+  var popupClose = document.getElementById('promoPopupClose');
+  var bannerCount = document.getElementById('promoCountdown');
+  var popupCount = document.getElementById('promoPopupCountdown');
+  var popupOld = document.getElementById('promoPopupOld');
+  var popupNew = document.getElementById('promoPopupNew');
+
+  if (!banner || Date.now() >= PROMO_END) {
+    if (banner) banner.remove();
+    if (popupOverlay) popupOverlay.remove();
+    return;
+  }
+
+  function pad2(n){ return String(n).padStart(2,'0'); }
+  function remainingText(ms){
+    if (ms <= 0) return '00:00:00';
+    var totalSec = Math.floor(ms/1000);
+    var h = Math.floor(totalSec/3600), m = Math.floor((totalSec%3600)/60), s = totalSec%60;
+    return pad2(h)+':'+pad2(m)+':'+pad2(s);
+  }
+
+  function applyPromoOffset(){
+    var h = (banner && banner.style.display !== 'none') ? banner.offsetHeight : 0;
+    document.documentElement.style.setProperty('--promo-h', h + 'px');
+  }
+
+  function endPromo(){
+    banner.style.display = 'none';
+    if (popupOverlay) popupOverlay.style.display = 'none';
+    applyPromoOffset();
+  }
+
+  function updatePrices(){
+    var discounted = Math.round(PROMO_BASE_PRICE * (1 - PROMO_PCT/100));
+    var fmt = function(n){ return window.ipiFmtMoney ? window.ipiFmtMoney(n) : ('Rp '+n.toLocaleString('id-ID')); };
+    if (popupOld) popupOld.textContent = fmt(PROMO_BASE_PRICE);
+    if (popupNew) popupNew.textContent = fmt(discounted);
+  }
+
+  function tick(){
+    var remaining = PROMO_END - Date.now();
+    if (remaining <= 0) { endPromo(); return; }
+    var text = remainingText(remaining);
+    if (bannerCount) bannerCount.textContent = text;
+    if (popupCount) popupCount.textContent = text;
+  }
+
+  updatePrices();
+  document.addEventListener('ipi-lang-change', updatePrices);
+
+  tick();
+  setInterval(tick, 1000);
+  applyPromoOffset();
+  window.addEventListener('resize', applyPromoOffset);
+
+  if (popupClose) popupClose.addEventListener('click', function(){
+    popupOverlay.style.display = 'none';
+  });
+  if (popupOverlay) popupOverlay.addEventListener('click', function(e){
+    if (e.target === popupOverlay) popupOverlay.style.display = 'none';
+  });
+
+  try {
+    if (!localStorage.getItem(PROMO_SEEN_KEY)) {
+      setTimeout(function(){
+        popupOverlay.style.display = 'flex';
+        localStorage.setItem(PROMO_SEEN_KEY, '1');
+      }, 2300);
+    }
+  } catch(e){}
 })();
 
 // ======= PRODUCT CARDS STAGGER REVEAL =======
@@ -761,6 +853,13 @@ window.I18N = {
   'prod.premium': {id:'Premium', en:'Premium'},
   'prod.featured': {id:'Unggulan', en:'Featured'},
   'prod.mulaiDari': {id:'Mulai dari', en:'Starting from'},
+
+  'promo.bannerText': {id:'Diskon 20% — Latih Claude Sniper Entry', en:'20% Off — Train Claude Sniper Entry'},
+  'promo.slots': {id:'Sisa 2 dari 5 slot tercepat', en:'2 of 5 fastest-buyer slots left'},
+  'promo.cta': {id:'Klaim Sekarang →', en:'Claim Now →'},
+  'promo.popupBadge': {id:'Diskon Terbatas', en:'Limited Discount'},
+  'promo.popupTitle': {id:'Diskon 20% — Latih Claude Sniper Entry', en:'20% Off — Train Claude Sniper Entry'},
+  'promo.popupDesc': {id:'Khusus 5 pembeli tercepat. Klaim sebelum waktu atau slotnya habis.', en:'For the first 5 fastest buyers only. Claim before time or slots run out.'},
   'prod.viewBtn': {id:'Lihat Produk →', en:'View Product →'},
   'prod.detailBtn': {id:'Lihat Detail →', en:'View Details →'},
   'prod.ctaFree': {id:'Free Neurobro Prompt', en:'Free Neurobro Prompt'},

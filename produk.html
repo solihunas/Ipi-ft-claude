@@ -44,7 +44,7 @@
 .pd-price-lbl { font-size: 10px; color: #ffffff; text-transform: uppercase; letter-spacing: .1em; }
 .pd-price-val { font-size: 22px; font-weight: 800; color: #a855f7; }
 
-/* Promo pricing — Sniper Claude 20% off */
+/* Recurring 48h promo pricing (Doktrin AI Signaler + Sniper Claude) */
 .pd-price-pill-promo {
   border-color: rgba(236,72,153,.4);
   background: linear-gradient(135deg, rgba(236,72,153,.1), rgba(249,115,22,.08));
@@ -76,7 +76,6 @@
   color: #f9a8d4; letter-spacing: .04em;
   text-shadow: 0 0 12px rgba(236,72,153,.6);
 }
-.pd-promo-slots { font-size: 13px; font-weight: 700; color: #fed7aa; }
 
 .pd-sec { margin-bottom: 28px; }
 .pd-sec-ttl {
@@ -317,7 +316,7 @@ document.addEventListener('click',function(e){const m=document.getElementById('m
 
 
 const PRODUCTS = {
-  '1':{name:'PROMPT AI NEUROBRO UNTUK OPTIMASI PROMPT',short:'PROMPT AI NEUROBRO',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:1363,
+  '1':{name:'PROMPT AI NEUROBRO UNTUK OPTIMASI PROMPT',short:'PROMPT AI NEUROBRO',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:1499,
     tagline:'Prompt siap pakai yang membantu Neurobro membaca chart lebih jernih, lebih terarah, dan mudah dipahami sejak percakapan pertama.',
     about:'Produk ini mengubah Neurobro dari sekadar tempat bertanya menjadi alat bantu analisa yang sesungguhnya. Kumpulan prompt di dalamnya disusun khusus untuk ekosistem Neurobro, sehingga AI lebih cepat menangkap konteks chart, merapikan alur berpikir, dan memberi output yang langsung bisa ditindaklanjuti. Cocok untuk pemula yang ingin mulai memakai AI dengan cara yang benar, maupun trader yang ingin proses analisanya jauh lebih efisien.',
     features:['Prompt dibuat khusus untuk ekosistem Neurobro AI, jadi hasilnya lebih relevan dibanding template AI umum','Membantu AI menyusun analisa tren, momentum, konfirmasi entry, dan evaluasi kondisi pasar dengan format yang rapi','Jawaban AI lebih terarah, lebih jelas poin pentingnya, dan lebih mudah dipakai saat mengambil keputusan','Siap salin dan pakai, sehingga kamu tidak perlu trial and error dari nol','Membantu trader pemula lebih cepat memahami cara berkomunikasi dengan AI untuk kebutuhan trading'],
@@ -329,7 +328,7 @@ const PRODUCTS = {
       features:['Prompts built specifically for the Neurobro AI ecosystem, so results are more relevant than generic AI templates','Helps the AI structure trend analysis, momentum, entry confirmation, and market evaluation in a clean format','AI answers are more focused, with clearer key points, and easier to use when making decisions','Copy-and-paste ready, so you skip trial and error from scratch','Helps beginner traders learn faster how to communicate with AI for trading needs'],
       includes:['Document with all ready-to-use prompts (PDF/DOC)','Guide on how to use and combine prompts for the best results'],
       note:'The lightest way to start using AI as a trading tool — the value shows up immediately, since you get a clear prompt flow from day one instead of writing your own instructions from scratch.'}},
-  '2':{name:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT',short:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:5.0,sales:564,
+  '2':{name:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT',short:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:5.0,sales:620,
     promo:{pct:10},
     tagline:'Data historis dan doktrin analisa siap pakai untuk melatih Claude & ChatGPT membaca pasar dengan dasar yang lebih kuat.',
     about:'Claude dan ChatGPT bisa menjawab, tapi belum tentu memahami ritme pasar. Produk ini memberi keduanya fondasi nyata untuk trading: 400.000 data candle historis OHLCV, lengkap dengan doktrin analisa dan teknik prompting, plus panduan langkah demi langkah untuk melatihnya dari nol. Hasil akhirnya bukan AI yang asal memberi sinyal, melainkan alat bantu analisa dengan referensi data yang kuat, doktrin berpikir yang jelas, dan cara bertanya yang tepat — berguna bahkan saat kamu masih belajar membaca market.',
@@ -342,7 +341,7 @@ const PRODUCTS = {
       features:['400,000 historical OHLCV candles, ready to use — no scraping or building your own dataset','Training guide built step-by-step so beginners can follow along cleanly','Helps the AI give more data-driven analysis instead of generic answers','Includes prompt techniques to extract signals and insights more clearly','Works across different timeframes and asset pairs depending on your analysis needs'],
       includes:['400,000 historical candle data file (CSV format)','Complete AI training guide (PDF/document)'],
       note:'No coding required. The doctrine and guide are built step-by-step, so traders new to historical data and AI can follow along without feeling overwhelmed.'}},
-  '3':{name:'LATIH CLAUDE SNIPER ENTRY',short:'LATIH CLAUDE SNIPER',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:132,
+  '3':{name:'LATIH CLAUDE SNIPER ENTRY',short:'LATIH CLAUDE SNIPER',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:145,
     promo:{pct:10},
     tagline:'Claude dilatih membaca konteks pasar, menyaring noise, dan menajamkan keputusan entry — bukan sekadar menebak arah.',
     about:'Produk ini dirancang agar Claude berfungsi sebagai alat bantu analisa yang benar-benar berguna saat membaca chart. Fokusnya bukan membuat AI mengikuti cara pandang user, tetapi membantu user melihat pasar dengan lebih jernih: apa konteks pergerakan harga, area mana yang layak diperhatikan, siapa yang berpotensi terjebak, dan apa risiko di balik sebuah entry. Dengan pendekatan logika pasar, psikologi pelaku, dan referensi data yang besar, Claude Sniper membantu trader pemula sampai berpengalaman agar proses analisa lebih dalam tanpa membebani pikiran dengan noise yang tidak perlu.',
@@ -355,7 +354,7 @@ const PRODUCTS = {
       features:['Helps Claude read cause-and-effect in the market, not just recognize surface-level patterns','Builds analysis of key areas, potential traps, and entry scenarios with clearer logic','Helps traders understand price-movement context, including market participant psychology','Backed by 1,000,000 historical candles as a richer learning foundation','Complete training guide from start to ready-for-real-analysis','30 days of support access for a smoother setup and usage process'],
       includes:['1,000,000 historical candle data file (CSV format)','Claude training guide document + analysis framework (PDF)','30 days of direct chat support access'],
       note:'Claude Sniper is positioned as an analysis aid to clarify decisions, not to replace trader judgment. Best used when you want to read the market more deeply in a way that stays structured and sensible.'}},
-  '4':{name:'EA MT5 || AUTOTRADE N8N',short:'EA MT5 || AUTOTRADE N8N',icon:'🤖',img:'prod-ea.png',price:720000,badge:'Premium',rating:5.0,sales:583,
+  '4':{name:'EA MT5 || AUTOTRADE N8N',short:'EA MT5 || AUTOTRADE N8N',icon:'🤖',img:'prod-ea.png',price:720000,badge:'Premium',rating:5.0,sales:641,
     tagline:'Tiga pilihan bot dan sistem otomatis untuk gaya trading berbeda — Martingale, Breakout, atau AI Agent lewat N8N. Pilih yang paling sesuai untuk Anda.',
     about:['Setiap trader punya gaya berbeda — ada yang nyaman dengan strategi agresif, ada yang lebih suka menunggu momentum breakout, dan ada yang ingin sistem AI Agent yang bisa disesuaikan sendiri lewat n8n. Karena itu kami sediakan tiga pilihan terpisah di bawah, bukan satu paket yang dipaksakan cocok untuk semua orang.',
       'Pilih salah satu sesuai kebutuhan dan gaya trading Anda. Masing-masing punya karakter, tingkat risiko, dan harga yang berbeda — baca detailnya sebelum memutuskan.'],
@@ -389,7 +388,7 @@ const PRODUCTS = {
           btnLabel:'Buy N8N Autotrade →'}
       ],
       note:'Not sure which one to pick? Read through each option above first, and make sure your trading account is already on MetaTrader 5 (not MT4) before buying EA Martingale or EA Breakout.'}},
-  '5':{name:'INDIKATOR TRADINGVIEW XAU',short:'INDIKATOR TRADINGVIEW XAU',icon:'📊',img:'prod-indikator.png',price:1500000,badge:null,rating:4.9,sales:790,
+  '5':{name:'INDIKATOR TRADINGVIEW XAU',short:'INDIKATOR TRADINGVIEW XAU',icon:'📊',img:'prod-indikator.png',price:1500000,badge:null,rating:4.9,sales:869,
     tagline:'Indikator yang membantu membaca area penting XAU lebih cepat dan lebih rapi, langsung di chart TradingView.',
     about:'XAU sering bergerak cepat dan membuat banyak trader telat membaca level penting. Indikator ini dibuat untuk membantu proses analisa jadi lebih ringan: menampilkan area yang layak diperhatikan, membantu melihat potensi reaksi harga, dan memberi peta visual yang lebih bersih sebelum entry. Cocok untuk trader XAU yang ingin analisa lebih efisien, lebih terarah, dan tidak dipenuhi noise yang mengganggu fokus.',
     features:['Akses invite-only langsung di TradingView sehingga indikator tetap eksklusif dan aman','Membantu menampilkan level-level penting XAU secara otomatis di chart','Visual dibuat bersih agar chart tetap enak dibaca tanpa terlalu banyak noise','Dilengkapi panduan penggunaan supaya trader pemula pun lebih cepat memahami tiap elemen indikator','Mendapat update berkelanjutan saat ada peningkatan atau penambahan fitur'],

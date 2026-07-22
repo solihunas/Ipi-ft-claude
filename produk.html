@@ -235,6 +235,15 @@
   border-radius: 6px; padding: 3px 8px;
 }
 .pd-variant-price { font-size: 19px; font-weight: 800; color: #a855f7; white-space: nowrap; }
+.pd-variant-bonus {
+  margin-top: 14px; font-size: 12.5px; font-weight: 700; color: #fed7aa;
+  background: linear-gradient(135deg, rgba(236,72,153,.1), rgba(249,115,22,.08));
+  border: 1px solid rgba(249,115,22,.3); border-radius: 8px; padding: 8px 12px;
+}
+.pd-variant-bonus-sep { color: #96a6bd; font-weight: 400; margin: 0 2px; }
+.pd-variant-bonus #pdPromoCountdown {
+  font-family: 'Courier New', monospace; font-weight: 800; color: #f9a8d4;
+}
 
 /* Sticky CTA bar */
 .pd-cta-bar {
@@ -308,82 +317,85 @@ document.addEventListener('click',function(e){const m=document.getElementById('m
 
 
 const PRODUCTS = {
-  '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:1363,
-    tagline:'Prompt siap pakai agar Neurobro membantu analisa trading lebih jelas, terarah, dan mudah dipakai sejak awal.',
-    about:'Produk ini membantu kamu memakai Neurobro sebagai alat bantu analisa, bukan sekadar tempat bertanya. Kumpulan prompt di dalamnya disusun khusus untuk ekosistem Neurobro agar AI lebih cepat memahami konteks chart, merapikan alur berpikir, dan memberi output yang lebih mudah ditindaklanjuti. Cocok untuk pemula yang ingin mulai memakai AI dengan cara yang benar maupun trader yang ingin proses analisa lebih efisien.',
+  '1':{name:'PROMPT AI NEUROBRO UNTUK OPTIMASI PROMPT',short:'PROMPT AI NEUROBRO',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:1363,
+    tagline:'Prompt siap pakai yang membantu Neurobro membaca chart lebih jernih, lebih terarah, dan mudah dipahami sejak percakapan pertama.',
+    about:'Produk ini mengubah Neurobro dari sekadar tempat bertanya menjadi alat bantu analisa yang sesungguhnya. Kumpulan prompt di dalamnya disusun khusus untuk ekosistem Neurobro, sehingga AI lebih cepat menangkap konteks chart, merapikan alur berpikir, dan memberi output yang langsung bisa ditindaklanjuti. Cocok untuk pemula yang ingin mulai memakai AI dengan cara yang benar, maupun trader yang ingin proses analisanya jauh lebih efisien.',
     features:['Prompt dibuat khusus untuk ekosistem Neurobro AI, jadi hasilnya lebih relevan dibanding template AI umum','Membantu AI menyusun analisa tren, momentum, konfirmasi entry, dan evaluasi kondisi pasar dengan format yang rapi','Jawaban AI lebih terarah, lebih jelas poin pentingnya, dan lebih mudah dipakai saat mengambil keputusan','Siap salin dan pakai, sehingga kamu tidak perlu trial and error dari nol','Membantu trader pemula lebih cepat memahami cara berkomunikasi dengan AI untuk kebutuhan trading'],
     includes:['Dokumen berisi semua prompt siap pakai (PDF/DOC)','Panduan cara menggunakan dan mengkombinasikan prompt untuk hasil optimal'],
-    note:'Pilihan paling ringan untuk mulai memakai AI sebagai alat bantu trading. Nilainya terasa dari awal karena kamu langsung punya alur prompt yang lebih jelas tanpa harus bingung menyusun instruksi sendiri.',
-    en:{name:'Neurobro AI Prompt Optimization Pack',short:'Neurobro AI Prompt',
-      tagline:'Ready-to-use prompts that help Neurobro give clearer, more focused trading analysis from day one.',
-      about:'This product helps you use Neurobro as a real analysis tool, not just something to ask questions to. The prompts inside are built specifically for the Neurobro ecosystem so the AI understands chart context faster, organizes its reasoning, and gives output that is easier to act on. Great for beginners who want to start using AI the right way, and for traders who want a more efficient analysis process.',
+    note:'Pilihan paling ringan untuk mulai memakai AI sebagai alat bantu trading. Nilainya terasa sejak awal karena kamu langsung punya alur prompt yang jelas, tanpa perlu menyusun instruksi sendiri dari nol.',
+    en:{name:'NEUROBRO AI PROMPT OPTIMIZATION PACK',short:'NEUROBRO AI PROMPT',
+      tagline:'Ready-to-use prompts that help Neurobro read the chart more clearly and more purposefully, right from the first conversation.',
+      about:'This product turns Neurobro from a simple Q&A tool into a genuine analysis assistant. Every prompt inside is built specifically for the Neurobro ecosystem, so the AI grasps chart context faster, structures its reasoning, and delivers output you can act on right away. Ideal for beginners learning to use AI the right way, and for traders who want a noticeably more efficient analysis process.',
       features:['Prompts built specifically for the Neurobro AI ecosystem, so results are more relevant than generic AI templates','Helps the AI structure trend analysis, momentum, entry confirmation, and market evaluation in a clean format','AI answers are more focused, with clearer key points, and easier to use when making decisions','Copy-and-paste ready, so you skip trial and error from scratch','Helps beginner traders learn faster how to communicate with AI for trading needs'],
       includes:['Document with all ready-to-use prompts (PDF/DOC)','Guide on how to use and combine prompts for the best results'],
-      note:'The lightest option to start using AI as a trading tool. The value shows immediately since you get a clear prompt flow right away, without the hassle of writing your own instructions.'}},
-  '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:5.0,sales:564,
-    tagline:'Data dan panduan pelatihan agar AI belajar membaca pasar, lalu membantu menyusun analisa dengan dasar yang lebih kuat.',
-    about:'Banyak AI bisa menjawab, tetapi belum tentu paham ritme pasar. Produk ini memberi fondasi supaya AI yang kamu pakai lebih berguna untuk trading: 400.000 data candle historis OHLCV plus panduan langkah demi langkah untuk melatihnya dari awal. Hasil akhirnya bukan AI yang asal memberi sinyal, melainkan alat bantu analisa yang punya referensi data lebih kuat, lebih terstruktur, dan lebih membantu bahkan jika kamu masih belajar memahami market.',
+      note:'The lightest way to start using AI as a trading tool — the value shows up immediately, since you get a clear prompt flow from day one instead of writing your own instructions from scratch.'}},
+  '2':{name:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT',short:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:5.0,sales:564,
+    promo:{pct:10},
+    tagline:'Data historis dan doktrin analisa siap pakai untuk melatih Claude & ChatGPT membaca pasar dengan dasar yang lebih kuat.',
+    about:'Claude dan ChatGPT bisa menjawab, tapi belum tentu memahami ritme pasar. Produk ini memberi keduanya fondasi nyata untuk trading: 400.000 data candle historis OHLCV, lengkap dengan doktrin analisa dan teknik prompting, plus panduan langkah demi langkah untuk melatihnya dari nol. Hasil akhirnya bukan AI yang asal memberi sinyal, melainkan alat bantu analisa dengan referensi data yang kuat, doktrin berpikir yang jelas, dan cara bertanya yang tepat — berguna bahkan saat kamu masih belajar membaca market.',
     features:['400.000 data candle historis OHLCV siap pakai tanpa perlu scraping atau menyusun dataset sendiri','Panduan pelatihan dibuat bertahap agar pemula tetap bisa mengikuti prosesnya dengan rapi','Membantu AI memberi analisa yang lebih berbasis data, bukan jawaban generik','Dilengkapi teknik prompt untuk mengekstrak sinyal dan insight dengan lebih jelas','Bisa dipakai untuk berbagai timeframe dan pasangan aset sesuai kebutuhan analisa'],
     includes:['File data 400.000 candle historis (format CSV)','Panduan pelatihan AI lengkap (PDF/dokumen)'],
-    note:'Tidak perlu coding. Panduannya dibuat supaya trader yang baru mulai mengenal data historis dan AI tetap bisa mengikuti prosesnya tanpa merasa kewalahan.',
-    en:{name:'Data + Training Method for AI Trading Signal Analysis',short:'AI Signal Training Data',
-      tagline:'Data and training guide so your AI learns to read the market, then helps build analysis on a stronger foundation.',
-      about:'Plenty of AI tools can answer questions, but that does not mean they understand market rhythm. This product gives your AI a real foundation for trading: 400,000 historical OHLCV candles plus a step-by-step guide to train it from scratch. The result is not an AI that just throws out signals, but an analysis tool backed by stronger, more structured data — useful even while you are still learning the market yourself.',
+    note:'Tidak perlu coding. Doktrin dan panduannya disusun bertahap, jadi trader yang baru mengenal data historis dan AI tetap bisa mengikuti prosesnya tanpa merasa kewalahan.',
+    en:{name:'DATA + DOCTRINE + PROMPTING || CLAUDE AI || CHATGPT',short:'DATA + DOCTRINE + PROMPTING || CLAUDE AI || CHATGPT',
+      tagline:'Historical data and ready-made analysis doctrine to train Claude & ChatGPT to read the market on a stronger foundation.',
+      about:'Claude and ChatGPT can answer questions, but that does not mean they understand market rhythm. This product gives both a real foundation for trading: 400,000 historical OHLCV candles, complete with analysis doctrine and prompting techniques, plus a step-by-step guide to train them from scratch. The result is not an AI that just throws out signals, but an analysis tool backed by strong data, clear reasoning doctrine, and the right way to ask — useful even while you are still learning to read the market.',
       features:['400,000 historical OHLCV candles, ready to use — no scraping or building your own dataset','Training guide built step-by-step so beginners can follow along cleanly','Helps the AI give more data-driven analysis instead of generic answers','Includes prompt techniques to extract signals and insights more clearly','Works across different timeframes and asset pairs depending on your analysis needs'],
       includes:['400,000 historical candle data file (CSV format)','Complete AI training guide (PDF/document)'],
-      note:'No coding required. The guide is written so traders who are new to historical data and AI can follow along without feeling overwhelmed.'}},
-  '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:132,
-    promo:{pct:20},
-    tagline:'Claude dilatih untuk membantu membaca konteks pasar, menyaring noise, dan menajamkan keputusan entry kamu.',
+      note:'No coding required. The doctrine and guide are built step-by-step, so traders new to historical data and AI can follow along without feeling overwhelmed.'}},
+  '3':{name:'LATIH CLAUDE SNIPER ENTRY',short:'LATIH CLAUDE SNIPER',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:132,
+    promo:{pct:10},
+    tagline:'Claude dilatih membaca konteks pasar, menyaring noise, dan menajamkan keputusan entry — bukan sekadar menebak arah.',
     about:'Produk ini dirancang agar Claude berfungsi sebagai alat bantu analisa yang benar-benar berguna saat membaca chart. Fokusnya bukan membuat AI mengikuti cara pandang user, tetapi membantu user melihat pasar dengan lebih jernih: apa konteks pergerakan harga, area mana yang layak diperhatikan, siapa yang berpotensi terjebak, dan apa risiko di balik sebuah entry. Dengan pendekatan logika pasar, psikologi pelaku, dan referensi data yang besar, Claude Sniper membantu trader pemula sampai berpengalaman agar proses analisa lebih dalam tanpa membebani pikiran dengan noise yang tidak perlu.',
     features:['Membantu Claude membaca hubungan sebab-akibat di pasar, bukan hanya mengenali pola permukaan','Menyusun analisa area penting, potensi jebakan, dan skenario entry dengan logika yang lebih jelas','Membantu trader memahami konteks pergerakan harga, termasuk sisi psikologi pelaku pasar','Didukung 1.000.000 data candle historis sebagai fondasi pembelajaran yang lebih kaya','Panduan pelatihan lengkap dari awal sampai siap dipakai untuk analisa nyata','Akses support 30 hari agar proses setup dan penggunaan berjalan lebih lancar'],
     includes:['File data 1.000.000 candle historis (format CSV)','Dokumen panduan pelatihan Claude + kerangka berpikir analisa (PDF)','30 hari akses chat support langsung'],
     note:'Claude Sniper diposisikan sebagai alat bantu analisa untuk memperjelas keputusan, bukan menggantikan penilaian trader. Cocok dipakai saat kamu ingin membaca pasar lebih dalam dengan cara yang tetap terstruktur dan masuk akal.',
-    en:{name:'Train Claude Sniper Entry',short:'Train Claude Sniper',
-      tagline:'Claude is trained to help read market context, filter out noise, and sharpen your entry decisions.',
+    en:{name:'TRAIN CLAUDE SNIPER ENTRY',short:'TRAIN CLAUDE SNIPER',
+      tagline:'Claude is trained to read market context, filter out noise, and sharpen entry decisions — not just guess direction.',
       about:'This product is designed to make Claude a genuinely useful analysis tool when reading charts. The focus is not to make the AI dictate a single view, but to help you see the market more clearly: the context behind a price move, which areas deserve attention, who might get trapped, and what risk sits behind an entry. Through market logic, participant psychology, and a large data reference, Claude Sniper helps traders — from beginner to experienced — go deeper in their analysis without the burden of unnecessary noise.',
       features:['Helps Claude read cause-and-effect in the market, not just recognize surface-level patterns','Builds analysis of key areas, potential traps, and entry scenarios with clearer logic','Helps traders understand price-movement context, including market participant psychology','Backed by 1,000,000 historical candles as a richer learning foundation','Complete training guide from start to ready-for-real-analysis','30 days of support access for a smoother setup and usage process'],
       includes:['1,000,000 historical candle data file (CSV format)','Claude training guide document + analysis framework (PDF)','30 days of direct chat support access'],
       note:'Claude Sniper is positioned as an analysis aid to clarify decisions, not to replace trader judgment. Best used when you want to read the market more deeply in a way that stays structured and sensible.'}},
-  '4':{name:'EA MT5 & Automasi Trading',short:'EA MT5 & Automasi Trading',icon:'🤖',img:'prod-ea.png',price:720000,badge:'Premium',rating:5.0,sales:583,
-    tagline:'Tiga pilihan bot dan sistem otomatis untuk gaya trading yang berbeda — pilih yang paling sesuai kebutuhan Anda.',
+  '4':{name:'EA MT5 || AUTOTRADE N8N',short:'EA MT5 || AUTOTRADE N8N',icon:'🤖',img:'prod-ea.png',price:720000,badge:'Premium',rating:5.0,sales:583,
+    tagline:'Tiga pilihan bot dan sistem otomatis untuk gaya trading berbeda — Martingale, Breakout, atau AI Agent lewat N8N. Pilih yang paling sesuai untuk Anda.',
     about:['Setiap trader punya gaya berbeda — ada yang nyaman dengan strategi agresif, ada yang lebih suka menunggu momentum breakout, dan ada yang ingin sistem AI Agent yang bisa disesuaikan sendiri lewat n8n. Karena itu kami sediakan tiga pilihan terpisah di bawah, bukan satu paket yang dipaksakan cocok untuk semua orang.',
       'Pilih salah satu sesuai kebutuhan dan gaya trading Anda. Masing-masing punya karakter, tingkat risiko, dan harga yang berbeda — baca detailnya sebelum memutuskan.'],
     variants:[
-      {id:'4a',title:'EA Martingale',tag:'High Risk, High Return',price:720000,
+      {id:'4a',title:'EA MARTINGALE',tag:'High Risk, High Return',price:720000,
         bullets:['Strategi averaging otomatis yang menambah posisi secara terukur saat harga bergerak melawan arah awal, dirancang untuk memaksimalkan potensi profit saat harga akhirnya berbalik arah.','Cocok dijalankan di sesi Asia, saat pergerakan harga cenderung lebih terkontrol dan tidak terlalu liar.','Dilengkapi Stop Loss akumulasi yang menghitung seluruh posisi terbuka sekaligus, jadi risiko tetap terjaga meski jumlah entry bertambah.'],
         btnLabel:'Beli EA Martingale →'},
-      {id:'4b',title:'EA Breakout Strategy',tag:null,price:3050000,
+      {id:'4b',title:'EA BREAKOUT STRATEGY',tag:null,price:3050000,
+        promoBonus:'🎁 Bonus VPS 1 Bulan',
         bullets:['Bot otomatis yang menangkap momentum saat harga menembus area kunci, dirancang untuk entry yang presisi di awal pergerakan baru.','Cocok dijalankan di sesi New York, saat volatilitas breakout biasanya lebih jelas terbentuk.','Semakin besar timeframe yang digunakan, semakin baik kualitas sinyal breakout yang dihasilkan.','Kalkulasi lot cerdas — risiko per transaksi bisa diatur berdasarkan persentase dari equity akun.','Bisa dipakai dengan lot tetap (fixed) atau lot otomatis yang menyesuaikan diri dengan risiko yang Anda tentukan.'],
         btnLabel:'Beli EA Breakout →'},
-      {id:'4c',title:'Autotrade N8N',tag:null,price:1300000,
+      {id:'4c',title:'AUTOTRADE N8N',tag:null,price:1300000,
         bullets:['Biaya server bulanan dan API pihak ketiga sepenuhnya menjadi tanggungan Anda sendiri, terpisah dari harga produk ini.','Anda mendapat file workflow n8n siap pakai plus PDF panduan lengkap untuk input data dan instalasi.','Proses instalasi dan aktivasi memakan waktu kurang dari 1 jam dengan mengikuti panduan yang disertakan.'],
         btnLabel:'Beli Autotrade N8N →'}
     ],
     note:'Belum yakin harus pilih yang mana? Baca dulu penjelasan tiap opsi di atas, dan pastikan akun trading Anda sudah menggunakan MetaTrader 5 (bukan MT4) sebelum membeli EA Martingale atau EA Breakout.',
-    en:{name:'MT5 EA & Trading Automation',short:'MT5 EA & Automation',
-      tagline:'Three bots and automation systems for different trading styles — pick the one that fits you best.',
+    en:{name:'EA MT5 || AUTOTRADE N8N',short:'EA MT5 || AUTOTRADE N8N',
+      tagline:'Three bots and automation systems for different trading styles — Martingale, Breakout, or an AI Agent via N8N. Pick whichever fits you best.',
       about:['Every trader has a different style — some are comfortable with an aggressive strategy, some prefer waiting for breakout momentum, and some want an AI Agent system they can customize themselves through n8n. That is why we offer three separate options below instead of one package forced to fit everyone.',
         'Pick whichever matches your needs and trading style. Each one has a different character, risk level, and price — read the details before deciding.'],
       variants:[
-        {id:'4a',title:'EA Martingale',tag:'High Risk, High Return',price:720000,
+        {id:'4a',title:'EA MARTINGALE',tag:'High Risk, High Return',price:720000,
           bullets:['An automated averaging strategy that adds positions in a measured way when price moves against the initial direction, aimed at maximizing profit potential once price eventually reverses.','Best run during the Asia session, when price movement tends to be more controlled and less erratic.','Comes with an accumulated Stop Loss that accounts for all open positions at once, so risk stays managed even as entries add up.'],
           btnLabel:'Buy EA Martingale →'},
-        {id:'4b',title:'EA Breakout Strategy',tag:null,price:3050000,
+        {id:'4b',title:'EA BREAKOUT STRATEGY',tag:null,price:3050000,
+          promoBonus:'🎁 Free 1-Month VPS',
           bullets:['An automated bot that captures momentum when price breaks through a key level, built for precise entries at the start of a new move.','Best run during the New York session, when breakout volatility tends to be clearer.','The bigger the timeframe used, the better the quality of the breakout signal.','Smart lot calculation — risk per trade can be set as a percentage of your account equity.','Works with either a fixed lot size or automatic lot sizing that adjusts to your chosen risk.'],
           btnLabel:'Buy EA Breakout →'},
-        {id:'4c',title:'Autotrade N8N',tag:null,price:1300000,
+        {id:'4c',title:'AUTOTRADE N8N',tag:null,price:1300000,
           bullets:['Monthly server costs and third-party API fees are entirely your own responsibility, separate from this product price.','You get a ready-to-use n8n workflow file plus a complete PDF guide for data input and installation.','Installation and activation take less than 1 hour by following the included guide.'],
           btnLabel:'Buy N8N Autotrade →'}
       ],
       note:'Not sure which one to pick? Read through each option above first, and make sure your trading account is already on MetaTrader 5 (not MT4) before buying EA Martingale or EA Breakout.'}},
-  '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,rating:4.9,sales:790,
-    tagline:'Indikator bantu membaca area penting XAU lebih cepat dan lebih rapi langsung di chart TradingView.',
+  '5':{name:'INDIKATOR TRADINGVIEW XAU',short:'INDIKATOR TRADINGVIEW XAU',icon:'📊',img:'prod-indikator.png',price:1500000,badge:null,rating:4.9,sales:790,
+    tagline:'Indikator yang membantu membaca area penting XAU lebih cepat dan lebih rapi, langsung di chart TradingView.',
     about:'XAU sering bergerak cepat dan membuat banyak trader telat membaca level penting. Indikator ini dibuat untuk membantu proses analisa jadi lebih ringan: menampilkan area yang layak diperhatikan, membantu melihat potensi reaksi harga, dan memberi peta visual yang lebih bersih sebelum entry. Cocok untuk trader XAU yang ingin analisa lebih efisien, lebih terarah, dan tidak dipenuhi noise yang mengganggu fokus.',
     features:['Akses invite-only langsung di TradingView sehingga indikator tetap eksklusif dan aman','Membantu menampilkan level-level penting XAU secara otomatis di chart','Visual dibuat bersih agar chart tetap enak dibaca tanpa terlalu banyak noise','Dilengkapi panduan penggunaan supaya trader pemula pun lebih cepat memahami tiap elemen indikator','Mendapat update berkelanjutan saat ada peningkatan atau penambahan fitur'],
     includes:['Akses Pine Script indikator di TradingView (invite-only, tidak bisa dibagikan)','Panduan penggunaan lengkap (PDF)'],
     note:'Khusus untuk XAU/USD. Akun TradingView gratis sudah cukup, jadi kamu bisa langsung memakai indikator ini tanpa perlu langganan paket Pro.',
-    en:{name:'TradingView XAU Indicator',short:'TradingView XAU Indicator',
+    en:{name:'TRADINGVIEW XAU INDICATOR',short:'TRADINGVIEW XAU INDICATOR',
       tagline:'An indicator that helps you read key XAU areas faster and more clearly, right on the TradingView chart.',
       about:'XAU often moves fast, and many traders end up reading key levels too late. This indicator makes analysis lighter: it highlights areas worth watching, helps you spot potential price reactions, and gives a cleaner visual map before you enter. Great for XAU traders who want analysis that is more efficient, more focused, and free of distracting noise.',
       features:['Invite-only access directly on TradingView, keeping the indicator exclusive and secure','Automatically highlights key XAU levels on the chart','Clean visuals keep the chart easy to read without too much noise','Comes with a usage guide so even beginner traders quickly understand every element of the indicator','Gets ongoing updates whenever improvements or new features are added'],
@@ -393,9 +405,15 @@ const PRODUCTS = {
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
-// Promo Sniper Claude 20% off — fixed end time (48h window). Keep this timestamp
-// in sync with the copy in index.html and bayar.html when relaunching the promo.
-const PROMO_SNIPER_END = new Date('2026-07-18T21:40:00+07:00').getTime();
+// Shared recurring 48h promo cycle — powers the 3 flash-sale slides on the homepage
+// (EA Breakout VPS bonus, Doktrin -10%, Sniper -10%) plus the discount shown here.
+// Keep PROMO_EPOCH/PROMO_CYCLE_MS in sync with index.html & bayar.html.
+const PROMO_EPOCH = new Date('2026-07-16T00:00:00+07:00').getTime();
+const PROMO_CYCLE_MS = 48*3600*1000;
+function promoCycleRemainingMs(){
+  const elapsed = (Date.now() - PROMO_EPOCH) % PROMO_CYCLE_MS;
+  return PROMO_CYCLE_MS - elapsed;
+}
 let promoTimer = null;
 function pad2(n){ return String(n).padStart(2,'0'); }
 function promoRemainingText(ms){
@@ -404,16 +422,14 @@ function promoRemainingText(ms){
   const h = Math.floor(totalSec/3600), m = Math.floor((totalSec%3600)/60), s = totalSec%60;
   return pad2(h)+':'+pad2(m)+':'+pad2(s);
 }
-function promoStripHtml(lang){
-  const endLbl = lang==='en' ? 'Ends in' : 'Berakhir dalam';
-  const slotsLbl = lang==='en' ? '🔥 5 fastest-buyer slots — 2 left' : '🔥 5 slot tercepat — sisa 2';
+function promoStripHtml(lang, pct, elId){
+  const lbl = lang==='en' ? `🔥 ${pct}% off — resets in` : `🔥 Diskon ${pct}% — reset dalam`;
   return `
     <div class="pd-promo-strip">
       <div class="pd-promo-row">
-        <span class="pd-promo-lbl">${endLbl}</span>
-        <span class="pd-promo-count" id="pdPromoCountdown">--:--:--</span>
+        <span class="pd-promo-lbl">${lbl}</span>
+        <span class="pd-promo-count" id="${elId||'pdPromoCountdown'}">--:--:--</span>
       </div>
-      <div class="pd-promo-slots">${slotsLbl}</div>
     </div>`;
 }
 
@@ -468,7 +484,7 @@ function render(){
   document.title = loc.short + ' — IPI Digital';
   const soldWord = lang==='en' ? ' sold' : ' terjual';
   const priceLbl = p.soldOut ? (lang==='en' ? 'Pre-Order Deposit' : 'Uang Muka Pre-Order') : (lang==='en' ? 'Price' : 'Harga');
-  const promoActive = !!(p.promo && Date.now() < PROMO_SNIPER_END);
+  const promoActive = !!p.promo;
   const priceNow = promoActive ? Math.round(p.price * (1 - p.promo.pct/100)) : p.price;
   const fmtP = n => window.ipiFmtMoney ? window.ipiFmtMoney(n) : ('Rp '+n.toLocaleString('id-ID'));
   const badge = p.badge ? `<span class="product-badge ${p.badgeClass||''}" style="position:static;font-size:11px;margin-bottom:10px;display:inline-block">${esc(p.badge)}</span><br>` : '';
@@ -515,7 +531,7 @@ function render(){
       </div>
     </div>
 
-    ${promoActive ? promoStripHtml(lang) : ''}
+    ${promoActive ? promoStripHtml(lang, p.promo.pct) : ''}
     ${preBox}
     ${warnBox}
 
@@ -549,9 +565,7 @@ function render(){
     const tickPromo = () => {
       const el = document.getElementById('pdPromoCountdown');
       if (!el) { clearInterval(promoTimer); promoTimer = null; return; }
-      const remaining = PROMO_SNIPER_END - Date.now();
-      if (remaining <= 0) { clearInterval(promoTimer); promoTimer = null; render(); return; }
-      el.textContent = promoRemainingText(remaining);
+      el.textContent = promoRemainingText(promoCycleRemainingMs());
     };
     tickPromo();
     promoTimer = setInterval(tickPromo, 1000);
@@ -668,6 +682,8 @@ function renderVariants(lang, loc){
         </div>` : '';
 
   const variantCards = variants.map(function(v){
+    const bonusRibbon = v.promoBonus ? `
+      <div class="pd-variant-bonus">${esc(v.promoBonus)} <span class="pd-variant-bonus-sep">·</span> ${lang==='en'?'resets in':'reset dalam'} <span id="pdPromoCountdown">--:--:--</span></div>` : '';
     return `
     <div class="pd-variant-card">
       <div class="pd-variant-top">
@@ -680,6 +696,7 @@ function renderVariants(lang, loc){
       <ul class="pd-feat" style="margin-top:14px">
         ${v.bullets.map(function(b){ return `<li><div class="pd-feat-check">✓</div><span>${esc(b)}</span></li>`; }).join('')}
       </ul>
+      ${bonusRibbon}
       <a href="bayar.html?id=${esc(v.id)}" class="btn btn-primary btn-lg" style="width:100%;text-align:center;margin-top:16px;display:block">${esc(v.btnLabel)}</a>
     </div>`;
   }).join('');
@@ -731,6 +748,17 @@ function renderVariants(lang, loc){
   ctaBtn.removeAttribute('target');
   ctaBtn.classList.remove('btn-gold');
   ctaBtn.classList.add('btn-primary');
+
+  if (promoTimer) { clearInterval(promoTimer); promoTimer = null; }
+  if (variants.some(function(v){ return v.promoBonus; })) {
+    const tickPromo = () => {
+      const el = document.getElementById('pdPromoCountdown');
+      if (!el) { clearInterval(promoTimer); promoTimer = null; return; }
+      el.textContent = promoRemainingText(promoCycleRemainingMs());
+    };
+    tickPromo();
+    promoTimer = setInterval(tickPromo, 1000);
+  }
 }
 
 render();

@@ -32,8 +32,57 @@
   border: 1px solid rgba(147,51,234,.22);
   border-radius: 14px;
   overflow: hidden;
+  position: relative; z-index: 1;
 }
-.pd-hero-body { flex: 1; min-width: 0; }
+.pd-hero-body { flex: 1; min-width: 0; position: relative; z-index: 1; }
+
+/* ===== ULTRA PREMIUM product treatment (Autotrade N8N) ===== */
+.pd-hero-premium {
+  background: linear-gradient(160deg, rgba(28,18,2,.95), rgba(10,5,25,.96) 65%);
+  border-color: transparent;
+}
+.pd-hero-premium::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 16px; padding: 1.5px;
+  background: conic-gradient(from 0deg, #fbbf24, #f59e0b, #fde68a, #a855f7, #ec4899, #fbbf24);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: pd-gold-ring-spin 5s linear infinite;
+  z-index: 0; pointer-events: none;
+}
+@keyframes pd-gold-ring-spin { to { transform: rotate(360deg); } }
+.pd-premium-sparkles {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 18% 28%, rgba(251,191,36,.9), transparent),
+    radial-gradient(1.5px 1.5px at 68% 18%, rgba(251,191,36,.7), transparent),
+    radial-gradient(2px 2px at 42% 68%, rgba(251,191,36,.8), transparent),
+    radial-gradient(1.5px 1.5px at 88% 55%, rgba(251,191,36,.6), transparent),
+    radial-gradient(1.5px 1.5px at 55% 40%, rgba(251,191,36,.7), transparent),
+    radial-gradient(2px 2px at 12% 78%, rgba(251,191,36,.5), transparent),
+    radial-gradient(1.5px 1.5px at 78% 85%, rgba(251,191,36,.6), transparent);
+  animation: pd-sparkle-twinkle 3s ease-in-out infinite;
+}
+@keyframes pd-sparkle-twinkle {
+  0%, 100% { opacity: .45; }
+  50% { opacity: 1; }
+}
+.pd-icon-premium { border-color: rgba(251,191,36,.55); box-shadow: 0 0 20px rgba(251,191,36,.35); }
+.pd-price-pill-gold {
+  background: linear-gradient(135deg, rgba(251,191,36,.14), rgba(245,158,11,.06));
+  border-color: rgba(251,191,36,.4);
+  box-shadow: 0 0 24px rgba(251,191,36,.18);
+}
+.pd-price-val-gold {
+  background: linear-gradient(100deg, #fde68a, #fbbf24, #f59e0b, #fde68a);
+  background-size: 200% auto;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: pd-gold-shimmer 2.5s linear infinite;
+}
+@keyframes pd-gold-shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
 .pd-name { font-size: clamp(17px,3.5vw,22px); font-weight: 800; color: #ffffff; line-height: 1.3; margin-bottom: 8px; }
 .pd-tagline { font-size: 14px; color: #ffffff; line-height: 1.7; margin-bottom: 20px; }
 .pd-price-pill {
@@ -354,9 +403,9 @@ const PRODUCTS = {
       features:['Helps Claude read cause-and-effect in the market, not just recognize surface-level patterns','Builds analysis of key areas, potential traps, and entry scenarios with clearer logic','Helps traders understand price-movement context, including market participant psychology','Backed by 1,000,000 historical candles as a richer learning foundation','Complete training guide from start to ready-for-real-analysis','30 days of support access for a smoother setup and usage process'],
       includes:['1,000,000 historical candle data file (CSV format)','Claude training guide document + analysis framework (PDF)','30 days of direct chat support access'],
       note:'Claude Sniper is positioned as an analysis aid to clarify decisions, not to replace trader judgment. Best used when you want to read the market more deeply in a way that stays structured and sensible.'}},
-  '4':{name:'EA MT5 || AUTOTRADE N8N',short:'EA MT5 || AUTOTRADE N8N',icon:'🤖',img:'prod-ea.png',price:720000,badge:'Premium',rating:5.0,sales:641,
-    tagline:'Tiga pilihan bot dan sistem otomatis untuk gaya trading berbeda — Martingale, Breakout, atau AI Agent lewat N8N. Pilih yang paling sesuai untuk Anda.',
-    about:['Setiap trader punya gaya berbeda — ada yang nyaman dengan strategi agresif, ada yang lebih suka menunggu momentum breakout, dan ada yang ingin sistem AI Agent yang bisa disesuaikan sendiri lewat n8n. Karena itu kami sediakan tiga pilihan terpisah di bawah, bukan satu paket yang dipaksakan cocok untuk semua orang.',
+  '4':{name:'EA MT5',short:'EA MT5',icon:'🤖',img:'prod-ea.png',price:720000,badge:'Premium',rating:5.0,sales:641,
+    tagline:'Dua pilihan bot otomatis untuk gaya trading berbeda — Martingale atau Breakout. Pilih yang paling sesuai untuk Anda.',
+    about:['Setiap trader punya gaya berbeda — ada yang nyaman dengan strategi agresif, ada yang lebih suka menunggu momentum breakout. Karena itu kami sediakan dua pilihan terpisah di bawah, bukan satu paket yang dipaksakan cocok untuk semua orang.',
       'Pilih salah satu sesuai kebutuhan dan gaya trading Anda. Masing-masing punya karakter, tingkat risiko, dan harga yang berbeda — baca detailnya sebelum memutuskan.'],
     variants:[
       {id:'4a',title:'EA MARTINGALE',tag:'High Risk, High Return',price:720000,
@@ -365,15 +414,12 @@ const PRODUCTS = {
       {id:'4b',title:'EA BREAKOUT STRATEGY',tag:null,price:3050000,
         promoBonus:'🎁 Bonus VPS 1 Bulan',
         bullets:['Bot otomatis yang menangkap momentum saat harga menembus area kunci, dirancang untuk entry yang presisi di awal pergerakan baru.','Cocok dijalankan di sesi New York, saat volatilitas breakout biasanya lebih jelas terbentuk.','Semakin besar timeframe yang digunakan, semakin baik kualitas sinyal breakout yang dihasilkan.','Kalkulasi lot cerdas — risiko per transaksi bisa diatur berdasarkan persentase dari equity akun.','Bisa dipakai dengan lot tetap (fixed) atau lot otomatis yang menyesuaikan diri dengan risiko yang Anda tentukan.'],
-        btnLabel:'Beli EA Breakout →'},
-      {id:'4c',title:'AUTOTRADE N8N',tag:null,price:1300000,
-        bullets:['Biaya server bulanan dan API pihak ketiga sepenuhnya menjadi tanggungan Anda sendiri, terpisah dari harga produk ini.','Anda mendapat file workflow n8n siap pakai plus PDF panduan lengkap untuk input data dan instalasi.','Proses instalasi dan aktivasi memakan waktu kurang dari 1 jam dengan mengikuti panduan yang disertakan.'],
-        btnLabel:'Beli Autotrade N8N →'}
+        btnLabel:'Beli EA Breakout →'}
     ],
-    note:'Belum yakin harus pilih yang mana? Baca dulu penjelasan tiap opsi di atas, dan pastikan akun trading Anda sudah menggunakan MetaTrader 5 (bukan MT4) sebelum membeli EA Martingale atau EA Breakout.',
-    en:{name:'EA MT5 || AUTOTRADE N8N',short:'EA MT5 || AUTOTRADE N8N',
-      tagline:'Three bots and automation systems for different trading styles — Martingale, Breakout, or an AI Agent via N8N. Pick whichever fits you best.',
-      about:['Every trader has a different style — some are comfortable with an aggressive strategy, some prefer waiting for breakout momentum, and some want an AI Agent system they can customize themselves through n8n. That is why we offer three separate options below instead of one package forced to fit everyone.',
+    note:'Belum yakin harus pilih yang mana? Baca dulu penjelasan tiap opsi di atas, dan pastikan akun trading Anda sudah menggunakan MetaTrader 5 (bukan MT4) sebelum membeli.',
+    en:{name:'EA MT5',short:'EA MT5',
+      tagline:'Two automated bots for different trading styles — Martingale or Breakout. Pick whichever fits you best.',
+      about:['Every trader has a different style — some are comfortable with an aggressive strategy, some prefer waiting for breakout momentum. That is why we offer two separate options below instead of one package forced to fit everyone.',
         'Pick whichever matches your needs and trading style. Each one has a different character, risk level, and price — read the details before deciding.'],
       variants:[
         {id:'4a',title:'EA MARTINGALE',tag:'High Risk, High Return',price:720000,
@@ -382,12 +428,9 @@ const PRODUCTS = {
         {id:'4b',title:'EA BREAKOUT STRATEGY',tag:null,price:3050000,
           promoBonus:'🎁 Free 1-Month VPS',
           bullets:['An automated bot that captures momentum when price breaks through a key level, built for precise entries at the start of a new move.','Best run during the New York session, when breakout volatility tends to be clearer.','The bigger the timeframe used, the better the quality of the breakout signal.','Smart lot calculation — risk per trade can be set as a percentage of your account equity.','Works with either a fixed lot size or automatic lot sizing that adjusts to your chosen risk.'],
-          btnLabel:'Buy EA Breakout →'},
-        {id:'4c',title:'AUTOTRADE N8N',tag:null,price:1300000,
-          bullets:['Monthly server costs and third-party API fees are entirely your own responsibility, separate from this product price.','You get a ready-to-use n8n workflow file plus a complete PDF guide for data input and installation.','Installation and activation take less than 1 hour by following the included guide.'],
-          btnLabel:'Buy N8N Autotrade →'}
+          btnLabel:'Buy EA Breakout →'}
       ],
-      note:'Not sure which one to pick? Read through each option above first, and make sure your trading account is already on MetaTrader 5 (not MT4) before buying EA Martingale or EA Breakout.'}},
+      note:'Not sure which one to pick? Read through each option above first, and make sure your trading account is already on MetaTrader 5 (not MT4) before buying.'}},
   '5':{name:'INDIKATOR TRADINGVIEW XAU',short:'INDIKATOR TRADINGVIEW XAU',icon:'📊',img:'prod-indikator.png',price:1500000,badge:null,rating:4.9,sales:869,
     tagline:'Indikator yang membantu membaca area penting XAU lebih cepat dan lebih rapi, langsung di chart TradingView.',
     about:'XAU sering bergerak cepat dan membuat banyak trader telat membaca level penting. Indikator ini dibuat untuk membantu proses analisa jadi lebih ringan: menampilkan area yang layak diperhatikan, membantu melihat potensi reaksi harga, dan memberi peta visual yang lebih bersih sebelum entry. Cocok untuk trader XAU yang ingin analisa lebih efisien, lebih terarah, dan tidak dipenuhi noise yang mengganggu fokus.',
@@ -400,6 +443,30 @@ const PRODUCTS = {
       features:['Invite-only access directly on TradingView, keeping the indicator exclusive and secure','Automatically highlights key XAU levels on the chart','Clean visuals keep the chart easy to read without too much noise','Comes with a usage guide so even beginner traders quickly understand every element of the indicator','Gets ongoing updates whenever improvements or new features are added'],
       includes:['Pine Script indicator access on TradingView (invite-only, non-transferable)','Complete usage guide (PDF)'],
       note:'Built specifically for XAU/USD. A free TradingView account is enough — no need for a Pro subscription to use this indicator.'}},
+  '6':{name:'AUTOTRADE N8N',short:'AUTOTRADE N8N',icon:'👑',img:'prod-n8n.png',price:65000000,badge:'Ultra Premium',badgeClass:'badge-gold',premium:true,rating:4.9,sales:23,
+    tagline:'Sistem AI Agent trading otomatis kelas atas di MT5, dibangun khusus lewat n8n — dari instalasi sampai berjalan, Anda didampingi personal sampai tuntas.',
+    warnTitle:'⚠️ Baca Dulu Sebelum Lanjut',
+    warnProvide:['Workflow n8n eksklusif siap pakai — tinggal isi data, logic, API key, ID, dan token milik Anda sendiri','Ebook panduan dari nol sampai sistem jadi','Pendampingan personal 1-on-1 sampai sistem Anda berjalan stabil'],
+    warnNotProvide:['Biaya server bulanan & API pihak ketiga — itu ditanggung Anda'],
+    warnBody:['Logic dan money management yang dipakai di sistem ini sepenuhnya tanggung jawab Anda sendiri.',
+      'Sederhananya: kami menyediakan sistem dan pendampingan personal untuk membangunnya — Anda yang menjalankan dan menanggung biaya operasionalnya sesuai kebutuhan Anda sendiri.'],
+    about:['Ini bukan produk workflow generik. Autotrade N8N dirancang untuk trader yang serius menjalankan sistem otomatis kelas eksekutif — AI Agent yang membaca data candle MT5 Anda, memprosesnya sesuai logika yang Anda tentukan sendiri, lalu mengeksekusi keputusan itu langsung ke akun trading Anda.',
+      'Karena ini investasi besar, Anda tidak dilepas begitu saja dengan sekadar file dan panduan. Tim kami mendampingi personal dari instalasi awal sampai sistem benar-benar berjalan stabil di akun Anda.'],
+    features:['Workflow n8n eksklusif — dirancang dan disesuaikan khusus untuk kebutuhan sistem AI Agent trading Anda','Pendampingan personal 1-on-1, bukan sekadar dokumen — tim kami mendampingi dari nol sampai sistem berjalan','Prioritas dukungan teknis dengan respons lebih cepat dibanding lini produk lain','Ebook panduan lengkap, ditulis sesederhana mungkin agar tetap bisa diikuti walau Anda belum paham coding'],
+    includes:['File workflow n8n eksklusif siap impor (.json)','Ebook panduan lengkap (PDF)','Sesi pendampingan personal sampai sistem berjalan'],
+    note:'Ingat: biaya server bulanan, API pihak ketiga, serta logic dan money management yang Anda pakai sepenuhnya tanggung jawab Anda sendiri. Kami menyediakan sistem, panduan, dan pendampingan personal — bukan mengelola akun trading Anda.',
+    en:{name:'AUTOTRADE N8N',short:'AUTOTRADE N8N',
+      tagline:'A top-tier automated AI Agent trading system for MT5, custom-built through n8n — from installation to launch, you get personal guidance the whole way.',
+      warnTitle:'⚠️ Read This Before You Continue',
+      warnProvide:['An exclusive, ready-to-use n8n workflow — just plug in your own data, logic, API keys, IDs, and tokens','A guide ebook from zero to a finished setup','Personal 1-on-1 support until your system is running stably'],
+      warnNotProvide:['Monthly server & third-party API costs — that is on you'],
+      warnBody:['The logic and money management used in this system are entirely your own responsibility.',
+        'In short: we provide the system and personal support to build it — you are the one who runs it and covers the running costs based on your own needs.'],
+      about:['This is not a generic workflow product. Autotrade N8N is built for traders serious about running an executive-tier automated system — an AI Agent that reads your MT5 candle data, processes it following the logic you define yourself, then executes that decision straight into your trading account.',
+        'Because this is a significant investment, you are not left alone with just a file and a guide. Our team gives you personal support from initial installation until the system is genuinely running stably on your account.'],
+      features:['An exclusive n8n workflow — designed and tailored specifically to your AI Agent trading system needs','Personal 1-on-1 support, not just documentation — our team guides you from zero to a running system','Priority technical support with faster response than our other product lines','A complete guide ebook, written as simply as possible so you can follow along even with no coding background'],
+      includes:['Exclusive, ready-to-import n8n workflow file (.json)','Complete guide ebook (PDF)','Personal support session until the system is running'],
+      note:'Remember: monthly server costs, third-party API fees, and the logic and money management you use are entirely your own responsibility. We provide the system, the guide, and personal support — not management of your trading account.'}},
 };
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -512,18 +579,19 @@ function render(){
       ${loc.warnBody.map(t=>`<p>${esc(t)}</p>`).join('')}
     </div>` : '';
   document.getElementById('pdContent').innerHTML = `
-    <div class="pd-hero">
-      <div class="pd-icon"><img src="${esc(p.img)}" alt="${esc(loc.short)}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+    <div class="pd-hero${p.premium ? ' pd-hero-premium' : ''}">
+      ${p.premium ? '<div class="pd-premium-sparkles"></div>' : ''}
+      <div class="pd-icon${p.premium ? ' pd-icon-premium' : ''}"><img src="${esc(p.img)}" alt="${esc(loc.short)}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
       <div class="pd-hero-body">
         ${badge}
         <div class="pd-name">${esc(loc.name)}</div>
         <div class="pd-tagline">${loc.tagline}</div>
         ${ratingRow}
-        <div class="pd-price-pill${promoActive ? ' pd-price-pill-promo' : ''}">
+        <div class="pd-price-pill${promoActive ? ' pd-price-pill-promo' : ''}${p.premium ? ' pd-price-pill-gold' : ''}">
           <div>
             <div class="pd-price-lbl">${priceLbl}</div>
             ${promoActive ? `<div class="pd-price-old">${fmtP(p.price)}</div>` : ''}
-            <div class="pd-price-val">${fmtP(priceNow)}</div>
+            <div class="pd-price-val${p.premium ? ' pd-price-val-gold' : ''}">${fmtP(priceNow)}</div>
           </div>
           ${promoActive ? `<div class="pd-promo-badge">-${p.promo.pct}%</div>` : ''}
         </div>

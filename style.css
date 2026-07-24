@@ -24,10 +24,42 @@ body::before {
   z-index: 0;
 }
 
+/* Starfield — twinkling, slowly drifting stars behind every page */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 380px 380px;
+  background-image:
+    radial-gradient(1.6px 1.6px at 8% 15%, rgba(255,255,255,.9), transparent),
+    radial-gradient(1.2px 1.2px at 22% 62%, rgba(255,255,255,.7), transparent),
+    radial-gradient(2px 2px at 38% 28%, rgba(255,255,255,.85), transparent),
+    radial-gradient(1.2px 1.2px at 52% 78%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1.6px 1.6px at 68% 40%, rgba(255,255,255,.9), transparent),
+    radial-gradient(1.2px 1.2px at 80% 65%, rgba(255,255,255,.7), transparent),
+    radial-gradient(2px 2px at 92% 12%, rgba(255,255,255,.85), transparent),
+    radial-gradient(1.2px 1.2px at 14% 88%, rgba(255,255,255,.55), transparent),
+    radial-gradient(1.6px 1.6px at 60% 52%, rgba(255,255,255,.75), transparent),
+    radial-gradient(1.2px 1.2px at 4% 45%, rgba(255,255,255,.6), transparent),
+    radial-gradient(1.2px 1.2px at 46% 8%, rgba(255,255,255,.65), transparent),
+    radial-gradient(1.6px 1.6px at 88% 90%, rgba(255,255,255,.8), transparent);
+  animation: stars-drift 120s linear infinite, stars-twinkle 4.5s ease-in-out infinite;
+}
+@keyframes stars-drift {
+  from { background-position: 0 0; }
+  to { background-position: -380px 380px; }
+}
+@keyframes stars-twinkle {
+  0%, 100% { opacity: .5; }
+  50% { opacity: 1; }
+}
+
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
 * { position: relative; z-index: 1; }
-body::before { z-index: 0; }
+body::before, body::after { z-index: 0; }
 
 /* ===== VARIABEL WARNA ===== */
 /* Ungu   : #9333ea */
@@ -610,58 +642,35 @@ body::before { z-index: 0; }
 .testi-name { color: #ffffff; font-size: 14px; font-weight: 600; }
 .testi-label { font-size: 11px; color: #ffffff; margin-top: 2px; }
 
-/* ===== CHALLENGE ===== */
-.challenge-box {
+/* ===== KOMUNITAS TELEGRAM (Jurnal Challenge + Prompt Gratis + Signaler + Admin) ===== */
+.tg-hub-grid {
+  max-width: 1060px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+@media (max-width: 860px) { .tg-hub-grid { grid-template-columns: 1fr; } }
+.tg-hub-card {
   background: rgba(10, 5, 25, 0.8);
-  border: 1px solid rgba(236,72,153,0.2);
+  border: 1px solid rgba(147,51,234,0.2);
   border-radius: 16px;
-  padding: 56px 48px;
+  padding: 32px 26px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  max-width: 720px;
-  margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center;
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
 }
-.challenge-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #ec4899, transparent);
+.tg-hub-card:hover { transform: translateY(-3px); }
+.tg-hub-icon { font-size: 30px; margin-bottom: 14px; }
+.tg-hub-card h3 { font-size: 17px; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.35; }
+.tg-hub-card p { color: #ffffff; font-size: 13.5px; line-height: 1.75; margin-bottom: 22px; flex: 1; }
+.tg-hub-card .btn { width: 100%; }
+.tg-hub-purple { border-color: rgba(236,72,153,0.25); }
+.tg-hub-purple:hover { border-color: rgba(236,72,153,0.5); box-shadow: 0 12px 32px rgba(0,0,0,0.3), 0 0 30px rgba(236,72,153,0.12); }
+.tg-hub-btn-purple {
+  background: linear-gradient(135deg, #7c3aed, #ec4899); color: #ffffff;
+  box-shadow: 0 0 20px rgba(236,72,153,0.2);
 }
-.challenge-box::after {
-  content: '';
-  position: absolute;
-  bottom: -80px; right: -80px;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(236,72,153,0.07) 0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-.challenge-box h2 { font-size: 32px; font-weight: 800; color: #ffffff; margin-bottom: 12px; }
-.challenge-box p { color: #ffffff; font-size: 15px; line-height: 1.8; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
-
-/* ===== FREE SIGNALER ===== */
-.signaler-box {
-  background: rgba(6,182,212,0.04);
-  border: 1px solid rgba(6,182,212,0.15);
-  border-radius: 16px;
-  padding: 56px 48px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.signaler-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #06b6d4, transparent);
-}
-.signaler-box h2 { font-size: 32px; font-weight: 800; color: #ffffff; margin-bottom: 12px; }
-.signaler-box p { color: #ffffff; font-size: 15px; line-height: 1.8; margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.tg-hub-btn-purple:hover { box-shadow: 0 0 30px rgba(236,72,153,0.35); transform: translateY(-1px); }
+.tg-hub-cyan { border-color: rgba(6,182,212,0.2); }
+.tg-hub-cyan:hover { border-color: rgba(6,182,212,0.45); box-shadow: 0 12px 32px rgba(0,0,0,0.3), 0 0 30px rgba(6,182,212,0.12); }
 .btn-cyan {
   background: transparent;
   color: #06b6d4;
@@ -827,8 +836,6 @@ footer {
   .order-guide-list { grid-template-columns: 1fr; }
   .about-exp { grid-template-columns: 1fr 1fr; }
   .section { padding: 64px 0; }
-  .challenge-box, .signaler-box { padding: 40px 24px; }
-  .challenge-box h2, .signaler-box h2 { font-size: 26px; }
   .footer-inner { flex-direction: column; gap: 28px; }
   .footer-bottom { flex-direction: column; text-align: center; }
 }

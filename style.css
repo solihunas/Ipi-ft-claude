@@ -230,7 +230,7 @@ body::before, body::after { z-index: 0; }
 
 /* ===== LAYOUT ===== */
 .container { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
-.section { padding: 88px 0; }
+.section { padding: 64px 0; }
 .section-dark { background: rgba(0,0,0,0.25); border-top: 1px solid rgba(147,51,234,0.07); border-bottom: 1px solid rgba(147,51,234,0.07); }
 
 .section-label {
@@ -389,8 +389,8 @@ body::before, body::after { z-index: 0; }
 .hero p {
   font-size: 16px;
   color: #ffffff;
-  line-height: 1.8;
-  margin-bottom: 36px;
+  line-height: 1.6;
+  margin-bottom: 26px;
   max-width: 460px;
 }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -491,7 +491,7 @@ body::before, body::after { z-index: 0; }
 .about-desc {
   color: #ffffff;
   font-size: 15px;
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 /* ===== PRODUK ===== */
@@ -668,8 +668,8 @@ body::before, body::after { z-index: 0; }
 }
 .tg-hub-list li {
   display: flex; align-items: flex-start; gap: 9px;
-  font-size: 13.5px; color: #ffffff; font-weight: 600; line-height: 1.5;
-  margin-bottom: 10px;
+  font-size: 13.5px; color: #ffffff; font-weight: 600; line-height: 1.45;
+  margin-bottom: 6px;
 }
 .tg-hub-list li::before {
   content: '✓'; color: #a855f7; font-weight: 800; flex-shrink: 0;
@@ -1243,6 +1243,17 @@ footer {
   transform: translateY(-1px);
   box-shadow: 0 0 20px rgba(6,182,212,0.2);
 }
+.btn-outline-pink {
+  background: transparent;
+  color: #f472b6;
+  border: 1px solid rgba(236,72,153,0.5);
+}
+.btn-outline-pink:hover {
+  background: rgba(236,72,153,0.1);
+  border-color: #ec4899;
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(236,72,153,0.25);
+}
 .btn-gold {
   background: linear-gradient(135deg, #78350f, #92400e);
   color: #fef3c7;
@@ -1255,65 +1266,64 @@ footer {
   transform: translateY(-1px);
 }
 
-/* TIER 1 — Basic (Neurobro Rp50k) */
+/* ===== Price-tiered pink premium cards — neon ring surrounds every card,
+   intensity + pulse scale with price. Price order: tier-1 (50k) < tier-2
+   (550k) < tier-4 (720k+) < tier-3 (1.5jt) < tier-5/flagship (own rings). ===== */
+.product-card.tier-1, .product-card.tier-2, .product-card.tier-3, .product-card.tier-4 {
+  border-color: transparent;
+}
+.product-card.tier-1::before, .product-card.tier-2::before,
+.product-card.tier-3::before, .product-card.tier-4::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 12px; padding: 1.5px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  z-index: 0; pointer-events: none; height: auto;
+}
+
+/* TIER 1 — Basic (Neurobro Rp50k) — subtlest pink, no pulse */
 .product-card.tier-1 {
-  border-color: rgba(147,51,234,0.15);
+  background: linear-gradient(155deg, rgba(236,72,153,.035), rgba(10,5,25,.85));
+  box-shadow: 0 0 14px rgba(236,72,153,.08);
 }
+.product-card.tier-1::before { background: rgba(236,72,153,.28); }
+.product-card.tier-1:hover { box-shadow: 0 12px 40px rgba(0,0,0,.4), 0 0 26px rgba(236,72,153,.18); }
+.product-card.tier-1 .prod-tagline { color: #f9a8d4; }
 
-/* TIER 2 — Better glow (Signaler Rp550k) */
+/* TIER 2 — Signaler Rp550k — a touch deeper pink, still calm */
 .product-card.tier-2 {
-  border-color: rgba(168,85,247,0.22);
+  background: linear-gradient(155deg, rgba(236,72,153,.05), rgba(10,5,25,.86));
+  box-shadow: 0 0 18px rgba(236,72,153,.1);
 }
-.product-card.tier-2::before {
-  background: linear-gradient(90deg, transparent, rgba(168,85,247,0.65), rgba(6,182,212,0.4), transparent);
-}
-.product-card.tier-2:hover {
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(168,85,247,0.14);
-}
-.product-card.tier-2 .prod-logo-wrap {
-  border-color: rgba(168,85,247,0.3);
-  box-shadow: 0 0 12px rgba(168,85,247,0.12);
-}
-.product-card.tier-2 .prod-tagline { color: #8b5cf6; }
+.product-card.tier-2::before { background: rgba(236,72,153,.38); }
+.product-card.tier-2:hover { box-shadow: 0 12px 40px rgba(0,0,0,.4), 0 0 32px rgba(236,72,153,.22); }
+.product-card.tier-2 .prod-logo-wrap { border-color: rgba(236,72,153,.35); box-shadow: 0 0 12px rgba(236,72,153,.16); }
+.product-card.tier-2 .prod-tagline { color: #f472b6; }
 
-/* TIER 3 — Premium neon cyan (Indikator Rp750k) */
-.product-card.tier-3 {
-  border-color: rgba(6,182,212,0.35);
-  background: rgba(6,182,212,0.03);
-}
-.product-card.tier-3::before {
-  background: linear-gradient(90deg, transparent, #06b6d4, #a855f7, transparent);
-  height: 2px;
-}
-.product-card.tier-3:hover {
-  border-color: rgba(6,182,212,0.6);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 40px rgba(6,182,212,0.15);
-}
-.product-card.tier-3 .prod-logo-wrap {
-  border-color: rgba(6,182,212,0.4);
-  box-shadow: 0 0 16px rgba(6,182,212,0.15);
-}
-.product-card.tier-3 .prod-tagline { color: #06b6d4; }
-
-/* TIER 4 — Premium pink/purple (EA MT5 Rp3M) */
+/* TIER 4 — EA MT5 Rp720k+ — deeper pink with a gentle pulse */
 .product-card.tier-4 {
-  border-color: rgba(236,72,153,0.4);
-  background: rgba(236,72,153,0.025);
-  box-shadow: 0 0 28px rgba(236,72,153,0.06);
+  background: linear-gradient(155deg, rgba(236,72,153,.07), rgba(10,5,25,.87));
+  animation: tier-pulse-soft 3.2s ease-in-out infinite;
 }
-.product-card.tier-4::before {
-  background: linear-gradient(90deg, transparent, #ec4899, #a855f7, transparent);
-  height: 2px;
-}
-.product-card.tier-4:hover {
-  border-color: rgba(236,72,153,0.65);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 50px rgba(236,72,153,0.2);
-}
-.product-card.tier-4 .prod-logo-wrap {
-  border-color: rgba(236,72,153,0.4);
-  box-shadow: 0 0 16px rgba(236,72,153,0.18);
-}
+.product-card.tier-4::before { background: rgba(236,72,153,.5); }
+.product-card.tier-4:hover { border-color: transparent; box-shadow: 0 12px 40px rgba(0,0,0,.4), 0 0 44px rgba(236,72,153,.3); }
+.product-card.tier-4 .prod-logo-wrap { border-color: rgba(236,72,153,.4); box-shadow: 0 0 16px rgba(236,72,153,.2); }
 .product-card.tier-4 .prod-tagline { color: #ec4899; }
+
+/* TIER 3 — Indikator Rp1.5jt — strongest pink of this group, most pulse */
+.product-card.tier-3 {
+  background: linear-gradient(155deg, rgba(236,72,153,.09), rgba(10,5,25,.88));
+  animation: tier-pulse-soft 2.6s ease-in-out infinite;
+}
+.product-card.tier-3::before { background: rgba(236,72,153,.62); }
+.product-card.tier-3:hover { border-color: transparent; box-shadow: 0 12px 40px rgba(0,0,0,.4), 0 0 50px rgba(236,72,153,.36); }
+.product-card.tier-3 .prod-logo-wrap { border-color: rgba(236,72,153,.48); box-shadow: 0 0 18px rgba(236,72,153,.24); }
+.product-card.tier-3 .prod-tagline { color: #db2777; }
+
+@keyframes tier-pulse-soft {
+  0%, 100% { box-shadow: 0 0 20px rgba(236,72,153,.14); }
+  50%      { box-shadow: 0 0 34px rgba(236,72,153,.28); }
+}
 
 /* TIER 5 — Ultra premium spinning neon border (Sniper Rp3.5M) */
 .product-card.tier-5 {
@@ -1331,7 +1341,7 @@ footer {
   width: 200%; height: 200%;
   top: -50%; left: -50%;
   right: auto;
-  background: conic-gradient(from 0deg, #7c3aed 0%, #a855f7 20%, #ec4899 40%, #f59e0b 60%, #a855f7 80%, #7c3aed 100%);
+  background: conic-gradient(from 0deg, #ec4899 0%, #f472b6 20%, #db2777 40%, #a855f7 60%, #ec4899 80%, #ec4899 100%);
   animation: ring-spin 4s linear infinite;
   z-index: 0;
 }

@@ -108,6 +108,10 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
   display:none;
 }
 .cs-dropdown.show{display:block;}
+.cs-group-label{
+  padding:10px 16px 6px; font-size:10.5px; font-weight:800; text-transform:uppercase;
+  letter-spacing:.06em; color:#7c3aed; background:#f8fafc;
+}
 .cs-option{
   display:flex;align-items:center;gap:12px;
   padding:14px 16px;cursor:pointer;transition:background .15s;
@@ -466,17 +470,17 @@ const PRODUCTS = {
   '6':{ name:'AUTOTRADE N8N', name_en:'AUTOTRADE N8N', img:'prod-n8n.png', price:65000000 },
 };
 
-// Metode pembayaran bank/e-wallet — dipakai saat bahasa Indonesia
+// Metode pembayaran lokal (bank/e-wallet) — selalu tersedia di semua bahasa
 const BANK_METHODS = [
-  {value:'dana', img:'logo-dana.png', name:'DANA', number:'083876123080', holder:'Ardikuntoro'},
-  {value:'seabank', img:'logo-seabank.webp', name:'SeaBank', number:'901170990455', holder:'Solihun Adi Saputra'}
+  {value:'dana', type:'bank', img:'logo-dana.png', name:'DANA', number:'083876123080', holder:'Ardikuntoro'},
+  {value:'seabank', type:'bank', img:'logo-seabank.webp', name:'SeaBank', number:'901170990455', holder:'Solihun Adi Saputra'}
 ];
-// Metode pembayaran crypto (USDT) — otomatis dipakai saat bahasa Inggris
+// Metode pembayaran crypto (USDT) — selalu tersedia di semua bahasa
 const CRYPTO_METHODS = [
-  {value:'usdt-trc20', img:'', name:'TRON (TRC20)', number:'TNtBj4CQnnCFxzjcR2rcT4QjHwZTkXU86L', holder:'USDT'},
-  {value:'usdt-erc20', img:'', name:'Ethereum (ERC20)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'},
-  {value:'usdt-arb', img:'', name:'Arbitrum One (USDT0)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'},
-  {value:'usdt-poly', img:'', name:'Polygon (USDT0)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'}
+  {value:'usdt-trc20', type:'crypto', img:'', name:'TRON (TRC20)', number:'TNtBj4CQnnCFxzjcR2rcT4QjHwZTkXU86L', holder:'USDT'},
+  {value:'usdt-erc20', type:'crypto', img:'', name:'Ethereum (ERC20)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'},
+  {value:'usdt-arb', type:'crypto', img:'', name:'Arbitrum One (USDT0)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'},
+  {value:'usdt-poly', type:'crypto', img:'', name:'Polygon (USDT0)', number:'0xa564779c5893d953813e0bd42bf6e599056931d8', holder:'USDT'}
 ];
 
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -505,9 +509,11 @@ const vpsBonusActive = pid === '4b';
 
 function isEn(){ return window.ipiLang ? window.ipiLang.get()==='en' : false; }
 
-// Mode Inggris = bayar via crypto (USDT), tanpa kode unik. Mode Indonesia = transfer bank + kode unik.
+// Metode yang dipilih menentukan mata uang: bank/lokal = Rupiah + kode unik,
+// crypto = USDT, tanpa kode unik. Sebelum ada pilihan, bahasa situs jadi fallback.
+function useCrypto(){ return selectedMethod ? selectedMethod.type==='crypto' : isEn(); }
 function currentAmount(){
-  if(isEn()){
+  if(useCrypto()){
     const usd=Math.round(product.price/12000);
     return { value:usd, display:'$'+usd.toLocaleString('en-US') };
   }
@@ -515,41 +521,78 @@ function currentAmount(){
   return { value:idr, display:'Rp '+idr.toLocaleString('id-ID') };
 }
 
-function renderHeader(){
+function refreshAmountUI(){
   const en=isEn();
-  const name=en&&product.name_en?product.name_en:product.name;
   const amt=currentAmount();
-  document.getElementById('ppIcon').innerHTML='<img src="'+esc(product.img)+'" alt="'+esc(name)+'">';
-  document.getElementById('ppName').textContent=name;
-  document.getElementById('ppPrice').textContent=amt.display;
-  document.getElementById('priceTotal').textContent=amt.display;
   const promoNote = promoActive
     ? (en ? PROMO_PCT+'% discount applied. ' : 'Diskon '+PROMO_PCT+'% diterapkan. ')
     : (vpsBonusActive ? (en ? 'Includes a free 1-month VPS bonus. ' : 'Termasuk bonus VPS 1 bulan. ') : '');
-  document.getElementById('priceCodeNote').textContent = en ? promoNote :
+  document.getElementById('ppPrice').textContent=amt.display;
+  document.getElementById('priceTotal').textContent=amt.display;
+  document.getElementById('priceCodeNote').textContent = useCrypto() ? promoNote :
     promoNote+'Harga dasar Rp '+product.price.toLocaleString('id-ID')+' + kode unik #'+uniqueCode;
-  document.getElementById('backLink').href='produk.html?id='+pid;
   document.getElementById('iAmount').textContent=amt.display;
   var amtNoteEl=document.getElementById('iAmtNote');
   if(amtNoteEl) amtNoteEl.textContent=amt.display;
+  return amt;
+}
+
+function renderHeader(){
+  const en=isEn();
+  const name=en&&product.name_en?product.name_en:product.name;
+  document.getElementById('ppIcon').innerHTML='<img src="'+esc(product.img)+'" alt="'+esc(name)+'">';
+  document.getElementById('ppName').textContent=name;
+  document.getElementById('backLink').href='produk.html?id='+pid;
+  refreshAmountUI();
 }
 
 function renderDropdown(){
   const en=isEn();
-  const methods = en ? CRYPTO_METHODS : BANK_METHODS;
-  const fallbackIcon = en ? '🪙' : '💳';
+  const fallbackIcon='💳';
+  const cryptoFallbackIcon='🪙';
   const availableWord = en ? 'Available' : 'Tersedia';
-  dropdown.innerHTML = methods.map(function(p){
+  const localLabel = en ? 'Local Transfer' : 'Transfer Lokal';
+  const cryptoLabel = 'Crypto (USDT)';
+
+  function optionHtml(p){
+    const icon = p.type==='crypto' ? cryptoFallbackIcon : fallbackIcon;
     const lg = p.img
-      ? '<div class="cs-opt-icon"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" onerror="this.parentElement.textContent=\''+fallbackIcon+'\'"></div>'
-      : '<div class="cs-opt-icon" style="font-size:20px">'+fallbackIcon+'</div>';
-    const subLine = en
+      ? '<div class="cs-opt-icon"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" onerror="this.parentElement.textContent=\''+icon+'\'"></div>'
+      : '<div class="cs-opt-icon" style="font-size:20px">'+icon+'</div>';
+    const subLine = p.type==='crypto'
       ? '<span class="cs-opt-num" style="word-break:break-all">'+esc(p.number)+'</span><span class="cs-opt-holder">'+esc(p.holder)+'</span>'
       : '<span class="cs-opt-num">'+esc(p.number)+'</span><span class="cs-opt-holder">a.n. '+esc(p.holder)+'</span>';
-    return '<div class="cs-option" data-value="'+esc(p.value)+'" data-img="'+esc(p.img)+'" data-name="'+esc(p.name)+'" data-number="'+esc(p.number)+'" data-holder="'+esc(p.holder)+'">'
+    return '<div class="cs-option" data-value="'+esc(p.value)+'" data-type="'+esc(p.type)+'" data-img="'+esc(p.img)+'" data-name="'+esc(p.name)+'" data-number="'+esc(p.number)+'" data-holder="'+esc(p.holder)+'">'
       +lg+'<div class="cs-opt-info"><span class="cs-opt-name">'+esc(p.name)+'</span>'+subLine+'</div>'
       +'<span class="cs-badge">'+availableWord+'</span></div>';
-  }).join('');
+  }
+
+  dropdown.innerHTML =
+    '<div class="cs-group-label">'+esc(localLabel)+'</div>'
+    + BANK_METHODS.map(optionHtml).join('')
+    + '<div class="cs-group-label">'+esc(cryptoLabel)+'</div>'
+    + CRYPTO_METHODS.map(optionHtml).join('');
+}
+
+function methodLabels(en, crypto){
+  return {
+    numberKey: crypto ? (en?'Wallet Address':'Alamat Wallet') : (en?'Account Number':'Nomor Rekening'),
+    holderKey: crypto ? (en?'Currency':'Mata Uang') : (en?'Account Holder':'Atas Nama')
+  };
+}
+function holderDisplay(en, crypto, holder){
+  if (crypto) return holder;
+  return en ? ('held by '+holder) : ('a.n. '+holder);
+}
+function instrNoteText(en, crypto, amtDisplay, name, holder){
+  if (crypto) {
+    return en
+      ? 'Send exactly <strong>'+esc(amtDisplay)+'</strong> worth of <strong>'+esc(holder)+'</strong> to the address above, via <strong>'+esc(name)+'</strong> only. Double-check the network before sending — using the wrong network can result in permanent loss of funds.'
+      : 'Kirim tepat <strong>'+esc(amtDisplay)+'</strong> senilai <strong>'+esc(holder)+'</strong> ke alamat di atas, khusus lewat jaringan <strong>'+esc(name)+'</strong>. Pastikan jaringan sudah benar sebelum mengirim — salah jaringan bisa menyebabkan dana hilang permanen.';
+  }
+  return en
+    ? 'Please transfer exactly <strong>'+esc(amtDisplay)+'</strong> to <strong>'+esc(name)+'</strong>, held by <strong>'+esc(holder)+'</strong>. The unique amount at the end helps our admin verify your order faster.'
+    : 'Silakan transfer tepat <strong>'+esc(amtDisplay)+'</strong> ke <strong>'+esc(name)+'</strong> atas nama <strong>'+esc(holder)+'</strong>. Nominal unik di akhir membantu admin memverifikasi pesanan Anda lebih cepat.';
 }
 
 function resetSelection(){
@@ -557,8 +600,9 @@ function resetSelection(){
   placeholder.style.display='';
   selectedWrap.style.display='none';
   document.getElementById('instrCard').classList.remove('show');
-  document.getElementById('iNumberKey').textContent = isEn() ? 'Wallet Address' : 'Nomor Rekening';
-  document.getElementById('iHolderKey').textContent = isEn() ? 'Currency' : 'Atas Nama';
+  const labels=methodLabels(isEn(), useCrypto());
+  document.getElementById('iNumberKey').textContent = labels.numberKey;
+  document.getElementById('iHolderKey').textContent = labels.holderKey;
   validateForm();
 }
 
@@ -596,33 +640,34 @@ dropdown.addEventListener('click',function(e){
   e.stopPropagation();
   const en=isEn();
   const img=opt.dataset.img;
+  const type=opt.dataset.type;
+  const crypto=type==='crypto';
   const name=opt.dataset.name;
   const number=opt.dataset.number;
   const holder=opt.dataset.holder;
 
-  selectedMethod={img,name,number,holder};
+  selectedMethod={img,name,number,holder,type};
 
   // Update trigger display
   placeholder.style.display='none';
   selectedWrap.style.display='flex';
-  const fallbackIcon=en?'🪙':'💳';
+  const fallbackIcon=crypto?'🪙':'💳';
   const iconEl=document.getElementById('csSIcon');
   iconEl.innerHTML=img?'<img src="'+esc(img)+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.textContent=\''+fallbackIcon+'\'">':fallbackIcon;
   document.getElementById('csSName').textContent=name;
-  document.getElementById('csSNum').textContent = en ? (number+' · '+holder) : (number+' · a.n. '+holder);
+  document.getElementById('csSNum').textContent = number+' · '+holderDisplay(en, crypto, holder);
 
   // Update instruction card
+  const labels=methodLabels(en, crypto);
   document.getElementById('iMethod').textContent=name;
   document.getElementById('iNumber').textContent=number;
-  document.getElementById('iHolder').textContent = en ? holder : ('a.n. '+holder);
-  document.getElementById('iNumberKey').textContent = en ? 'Wallet Address' : 'Nomor Rekening';
-  document.getElementById('iHolderKey').textContent = en ? 'Currency' : 'Atas Nama';
+  document.getElementById('iHolder').textContent = holderDisplay(en, crypto, holder);
+  document.getElementById('iNumberKey').textContent = labels.numberKey;
+  document.getElementById('iHolderKey').textContent = labels.holderKey;
 
-  const amt=currentAmount();
+  const amt=refreshAmountUI();
   const note=document.getElementById('instrNote');
-  note.innerHTML = en
-    ? 'Send exactly <strong>'+esc(amt.display)+'</strong> worth of <strong>'+esc(holder)+'</strong> to the address above, via <strong>'+esc(name)+'</strong> only. Double-check the network before sending — using the wrong network can result in permanent loss of funds.'
-    : 'Silakan transfer tepat <strong>'+esc(amt.display)+'</strong> ke <strong>'+esc(name)+'</strong> atas nama <strong>'+esc(holder)+'</strong>. Nominal unik di akhir membantu admin memverifikasi pesanan Anda lebih cepat.';
+  note.innerHTML = instrNoteText(en, crypto, amt.display, name, holder);
 
   // Copy buttons
   document.getElementById('copyNumBtn').onclick=function(){copyText(number, en?'Address copied!':'Nomor disalin!');};
@@ -717,9 +762,9 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
 
   const order={
     pid,name,img:product.img,
-    currency: en?'USDT':'IDR',
+    currency: useCrypto()?'USDT':'IDR',
     finalPrice:amt.value, finalPriceDisplay:amt.display,
-    basePrice:product.price, uniqueCode: en?null:uniqueCode,
+    basePrice:product.price, uniqueCode: useCrypto()?null:uniqueCode,
     nama,contact,pesan,
     method:selectedMethod.name,
     methodNumber:selectedMethod.number,
@@ -736,7 +781,7 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
     '👤 <b>Name:</b> '+escTg(nama),
     '📱 <b>Contact:</b> '+escTg(contact),
     '💳 <b>Method:</b> '+escTg(selectedMethod.name)+' – '+escTg(selectedMethod.number)+' ('+escTg(selectedMethod.holder)+')',
-    '💰 <b>Total:</b> '+escTg(amt.display)+' (USDT)',
+    '💰 <b>Total:</b> '+escTg(amt.display)+(useCrypto()?' (USDT)':' (unique code #'+uniqueCode+')'),
     pesan?'📝 <b>Note:</b> '+escTg(pesan):'',
     '',
     '🕐 '+new Date().toISOString(),
@@ -746,8 +791,8 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
     '📦 <b>Produk:</b> '+escTg(name),
     '👤 <b>Nama:</b> '+escTg(nama),
     '📱 <b>WA/Email:</b> '+escTg(contact),
-    '💳 <b>Metode:</b> '+escTg(selectedMethod.name)+' – '+escTg(selectedMethod.number)+' (a.n. '+escTg(selectedMethod.holder)+')',
-    '💰 <b>Total:</b> '+escTg(amt.display)+' (kode unik #'+uniqueCode+')',
+    '💳 <b>Metode:</b> '+escTg(selectedMethod.name)+' – '+escTg(selectedMethod.number)+' ('+(useCrypto()?'':'a.n. ')+escTg(selectedMethod.holder)+')',
+    '💰 <b>Total:</b> '+escTg(amt.display)+(useCrypto()?' (USDT)':' (kode unik #'+uniqueCode+')'),
     pesan?'📝 <b>Catatan:</b> '+escTg(pesan):'',
     '',
     '🕐 '+new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}),

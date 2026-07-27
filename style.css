@@ -662,6 +662,25 @@ body::before, body::after { z-index: 0; }
 .tg-hub-card h3 { font-size: 17px; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.35; }
 .tg-hub-card p { color: #ffffff; font-size: 13.5px; line-height: 1.75; margin-bottom: 22px; flex: 1; }
 .tg-hub-card .btn { width: 100%; }
+.tg-hub-list {
+  list-style: none; text-align: left; width: 100%; flex: 1;
+  margin-bottom: 18px;
+}
+.tg-hub-list li {
+  display: flex; align-items: flex-start; gap: 9px;
+  font-size: 13.5px; color: #ffffff; font-weight: 600; line-height: 1.5;
+  margin-bottom: 10px;
+}
+.tg-hub-list li::before {
+  content: '✓'; color: #a855f7; font-weight: 800; flex-shrink: 0;
+}
+.tg-hub-cyan .tg-hub-list li::before { color: #06b6d4; }
+.tg-hub-value {
+  display: flex; align-items: baseline; justify-content: center; gap: 10px;
+  margin-bottom: 18px;
+}
+.tg-hub-value-old { font-size: 14px; color: #96a6bd; text-decoration: line-through; }
+.tg-hub-value-free { font-size: 19px; font-weight: 900; color: #4ade80; letter-spacing: .03em; }
 .tg-hub-purple { border-color: rgba(236,72,153,0.25); }
 .tg-hub-purple:hover { border-color: rgba(236,72,153,0.5); box-shadow: 0 12px 32px rgba(0,0,0,0.3), 0 0 30px rgba(236,72,153,0.12); }
 .tg-hub-btn-purple {

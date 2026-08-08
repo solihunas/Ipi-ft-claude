@@ -23,7 +23,7 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 /* ── Header ── */
 .pay-header{
   background:linear-gradient(135deg,#5b21b6 0%,#7c3aed 55%,#6d28d9 100%);
-  padding:48px 20px 60px;position:relative;overflow:hidden;
+  padding:42px 20px 52px;position:relative;overflow:hidden;
 }
 .pay-header::before{
   content:'';position:absolute;top:-40px;right:-40px;
@@ -39,7 +39,7 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 .back-link{
   display:inline-flex;align-items:center;gap:6px;
   color:rgba(255,255,255,.65);font-size:13px;text-decoration:none;
-  margin-bottom:20px;transition:color .2s;
+  margin-bottom:16px;transition:color .2s;
 }
 .back-link:hover{color:#fff;}
 .header-title{font-size:clamp(22px,5vw,28px);font-weight:800;color:#fff;margin-bottom:6px;}
@@ -62,12 +62,12 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 .pay-card{
   max-width:540px;margin:0 auto;
   background:#fff;border-radius:0 0 20px 20px;
-  padding:24px 20px 32px;
+  padding:22px 20px 26px;
   box-shadow:0 8px 40px rgba(0,0,0,.2);
 }
 
 /* ── Form groups ── */
-.form-group{margin-bottom:20px;}
+.form-group{margin-bottom:16px;}
 .form-label{
   display:block;font-size:11px;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:#64748b;margin-bottom:8px;
@@ -131,7 +131,7 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 
 /* ── Instruction card ── */
 .instr-card{
-  display:none;margin-bottom:20px;
+  display:none;margin-bottom:16px;
   border-radius:14px;overflow:hidden;
   border:1.5px solid #ddd6fe;
   animation:slideDown .3s ease;
@@ -165,10 +165,28 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 }
 .instr-note strong{color:#5b21b6;}
 
+/* ── QRIS block ── */
+.qris-block{margin:12px 0;text-align:center;}
+.qris-img-wrap{background:#fff;border:1.5px solid #ede9fe;border-radius:14px;padding:14px;display:inline-block;box-shadow:0 4px 20px rgba(124,58,237,.08);}
+.qris-img-wrap img{width:180px;height:180px;object-fit:contain;display:block;border-radius:6px;}
+.qris-merchant{margin-top:8px;font-size:11px;color:#6d28d9;font-weight:600;letter-spacing:.02em;}
+.qris-actions{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap;}
+.qris-btn{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;letter-spacing:.02em;padding:9px 16px;border-radius:10px;cursor:pointer;text-decoration:none;border:1.5px solid transparent;transition:opacity .2s,transform .1s;}
+.qris-btn:active{transform:translateY(1px);}
+.qris-btn-solid{background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;}
+.qris-btn-solid:hover{opacity:.9;}
+.qris-btn-outline{background:#fff;border-color:#ddd6fe;color:#7c3aed;}
+.qris-btn-outline:hover{background:#f5f3ff;}
+.qris-lightbox{display:none;position:fixed;inset:0;background:rgba(10,6,20,.92);z-index:99999;align-items:center;justify-content:center;padding:24px;}
+.qris-lightbox.show{display:flex;}
+.qris-lightbox img{max-width:92vw;max-height:85vh;border-radius:14px;box-shadow:0 10px 60px rgba(0,0,0,.5);background:#fff;padding:16px;}
+.qris-lightbox-close{position:absolute;top:20px;right:20px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.qris-lightbox-close:hover{background:rgba(255,255,255,.22);}
+
 /* ── File upload ── */
 .upload-area{
   border:2px dashed #cbd5e1;border-radius:12px;
-  padding:28px 20px;text-align:center;cursor:pointer;
+  padding:22px 20px;text-align:center;cursor:pointer;
   background:#f8fafc;transition:border-color .2s,background .2s;
   position:relative;
 }
@@ -208,7 +226,7 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 }
 .price-lbl{font-size:12px;color:#6d28d9;font-weight:600;}
 .price-final{font-size:20px;font-weight:800;color:#7c3aed;}
-.price-code-note{font-size:11px;color:#94a3b8;margin-bottom:20px;}
+.price-code-note{font-size:11px;color:#94a3b8;margin-bottom:16px;}
 
 /* ── Submit ── */
 .submit-btn{
@@ -224,7 +242,7 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 .submit-btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
 
 /* ── Footer note ── */
-.form-footer{text-align:center;margin-top:20px;font-size:12px;color:#94a3b8;line-height:1.6;}
+.form-footer{text-align:center;margin-top:16px;font-size:12px;color:#94a3b8;line-height:1.55;}
 
 /* ── Divider ── */
 .section-divider{display:flex;align-items:center;gap:12px;margin:22px 0;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;}
@@ -353,16 +371,30 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
           <span class="instr-key" data-i18n="pay.metodeKey">Metode</span>
           <span class="instr-val" id="iMethod">—</span>
         </div>
-        <div class="instr-row">
+        <div class="instr-row" id="instrRowNumber">
           <span class="instr-key" id="iNumberKey" data-i18n="pay.rekeningKey">Nomor Rekening</span>
           <div class="instr-val-wrap">
             <span class="instr-val" id="iNumber" style="word-break:break-all">—</span>
             <button type="button" class="copy-btn" id="copyNumBtn" data-i18n="pay.salinBtn">Salin</button>
           </div>
         </div>
-        <div class="instr-row">
+        <div class="instr-row" id="instrRowHolder">
           <span class="instr-key" id="iHolderKey" data-i18n="pay.atasNamaKey">Atas Nama</span>
           <span class="instr-val" id="iHolder">—</span>
+        </div>
+        <div class="qris-block" id="qrisBlock" style="display:none">
+          <div class="qris-img-wrap">
+            <img src="qris-code.png" alt="QRIS IPI Digital" id="qrisImg">
+          </div>
+          <div class="qris-merchant" data-i18n="pay.qrisMerchant">JASA IPI DIGITAL — NMID ID1026537323580</div>
+          <div class="qris-actions">
+            <a href="qris-code.png" download="QRIS-IPI-Digital.png" class="qris-btn qris-btn-solid" id="qrisDownloadBtn">
+              ⬇ <span data-i18n="pay.qrisDownload">DOWNLOAD</span>
+            </a>
+            <button type="button" class="qris-btn qris-btn-outline" id="qrisFullBtn">
+              ⛶ <span data-i18n="pay.qrisFull">UKURAN PENUH</span>
+            </button>
+          </div>
         </div>
         <div class="instr-row">
           <span class="instr-key" data-i18n="pay.nominalKey">Nominal Transfer</span>
@@ -430,6 +462,10 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 
 <div class="page-pad"></div>
 <div class="toast" id="toast"></div>
+<div class="qris-lightbox" id="qrisLightbox">
+  <button type="button" class="qris-lightbox-close" id="qrisLightboxClose">✕</button>
+  <img src="qris-code.png" alt="QRIS IPI Digital">
+</div>
 
 <script src="i18n.js"></script>
 <script>
@@ -457,7 +493,10 @@ window.I18N = Object.assign(window.I18N||{}, {
   'pay.pesanLbl': {id:'Pesan <span class="opt">(opsional)</span>', en:'Message <span class="opt">(optional)</span>'},
   'pay.pesanPh': {id:'Catatan tambahan untuk admin...', en:'Additional notes for the admin...'},
   'pay.submitBtn': {id:'Kirim Bukti Pembayaran', en:'Send Proof of Payment'},
-  'pay.footer': {id:'🔒 Data Anda aman. Pembayaran diverifikasi langsung oleh admin IPI Digital.', en:'🔒 Your data is safe. Payments are verified directly by the IPI Digital admin.'}
+  'pay.footer': {id:'🔒 Data Anda aman. Pembayaran diverifikasi langsung oleh admin IPI Digital.', en:'🔒 Your data is safe. Payments are verified directly by the IPI Digital admin.'},
+  'pay.qrisMerchant': {id:'JASA IPI DIGITAL — NMID ID1026537323580', en:'JASA IPI DIGITAL — NMID ID1026537323580'},
+  'pay.qrisDownload': {id:'DOWNLOAD', en:'DOWNLOAD'},
+  'pay.qrisFull': {id:'UKURAN PENUH', en:'FULL SIZE'}
 });
 
 const PRODUCTS = {
@@ -474,6 +513,10 @@ const PRODUCTS = {
 const BANK_METHODS = [
   {value:'dana', type:'bank', img:'logo-dana.png', name:'DANA', number:'083876123080', holder:'Ardikuntoro'},
   {value:'seabank', type:'bank', img:'logo-seabank.webp', name:'SeaBank', number:'901170990455', holder:'Solihun Adi Saputra'}
+];
+// Metode QRIS — selalu tersedia di semua bahasa, Rupiah + kode unik seperti bank
+const QRIS_METHODS = [
+  {value:'qris', type:'qris', img:'logo-qris.jpg', name:'QRIS', number:'', holder:'JASA IPI DIGITAL'}
 ];
 // Metode pembayaran crypto (USDT) — selalu tersedia di semua bahasa
 const CRYPTO_METHODS = [
@@ -550,18 +593,25 @@ function renderDropdown(){
   const en=isEn();
   const fallbackIcon='💳';
   const cryptoFallbackIcon='🪙';
+  const qrisFallbackIcon='📱';
   const availableWord = en ? 'Available' : 'Tersedia';
   const localLabel = en ? 'Local Transfer' : 'Transfer Lokal';
   const cryptoLabel = 'Crypto (USDT)';
+  const scanPayLabel = en ? 'Scan & pay instantly' : 'Scan & bayar instan';
 
   function optionHtml(p){
-    const icon = p.type==='crypto' ? cryptoFallbackIcon : fallbackIcon;
+    const icon = p.type==='crypto' ? cryptoFallbackIcon : (p.type==='qris' ? qrisFallbackIcon : fallbackIcon);
     const lg = p.img
       ? '<div class="cs-opt-icon"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" onerror="this.parentElement.textContent=\''+icon+'\'"></div>'
       : '<div class="cs-opt-icon" style="font-size:20px">'+icon+'</div>';
-    const subLine = p.type==='crypto'
-      ? '<span class="cs-opt-num" style="word-break:break-all">'+esc(p.number)+'</span><span class="cs-opt-holder">'+esc(p.holder)+'</span>'
-      : '<span class="cs-opt-num">'+esc(p.number)+'</span><span class="cs-opt-holder">a.n. '+esc(p.holder)+'</span>';
+    let subLine;
+    if (p.type==='crypto') {
+      subLine = '<span class="cs-opt-num" style="word-break:break-all">'+esc(p.number)+'</span><span class="cs-opt-holder">'+esc(p.holder)+'</span>';
+    } else if (p.type==='qris') {
+      subLine = '<span class="cs-opt-num">'+esc(scanPayLabel)+'</span>';
+    } else {
+      subLine = '<span class="cs-opt-num">'+esc(p.number)+'</span><span class="cs-opt-holder">a.n. '+esc(p.holder)+'</span>';
+    }
     return '<div class="cs-option" data-value="'+esc(p.value)+'" data-type="'+esc(p.type)+'" data-img="'+esc(p.img)+'" data-name="'+esc(p.name)+'" data-number="'+esc(p.number)+'" data-holder="'+esc(p.holder)+'">'
       +lg+'<div class="cs-opt-info"><span class="cs-opt-name">'+esc(p.name)+'</span>'+subLine+'</div>'
       +'<span class="cs-badge">'+availableWord+'</span></div>';
@@ -570,6 +620,8 @@ function renderDropdown(){
   dropdown.innerHTML =
     '<div class="cs-group-label">'+esc(localLabel)+'</div>'
     + BANK_METHODS.map(optionHtml).join('')
+    + '<div class="cs-group-label">QRIS</div>'
+    + QRIS_METHODS.map(optionHtml).join('')
     + '<div class="cs-group-label">'+esc(cryptoLabel)+'</div>'
     + CRYPTO_METHODS.map(optionHtml).join('');
 }
@@ -584,11 +636,16 @@ function holderDisplay(en, crypto, holder){
   if (crypto) return holder;
   return en ? ('held by '+holder) : ('a.n. '+holder);
 }
-function instrNoteText(en, crypto, amtDisplay, name, holder){
-  if (crypto) {
+function instrNoteText(en, type, amtDisplay, name, holder){
+  if (type==='crypto') {
     return en
       ? 'Send exactly <strong>'+esc(amtDisplay)+'</strong> worth of <strong>'+esc(holder)+'</strong> to the address above, via <strong>'+esc(name)+'</strong> only. Double-check the network before sending — using the wrong network can result in permanent loss of funds.'
       : 'Kirim tepat <strong>'+esc(amtDisplay)+'</strong> senilai <strong>'+esc(holder)+'</strong> ke alamat di atas, khusus lewat jaringan <strong>'+esc(name)+'</strong>. Pastikan jaringan sudah benar sebelum mengirim — salah jaringan bisa menyebabkan dana hilang permanen.';
+  }
+  if (type==='qris') {
+    return en
+      ? 'Scan the QRIS code above using any e-wallet or mobile banking app that supports QRIS. Enter <strong>'+esc(amtDisplay)+'</strong> manually when prompted. The unique amount at the end helps our admin verify your order faster. You can download or open the code in full size if it\'s easier to scan that way.'
+      : 'Scan kode QRIS di atas menggunakan aplikasi e-wallet atau mobile banking apa pun yang mendukung QRIS. Masukkan nominal <strong>'+esc(amtDisplay)+'</strong> secara manual saat diminta. Nominal unik di akhir membantu admin memverifikasi pesanan Anda lebih cepat. Kode juga bisa diunduh atau dibuka dalam ukuran penuh agar lebih mudah dipindai.';
   }
   return en
     ? 'Please transfer exactly <strong>'+esc(amtDisplay)+'</strong> to <strong>'+esc(name)+'</strong>, held by <strong>'+esc(holder)+'</strong>. The unique amount at the end helps our admin verify your order faster.'
@@ -600,6 +657,9 @@ function resetSelection(){
   placeholder.style.display='';
   selectedWrap.style.display='none';
   document.getElementById('instrCard').classList.remove('show');
+  document.getElementById('qrisBlock').style.display='none';
+  document.getElementById('instrRowNumber').style.display='';
+  document.getElementById('instrRowHolder').style.display='';
   const labels=methodLabels(isEn(), useCrypto());
   document.getElementById('iNumberKey').textContent = labels.numberKey;
   document.getElementById('iHolderKey').textContent = labels.holderKey;
@@ -642,6 +702,7 @@ dropdown.addEventListener('click',function(e){
   const img=opt.dataset.img;
   const type=opt.dataset.type;
   const crypto=type==='crypto';
+  const qris=type==='qris';
   const name=opt.dataset.name;
   const number=opt.dataset.number;
   const holder=opt.dataset.holder;
@@ -651,11 +712,13 @@ dropdown.addEventListener('click',function(e){
   // Update trigger display
   placeholder.style.display='none';
   selectedWrap.style.display='flex';
-  const fallbackIcon=crypto?'🪙':'💳';
+  const fallbackIcon=crypto?'🪙':(qris?'📱':'💳');
   const iconEl=document.getElementById('csSIcon');
   iconEl.innerHTML=img?'<img src="'+esc(img)+'" alt="'+esc(name)+'" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.parentElement.textContent=\''+fallbackIcon+'\'">':fallbackIcon;
   document.getElementById('csSName').textContent=name;
-  document.getElementById('csSNum').textContent = number+' · '+holderDisplay(en, crypto, holder);
+  document.getElementById('csSNum').textContent = qris
+    ? (en?'Scan & pay instantly':'Scan & bayar instan')
+    : number+' · '+holderDisplay(en, crypto, holder);
 
   // Update instruction card
   const labels=methodLabels(en, crypto);
@@ -664,10 +727,13 @@ dropdown.addEventListener('click',function(e){
   document.getElementById('iHolder').textContent = holderDisplay(en, crypto, holder);
   document.getElementById('iNumberKey').textContent = labels.numberKey;
   document.getElementById('iHolderKey').textContent = labels.holderKey;
+  document.getElementById('instrRowNumber').style.display = qris ? 'none' : '';
+  document.getElementById('instrRowHolder').style.display = qris ? 'none' : '';
+  document.getElementById('qrisBlock').style.display = qris ? 'block' : 'none';
 
   const amt=refreshAmountUI();
   const note=document.getElementById('instrNote');
-  note.innerHTML = instrNoteText(en, crypto, amt.display, name, holder);
+  note.innerHTML = instrNoteText(en, type, amt.display, name, holder);
 
   // Copy buttons
   document.getElementById('copyNumBtn').onclick=function(){copyText(number, en?'Address copied!':'Nomor disalin!');};
@@ -717,6 +783,17 @@ document.getElementById('fpRemove').addEventListener('click',function(){
   filePreview.classList.remove('show');
   uploadArea.style.display='';
   validateForm();
+});
+
+// ── QRIS full-size lightbox ──
+document.getElementById('qrisFullBtn').addEventListener('click',function(){
+  document.getElementById('qrisLightbox').classList.add('show');
+});
+document.getElementById('qrisLightboxClose').addEventListener('click',function(){
+  document.getElementById('qrisLightbox').classList.remove('show');
+});
+document.getElementById('qrisLightbox').addEventListener('click',function(e){
+  if(e.target===this) this.classList.remove('show');
 });
 
 // ── Form validation ──

@@ -1328,8 +1328,11 @@ footer {
 }
 
 /* FLAGSHIP — Ultra premium full-width, favorite product (Autotrade N8N) */
-.product-card.tier-flagship {
+.tier-flagship-wrap {
+  position: relative;
   margin-bottom: 26px;
+}
+.product-card.tier-flagship {
   padding: 3px;
   border: none !important;
   background: transparent;
@@ -1339,9 +1342,10 @@ footer {
   0%,100% { box-shadow: 0 0 40px rgba(251,191,36,0.3), 0 0 90px rgba(251,191,36,0.12); }
   50%      { box-shadow: 0 0 65px rgba(251,191,36,0.45), 0 0 120px rgba(245,158,11,0.2); }
 }
-/* Favorite-product ribbon badge, floating above the top edge */
+/* Favorite-product ribbon badge — sits in the wrap, not the clipped card,
+   so it never gets cut off by the card's overflow:hidden */
 .tier-flagship-fav-badge {
-  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
   z-index: 5; white-space: nowrap;
   background: linear-gradient(135deg, #fbbf24, #f97316);
   color: #1c1206; font-weight: 900; font-size: 12px; letter-spacing: .03em;

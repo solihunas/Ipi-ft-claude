@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Konfirmasi Pembayaran — IPI Digital</title>
-<link rel="icon" href="logo.png" type="image/png">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#5b21b6">
+<link rel="icon" href="logo.webp" type="image/webp">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;-webkit-text-size-adjust:100%}
@@ -384,7 +386,7 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
         </div>
         <div class="qris-block" id="qrisBlock" style="display:none">
           <div class="qris-img-wrap">
-            <img src="qris-code.png" alt="QRIS IPI Digital" id="qrisImg">
+            <img src="qris-code.webp" alt="QRIS IPI Digital" id="qrisImg" width="180" height="180" decoding="async" onerror="this.onerror=null;this.src='qris-code.png'">
           </div>
           <div class="qris-merchant" data-i18n="pay.qrisMerchant">JASA IPI DIGITAL — NMID ID1026537323580</div>
           <div class="qris-actions">
@@ -464,7 +466,7 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 <div class="toast" id="toast"></div>
 <div class="qris-lightbox" id="qrisLightbox">
   <button type="button" class="qris-lightbox-close" id="qrisLightboxClose">✕</button>
-  <img src="qris-code.png" alt="QRIS IPI Digital">
+  <img src="qris-code.webp" alt="QRIS IPI Digital" decoding="async" onerror="this.onerror=null;this.src='qris-code.png'">
 </div>
 
 <script src="i18n.js"></script>
@@ -500,13 +502,13 @@ window.I18N = Object.assign(window.I18N||{}, {
 });
 
 const PRODUCTS = {
-  '1':{ name:'PROMPT AI NEUROBRO', name_en:'NEUROBRO AI PROMPT', img:'prod-neurobro.png', price:50000 },
-  '2':{ name:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT', name_en:'DATA + DOCTRINE + PROMPTING || CLAUDE AI || CHATGPT', img:'prod-signaler.png', price:550000 },
-  '3':{ name:'LATIH CLAUDE SNIPER ENTRY', name_en:'TRAIN CLAUDE SNIPER ENTRY', img:'prod-sniper.png', price:3500000 },
-  '4a':{ name:'EA MARTINGALE', name_en:'EA MARTINGALE', img:'prod-ea.png', price:720000 },
-  '4b':{ name:'EA BREAKOUT STRATEGY', name_en:'EA BREAKOUT STRATEGY', img:'prod-ea.png', price:3050000 },
-  '5':{ name:'INDIKATOR TRADINGVIEW XAU', name_en:'TRADINGVIEW XAU INDICATOR', img:'prod-indikator.png', price:1500000 },
-  '6':{ name:'AUTOTRADE N8N', name_en:'AUTOTRADE N8N', img:'prod-n8n.png', price:11200000 },
+  '1':{ name:'PROMPT AI NEUROBRO', name_en:'NEUROBRO AI PROMPT', img:'prod-neurobro.webp', price:50000 },
+  '2':{ name:'DATA + DOKTRIN + PROMPTING || CLAUDE AI || CHATGPT', name_en:'DATA + DOCTRINE + PROMPTING || CLAUDE AI || CHATGPT', img:'prod-signaler.webp', price:550000 },
+  '3':{ name:'LATIH CLAUDE SNIPER ENTRY', name_en:'TRAIN CLAUDE SNIPER ENTRY', img:'prod-sniper.webp', price:3500000 },
+  '4a':{ name:'EA MARTINGALE', name_en:'EA MARTINGALE', img:'prod-ea.webp', price:720000 },
+  '4b':{ name:'EA BREAKOUT STRATEGY', name_en:'EA BREAKOUT STRATEGY', img:'prod-ea.webp', price:3050000 },
+  '5':{ name:'INDIKATOR TRADINGVIEW XAU', name_en:'TRADINGVIEW XAU INDICATOR', img:'prod-indikator.webp', price:1500000 },
+  '6':{ name:'AUTOTRADE N8N', name_en:'AUTOTRADE N8N', img:'prod-n8n.webp', price:11200000 },
 };
 
 // Metode pembayaran lokal (bank/e-wallet) — selalu tersedia di semua bahasa
@@ -583,7 +585,7 @@ function refreshAmountUI(){
 function renderHeader(){
   const en=isEn();
   const name=en&&product.name_en?product.name_en:product.name;
-  document.getElementById('ppIcon').innerHTML='<img src="'+esc(product.img)+'" alt="'+esc(name)+'">';
+  document.getElementById('ppIcon').innerHTML='<img src="'+esc(product.img)+'" alt="'+esc(name)+'" width="44" height="44" decoding="async" onerror="this.onerror=null;this.src=this.src.replace(\'.webp\',\'.png\')">';
   document.getElementById('ppName').textContent=name;
   document.getElementById('backLink').href='produk.html?id='+pid;
   refreshAmountUI();

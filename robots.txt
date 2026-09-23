@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Halaman checkout & konfirmasi tidak perlu diindeks
+Disallow: /bayar.html
+Disallow: /sukses.html
+
+# File sumber untuk membuat ulang kartu pratinjau (bukan halaman publik)
+Disallow: /og-card-source.html
+
+Sitemap: https://ipi-digital.com/sitemap.xml

@@ -399,8 +399,13 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
       </span>
     </button>
 
+    <p id="submitError" role="alert" hidden style="color:#fca5a5;line-height:1.7">
+      Pengiriman belum terkonfirmasi. Bukti mungkin sudah diterima jika koneksi terputus.
+      Hubungi <a href="https://wa.me/6282220761257" target="_blank" rel="noopener noreferrer">WhatsApp admin</a>
+      untuk memastikan, atau coba kirim lagi. Pembayaran tidak perlu diulang.
+    </p>
     <div class="form-footer">
-      🔒 Data Anda aman. Pembayaran diverifikasi langsung oleh admin IPI Digital.
+      Bukti dikirim ke Telegram admin. Pembayaran tetap menunggu verifikasi.
     </div>
 
   </form>
@@ -409,14 +414,9 @@ body{background:#0e0920;color:#1e293b;font-family:'Segoe UI',system-ui,sans-seri
 <div class="page-pad"></div>
 <div class="toast" id="toast"></div>
 
+<script src="products.js"></script>
 <script>
-const PRODUCTS = {
-  '1':{ name:'Prompt AI Neurobro', img:'prod-neurobro.png', price:50000 },
-  '2':{ name:'Data Training AI Signal', img:'prod-signaler.png', price:550000 },
-  '3':{ name:'Latih Claude Sniper Entry', img:'prod-sniper.png', price:3500000 },
-  '4':{ name:'EA MT5 Trend Following', img:'prod-ea.png', price:3000000 },
-  '5':{ name:'Indikator TradingView XAU', img:'prod-indikator.png', price:750000 },
-};
+const PRODUCTS = window.IPI_PRODUCTS;
 
 function fmtRp(n){ return 'Rp '+n.toLocaleString('id-ID'); }
 function fmtBytes(b){ return b<1048576?(b/1024).toFixed(0)+' KB':(b/1048576).toFixed(1)+' MB'; }
@@ -430,7 +430,8 @@ function getUniqueCode(id){
 
 const params=new URLSearchParams(location.search);
 const pid=params.get('id')||'1';
-const product=PRODUCTS[pid]||PRODUCTS['1'];
+const product=PRODUCTS[pid];
+if(!product){ location.replace('index.html#produk'); throw new Error('Produk tidak ditemukan'); }
 const uniqueCode=getUniqueCode(pid);
 const finalPrice=product.price+uniqueCode;
 
@@ -531,6 +532,7 @@ const fileInput=document.getElementById('fileInput');
 const uploadArea=document.getElementById('uploadArea');
 const filePreview=document.getElementById('filePreview');
 let uploadedFile=null;
+let submitting=false;
 
 function handleFile(f){
   if(!f)return;
@@ -573,7 +575,7 @@ document.getElementById('fpRemove').addEventListener('click',function(){
 function validateForm(){
   const nama=document.getElementById('namaInput').value.trim();
   const contact=document.getElementById('contactInput').value.trim();
-  const ok=nama.length>=2&&contact.length>=6&&selectedMethod&&uploadedFile;
+  const ok=nama.length>=2&&contact.length>=6&&selectedMethod&&uploadedFile&&!submitting;
   document.getElementById('submitBtn').disabled=!ok;
 }
 
@@ -597,6 +599,10 @@ function showToast(msg){
 document.getElementById('payForm').addEventListener('submit',async function(e){
   e.preventDefault();
   const btn=document.getElementById('submitBtn');
+  validateForm();
+  if(btn.disabled)return;
+  submitting=true;
+  btn.disabled=true;
   btn.classList.add('loading');
 
   const nama=document.getElementById('namaInput').value.trim();
@@ -604,7 +610,7 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
   const pesan=document.getElementById('pesanInput').value.trim();
 
   const order={
-    pid,name:product.name,img:product.img,
+    pid,name:product.name,img:product.img,icon:product.icon,orderId:(sessionStorage.getItem('ipi_order_id_'+pid)||(()=>{const id=crypto.randomUUID();sessionStorage.setItem('ipi_order_id_'+pid,id);return id;})()),
     basePrice:product.price,uniqueCode,finalPrice,
     nama,contact,pesan,
     method:selectedMethod.name,
@@ -618,6 +624,7 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
   var tgLines=[
     '🛒 <b>PESANAN BARU — IPI Digital</b>',
     '',
+    '🧾 <b>Pesanan:</b> '+escTg(order.orderId),
     '📦 <b>Produk:</b> '+escTg(product.name),
     '👤 <b>Nama:</b> '+escTg(nama),
     '📱 <b>WA/Email:</b> '+escTg(contact),
@@ -628,26 +635,47 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
     '🕐 '+new Date().toLocaleString('id-ID',{timeZone:'Asia/Jakarta'}),
   ];
   try{
-    await fetch('https://api.telegram.org/bot8951859923:AAGc51yLFQOHiZdoCnnRx1qZvPkMHdfI798/sendMessage',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:6824927884,text:tgLines.filter(Boolean).join('\n'),parse_mode:'HTML'})
+    const caption=tgLines.filter(Boolean).join('\n');
+    const form=new FormData();
+    document.getElementById('submitError').hidden=true;
+    form.append('chat_id','6824927884');
+    // Send as a document to preserve the original image, including WebP.
+    form.append('document',uploadedFile,uploadedFile.name);
+    if(caption.length<=1024){
+      form.append('caption',caption);
+      form.append('parse_mode','HTML');
+    }else{
+      form.append('caption','Pesanan '+order.orderId+' — '+product.short);
+    }
+    const response=await fetch('https://api.telegram.org/bot8951859923:AAGc51yLFQOHiZdoCnnRx1qZvPkMHdfI798/sendDocument',{
+      method:'POST',body:form,signal:AbortSignal.timeout(45000)
     });
-  }catch(_){}
-
-  // Simpan pesanan untuk admin panel
-  try{
-    var ords=JSON.parse(localStorage.getItem('ipi_admin_orders'))||[];
-    ords.push({pid:pid,name:product.name,img:product.img,basePrice:product.price,
-      uniqueCode:uniqueCode,finalPrice:finalPrice,nama:nama,contact:contact,pesan:pesan,
-      method:selectedMethod.name,methodNumber:selectedMethod.number,
-      methodHolder:selectedMethod.holder,ts:Date.now(),status:'pending'});
-    localStorage.setItem('ipi_admin_orders',JSON.stringify(ords));
-  }catch(_){}
-
-  // Redirect setelah notifikasi terkirim
-  sessionStorage.setItem('ipi_order',JSON.stringify(order));
-  location.href='sukses.html';
+    const result=await response.json();
+    if(!response.ok||!result.ok)throw new Error('Telegram belum menerima bukti');
+    // Long notes are sent separately only after the receipt is accepted.
+    if(caption.length>1024){
+      const plain=tgLines.filter(Boolean).join('\n').replace(/<\/?b>/g,'')
+          .replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+      for(let offset=0;offset<plain.length;offset+=3500){
+        const follow=await fetch('https://api.telegram.org/bot8951859923:AAGc51yLFQOHiZdoCnnRx1qZvPkMHdfI798/sendMessage',{
+          method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({chat_id:6824927884,text:plain.slice(offset,offset+3500)}),
+          signal:AbortSignal.timeout(15000)
+        });
+        const sent=await follow.json();
+        if(!follow.ok||!sent.ok)throw new Error('Detail pesanan belum lengkap');
+      }
+    }
+    sessionStorage.setItem('ipi_order',JSON.stringify({...order,receiptSent:true}));
+    location.href='sukses.html';
+  }catch(error){
+    document.getElementById('submitError').hidden=false;
+    showToast('Pengiriman belum terkonfirmasi. Coba lagi atau hubungi admin.');
+  }finally{
+    submitting=false;
+    btn.classList.remove('loading');
+    validateForm();
+  }
 });
 </script>
 <!-- Firebase: fetch fresh payment methods -->
@@ -677,3 +705,4 @@ document.getElementById('payForm').addEventListener('submit',async function(e){
 </script>
 </body>
 </html>
+

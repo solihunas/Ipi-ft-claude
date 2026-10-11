@@ -83,7 +83,7 @@
 .pd-note {
   background: rgba(245,158,11,.05); border: 1px solid rgba(245,158,11,.15);
   border-radius: 10px; padding: 14px 18px; margin-bottom: 28px;
-  font-size: 13px; color: #78350f; line-height: 1.7;
+  font-size: 13px; color: #cbd5e1; line-height: 1.7;
   display: flex; gap: 10px;
 }
 
@@ -154,36 +154,124 @@ document.addEventListener('click',function(e){const m=document.getElementById('m
 function fmtRp(n){return'Rp '+n.toLocaleString('id-ID');}
 
 const PRODUCTS = {
-  '1':{name:'Prompt AI Neurobro untuk Optimasi Prompt',short:'Prompt AI Neurobro',icon:'⚡',img:'prod-neurobro.png',price:50000,badge:null,rating:4.9,sales:376,
-    tagline:'Neurobro punya AI-nya sendiri. Prompt ini yang membuat AI-nya bekerja maksimal untuk trading kamu.',
-    about:'Neurobro adalah platform AI yang punya ekosistem sendiri — berbeda dari Claude atau GPT. Dan seperti semua AI, hasilnya sangat bergantung pada bagaimana kamu berkomunikasi dengannya. Koleksi prompt ini dirancang khusus untuk mengeluarkan potensi penuh dari Neurobro AI: analisa lebih tajam, konteks lebih dalam, dan output yang langsung bisa digunakan — bukan jawaban generik yang harus ditafsir ulang.',
-    features:['Prompt yang dirancang spesifik untuk ekosistem Neurobro AI — bukan template AI umum','Mencakup berbagai skenario analisa: arah tren, evaluasi momen, konfirmasi sebelum entry','Output yang dihasilkan lebih terstruktur, lebih kontekstual, dan lebih actionable','Format siap pakai — tidak perlu eksperimen sendiri dari nol','Dikembangkan dari penggunaan nyata, bukan dari teori prompt engineering'],
-    includes:['Dokumen berisi semua prompt siap pakai (PDF/DOC)','Panduan cara menggunakan dan mengkombinasikan prompt untuk hasil optimal'],
-    note:'Entry point paling terjangkau ke dunia AI Trading. Harga kecil, tapi perbedaan hasil yang dirasakan signifikan bagi yang benar-benar menggunakannya.'},
-  '2':{name:'Data + Cara Melatih AI untuk Signal Analisa Trading',short:'Data Training AI Signal',icon:'🧠',img:'prod-signaler.png',price:550000,badge:null,rating:4.9,sales:141,
-    tagline:'AI default tidak tahu seperti apa pasar bergerak. Yang ini sudah "melihat" 400.000 candle.',
-    about:'AI yang belum pernah dilatih dengan data harga nyata akan memberikan analisa yang dangkal. Produk ini adalah paket lengkap untuk mengubah itu: 400.000 candle historis OHLCV dalam format CSV, plus panduan step-by-step cara melatih AI kamu sendiri dari nol. Setelah proses ini, AI kamu tidak lagi menjawab ala kadarnya — ia mulai mengenali pola, ritme, dan perilaku pasar yang tidak bisa dilihat dengan mata biasa.',
-    features:['400.000 data candle historis OHLCV — siap pakai, tidak perlu scraping sendiri','Panduan pelatihan AI dari awal hingga model siap digunakan untuk analisa','Teknik prompt engineering lanjutan untuk mengekstrak sinyal yang lebih akurat','Cara memvalidasi dan menginterpretasi output model secara kritis','Berlaku untuk berbagai timeframe dan pasangan aset'],
-    includes:['File data 400.000 candle historis (format CSV)','Panduan pelatihan AI lengkap (PDF/dokumen)'],
-    note:'Tidak perlu coding sama sekali. Semua langkah dijelaskan secara bertahap, dari yang belum pernah menyentuh data historis sekalipun bisa mengikutinya.'},
-  '3':{name:'Latih Claude Sniper Entry',short:'Latih Claude Sniper',icon:'🎯',img:'prod-sniper.png',price:3500000,badge:'Premium',rating:5.0,sales:81,
-    tagline:'Kebanyakan AI melihat chart. Claude Sniper dilatih untuk memahami mengapa chart bergerak seperti itu.',
-    about:'Ada perbedaan besar antara AI yang mengenali pola dan AI yang memahami pasar. Produk ini melatih Claude untuk berpikir secara logis dan psikologis — membaca chart bukan sebagai kumpulan candle, tapi sebagai rekaman dari keputusan jutaan manusia, perusahaan, dan algoritma yang bekerja bersamaan. Kenapa harga berhenti tepat di sini? Apa yang ditunggu oleh penggerak besar sebelum bergerak? Siapa yang sudah terjebak, dan di mana mereka akan menyerah? Claude Sniper dilatih untuk mempertanyakan semuanya dan menghasilkan kesimpulan yang masuk akal secara logika — bukan sekadar sinyal dari pola yang kebetulan berulang.',
-    features:['Claude dilatih memahami kausalitas: kenapa A terjadi di area B, kenapa setelah X selalu muncul Y','Membaca anatomi pasar — di mana konsentrasi uang terbesar berada dan ke mana ia akan bergerak','Memahami psikologi pelaku pasar: apa yang diinginkan retail, institusi, dan algoritma pada waktu yang sama','1.000.000 data candle sebagai referensi — semakin banyak "pengalaman" yang dimiliki Claude','Panduan lengkap proses pelatihan dari awal hingga Claude siap digunakan untuk analisa nyata','Akses support 30 hari untuk memastikan proses pelatihan berjalan optimal'],
-    includes:['File data 1.000.000 candle historis (format CSV)','Dokumen panduan pelatihan Claude + kerangka berpikir analisa (PDF)','30 hari akses chat support langsung'],
-    note:'Cocok untuk trader yang sudah bisa membaca chart dan ingin memiliki "partner analisa" yang berpikir — bukan hanya merespons. Semakin dalam kamu menggunakannya, semakin Claude memahami cara kamu melihat pasar.'},
-  '4':{name:'EA MT5 Trend Following',short:'EA MT5 Trend Following',icon:'🤖',img:'prod-ea.png',price:3000000,badge:'Premium',rating:4.8,sales:62,
-    tagline:'Emosi adalah musuh terbesar trader. Bot tidak punya emosi. Bot tidak pernah FOMO.',
-    about:'Salah satu alasan terbesar trader rugi bukan karena strategi yang buruk — tapi karena eksekusi yang tidak konsisten akibat emosi. EA MT5 Trend Following hadir untuk menyelesaikan masalah itu: bot ini membaca tren, masuk posisi sesuai parameter yang sudah kamu tentukan, dan keluar dengan disiplin yang tidak akan pernah bisa dipertahankan oleh manusia di jam 2 pagi. Sudah melalui backtesting dan pengujian live — bukan sekadar EA teoritis.',
-    features:['File EA (.ex5) siap install dan jalan langsung di MetaTrader 5','Strategi trend following yang sudah diuji dalam kondisi pasar nyata','Parameter yang bisa dikustomisasi: lot size, TP, SL, trailing stop, filter waktu','Tidak perlu pantau layar — EA bekerja selama platform aktif','Kompatibel dengan semua broker MT5, termasuk ECN dan STP'],
-    includes:['File EA MetaTrader 5 (.ex5)','Panduan instalasi, konfigurasi, dan optimasi parameter (PDF)'],
-    note:'Pastikan broker dan akun trading kamu menggunakan platform MetaTrader 5 (bukan MT4). Untuk yang sudah pakai MT5, ini bisa langsung jalan hari yang sama.'},
-  '5':{name:'Indikator TradingView XAU',short:'Indikator TradingView XAU',icon:'📊',img:'prod-indikator.png',price:750000,badge:null,rating:4.9,sales:100,
-    tagline:'Gold bergerak di level-level tertentu yang tidak terlihat di chart biasa. Indikator ini menampilkannya.',
-    about:'XAU/USD adalah pasangan yang digemari sekaligus ditakuti banyak trader — volatilitasnya tinggi, pergerakannya cepat, dan levelnya sering mengejutkan yang tidak tahu "peta"-nya. Indikator ini dirancang khusus untuk membantu trader XAU melihat area-area yang sering menjadi titik reaksi harga: level kritis yang diperhatikan oleh pemain besar, zona potensial reversal, dan konfirmasi arah sebelum entry. Dikembangkan dari pengalaman nyata trading XAU dan diperbarui secara berkelanjutan.',
-    features:['Akses invite-only langsung via TradingView Pine Script — tidak ada yang bisa download tanpa izin','Tampilkan level-level kritikal XAU secara otomatis di atas chart kamu','Sinyal visual yang bersih dan tidak membebani chart dengan noise yang tidak perlu','Panduan cara membaca setiap elemen indikator dan mengintegrasikannya dalam analisa','Update berkelanjutan jika ada perbaikan atau penambahan fitur baru'],
-    includes:['Akses Pine Script indikator di TradingView (invite-only, tidak bisa dibagikan)','Panduan penggunaan lengkap (PDF)'],
-    note:'Khusus untuk XAU/USD. Akun TradingView gratis sudah cukup — kamu tidak perlu berlangganan TradingView Pro untuk menggunakannya.'},
+  "1": {
+    "name": "Prompt AI Neurobro untuk Optimasi Prompt",
+    "short": "Prompt AI Neurobro",
+    "icon": "⚡",
+    "img": "prod-neurobro.png",
+    "price": 50000,
+    "badge": null,
+    "rating": 4.9,
+    "sales": 376,
+    "tagline": "Prompt siap pakai untuk menyusun analisis trading dengan Neurobro AI.",
+    "about": "Kumpulan prompt yang dirancang untuk membantu pengguna Neurobro AI menyampaikan konteks pasar dan meminta analisis secara terstruktur. Paket ini mencakup dokumen prompt serta panduan penggunaan untuk mengevaluasi tren, momentum, dan pertimbangan sebelum membuka posisi. Kualitas jawaban bergantung pada data yang diberikan dan kemampuan platform; setiap hasil tetap perlu diperiksa oleh pengguna.",
+    "features": [
+      "Prompt khusus untuk penggunaan di platform Neurobro AI",
+      "Kerangka pertanyaan untuk meninjau tren, momentum, dan rencana transaksi",
+      "Format instruksi yang membantu menyusun jawaban secara terstruktur",
+      "Panduan penggunaan dan penggabungan prompt sesuai konteks analisis"
+    ],
+    "includes": [
+      "Dokumen kumpulan prompt siap pakai (PDF/DOC)",
+      "Panduan penggunaan dan penggabungan prompt"
+    ],
+    "note": "Memerlukan akses ke Neurobro AI. Paket berupa prompt dan panduan, bukan akun platform atau robot transaksi otomatis."
+  },
+  "2": {
+    "name": "Data + Cara Melatih AI untuk Signal Analisa Trading",
+    "short": "Data Training AI Signal",
+    "icon": "🧠",
+    "img": "prod-signaler.png",
+    "price": 550000,
+    "badge": null,
+    "rating": 4.9,
+    "sales": 141,
+    "tagline": "Dataset 400.000 candle historis dan panduan analisis dengan Claude atau ChatGPT.",
+    "about": "Paket data historis OHLCV dalam format CSV, disertai panduan untuk menggunakan data dan instruksi analisis bersama Claude atau ChatGPT. OHLCV mencakup harga pembukaan, tertinggi, terendah, penutupan, serta volume. Materi membantu pengguna menyusun konteks, meninjau pola, dan mengevaluasi jawaban AI. Istilah pelatihan pada paket ini merujuk pada penggunaan data dan instruksi sebagai konteks analisis; bukan jaminan perubahan permanen pada model AI.",
+    "features": [
+      "Dataset 400.000 candle historis OHLCV dalam format CSV",
+      "Panduan bertahap untuk menyiapkan data sebagai konteks analisis AI",
+      "Instruksi untuk menyusun pertanyaan dan meminta penjelasan analisis",
+      "Panduan memeriksa hasil AI dan membandingkannya dengan data pasar"
+    ],
+    "includes": [
+      "File CSV berisi 400.000 candle historis",
+      "Dokumen panduan penggunaan data dan instruksi analisis"
+    ],
+    "note": "Memerlukan akun Claude atau ChatGPT. Kemampuan unggah dan pemrosesan data bergantung pada platform serta paket akun. Konfirmasikan aset dan rentang waktu dataset kepada admin sebelum membeli."
+  },
+  "3": {
+    "name": "Latih Claude Sniper Entry",
+    "short": "Latih Claude Sniper",
+    "icon": "🎯",
+    "img": "prod-sniper.png",
+    "price": 3500000,
+    "badge": "Premium",
+    "rating": 5,
+    "sales": 81,
+    "tagline": "Dataset 1.000.000 candle dan kerangka analisis pasar untuk Claude AI.",
+    "about": "Paket untuk trader yang ingin menggunakan Claude sebagai pendamping analisis. Materi menggabungkan dataset historis, panduan penggunaan, dan kerangka berpikir untuk meninjau struktur harga, kemungkinan likuiditas, serta psikologi pelaku pasar. Tujuannya membantu menyusun skenario dan alasan di balik keputusan trading. Interpretasi perilaku pasar merupakan hipotesis yang perlu divalidasi, bukan kepastian mengenai tindakan institusi atau arah harga.",
+    "features": [
+      "Dataset 1.000.000 candle historis sebagai bahan analisis",
+      "Kerangka berpikir untuk meninjau struktur harga, likuiditas, dan psikologi pasar",
+      "Panduan menyusun skenario serta mengevaluasi alasan analisis Claude",
+      "Dokumen penggunaan data dan instruksi analisis secara bertahap",
+      "Dukungan melalui chat selama 30 hari"
+    ],
+    "includes": [
+      "File CSV berisi 1.000.000 candle historis",
+      "Dokumen panduan penggunaan Claude dan kerangka analisis (PDF)",
+      "Akses dukungan melalui chat selama 30 hari"
+    ],
+    "note": "Ditujukan bagi pengguna yang sudah memahami dasar chart dan pengelolaan risiko. Memerlukan akun Claude; batas pemrosesan mengikuti paket akun. Penggunaan data dan instruksi tidak menjamin model mengingat seluruh materi secara permanen."
+  },
+  "4": {
+    "name": "EA MT5 Trend Following",
+    "short": "EA MT5 Trend Following",
+    "icon": "🤖",
+    "img": "prod-ea.png",
+    "price": 3000000,
+    "badge": "Premium",
+    "rating": 4.8,
+    "sales": 62,
+    "tagline": "Robot MetaTrader 5 untuk menjalankan strategi mengikuti tren sesuai parameter.",
+    "about": "Expert Advisor (EA) untuk MetaTrader 5 yang menjalankan aturan strategi mengikuti tren secara otomatis. Pengguna dapat menyesuaikan parameter transaksi sesuai panduan, termasuk ukuran lot dan pengaturan keluar posisi. Paket berupa file EA dan dokumen instalasi serta konfigurasi. Kinerja dipengaruhi kondisi pasar, spread, eksekusi broker, dan pengaturan akun; hasil pengujian historis tidak menjamin hasil berikutnya.",
+    "features": [
+      "File EA berformat .ex5 untuk MetaTrader 5",
+      "Eksekusi otomatis berdasarkan aturan strategi mengikuti tren",
+      "Pengaturan ukuran lot, ambil untung (TP), batas kerugian (SL), trailing stop, dan filter waktu sesuai fitur EA",
+      "Panduan instalasi, konfigurasi, dan evaluasi parameter"
+    ],
+    "includes": [
+      "File Expert Advisor MetaTrader 5 (.ex5)",
+      "Panduan instalasi, konfigurasi, dan optimasi parameter (PDF)"
+    ],
+    "note": "Memerlukan MetaTrader 5 pada komputer atau VPS yang tetap aktif dan terhubung internet. Konfirmasikan kompatibilitas broker, akun, dan instrumen kepada admin. Uji konfigurasi pada akun demo sebelum penggunaan dana nyata."
+  },
+  "5": {
+    "name": "Indikator TradingView XAU",
+    "short": "Indikator TradingView XAU",
+    "icon": "📊",
+    "img": "prod-indikator.png",
+    "price": 750000,
+    "badge": null,
+    "rating": 4.9,
+    "sales": 100,
+    "tagline": "Indikator TradingView untuk membantu membaca area harga pada XAU/USD.",
+    "about": "Indikator khusus XAU/USD yang menampilkan level dan petunjuk visual pada chart TradingView. Produk membantu pengguna meninjau area reaksi harga, kemungkinan perubahan arah, serta konteks pergerakan emas. Paket mencakup akses indikator melalui undangan dan panduan untuk membaca elemen indikator. Hasil indikator perlu dipadukan dengan analisis dan pengelolaan risiko pengguna.",
+    "features": [
+      "Akses indikator TradingView melalui undangan khusus",
+      "Tampilan level harga XAU/USD pada chart",
+      "Petunjuk visual untuk membantu evaluasi area dan arah pergerakan",
+      "Panduan membaca elemen indikator dan menggunakannya dalam analisis",
+      "Pembaruan indikator apabila tersedia perbaikan atau penambahan fitur"
+    ],
+    "includes": [
+      "Akses indikator TradingView melalui undangan khusus",
+      "Panduan penggunaan indikator (PDF)"
+    ],
+    "note": "Memerlukan akun TradingView dan ditujukan untuk XAU/USD. Konfirmasikan nama pengguna, ketentuan akses, dan kebutuhan paket akun kepada admin sebelum membeli."
+  }
 };
 
 // Admin: Apply product overrides (from cache or Firestore)
@@ -241,7 +329,7 @@ if (!p) {
     </div>
 
     <div class="pd-sec">
-      <div class="pd-sec-ttl">Yang Kamu Dapatkan</div>
+      <div class="pd-sec-ttl">Fungsi dan Fitur</div>
       <ul class="pd-feat">
         ${p.features.map(f=>`<li><div class="pd-feat-check">✓</div><span>${f}</span></li>`).join('')}
       </ul>
